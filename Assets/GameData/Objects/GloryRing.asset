@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: GloryRing
+  m_EditorClassIdentifier: 
+  objectName: Anneau de Gloire
+  title: du sanctuaire du serpent
+  illu: {fileID: 21300000, guid: b82fc0f960a034646a21d2309da7c576, type: 3}
+  description: "Un anneau plaqu\xE9 or avec 6 dents repartis sur ses contours. Il
+    \xE9mane une aura agr\xE9able lorsqu'il est port\xE9. L'accessoire est ab\xEEm\xE9
+    et doit avoir travers\xE9s plusieurs d\xE9c\xE9nnies."
+  originDescription: "L'anneau a \xE9t\xE9 retrouv\xE9 sur le cadavre d'une femme
+    d\xE9c\xE9d\xE9 dans le temple du serpent \xE0 l'est du D\xE9sert de Duhua."
+  origin: 0
+  category: 2
+  features:
+  - argumentDescription: Anneau vigoureux
+    argumentTime: 8
+    featureTraits: 060000000e000000
+    featureDescription: "Lorsque l'anneau est port\xE9 au doigt, il donne une augmentation
+      d'\xE9nergie e tde vigueur \xE0 son porteur."
+    isKnownWhenObjectAcquired: 0
+    visibility: 0
+  - argumentDescription: "Gagn\xE9 lors d'un tournoi de Gladiateur"
+    argumentTime: 15
+    featureTraits: 0a0000000b000000
+    featureDescription: "L'anneau a \xE9t\xE9 la r\xE9compense d'un grand tournoi
+      de gladiateur qui a eu lieu i ly a plus de 200 ans. Il a \xE9t\xE9 transmit
+      de g\xE9n\xE9ration en g\xE9n\xE9ration jusqu'a \xEAtre retrouv\xE9 sur le
+      cadavre d'une femme au temple du serpent."
+    isKnownWhenObjectAcquired: 0
+    visibility: 0.3
