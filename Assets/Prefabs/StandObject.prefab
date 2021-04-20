@@ -280,7 +280,13 @@ MonoBehaviour:
   linkedObject: {fileID: 0}
   nameText: {fileID: 9115588057777454673}
   illustration: {fileID: 9115588057267190685}
+  hoverAnim:
+    anim: {fileID: 11400000, guid: 7595e0e588998e244acb6b4e5baba406, type: 2}
+    rectTransform: {fileID: 9115588058561120568}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
   isHovered: 0
   isPressed: 0
   isClicked: 0
   clickedDown: 0
+  canBeHovered: 0

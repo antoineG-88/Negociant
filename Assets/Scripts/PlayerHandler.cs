@@ -9,6 +9,7 @@ public class PlayerHandler : MonoBehaviour
     public List<Object> initialPlayerBelongings;
     [Header("Stand Display")]
     public GameObject objectInfoWindow;
+    public TweeningAnimator objectInfoWindowAnimator;
     public RectTransform standRectTransform; 
     public float distanceBetweenStandObject;
     public Vector2 standObjectsOriginPos;
@@ -24,37 +25,52 @@ public class PlayerHandler : MonoBehaviour
 
     private List<StandObject> allStandObjects;
     private bool atleastOneHovered;
+    private bool atleastOneClicked;
+    private StandObject standObjectSelected;
+    private StandObject previousSelectedObject;
 
     private void Start()
     {
+        objectInfoWindowAnimator.GetReferences();
+        StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, true));
         InitPlayerInfo();
         InitStandLayout();
     }
 
     private void Update()
     {
-        atleastOneHovered = false;
-        for (int i = 0; i < allStandObjects.Count; i++)
+        if(Input.GetMouseButtonDown(0))
         {
-            if(allStandObjects[i].isHovered)
+            atleastOneHovered = false;
+            for (int i = 0; i < allStandObjects.Count; i++)
             {
-                objectInfoNameText.text = allStandObjects[i].linkedObject.objectName;
-                objectInfoTitleText.text = allStandObjects[i].linkedObject.title;
-                objectInfoCategoryText.text = allStandObjects[i].linkedObject.category.ToString();
-                objectInfoDescriptionText.text = allStandObjects[i].linkedObject.description;
-                objectInfoOriginText.text = allStandObjects[i].linkedObject.originDescription;
-                objectInfoIllustration.sprite = allStandObjects[i].linkedObject.illustration;
-                atleastOneHovered = true;
+                if (allStandObjects[i].isHovered)
+                {
+                    if(standObjectSelected != null)
+                    {
+                        previousSelectedObject = standObjectSelected;
+                    }
+                    standObjectSelected = allStandObjects[i];
+                    objectInfoNameText.text = standObjectSelected.linkedObject.objectName;
+                    objectInfoTitleText.text = standObjectSelected.linkedObject.title;
+                    objectInfoCategoryText.text = standObjectSelected.linkedObject.category.ToString();
+                    objectInfoDescriptionText.text = standObjectSelected.linkedObject.description;
+                    objectInfoOriginText.text = standObjectSelected.linkedObject.originDescription;
+                    objectInfoIllustration.sprite = standObjectSelected.linkedObject.illustration;
+                    atleastOneHovered = true;
+                }
             }
-        }
 
-        if(atleastOneHovered)
-        {
-            objectInfoWindow.SetActive(true);
-        }
-        else
-        {
-            objectInfoWindow.SetActive(false);
+            if (atleastOneHovered && previousSelectedObject != standObjectSelected)
+            {
+                StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator));
+            }
+            if (!atleastOneHovered && standObjectSelected != null)
+            {
+                standObjectSelected = null;
+                previousSelectedObject = null;
+                StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, true));
+            }
         }
     }
 

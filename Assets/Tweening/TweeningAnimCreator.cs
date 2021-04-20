@@ -27,7 +27,7 @@ public class TweeningAnimCreator : MonoBehaviour
     {
         if(testTweenAnimator.rectTransform != null)
         {
-            testTweenAnimator.GetCanvasGroup();
+            testTweenAnimator.GetReferences();
         }
     }
 

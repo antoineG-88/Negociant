@@ -10,8 +10,9 @@ public class TweeningAnimator
     [HideInInspector] public CanvasGroup canvasGroup;
     [HideInInspector] public Vector2 originalPos;
 
-    public void GetCanvasGroup()
+    public void GetReferences()
     {
         canvasGroup = rectTransform.GetComponent<CanvasGroup>();
+        originalPos = rectTransform.anchoredPosition;
     }
 }

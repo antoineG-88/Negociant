@@ -9,11 +9,23 @@ public class StandObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Object linkedObject;
     public Text nameText;
     public Image illustration;
+    public TweeningAnimator hoverAnim;
 
-    public bool isHovered;
-    public bool isPressed;
-    public bool isClicked;
-    public bool clickedDown;
+    [HideInInspector] public bool isHovered;
+    [HideInInspector] public bool isPressed;
+    [HideInInspector] public bool isClicked;
+    [HideInInspector] public bool clickedDown;
+    [HideInInspector] public bool canBeHovered;
+
+    private bool hoveredFlag;
+
+    private void Start()
+    {
+        canBeHovered = true;
+        hoverAnim.GetReferences();
+        hoverAnim.anim = Instantiate(hoverAnim.anim);
+    }
+
     private void Update()
     {
         if(isClicked)
@@ -29,6 +41,25 @@ public class StandObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (Input.GetMouseButtonUp(0))
         {
             isPressed = false;
+        }
+
+        if(canBeHovered)
+        {
+            if(!hoveredFlag && isHovered)
+            {
+                StartCoroutine(hoverAnim.anim.Play(hoverAnim, hoverAnim.originalPos));
+                hoveredFlag = true;
+            }
+        }
+        else
+        {
+            isHovered = false;
+        }
+
+        if(!isHovered && hoveredFlag)
+        {
+            StartCoroutine(hoverAnim.anim.PlayBackward(hoverAnim, hoverAnim.originalPos, true));
+            hoveredFlag = false;
         }
     }
 
@@ -61,5 +92,6 @@ public class StandObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
+        isPressed = false;
     }
 }
