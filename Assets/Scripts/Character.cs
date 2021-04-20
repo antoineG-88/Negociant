@@ -10,10 +10,19 @@ public class Character : ScriptableObject
     {
         public Trait trait;
         [Range(0f, 1f)] public float importance;
+
+        public Need(Trait needTrait, float needImportance)
+        {
+            trait = needTrait;
+            importance = needImportance;
+        }
     }
 
+    public string characterName;
+    public Sprite illustration;
     public Temper temper;
     public List<Need> needs;
+    public List<Category> initialInterest;
 }
 
 public enum Temper { Patient, Stressed};

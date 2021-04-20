@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerInventory
 {
-    public List<Belonging> objectsOwned;
+    public List<Belonging> belongings;
 
     [System.Serializable]
     public class Belonging

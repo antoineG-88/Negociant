@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Anneau de Gloire
   title: du sanctuaire du serpent
-  illu: {fileID: 21300000, guid: b82fc0f960a034646a21d2309da7c576, type: 3}
+  illustration: {fileID: 21300000, guid: b82fc0f960a034646a21d2309da7c576, type: 3}
   description: "Un anneau plaqu\xE9 or avec 6 dents repartis sur ses contours. Il
     \xE9mane une aura agr\xE9able lorsqu'il est port\xE9. L'accessoire est ab\xEEm\xE9
     et doit avoir travers\xE9s plusieurs d\xE9c\xE9nnies."

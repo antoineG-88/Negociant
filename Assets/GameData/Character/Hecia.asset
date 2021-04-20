@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
   m_Name: Hecia
   m_EditorClassIdentifier: 
+  characterName: Hecia
+  illustration: {fileID: 21300000, guid: 9d35e06f3fd156b4482bb41174d6cf47, type: 3}
   temper: 0
   needs:
   - trait: 11
@@ -20,3 +22,4 @@ MonoBehaviour:
     importance: 0.9
   - trait: 8
     importance: 0.8
+  initialInterest: 0000000003000000

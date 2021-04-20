@@ -6,8 +6,6 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "UniqueObject", menuName = "Negociant/Create new unique object", order = 1)]
 public class Object : ScriptableObject
 {
-    public enum Category { Armor, Weapon, Accessory, Relic, Ressource};
-    public enum Origin { DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, Unknown };
 
     [System.Serializable]
     public class Feature
@@ -25,7 +23,7 @@ public class Object : ScriptableObject
 
     public string objectName;
     public string title;
-    public Sprite illu;
+    public Sprite illustration;
     [TextArea] public string description;
     [TextArea] public string originDescription;
     public Origin origin;
@@ -39,4 +37,6 @@ public class Object : ScriptableObject
 
 
 public enum Trait { ColdResistant, HeatResistant, Shiny, Heavy, Light, Mysterious, Magic, SkeletonProof, SandWormProof, Clean, Old, NobleOrigins, Sharp, GoodMaterial, VigorUp};
+public enum Category { Armor, Weapon, Accessory, Relic, Ressource };
+public enum Origin { DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, Unknown };
 
