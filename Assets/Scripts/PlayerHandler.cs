@@ -28,6 +28,7 @@ public class PlayerHandler : MonoBehaviour
     private bool atleastOneClicked;
     private StandObject standObjectSelected;
     private StandObject previousSelectedObject;
+    private CharacterBehavior characterSelected;
 
     private void Start()
     {
@@ -98,6 +99,19 @@ public class PlayerHandler : MonoBehaviour
             newStandObject.linkedObject = playerInventory.belongings[o].ownedObject;
             newStandObject.RefreshDisplay();
             allStandObjects.Add(newStandObject);
+        }
+    }
+
+    public void SelectCharacter(CharacterBehavior theCharacter)
+    {
+        characterSelected = theCharacter;
+        characterSelected.Select();
+        foreach (CharacterBehavior character in NegoceManager.I.allPresentCharacters)
+        {
+            if(character != characterSelected)
+            {
+                character.UnSelect();
+            }
         }
     }
 }

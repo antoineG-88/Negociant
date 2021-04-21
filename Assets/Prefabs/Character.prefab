@@ -50,8 +50,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df125419bee61524fa79e4f6b311d60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHovered: 0
+  isPressed: 0
+  isClicked: 0
+  clickedDown: 0
   character: {fileID: 0}
   illustrationImage: {fileID: 7964137432250745116}
+  selectionAnim:
+    anim: {fileID: 11400000, guid: f7615f0be8a749949ae43f2866783ae2, type: 2}
+    rectTransform: {fileID: 2919613208417944377}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  isSelected: 0
 --- !u!222 &7756144542866971032
 CanvasRenderer:
   m_ObjectHideFlags: 0

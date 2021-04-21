@@ -11,6 +11,7 @@ public class NegoceManager : MonoBehaviour
     public RectTransform charactersDisplay;
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
+    public int maxCharacterPresent;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -18,9 +19,15 @@ public class NegoceManager : MonoBehaviour
     public int maxChNeeds;
     public List<Sprite> allCharacterIllustrations;
 
-    private List<CharacterBehavior> allPresentCharacters;
+    [HideInInspector] public List<CharacterBehavior> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
+
+    public static NegoceManager I;
+    private void Awake()
+    {
+        I = this;
+    }
 
     void Start()
     {
@@ -38,7 +45,26 @@ public class NegoceManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            AppearCharacter(allPossibleCharacters[UnityEngine.Random.Range(0, allPossibleCharacters.Count)]);
+            Character chosenChara;
+            bool charaAlreadyPresent = false;
+            int iteration = 0;
+            do
+            {
+                charaAlreadyPresent = false;
+                iteration++;
+                chosenChara = allPossibleCharacters[UnityEngine.Random.Range(0, allPossibleCharacters.Count)];
+
+                for (int i = 0; i < allPresentCharacters.Count; i++)
+                {
+                    if(allPresentCharacters[i].character == chosenChara)
+                    {
+                        charaAlreadyPresent = true;
+                    }
+                }
+
+            } while (charaAlreadyPresent && iteration < 200);
+
+            AppearCharacter(chosenChara);
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -53,16 +79,22 @@ public class NegoceManager : MonoBehaviour
         newCharacter = Instantiate(characterBehaviorPrefab, charactersDisplay);
         allPresentCharacters.Add(newCharacter);
         newCharacter.character = theCharacter;
-        newCharacter.RefreshCharacterDisplay();
-        RefreshCharacterPos();
+        if(allPresentCharacters.Count > maxCharacterPresent)
+        {
+            Destroy(allPresentCharacters[0].gameObject);
+            allPresentCharacters.RemoveAt(0);
+        }
+        newCharacter.UnSelect();
+        RefreshCharactersDisplay();
     }
 
-    private void RefreshCharacterPos()
+    private void RefreshCharactersDisplay()
     {
         for (int i = 0; i < allPresentCharacters.Count; i++)
         {
             allPresentCharacters[i].GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
                 Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)(i + 1) / allPresentCharacters.Count), 0.5f);
+            allPresentCharacters[i].RefreshCharacterDisplay();
         }
     }
 

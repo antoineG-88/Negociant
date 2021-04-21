@@ -113,7 +113,7 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 53585
+    atime1: 65535
     atime2: 0
     atime3: 0
     atime4: 0
@@ -123,5 +123,5 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  useColorChange: 1
+  useColorChange: 0
   colorImage: {fileID: 0}
