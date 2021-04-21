@@ -12,6 +12,9 @@ public class NegoceManager : MonoBehaviour
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
     public int maxCharacterPresent;
+    [Header("Characters options")]
+    public RectTransform gazePrefab;
+    public RectTransform gazePanel;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -81,10 +84,14 @@ public class NegoceManager : MonoBehaviour
         newCharacter.character = theCharacter;
         if(allPresentCharacters.Count > maxCharacterPresent)
         {
-            Destroy(allPresentCharacters[0].gameObject);
-            allPresentCharacters.RemoveAt(0);
+            MakeCharacterLeave(allPresentCharacters[0]);
         }
+
+        newCharacter.gazeDisplay = Instantiate(gazePrefab, gazePanel);
+        newCharacter.gameObject.name = newCharacter.character.characterName;
+        newCharacter.gazeDisplay.gameObject.name = newCharacter.character.characterName + "'s gaze";
         newCharacter.UnSelect();
+        newCharacter.RefreshPotentialObjects();
         RefreshCharactersDisplay();
     }
 
@@ -106,7 +113,7 @@ public class NegoceManager : MonoBehaviour
         {
             characterInitialPreferences.Add((Category)Enum.ToObject(typeof(Category), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Category)).Length)));
         }
-        newCharacter.initialInterest = new List<Category>(characterInitialPreferences);
+        newCharacter.initialInterests = new List<Category>(characterInitialPreferences);
 
         newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
 
@@ -126,7 +133,15 @@ public class NegoceManager : MonoBehaviour
         char firstLetter = char.ToUpper(newCharacter.characterName[0]);
         newCharacter.characterName = firstLetter + newCharacter.characterName.Remove(0, 1);
         newCharacter.illustration = allCharacterIllustrations[UnityEngine.Random.Range(0, allCharacterIllustrations.Count)];
+        newCharacter.name = newCharacter.characterName;
         Debug.Log(newCharacter.characterName + " added to possibleCharacters");
         return newCharacter;
+    }
+
+    private void MakeCharacterLeave(CharacterBehavior leavingCharacter)
+    {
+        allPresentCharacters.Remove(leavingCharacter);
+        Destroy(leavingCharacter.gazeDisplay.gameObject);
+        Destroy(leavingCharacter.gameObject);
     }
 }

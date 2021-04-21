@@ -18,7 +18,7 @@ MonoBehaviour:
   description: Un baton qui fait de la magie avec des feuilles et de plantes.
   originDescription: "Il \xE9tait cach\xE9 dans un coffre enfoui sous un abre"
   origin: 5
-  category: 1
+  categories: 0100000002000000
   features:
   - argumentDescription: Magie des plantes
     argumentTime: 5

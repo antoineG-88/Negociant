@@ -27,7 +27,7 @@ public class Object : ScriptableObject
     [TextArea] public string description;
     [TextArea] public string originDescription;
     public Origin origin;
-    public Category category;
+    public List<Category> categories;
     public List<Feature> features;
 
     public Object()

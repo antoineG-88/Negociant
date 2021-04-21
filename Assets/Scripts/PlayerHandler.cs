@@ -23,7 +23,7 @@ public class PlayerHandler : MonoBehaviour
     public Image objectInfoIllustration;
     public StandObject standObjectPrefab;
 
-    private List<StandObject> allStandObjects;
+    [HideInInspector] public List<StandObject> allStandObjects;
     private bool atleastOneHovered;
     private bool atleastOneClicked;
     private StandObject standObjectSelected;
@@ -54,7 +54,7 @@ public class PlayerHandler : MonoBehaviour
                     standObjectSelected = allStandObjects[i];
                     objectInfoNameText.text = standObjectSelected.linkedObject.objectName;
                     objectInfoTitleText.text = standObjectSelected.linkedObject.title;
-                    objectInfoCategoryText.text = standObjectSelected.linkedObject.category.ToString();
+                    objectInfoCategoryText.text = standObjectSelected.linkedObject.categories[0].ToString() + " / " + (standObjectSelected.linkedObject.categories.Count > 1 ? standObjectSelected.linkedObject.categories[1].ToString() : "");
                     objectInfoDescriptionText.text = standObjectSelected.linkedObject.description;
                     objectInfoOriginText.text = standObjectSelected.linkedObject.originDescription;
                     objectInfoIllustration.sprite = standObjectSelected.linkedObject.illustration;
@@ -97,6 +97,8 @@ public class PlayerHandler : MonoBehaviour
             newStandObject = Instantiate(standObjectPrefab, standRectTransform);
             newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPos + new Vector2(-((distanceBetweenStandObject * (playerInventory.belongings.Count - 1))*0.5f) + distanceBetweenStandObject * o, 0);
             newStandObject.linkedObject = playerInventory.belongings[o].ownedObject;
+            newStandObject.rectTransform = newStandObject.GetComponent<RectTransform>();
+            newStandObject.name = newStandObject.linkedObject.objectName;
             newStandObject.RefreshDisplay();
             allStandObjects.Add(newStandObject);
         }

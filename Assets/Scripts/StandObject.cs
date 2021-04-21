@@ -9,6 +9,7 @@ public class StandObject : UIInteractable
     public Text nameText;
     public Image illustration;
     public TweeningAnimator hoverAnim;
+    public RectTransform rectTransform;
     [HideInInspector] public bool canBeHovered;
 
     private void Start()

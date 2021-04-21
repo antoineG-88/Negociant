@@ -22,7 +22,8 @@ public class Character : ScriptableObject
     public Sprite illustration;
     public Temper temper;
     public List<Need> needs;
-    public List<Category> initialInterest;
+    public List<Category> initialInterests;
+    public List<Object> ownedObjects;
 }
 
-public enum Temper { Patient, Stressed};
+public enum Temper { Decisive};

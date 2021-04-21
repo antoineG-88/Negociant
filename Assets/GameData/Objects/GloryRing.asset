@@ -21,7 +21,7 @@ MonoBehaviour:
   originDescription: "L'anneau a \xE9t\xE9 retrouv\xE9 sur le cadavre d'une femme
     d\xE9c\xE9d\xE9 dans le temple du serpent \xE0 l'est du D\xE9sert de Duhua."
   origin: 1
-  category: 2
+  categories: 0200000003000000
   features:
   - argumentDescription: Anneau vigoureux
     argumentTime: 8
