@@ -279,4 +279,83 @@ public class TweeningAnim : ScriptableObject
             canvasGroup.alpha = colorAnimation.Evaluate(0).a;
         }
     }
+
+    public void SetAtStartState(TweeningAnimator animator)
+    {
+        animatedTransform = animator.rectTransform;
+        canvasGroup = animator.canvasGroup;
+
+
+        if (movementRelativeToOriginalPos)
+        {
+            animatedTransform.anchoredPosition = animator.originalPos + animationEndPos;
+        }
+        else
+        {
+            animatedTransform.anchoredPosition = animationEndPos;
+        }
+
+        if (useColorChange)
+        {
+            colorImage = animatedTransform.GetComponent<Image>();
+        }
+
+
+        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? animator.originalPos : animationStartPos;
+        animatedTransform.localRotation = Quaternion.Euler(0, 0, animationStartRot);
+        animatedTransform.localScale = animationStartScale;
+
+        if (useColorChange && colorImage != null)
+        {
+            colorImage.color = colorAnimation.Evaluate(0);
+            if (canvasGroup != null)
+            {
+                colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
+            }
+        }
+
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = colorAnimation.Evaluate(0).a;
+        }
+    }
+
+    public void SetAtEndState(TweeningAnimator animator)
+    {
+        animatedTransform = animator.rectTransform;
+        canvasGroup = animator.canvasGroup;
+
+
+        if (movementRelativeToOriginalPos)
+        {
+            animatedTransform.anchoredPosition = animator.originalPos;
+        }
+        else
+        {
+            animatedTransform.anchoredPosition = animationStartPos;
+        }
+
+        if (useColorChange)
+        {
+            colorImage = animatedTransform.GetComponent<Image>();
+        }
+
+        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? animator.originalPos + animationEndPos : animationEndPos;
+        animatedTransform.localRotation = Quaternion.Euler(0, 0, animationEndRot);
+        animatedTransform.localScale = animationEndScale;
+
+        if (useColorChange && colorImage != null)
+        {
+            colorImage.color = colorAnimation.Evaluate(1);
+            if (canvasGroup != null)
+            {
+                colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
+            }
+        }
+
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = colorAnimation.Evaluate(1).a;
+        }
+    }
 }

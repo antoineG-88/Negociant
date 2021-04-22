@@ -87,13 +87,13 @@ MonoBehaviour:
     m_RotationOrder: 4
   customRotCurve: 0
   customScaleCurve: 0
-  animationStartPos: {x: 1541, y: 140}
-  animationEndPos: {x: 1541, y: 229}
+  animationStartPos: {x: 0, y: 0}
+  animationEndPos: {x: 0, y: 89}
   animationStartScale: {x: 1, y: 1, z: 1}
   animationEndScale: {x: 1, y: 1, z: 1}
   animationStartRot: 0
   animationEndRot: 0
-  movementRelativeToOriginalPos: 0
+  movementRelativeToOriginalPos: 1
   colorAnimation:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 0}

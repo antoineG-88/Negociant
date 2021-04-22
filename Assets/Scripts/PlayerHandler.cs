@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerHandler : MonoBehaviour
 {
@@ -22,32 +23,40 @@ public class PlayerHandler : MonoBehaviour
     public Text objectInfoOriginText;
     public Image objectInfoIllustration;
     public StandObject standObjectPrefab;
+    [Space]
+    public RectTransform playerActionPanel;
 
     [HideInInspector] public List<StandObject> allStandObjects;
     private bool atleastOneHovered;
     private bool atleastOneClicked;
     private StandObject standObjectSelected;
     private StandObject previousSelectedObject;
-    private CharacterBehavior characterSelected;
+    private StandObject hoveredStandObject;
 
     private void Start()
     {
         objectInfoWindowAnimator.GetReferences();
-        StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, true));
+        objectInfoWindowAnimator.anim.SetAtStartState(objectInfoWindowAnimator);
+        playerActionPanel.gameObject.SetActive(false);
         InitPlayerInfo();
         InitStandLayout();
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        UpdateObjectSelection();
+    }
+
+    private void UpdateObjectSelection()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             atleastOneHovered = false;
             for (int i = 0; i < allStandObjects.Count; i++)
             {
                 if (allStandObjects[i].isHovered)
                 {
-                    if(standObjectSelected != null)
+                    if (standObjectSelected != null)
                     {
                         previousSelectedObject = standObjectSelected;
                     }
@@ -64,15 +73,42 @@ public class PlayerHandler : MonoBehaviour
 
             if (atleastOneHovered && previousSelectedObject != standObjectSelected)
             {
-                StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator));
+                StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos));
+                playerActionPanel.gameObject.SetActive(true);
+                playerActionPanel.position = standObjectSelected.rectTransform.position;
             }
             if (!atleastOneHovered && standObjectSelected != null)
             {
-                standObjectSelected = null;
-                previousSelectedObject = null;
-                StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, true));
+
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            standObjectSelected = null;
+            previousSelectedObject = null;
+            StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos, true));
+            playerActionPanel.gameObject.SetActive(false);
+        }
+
+        /*atleastOneHovered = false;
+        for (int i = 0; i < allStandObjects.Count; i++)
+        {
+            if (allStandObjects[i].isHovered)
+            {
+                hoveredStandObject = allStandObjects[i];
+                atleastOneHovered = true;
+            }
+        }
+
+        if(atleastOneHovered)
+        {
+            playerActionPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            playerActionPanel.gameObject.SetActive(false);
+        }*/
     }
 
     private void InitPlayerInfo()
@@ -104,16 +140,15 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void SelectCharacter(CharacterBehavior theCharacter)
+    public void PresentObject()
     {
-        characterSelected = theCharacter;
-        characterSelected.Select();
-        foreach (CharacterBehavior character in NegoceManager.I.allPresentCharacters)
+        if(NegoceManager.I.characterSelected != null)
         {
-            if(character != characterSelected)
-            {
-                character.UnSelect();
-            }
+            NegoceManager.I.characterSelected.PresentObject(standObjectSelected);
+        }
+        else
+        {
+            Debug.Log("Aucun personnage sélectionné");
         }
     }
 }

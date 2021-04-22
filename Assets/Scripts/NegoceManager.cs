@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class NegoceManager : MonoBehaviour
 {
@@ -12,9 +13,15 @@ public class NegoceManager : MonoBehaviour
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
     public int maxCharacterPresent;
+    [Header("CharacterInfoRef")]
+    public bool debugInfo;
+    public GameObject charaInfoPanel;
+    public Text charaInitialInterestsText;
+    public Text charaNameText;
     [Header("Characters options")]
     public RectTransform gazePrefab;
     public RectTransform gazePanel;
+    public List<Color> identificationColors;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -25,6 +32,7 @@ public class NegoceManager : MonoBehaviour
     [HideInInspector] public List<CharacterBehavior> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
+    [HideInInspector] public CharacterBehavior characterSelected;
 
     public static NegoceManager I;
     private void Awake()
@@ -74,24 +82,46 @@ public class NegoceManager : MonoBehaviour
         {
             allPossibleCharacters.Add(GenerateRandomCharacter());
         }
+
+        UpdateSelectedCharaInfo();
+    }
+
+    private void UpdateSelectedCharaInfo()
+    {
+        if(characterSelected != null)
+        {
+            charaInitialInterestsText.text = characterSelected.character.initialInterests[0].ToString()
+                + " / " + (characterSelected.character.initialInterests.Count > 1 ? characterSelected.character.initialInterests[1].ToString() : "")
+                + " / " + (characterSelected.character.initialInterests.Count > 2 ? characterSelected.character.initialInterests[2].ToString() : "");
+            charaNameText.text = characterSelected.character.characterName;
+            if(debugInfo)
+            {
+                charaInfoPanel.SetActive(true);
+            }
+        }
+        else
+        {
+            charaInfoPanel.SetActive(false);
+        }
     }
 
     private void AppearCharacter(Character theCharacter)
     {
-        CharacterBehavior newCharacter;
-        newCharacter = Instantiate(characterBehaviorPrefab, charactersDisplay);
-        allPresentCharacters.Add(newCharacter);
-        newCharacter.character = theCharacter;
+        CharacterBehavior newCharacterBehavior;
+        newCharacterBehavior = Instantiate(characterBehaviorPrefab, charactersDisplay);
+        allPresentCharacters.Add(newCharacterBehavior);
+        newCharacterBehavior.character = theCharacter;
         if(allPresentCharacters.Count > maxCharacterPresent)
         {
             MakeCharacterLeave(allPresentCharacters[0]);
         }
 
-        newCharacter.gazeDisplay = Instantiate(gazePrefab, gazePanel);
-        newCharacter.gameObject.name = newCharacter.character.characterName;
-        newCharacter.gazeDisplay.gameObject.name = newCharacter.character.characterName + "'s gaze";
-        newCharacter.UnSelect();
-        newCharacter.RefreshPotentialObjects();
+        newCharacterBehavior.RefreshPotentialObjects();
+        newCharacterBehavior.gazeDisplay = Instantiate(gazePrefab, gazePanel);
+        newCharacterBehavior.nameText.text = newCharacterBehavior.character.characterName;
+        newCharacterBehavior.gameObject.name = newCharacterBehavior.character.characterName;
+        newCharacterBehavior.gazeDisplay.gameObject.name = newCharacterBehavior.character.characterName + "'s gaze";
+        newCharacterBehavior.UnSelect(true);
         RefreshCharactersDisplay();
     }
 
@@ -99,8 +129,9 @@ public class NegoceManager : MonoBehaviour
     {
         for (int i = 0; i < allPresentCharacters.Count; i++)
         {
-            allPresentCharacters[i].GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
+            allPresentCharacters[i].rectTransform.anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
                 Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)(i + 1) / allPresentCharacters.Count), 0.5f);
+            allPresentCharacters[i].identificationColor = identificationColors[i];
             allPresentCharacters[i].RefreshCharacterDisplay();
         }
     }
@@ -138,10 +169,28 @@ public class NegoceManager : MonoBehaviour
         return newCharacter;
     }
 
-    private void MakeCharacterLeave(CharacterBehavior leavingCharacter)
+    public void MakeCharacterLeave(CharacterBehavior leavingCharacter)
     {
         allPresentCharacters.Remove(leavingCharacter);
         Destroy(leavingCharacter.gazeDisplay.gameObject);
         Destroy(leavingCharacter.gameObject);
+        RefreshCharactersDisplay();
+    }
+    public void SelectCharacter(CharacterBehavior theCharacter)
+    {
+        characterSelected = theCharacter;
+        characterSelected.Select();
+        foreach (CharacterBehavior character in NegoceManager.I.allPresentCharacters)
+        {
+            if (character != characterSelected)
+            {
+                character.UnSelect(false);
+            }
+        }
+    }
+
+    public static Vector2 GetDirectionFromAngle(float angle)
+    {
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 }

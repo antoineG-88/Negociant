@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: Dague Orque
+  m_EditorClassIdentifier: 
+  objectName: Dague Orque
+  title: du roi des voleurs
+  illustration: {fileID: 21300000, guid: 7705839defc77124dbaa0ca4dd37f219, type: 3}
+  description: Elle n'est pas bien droite
+  originDescription: "\xE9vident non ?"
+  origin: 3
+  categories: 0100000002000000
+  features: []

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: GantMagnetique
+  m_EditorClassIdentifier: 
+  objectName: "Gants magn\xE9tiques"
+  title: "de la tour gel\xE9e"
+  illustration: {fileID: 21300000, guid: a5aef7816752e5543b7061c36bf97116, type: 3}
+  description: Il permet d'attirer les objets magique
+  originDescription: "Il vient du 34 \xE9tages de la tour gel\xE9e"
+  origin: 6
+  categories: 0000000001000000
+  features: []

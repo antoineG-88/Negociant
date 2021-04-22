@@ -216,9 +216,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 50e7703b80ff93240a331325dbd5410b, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_BestFit: 1
+    m_MinSize: 30
+    m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -277,6 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50607a11867aa046a11a64a46134fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHovered: 0
+  isPressed: 0
+  isClicked: 0
+  clickedDown: 0
   linkedObject: {fileID: 0}
   nameText: {fileID: 9115588057777454673}
   illustration: {fileID: 9115588057267190685}
@@ -285,8 +289,5 @@ MonoBehaviour:
     rectTransform: {fileID: 9115588057267190684}
     canvasGroup: {fileID: 0}
     originalPos: {x: 0, y: 0}
-  isHovered: 0
-  isPressed: 0
-  isClicked: 0
-  clickedDown: 0
+  rectTransform: {fileID: 0}
   canBeHovered: 0
