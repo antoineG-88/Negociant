@@ -359,7 +359,7 @@ TextureImporter:
         width: 502
         height: 799
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -367,6 +367,27 @@ TextureImporter:
       bones: []
       spriteID: edc9833d8422d6c70800000000000000
       internalID: 8965860129341218014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aiodos_2
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 577
+        width: 133
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e25e3010e79498a0800000000000000
+      internalID: -6299242990183492890
       vertices: []
       indices: 
       edges: []

@@ -27,14 +27,19 @@ public class CharacterBehavior : UIInteractable
     public float d_enthousiasmBonusIncreaseWhenlooking;
     public float d_interestLevelIncreaseByPresenting;
     [Range(0f, 1f)] public float d_initialEntousiasm;
+    [Header("More options")]
     public float timeBeforeEnthousiasmDecrease;
     public float enthousiasmDecreaseRate;
+    [Header("Gaze options")]
+    public float gazeLerpRatio;
+    public Image identificationCircle;
 
     [HideInInspector] public bool isSelected;
     [HideInInspector] public RectTransform gazeDisplay;
     [HideInInspector] public Color identificationColor;
+    [HideInInspector] public bool isLeaving;
 
-    private List<PotentialObject> potentialObjects;
+    [HideInInspector] public List<PotentialObject> potentialObjects;
     private PotentialObject lookedObject;
     private float gazeTimeRmn;
     private float reflexionTimeRMN;
@@ -154,6 +159,7 @@ public class CharacterBehavior : UIInteractable
 
     public void PresentObject(StandObject presentedObject)
     {
+        RefreshEnthousiasm();
         PotentialObject presentedPotentialObject = null;
         foreach(PotentialObject potentialObject in potentialObjects)
         {
@@ -188,6 +194,7 @@ public class CharacterBehavior : UIInteractable
     private void Leave()
     {
         NegoceManager.I.MakeCharacterLeave(this);
+        isLeaving = true;
     }
 
     private void IncreaseAlternanceIndex()
@@ -216,7 +223,7 @@ public class CharacterBehavior : UIInteractable
 
     private void LookObject(PotentialObject objectToLook, float timeToLook)
     {
-        if(objectToLook != lookedObject)
+        if (objectToLook != lookedObject)
         {
             IncreaseAlternanceIndex();
         }
@@ -229,6 +236,11 @@ public class CharacterBehavior : UIInteractable
         IncreaseAlternanceIndex();
         reflexionTimeRMN = reflexionTime;
         lookedObject = null;
+    }
+
+    private void RefreshEnthousiasm()
+    {
+        timeSpendRefreshEnthousiasm = 0;
     }
 
     private void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
@@ -267,18 +279,29 @@ public class CharacterBehavior : UIInteractable
     {
         if (lookedObject != null)
         {
-            gazeDirection = rectTransform.position + Vector3.up * gazeHeadOffset - lookedObject.standObject.rectTransform.position;
+            gazeDirection = rectTransform.position + Vector3.up * gazeHeadOffset - gazeDisplay.position;
             gazeDirection.Normalize();
             gazeAngle = Vector2.SignedAngle(Vector2.up, gazeDirection);
 
-            gazeDisplay.position = lookedObject.standObject.rectTransform.position;
             gazeDisplay.rotation = Quaternion.Euler(0, 0, gazeAngle);
+
+
+            gazeDisplay.position = Vector2.Lerp(gazeDisplay.position , lookedObject.standObject.rectTransform.position, gazeLerpRatio * Time.deltaTime);
+            if(!gazeDisplay.gameObject.activeSelf)
+            {
+                RefreshGazeOrigin();
+            }
             gazeDisplay.gameObject.SetActive(true);
         }
         else
         {
             gazeDisplay.gameObject.SetActive(false);
         }
+    }
+
+    private void RefreshGazeOrigin()
+    {
+        gazeDisplay.position = rectTransform.position + (Vector3)(new Vector2(0, gazeHeadOffset));
     }
 
     public void RefreshPotentialObjects()
@@ -319,7 +342,11 @@ public class CharacterBehavior : UIInteractable
         selectionAnim.anim = Instantiate(selectionAnim.anim);
         illustrationImage.sprite = character.illustration;
         illustrationImage.SetNativeSize();
-        gazeDisplay.GetComponent<Image>().color = identificationColor;
+        if(gazeDisplay != null)
+        {
+            gazeDisplay.GetComponent<Image>().color = identificationColor;
+        }
+        identificationCircle.color = new Color(identificationColor.r, identificationColor.g, identificationColor.b, 0.5f);
         selectionAnim.GetReferences();
     }
 
@@ -357,7 +384,7 @@ public class CharacterBehavior : UIInteractable
     }
 
     [System.Serializable]
-    private class PotentialObject
+    public class PotentialObject
     {
         public StandObject standObject;
         public float interestLevel;

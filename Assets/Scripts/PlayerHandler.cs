@@ -13,7 +13,8 @@ public class PlayerHandler : MonoBehaviour
     public TweeningAnimator objectInfoWindowAnimator;
     public RectTransform standRectTransform; 
     public float distanceBetweenStandObject;
-    public Vector2 standObjectsOriginPos;
+    public Vector2 standObjectsOriginPosLine1;
+    public Vector2 standObjectsOriginPosLine2;
     [Header("Reference")]
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
@@ -124,14 +125,29 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
+    private int maxObjectOnLine;
+
     private void InitStandLayout()
     {
         allStandObjects = new List<StandObject>();
         StandObject newStandObject;
+        maxObjectOnLine = playerInventory.belongings.Count / 2;
         for (int o = 0; o < playerInventory.belongings.Count; o++)
         {
             newStandObject = Instantiate(standObjectPrefab, standRectTransform);
-            newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPos + new Vector2(-((distanceBetweenStandObject * (playerInventory.belongings.Count - 1))*0.5f) + distanceBetweenStandObject * o, 0);
+
+            if(o < maxObjectOnLine)
+            {
+                newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine1 + new Vector2(o % 2 == 0 ? ((o+0.5f)/2 * distanceBetweenStandObject) : (-(o + 0.5f)/2 * distanceBetweenStandObject), 0);
+                //newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine1 + new Vector2(-((distanceBetweenStandObject * (Mathf.Clamp(playerInventory.belongings.Count - 1, 0, maxObjectOnLine - 1))) * 0.5f) + distanceBetweenStandObject * o, 0);
+            }
+            else
+            {
+                int realo = o - maxObjectOnLine;
+                newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine2 + new Vector2(realo % 2 == 0 ? ((realo + 0.5f) / 2 * distanceBetweenStandObject) : (-(realo + 0.5f) / 2 * distanceBetweenStandObject), 0);
+                //newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine2 + new Vector2(-((distanceBetweenStandObject * (playerInventory.belongings.Count - (1 + maxObjectOnLine))) * 0.5f) + distanceBetweenStandObject * o, 0);
+            }
+
             newStandObject.linkedObject = playerInventory.belongings[o].ownedObject;
             newStandObject.rectTransform = newStandObject.GetComponent<RectTransform>();
             newStandObject.name = newStandObject.linkedObject.objectName;

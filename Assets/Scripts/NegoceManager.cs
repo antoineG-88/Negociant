@@ -98,6 +98,24 @@ public class NegoceManager : MonoBehaviour
             {
                 charaInfoPanel.SetActive(true);
             }
+            foreach (StandObject standObject in playerHandler.allStandObjects)
+            {
+                if(debugInfo)
+                {
+                    standObject.interestLevel.gameObject.SetActive(true);
+                    foreach (CharacterBehavior.PotentialObject potentialObject in characterSelected.potentialObjects)
+                    {
+                        if (standObject == potentialObject.standObject)
+                        {
+                            standObject.interestLevel.text = potentialObject.interestLevel.ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    standObject.interestLevel.gameObject.SetActive(false);
+                }
+            }
         }
         else
         {
@@ -129,10 +147,13 @@ public class NegoceManager : MonoBehaviour
     {
         for (int i = 0; i < allPresentCharacters.Count; i++)
         {
-            allPresentCharacters[i].rectTransform.anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
-                Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)(i + 1) / allPresentCharacters.Count), 0.5f);
-            allPresentCharacters[i].identificationColor = identificationColors[i];
-            allPresentCharacters[i].RefreshCharacterDisplay();
+            if(!allPresentCharacters[i].isLeaving)
+            {
+                allPresentCharacters[i].rectTransform.anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
+                    Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)(i + 1) / allPresentCharacters.Count), 0.5f);
+                allPresentCharacters[i].identificationColor = identificationColors[i];
+                allPresentCharacters[i].RefreshCharacterDisplay();
+            }
         }
     }
 
@@ -171,6 +192,7 @@ public class NegoceManager : MonoBehaviour
 
     public void MakeCharacterLeave(CharacterBehavior leavingCharacter)
     {
+        leavingCharacter.isLeaving = true;
         allPresentCharacters.Remove(leavingCharacter);
         Destroy(leavingCharacter.gazeDisplay.gameObject);
         Destroy(leavingCharacter.gameObject);

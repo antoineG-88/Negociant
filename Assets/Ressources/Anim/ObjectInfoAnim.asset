@@ -88,7 +88,7 @@ MonoBehaviour:
   customRotCurve: 0
   customScaleCurve: 0
   animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: 0, y: 89}
+  animationEndPos: {x: 0, y: 45}
   animationStartScale: {x: 1, y: 1, z: 1}
   animationEndScale: {x: 1, y: 1, z: 1}
   animationStartRot: 0
