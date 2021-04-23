@@ -9,7 +9,9 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
     [HideInInspector] public bool isPressed;
     [HideInInspector] public bool isClicked;
     [HideInInspector] public bool clickedDown;
+    [HideInInspector] public bool clickedUp;
 
+    private bool hasBeenClickedWithoutLeaving;
     private bool hoveredFlag;
 
     public virtual void Update()
@@ -24,6 +26,11 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
             clickedDown = false;
         }
 
+        if (clickedUp)
+        {
+            clickedUp = false;
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             isPressed = false;
@@ -31,40 +38,50 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
 
         if (!hoveredFlag && isHovered)
         {
-            OnHoverIn();
             hoveredFlag = true;
         }
 
         if (!isHovered && hoveredFlag)
         {
-            OnHoverOut();
             hoveredFlag = false;
         }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            if(isHovered)
+            {
+                clickedUp = true;
+            }
+        }
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
         clickedDown = true;
+        hasBeenClickedWithoutLeaving = true;
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (isPressed)
+        if (hasBeenClickedWithoutLeaving)
         {
             isClicked = true;
         }
-        isPressed = false;
+        hasBeenClickedWithoutLeaving = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        OnHoverIn();
         isHovered = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        OnHoverOut();
         isHovered = false;
-        isPressed = false;
+        hasBeenClickedWithoutLeaving = false;
     }
 
     public abstract void OnHoverIn();

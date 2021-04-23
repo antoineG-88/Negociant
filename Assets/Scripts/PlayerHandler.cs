@@ -26,19 +26,24 @@ public class PlayerHandler : MonoBehaviour
     public StandObject standObjectPrefab;
     [Space]
     public RectTransform playerActionPanel;
+    public TweeningAnimator playerActionPanelAnim;
 
     [HideInInspector] public List<StandObject> allStandObjects;
     private bool atleastOneHovered;
-    private bool atleastOneClicked;
-    private StandObject standObjectSelected;
+    private bool atLeastOnePressed;
+    private StandObject selectedStandObject;
     private StandObject previousSelectedObject;
     private StandObject hoveredStandObject;
+    private StandObject previousHoveredObject;
 
     private void Start()
     {
         objectInfoWindowAnimator.GetReferences();
         objectInfoWindowAnimator.anim.SetAtStartState(objectInfoWindowAnimator);
-        playerActionPanel.gameObject.SetActive(false);
+        playerActionPanelAnim.GetReferences();
+        playerActionPanelAnim.canvasGroup.interactable = false;
+        playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
+        playerActionPanelAnim.anim.SetAtEndState(playerActionPanelAnim);
         InitPlayerInfo();
         InitStandLayout();
     }
@@ -50,66 +55,64 @@ public class PlayerHandler : MonoBehaviour
 
     private void UpdateObjectSelection()
     {
-        if (Input.GetMouseButtonDown(0))
+        atleastOneHovered = false;
+        atLeastOnePressed = false;
+        for (int i = 0; i < allStandObjects.Count; i++)
         {
-            atleastOneHovered = false;
-            for (int i = 0; i < allStandObjects.Count; i++)
+            if(selectedStandObject == null && allStandObjects[i].isPressed)
+            {
+                if (selectedStandObject != null)
+                {
+                    previousSelectedObject = selectedStandObject;
+                }
+                selectedStandObject = allStandObjects[i];
+                atLeastOnePressed = true;
+            }
+
+            if (selectedStandObject == null)
             {
                 if (allStandObjects[i].isHovered)
                 {
-                    if (standObjectSelected != null)
-                    {
-                        previousSelectedObject = standObjectSelected;
-                    }
-                    standObjectSelected = allStandObjects[i];
-                    objectInfoNameText.text = standObjectSelected.linkedObject.objectName;
-                    objectInfoTitleText.text = standObjectSelected.linkedObject.title;
-                    objectInfoCategoryText.text = standObjectSelected.linkedObject.categories[0].ToString() + " / " + (standObjectSelected.linkedObject.categories.Count > 1 ? standObjectSelected.linkedObject.categories[1].ToString() : "");
-                    objectInfoDescriptionText.text = standObjectSelected.linkedObject.description;
-                    objectInfoOriginText.text = standObjectSelected.linkedObject.originDescription;
-                    objectInfoIllustration.sprite = standObjectSelected.linkedObject.illustration;
-                    atleastOneHovered = true;
+                    SetHoveredObject(allStandObjects[i]);
                 }
             }
-
-            if (atleastOneHovered && previousSelectedObject != standObjectSelected)
+            else
             {
-                StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos));
-                playerActionPanel.gameObject.SetActive(true);
-                playerActionPanel.position = standObjectSelected.rectTransform.position;
-            }
-            if (!atleastOneHovered && standObjectSelected != null)
-            {
-
+                SetHoveredObject(selectedStandObject);
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.C))
+        if (atleastOneHovered && previousHoveredObject != hoveredStandObject)
         {
-            standObjectSelected = null;
-            previousSelectedObject = null;
+            StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos));
+        }
+        if (!atleastOneHovered && hoveredStandObject != null)
+        {
+            hoveredStandObject = null;
+            previousHoveredObject = null;
             StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos, true));
-            playerActionPanel.gameObject.SetActive(false);
         }
 
-        /*atleastOneHovered = false;
-        for (int i = 0; i < allStandObjects.Count; i++)
+        if (atLeastOnePressed && previousSelectedObject != selectedStandObject)
         {
-            if (allStandObjects[i].isHovered)
+            playerActionPanel.position = hoveredStandObject.rectTransform.position;
+            playerActionPanelAnim.GetReferences();
+            playerActionPanelAnim.canvasGroup.interactable = true;
+            playerActionPanelAnim.canvasGroup.blocksRaycasts = true;
+            StartCoroutine(playerActionPanelAnim.anim.PlayBackward(playerActionPanelAnim, playerActionPanelAnim.originalPos, true));
+        }
+
+        if (selectedStandObject != null)
+        {
+            if(selectedStandObject.isPressed == false)
             {
-                hoveredStandObject = allStandObjects[i];
-                atleastOneHovered = true;
+                selectedStandObject = null;
+                previousSelectedObject = null;
+                playerActionPanelAnim.canvasGroup.interactable = false;
+                playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
+                StartCoroutine(playerActionPanelAnim.anim.Play(playerActionPanelAnim, playerActionPanelAnim.originalPos));
             }
         }
-
-        if(atleastOneHovered)
-        {
-            playerActionPanel.gameObject.SetActive(true);
-        }
-        else
-        {
-            playerActionPanel.gameObject.SetActive(false);
-        }*/
     }
 
     private void InitPlayerInfo()
@@ -123,6 +126,22 @@ public class PlayerHandler : MonoBehaviour
                 playerInventory.belongings[playerInventory.belongings.Count - 1].featureKnowledge[y] = true;
             }
         }
+    }
+
+    private void SetHoveredObject(StandObject newHoveredObject)
+    {
+        if (hoveredStandObject != null)
+        {
+            previousHoveredObject = hoveredStandObject;
+        }
+        hoveredStandObject = newHoveredObject;
+        objectInfoNameText.text = hoveredStandObject.linkedObject.objectName;
+        objectInfoTitleText.text = hoveredStandObject.linkedObject.title;
+        objectInfoCategoryText.text = hoveredStandObject.linkedObject.categories[0].ToString() + " / " + (hoveredStandObject.linkedObject.categories.Count > 1 ? hoveredStandObject.linkedObject.categories[1].ToString() : "");
+        objectInfoDescriptionText.text = hoveredStandObject.linkedObject.description;
+        objectInfoOriginText.text = hoveredStandObject.linkedObject.originDescription;
+        objectInfoIllustration.sprite = hoveredStandObject.linkedObject.illustration;
+        atleastOneHovered = true;
     }
 
     private int maxObjectOnLine;
@@ -160,7 +179,7 @@ public class PlayerHandler : MonoBehaviour
     {
         if(NegoceManager.I.characterSelected != null)
         {
-            NegoceManager.I.characterSelected.PresentObject(standObjectSelected);
+            NegoceManager.I.characterSelected.PresentObject(selectedStandObject);
         }
         else
         {

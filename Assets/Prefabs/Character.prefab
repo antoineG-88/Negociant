@@ -282,6 +282,7 @@ MonoBehaviour:
   isPressed: 0
   isClicked: 0
   clickedDown: 0
+  clickedUp: 0
   character: {fileID: 0}
   illustrationImage: {fileID: 6244530951691481489}
   selectionAnim:
@@ -306,7 +307,7 @@ MonoBehaviour:
   d_enthousiasmIncreaseWithCorrectPresent: 0.1
   d_enthousiasmDecreaseWithIncorrectPresent: 0.1
   d_enthousiasmBonusIncreaseWhenlooking: 0.2
-  d_interestLevelIncreaseByPresenting: 3
+  d_interestLevelIncreaseByPresenting: 2
   d_initialEntousiasm: 0.5
   timeBeforeEnthousiasmDecrease: 10
   enthousiasmDecreaseRate: 0.003
