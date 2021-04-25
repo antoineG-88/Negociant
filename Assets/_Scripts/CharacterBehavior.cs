@@ -312,7 +312,7 @@ public class CharacterBehavior : UIInteractable
         identificationCircle.gameObject.SetActive(true);
         enthousiasmGauge.SetActive(true);
         isAppearing = false;
-
+        UnSelect(true);
     }
 
     public void Select()

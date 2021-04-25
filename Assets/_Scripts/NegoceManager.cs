@@ -182,7 +182,6 @@ public class NegoceManager : MonoBehaviour
         newCharacterBehavior.gameObject.name = newCharacterBehavior.character.characterName;
         newCharacterBehavior.gazeDisplay.gameObject.name = newCharacterBehavior.character.characterName + "'s gaze";
         newCharacterBehavior.characterCanvasRectTransform = charactersDisplay;
-        newCharacterBehavior.UnSelect(true);
         RefreshCharactersDisplay();
         StartCoroutine(newCharacterBehavior.Appear());
     }

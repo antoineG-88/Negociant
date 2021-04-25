@@ -4079,7 +4079,7 @@ MonoBehaviour:
   - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
   - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
   - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
-  timeRangeBetweenCharacterApparition: {x: 30, y: 180}
+  timeRangeBetweenCharacterApparition: {x: 10, y: 60}
   randomCharacterGenerated: 10
   minChInitialInterest: 1
   maxChInitialInterest: 1
