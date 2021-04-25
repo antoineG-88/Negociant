@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -1413388721454057509
     second: Agielba_0
+  - first:
+      213: 1437476644234695805
+    second: Agielba_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -105,12 +108,12 @@ TextureImporter:
       name: Agielba_0
       rect:
         serializedVersion: 2
-        x: 217
+        x: 218
         y: 0
         width: 484
         height: 797
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: bd7ff204272a26ce0800000000000000
       internalID: -1413388721454057509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Agielba_1
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 620
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7497805461f2f310800000000000000
+      internalID: 1437476644234695805
       vertices: []
       indices: 
       edges: []

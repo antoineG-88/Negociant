@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -2164466282066322600
     second: LightKnight_0
+  - first:
+      213: -27853127596480695
+    second: LightKnight_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 488
         height: 790
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: 85b5021626546f1e0800000000000000
       internalID: -2164466282066322600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightKnight_1
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 636
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9476abf5abb0d9ff0800000000000000
+      internalID: -27853127596480695
       vertices: []
       indices: 
       edges: []

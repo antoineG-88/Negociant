@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 4498544600597911442
     second: BlackKnight_0
+  - first:
+      213: -7706798523822224507
+    second: BlackKnight_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 471
         height: 732
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: 297d3ecda7a0e6e30800000000000000
       internalID: 4498544600597911442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlackKnight_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 633
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58b42103393fb0590800000000000000
+      internalID: -7706798523822224507
       vertices: []
       indices: 
       edges: []

@@ -20,6 +20,7 @@ public class Character : ScriptableObject
 
     public string characterName;
     public Sprite illustration;
+    public Sprite faceSprite;
     public Temper temper;
     public List<Need> needs;
     public List<Category> initialInterests;

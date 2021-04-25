@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,47 +12,51 @@ public class CharacterBehavior : UIInteractable
     public float gazeHeadOffset;
     public Text nameText;
     public Image enthousiasmFiller;
+    public RectTransform characterCanvasRectTransform;
+    public GameObject annoyedFxPrefab;
+    public GameObject happyFxPrefab;
+    public TweeningAnimator backWardApparitionAnim;
+    public GameObject enthousiasmGauge;
+    public float gazeLerpRatio;
+    public Image identificationCircle;
+
     [Header("Decisive options")]
     public float d_initialInterestLevel;
     public float d_initialCuriosityLevel;
-    public bool[] d_gazeReflexionAlternance;
     public float d_minLookingTime;
+    public float d_baseLookingTime;
     public float d_reflexionTime;
-    public float d_curiosityDecreaseSpeed;
     public float d_curiosityIncreaseSpeed;
-    public float d_initialInterestCuriosityBoost;
-    public float d_initialInterestLookTimeRatio;
+    public float d_highLevelInterestCuriosityBoost;
+    public int[] d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine;
     public Vector2 minMaxRandomCuriosity;
     public float d_enthousiasmIncreaseWithCorrectPresent;
     public float d_enthousiasmDecreaseWithIncorrectPresent;
-    public float d_enthousiasmBonusIncreaseWhenlooking;
     public float d_interestLevelIncreaseByPresenting;
+    public float d_curiosityLevelIncreaseByPresenting;
     [Range(0f, 1f)] public float d_initialEntousiasm;
     [Header("More options")]
     public float timeBeforeEnthousiasmDecrease;
     public float enthousiasmDecreaseRate;
-    [Header("Gaze options")]
-    public float gazeLerpRatio;
-    public Image identificationCircle;
 
     [HideInInspector] public bool isSelected;
     [HideInInspector] public RectTransform gazeDisplay;
     [HideInInspector] public Color identificationColor;
     [HideInInspector] public bool isLeaving;
+    [HideInInspector] public bool isTalking;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
     private PotentialObject lookedObject;
     private float gazeTimeRmn;
     private float reflexionTimeRMN;
     private float maxCuriosityLevel;
-    private PotentialObject potential;
-    private int alternanceIndex;
     private float timeSpendRefreshEnthousiasm;
     private float currentEnthousiasm;
+    private int gazedObjectThisGazeTime;
+    private bool isAppearing;
 
     void Start()
     {
-        alternanceIndex = 0;
         timeSpendRefreshEnthousiasm = 0;
         if(character.temper == Temper.Decisive)
         {
@@ -59,25 +64,27 @@ public class CharacterBehavior : UIInteractable
         }
     }
 
-    public override void Update()
+    public void Update()
     {
-        if(clickedDown)
+        if(!isAppearing)
         {
-            NegoceManager.I.SelectCharacter(this);
-        }
-
-        if(potentialObjects != null)
-        {
-            if (character.temper == Temper.Decisive)
+            if (clickedDown)
             {
-                DecisiveBehavior();
+                NegoceManager.I.SelectCharacter(this);
             }
+
+            if (potentialObjects != null)
+            {
+                if (character.temper == Temper.Decisive)
+                {
+                    DecisiveBehavior();
+                }
+            }
+
+            UpdateGazeDisplay();
+
+            UpdateCharacterInfoDisplay();
         }
-
-        UpdateGazeDisplay();
-
-        UpdateCharacterInfoDisplay();
-        base.Update();
     }
 
     private void UpdateCharacterInfoDisplay()
@@ -96,34 +103,42 @@ public class CharacterBehavior : UIInteractable
     #region Tempers Behaviors
     private void DecisiveBehavior()
     {
-        if(gazeTimeRmn > 0)
+        if(!isTalking)
         {
-            gazeTimeRmn -= Time.deltaTime;
+            if (gazeTimeRmn > 0)
+            {
+                gazeTimeRmn -= Time.deltaTime;
+            }
+
+            if (reflexionTimeRMN > 0)
+            {
+                reflexionTimeRMN -= Time.deltaTime;
+            }
+
+            if (reflexionTimeRMN <= 0 && gazeTimeRmn <= 0)
+            {
+                if (d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)] - gazedObjectThisGazeTime > 0)
+                {
+                    LookObject(GetMaxCuriosityObject(), Mathf.Max(d_minLookingTime, d_baseLookingTime / d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)]));
+                }
+                else
+                {
+                    StartReflexion(d_reflexionTime);
+                }
+            }
+        }
+        else
+        {
+            StartReflexion(d_reflexionTime);
         }
 
-        if (reflexionTimeRMN > 0)
-        {
-            reflexionTimeRMN -= Time.deltaTime;
-        }
-
-        if(reflexionTimeRMN <= 0 && gazeTimeRmn <= 0)
-        {
-            if(d_gazeReflexionAlternance[alternanceIndex])
-            {
-                LookObject(GetMaxCuriosityObject(), d_minLookingTime * (DoesObjectHasCommonCategory(GetMaxCuriosityObject().stallObject.linkedObject, character.initialInterests) ? d_initialInterestLookTimeRatio : 1));
-            }
-            else
-            {
-                StartReflexion(d_reflexionTime);
-            }
-        }
 
         foreach(PotentialObject potentialObject in potentialObjects)
         {
             if(potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine)
             {
                 potentialObject.curiosityLevel += Time.deltaTime * d_curiosityIncreaseSpeed
-                    * (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests) ? d_initialInterestCuriosityBoost : 1);
+                    * (DoesObjectHaveHigherInterestLevel(potentialObject) ? d_highLevelInterestCuriosityBoost : 1);
             }
         }
 
@@ -137,7 +152,10 @@ public class CharacterBehavior : UIInteractable
             }
             else
             {
-                Leave();
+                if(!isTalking)
+                {
+                    Leave();
+                }
                 currentEnthousiasm = 0;
             }
         }
@@ -148,35 +166,23 @@ public class CharacterBehavior : UIInteractable
     public void PresentObject(StallObject presentedObject)
     {
         RefreshEnthousiasm();
-        PotentialObject presentedPotentialObject = null;
-        foreach(PotentialObject potentialObject in potentialObjects)
-        {
-            if(potentialObject.stallObject == presentedObject)
-            {
-                presentedPotentialObject = potentialObject;
-            }
-        }
-
-        if(DoesObjectHasCommonCategory(presentedPotentialObject.stallObject.linkedObject, character.initialInterests))
+        PotentialObject presentedPotentialObject = GetPotentialFromStallObject(presentedObject);
+        if (DoesObjectHaveHigherInterestLevel(presentedPotentialObject))
         {
             currentEnthousiasm += d_enthousiasmIncreaseWithCorrectPresent;
-            Debug.Log("Great ! C'était un objet de ses préférences");
+            //Debug.Log("Great ! C'était un objet de ses préférences");
+            Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
             currentEnthousiasm -= d_enthousiasmDecreaseWithIncorrectPresent;
-            Debug.Log("Raté ... Il n'aime ce genre d'objet");
+            //Debug.Log("Raté ... Il n'aime ce genre d'objet");
+            Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
 
-        if (lookedObject == presentedPotentialObject)
-        {
-            currentEnthousiasm += d_enthousiasmBonusIncreaseWhenlooking;
-            Debug.Log("Bon timing ! Il regardé quand tu lui a montré !!!!!");
-        }
-
+        presentedPotentialObject.interestLevel += d_interestLevelIncreaseByPresenting;
+        presentedPotentialObject.curiosityLevel += d_curiosityLevelIncreaseByPresenting;
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm ,0f, 1f);
-        reflexionTimeRMN = 0;
-        LookObject(presentedPotentialObject, d_minLookingTime);
     }
 
     private void Leave()
@@ -185,36 +191,24 @@ public class CharacterBehavior : UIInteractable
         isLeaving = true;
     }
 
-    private void IncreaseAlternanceIndex()
-    {
-        alternanceIndex++;
-        if (alternanceIndex >= d_gazeReflexionAlternance.Length)
-        {
-            alternanceIndex = 0;
-        }
-    }
-
     private PotentialObject GetMaxCuriosityObject()
     {
         maxCuriosityLevel = 0;
-        potential = null;
+        PotentialObject maxCuriosityObject = null;
         foreach (PotentialObject potentialObject in potentialObjects)
         {
             if (potentialObject.curiosityLevel > maxCuriosityLevel && potentialObject.stallObject.stallSpace.isVitrine)
             {
-                potential = potentialObject;
+                maxCuriosityObject = potentialObject;
                 maxCuriosityLevel = potentialObject.curiosityLevel;
             }
         }
-        return potential;
+        return maxCuriosityObject;
     }
 
     private void LookObject(PotentialObject objectToLook, float timeToLook)
     {
-        if (objectToLook != lookedObject)
-        {
-            IncreaseAlternanceIndex();
-        }
+        gazedObjectThisGazeTime++;
         objectToLook.curiosityLevel = 0;
         gazeTimeRmn = timeToLook;
         lookedObject = objectToLook;
@@ -222,7 +216,7 @@ public class CharacterBehavior : UIInteractable
 
     private void StartReflexion(float reflexionTime)
     {
-        IncreaseAlternanceIndex();
+        gazedObjectThisGazeTime = 0;
         reflexionTimeRMN = reflexionTime;
         lookedObject = null;
     }
@@ -230,6 +224,11 @@ public class CharacterBehavior : UIInteractable
     private void RefreshEnthousiasm()
     {
         timeSpendRefreshEnthousiasm = 0;
+    }
+
+    public bool IsLookingAt(StallObject stallObject)
+    {
+        return lookedObject != null && lookedObject.stallObject == stallObject;
     }
 
     private void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
@@ -261,6 +260,85 @@ public class CharacterBehavior : UIInteractable
         }
         return hasCommonCategory;
     }
+
+    private bool DoesObjectHaveHigherInterestLevel(PotentialObject objectToCheck)
+    {
+        float averageInterestLevel = 0;
+        for (int i = 0; i < potentialObjects.Count; i++)
+        {
+            averageInterestLevel += potentialObjects[i].interestLevel;
+        }
+        averageInterestLevel /= potentialObjects.Count;
+        
+        return objectToCheck.interestLevel > averageInterestLevel;
+    }
+
+    private int GetNumberOfInterestingObjectOnVitrine()
+    {
+        int numberOnVitrine = 0;
+
+        foreach (PotentialObject potentialObject in potentialObjects)
+        {
+            if(potentialObject.stallObject.stallSpace.isVitrine && DoesObjectHaveHigherInterestLevel(potentialObject))
+            {
+                numberOnVitrine++;
+            }
+        }
+        return numberOnVitrine;
+    }
+
+    private PotentialObject GetPotentialFromStallObject(StallObject searchedStallObject)
+    {
+        PotentialObject potentialObjectSearched = null;
+        foreach (PotentialObject potentialObject in potentialObjects)
+        {
+            if (potentialObject.stallObject == searchedStallObject)
+            {
+                potentialObjectSearched = potentialObject;
+            }
+        }
+        return potentialObjectSearched;
+    }
+
+    public IEnumerator Appear()
+    {
+        isAppearing = true;
+        backWardApparitionAnim.GetReferences();
+        nameText.gameObject.SetActive(false);
+        identificationCircle.gameObject.SetActive(false);
+        enthousiasmGauge.SetActive(false);
+        StartCoroutine(backWardApparitionAnim.anim.PlayBackward(backWardApparitionAnim, true));
+        yield return new WaitForSeconds(backWardApparitionAnim.anim.animationTime);
+        identificationCircle.gameObject.SetActive(true);
+        enthousiasmGauge.SetActive(true);
+        isAppearing = false;
+
+    }
+
+    public void Select()
+    {
+        if (!isSelected)
+        {
+            isSelected = true;
+            StartCoroutine(selectionAnim.anim.Play(selectionAnim));
+        }
+    }
+    public void UnSelect(bool forced)
+    {
+        if (forced)
+        {
+            selectionAnim.anim.SetAtStartState(selectionAnim);
+            isSelected = false;
+        }
+        else if (isSelected)
+        {
+            StartCoroutine(selectionAnim.anim.PlayBackward(selectionAnim, true));
+            isSelected = false;
+        }
+
+    }
+
+    #region Display
 
     Vector2 gazeDirection;
     float gazeAngle;
@@ -339,29 +417,6 @@ public class CharacterBehavior : UIInteractable
         selectionAnim.GetReferences();
     }
 
-    public void Select()
-    {
-        if(!isSelected)
-        {
-            isSelected = true;
-            StartCoroutine(selectionAnim.anim.Play(selectionAnim, selectionAnim.originalPos));
-        }
-    }
-    public void UnSelect(bool forced)
-    {
-        if (forced)
-        {
-            selectionAnim.anim.SetAtStartState(selectionAnim);
-            isSelected = false;
-        }
-        else if (isSelected)
-        {
-            StartCoroutine(selectionAnim.anim.PlayBackward(selectionAnim, selectionAnim.originalPos, true));
-            isSelected = false;
-        }
-
-    }
-
     public override void OnHoverIn()
     {
 
@@ -371,6 +426,8 @@ public class CharacterBehavior : UIInteractable
     {
 
     }
+
+#endregion
 
     [System.Serializable]
     public class PotentialObject

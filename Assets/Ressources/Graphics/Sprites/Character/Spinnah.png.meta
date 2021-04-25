@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -8489279680045243894
     second: Spinnah_0
+  - first:
+      213: 4800353797765959337
+    second: Spinnah_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 462
         height: 799
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: a0226ffeb15003a80800000000000000
       internalID: -8489279680045243894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spinnah_1
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 614
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ae890088584e9240800000000000000
+      internalID: 4800353797765959337
       vertices: []
       indices: 
       edges: []

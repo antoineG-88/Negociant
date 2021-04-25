@@ -20,14 +20,13 @@ public class StallSpace : UIInteractable
         placeAnim.anim.SetAtStartState(placeAnim);
     }
 
-    public override void Update()
+    public void Update()
     {
         if(playerHandler.draggedStallObject == null && highlightedFlag)
         {
             highlightedFlag = false;
-            StartCoroutine(placeAnim.anim.PlayBackward(placeAnim, placeAnim.originalPos, true));
+            StartCoroutine(placeAnim.anim.PlayBackward(placeAnim, true));
         }
-        base.Update();
     }
 
 
@@ -36,7 +35,7 @@ public class StallSpace : UIInteractable
         if(playerHandler.draggedStallObject != null && !highlightedFlag)
         {
             highlightedFlag = true;
-            StartCoroutine(placeAnim.anim.Play(placeAnim, placeAnim.originalPos));
+            StartCoroutine(placeAnim.anim.Play(placeAnim));
         }
     }
 
@@ -45,7 +44,7 @@ public class StallSpace : UIInteractable
         if (playerHandler.draggedStallObject != null && highlightedFlag)
         {
             highlightedFlag = false;
-            StartCoroutine(placeAnim.anim.PlayBackward(placeAnim, placeAnim.originalPos, true));
+            StartCoroutine(placeAnim.anim.PlayBackward(placeAnim, true));
         }
     }
 }

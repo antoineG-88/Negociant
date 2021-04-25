@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: -4215602638976889590
     second: True_Ayer_0
+  - first:
+      213: 5250556089858733034
+    second: True_Ayer_1
+  - first:
+      213: 3100217316777245937
+    second: True_Ayer_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +116,7 @@ TextureImporter:
         width: 449
         height: 783
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +124,27 @@ TextureImporter:
       bones: []
       spriteID: a0d459d2cbb2f75c0800000000000000
       internalID: -4215602638976889590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: True_Ayer_1
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 655
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae33b41f1f8bdd840800000000000000
+      internalID: 5250556089858733034
       vertices: []
       indices: 
       edges: []

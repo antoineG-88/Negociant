@@ -16,7 +16,7 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
     private bool hasBeenClickedWithoutLeaving;
     private bool hoveredFlag;
 
-    public virtual void Update()
+    public void LateUpdate()
     {
         if (isClicked)
         {
@@ -38,11 +38,6 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
             isDropped = false;
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            isPressed = false;
-        }
-
         if (!hoveredFlag && isHovered)
         {
             hoveredFlag = true;
@@ -55,7 +50,8 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
 
         if(Input.GetMouseButtonUp(0))
         {
-            if(isHovered)
+            isPressed = false;
+            if (isHovered)
             {
                 clickedUp = true;
             }

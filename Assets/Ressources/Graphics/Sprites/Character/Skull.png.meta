@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -2739807658926110822
     second: Skull_0
+  - first:
+      213: -8375587311600527847
+    second: Skull_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 426
         height: 513
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: a9780d8437f3af9d0800000000000000
       internalID: -2739807658926110822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skull_1
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 438
+        width: 140
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91618c247bfe3cb80800000000000000
+      internalID: -8375587311600527847
       vertices: []
       indices: 
       edges: []

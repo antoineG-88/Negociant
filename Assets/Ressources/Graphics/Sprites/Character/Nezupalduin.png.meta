@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -4406546410419622498
     second: Nezupalduin_0
+  - first:
+      213: 7915640968242148779
+    second: Nezupalduin_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 494
         height: 788
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: e9d6aa8f26dc8d2c0800000000000000
       internalID: -4406546410419622498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nezupalduin_1
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 541
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba53a9195810add60800000000000000
+      internalID: 7915640968242148779
       vertices: []
       indices: 
       edges: []

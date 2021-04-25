@@ -22,17 +22,22 @@ public class NegoceManager : MonoBehaviour
     public RectTransform gazePrefab;
     public RectTransform gazePanel;
     public List<Color> identificationColors;
+    public Vector2 timeRangeBetweenCharacterApparition;
+    public int randomCharacterGenerated;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
     public int minChNeeds;
     public int maxChNeeds;
     public List<Sprite> allCharacterIllustrations;
+    public List<Sprite> allCharacterFaces;
 
     [HideInInspector] public List<CharacterBehavior> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
     [HideInInspector] public CharacterBehavior characterSelected;
+    private float timeSpendSinceLastCharacterApparition;
+    private float nextCharacterApparitionTime;
 
     public static NegoceManager I;
     private void Awake()
@@ -45,6 +50,11 @@ public class NegoceManager : MonoBehaviour
         unfoldTime = true;
         negoceTimeSpend = 0;
         allPresentCharacters = new List<CharacterBehavior>();
+        for (int i = 0; i < randomCharacterGenerated; i++)
+        {
+            allPossibleCharacters.Add(GetRandomGeneratedCharacter());
+        }
+        nextCharacterApparitionTime = UnityEngine.Random.Range(2, 5);
     }
 
     void Update()
@@ -59,36 +69,34 @@ public class NegoceManager : MonoBehaviour
             negoceTimeSpend += Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Character chosenChara;
-            bool charaAlreadyPresent = false;
-            int iteration = 0;
-            do
-            {
-                charaAlreadyPresent = false;
-                iteration++;
-                chosenChara = allPossibleCharacters[UnityEngine.Random.Range(0, allPossibleCharacters.Count)];
-
-                for (int i = 0; i < allPresentCharacters.Count; i++)
-                {
-                    if(allPresentCharacters[i].character == chosenChara)
-                    {
-                        charaAlreadyPresent = true;
-                    }
-                }
-
-            } while (charaAlreadyPresent && iteration < 200);
-
-            AppearCharacter(chosenChara);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            allPossibleCharacters.Add(GenerateRandomCharacter());
-        }
+        UpdateCharacterApparition();
 
         UpdateSelectedCharaInfo();
+    }
+
+    private void UpdateCharacterApparition()
+    {
+        if(allPresentCharacters.Count < maxCharacterPresent)
+        {
+            if(timeSpendSinceLastCharacterApparition < nextCharacterApparitionTime)
+            {
+                timeSpendSinceLastCharacterApparition += Time.deltaTime;
+            }
+            else
+            {
+                timeSpendSinceLastCharacterApparition = 0;
+                nextCharacterApparitionTime = UnityEngine.Random.Range(timeRangeBetweenCharacterApparition.x, timeRangeBetweenCharacterApparition.y);
+                Character toAppearCharacter = GetRandomAbsentCharacter();
+                if(toAppearCharacter != null)
+                {
+                    AppearCharacter(toAppearCharacter);
+                }
+                else
+                {
+                    Debug.LogWarning("Can't appear character because he is already present at the stall");
+                }
+            }
+        }
     }
 
     private void UpdateSelectedCharaInfo()
@@ -116,7 +124,7 @@ public class NegoceManager : MonoBehaviour
                     {
                         if (standObject == potentialObject.stallObject)
                         {
-                            standObject.interestLevel.text = potentialObject.curiosityLevel.ToString();
+                            standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
                         }
                     }
                 }
@@ -132,6 +140,30 @@ public class NegoceManager : MonoBehaviour
         }
     }
 
+    private Character GetRandomAbsentCharacter()
+    {
+        Character chosenChara;
+        bool charaAlreadyPresent = false;
+        int iteration = 0;
+        do
+        {
+            charaAlreadyPresent = false;
+            iteration++;
+            chosenChara = allPossibleCharacters[UnityEngine.Random.Range(0, allPossibleCharacters.Count)];
+
+            for (int i = 0; i < allPresentCharacters.Count; i++)
+            {
+                if (allPresentCharacters[i].character == chosenChara)
+                {
+                    charaAlreadyPresent = true;
+                }
+            }
+
+        } while (charaAlreadyPresent && iteration < 200);
+
+        return charaAlreadyPresent ? null : chosenChara;
+    }
+
     private void AppearCharacter(Character theCharacter)
     {
         CharacterBehavior newCharacterBehavior;
@@ -140,7 +172,8 @@ public class NegoceManager : MonoBehaviour
         newCharacterBehavior.character = theCharacter;
         if(allPresentCharacters.Count > maxCharacterPresent)
         {
-            MakeCharacterLeave(allPresentCharacters[0]);
+            //MakeCharacterLeave(allPresentCharacters[0]);
+            Debug.LogWarning("There is too many character at the stall");
         }
 
         newCharacterBehavior.RefreshPotentialObjects();
@@ -148,8 +181,10 @@ public class NegoceManager : MonoBehaviour
         newCharacterBehavior.nameText.text = newCharacterBehavior.character.characterName;
         newCharacterBehavior.gameObject.name = newCharacterBehavior.character.characterName;
         newCharacterBehavior.gazeDisplay.gameObject.name = newCharacterBehavior.character.characterName + "'s gaze";
+        newCharacterBehavior.characterCanvasRectTransform = charactersDisplay;
         newCharacterBehavior.UnSelect(true);
         RefreshCharactersDisplay();
+        StartCoroutine(newCharacterBehavior.Appear());
     }
 
     private void RefreshCharactersDisplay()
@@ -166,7 +201,7 @@ public class NegoceManager : MonoBehaviour
         }
     }
 
-    private Character GenerateRandomCharacter()
+    private Character GetRandomGeneratedCharacter()
     {
         Character newCharacter = ScriptableObject.CreateInstance<Character>();
         List<Category> characterInitialPreferences = new List<Category>();
@@ -193,9 +228,11 @@ public class NegoceManager : MonoBehaviour
         }
         char firstLetter = char.ToUpper(newCharacter.characterName[0]);
         newCharacter.characterName = firstLetter + newCharacter.characterName.Remove(0, 1);
-        newCharacter.illustration = allCharacterIllustrations[UnityEngine.Random.Range(0, allCharacterIllustrations.Count)];
+        int rand = UnityEngine.Random.Range(0, allCharacterIllustrations.Count);
+        newCharacter.illustration = allCharacterIllustrations[rand];
+        newCharacter.faceSprite = allCharacterFaces[rand];
         newCharacter.name = newCharacter.characterName;
-        Debug.Log(newCharacter.characterName + " added to possibleCharacters");
+        //Debug.Log(newCharacter.characterName + " added to possibleCharacters");
         return newCharacter;
     }
 
@@ -207,6 +244,7 @@ public class NegoceManager : MonoBehaviour
         Destroy(leavingCharacter.gameObject);
         RefreshCharactersDisplay();
     }
+
     public void SelectCharacter(CharacterBehavior theCharacter)
     {
         characterSelected = theCharacter;

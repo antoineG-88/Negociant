@@ -25,7 +25,7 @@ public class TweeningAnim : ScriptableObject
     private RectTransform animatedTransform;
     private CanvasGroup canvasGroup;
 
-    public IEnumerator Play(TweeningAnimator animator, Vector2 originalPos)
+    public IEnumerator Play(TweeningAnimator animator)
     {
         animatedTransform = animator.rectTransform;
         canvasGroup = animator.canvasGroup;
@@ -33,7 +33,7 @@ public class TweeningAnim : ScriptableObject
         float time = 0;
         if(movementRelativeToOriginalPos)
         {
-            animatedTransform.anchoredPosition = originalPos;
+            animatedTransform.anchoredPosition = animator.originalPos;
         }
         else
         {
@@ -57,7 +57,7 @@ public class TweeningAnim : ScriptableObject
             }
 
 
-            animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? originalPos : animationStartPos, movementRelativeToOriginalPos ? originalPos + animationEndPos : animationEndPos, animationCurve.Evaluate(time / animationTime));
+            animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? animator.originalPos : animationStartPos, movementRelativeToOriginalPos ? animator.originalPos + animationEndPos : animationEndPos, animationCurve.Evaluate(time / animationTime));
 
             animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationStartRot), Quaternion.Euler(0, 0, animationEndRot), customRotCurve ? rotAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
 
@@ -71,7 +71,7 @@ public class TweeningAnim : ScriptableObject
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? originalPos + animationEndPos : animationEndPos;
+        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? animator.originalPos + animationEndPos : animationEndPos;
         animatedTransform.localRotation = Quaternion.Euler(0, 0, animationEndRot);
         animatedTransform.localScale = animationEndScale;
 
@@ -90,63 +90,7 @@ public class TweeningAnim : ScriptableObject
         }
     }
 
-    public IEnumerator Play(TweeningAnimator animator)
-    {
-        animatedTransform = animator.rectTransform;
-        canvasGroup = animator.canvasGroup;
-
-        float time = 0;
-        animatedTransform.anchoredPosition = animationStartPos;
-
-
-        if (useColorChange)
-        {
-            colorImage = animatedTransform.GetComponent<Image>();
-        }
-        while (time < animationTime)
-        {
-            if (useColorChange && colorImage != null)
-            {
-                colorImage.color = colorAnimation.Evaluate(time / animationTime);
-                if (canvasGroup != null)
-                {
-                    colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
-                }
-            }
-            animatedTransform.anchoredPosition = Vector2.Lerp(animationStartPos, animationEndPos, animationCurve.Evaluate(time / animationTime));
-
-            animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationStartRot), Quaternion.Euler(0, 0, animationEndRot), customRotCurve ? rotAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
-
-            animatedTransform.localScale = Vector3.Lerp(animationStartScale, animationEndScale, customScaleCurve ? scaleAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
-
-            if (canvasGroup != null)
-            {
-                canvasGroup.alpha = colorAnimation.Evaluate(time / animationTime).a;
-            }
-
-            time += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        animatedTransform.anchoredPosition = animationEndPos;
-        animatedTransform.localRotation = Quaternion.Euler(0, 0, animationEndRot);
-        animatedTransform.localScale = animationEndScale;
-
-        if (useColorChange && colorImage != null)
-        {
-            colorImage.color = colorAnimation.Evaluate(1);
-            if (canvasGroup != null)
-            {
-                colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
-            }
-        }
-
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = colorAnimation.Evaluate(1).a;
-        }
-    }
-
-    public IEnumerator PlayBackward(TweeningAnimator animator, Vector2 originalPos, bool onlyInversePos)
+    public IEnumerator PlayBackward(TweeningAnimator animator, bool onlyInversePos)
     {
         animatedTransform = animator.rectTransform;
         canvasGroup = animator.canvasGroup;
@@ -154,7 +98,7 @@ public class TweeningAnim : ScriptableObject
         float time = 0;
         if (movementRelativeToOriginalPos)
         {
-            animatedTransform.anchoredPosition = originalPos + animationEndPos;
+            animatedTransform.anchoredPosition = animator.originalPos + animationEndPos;
         }
         else
         {
@@ -179,13 +123,13 @@ public class TweeningAnim : ScriptableObject
 
             if(onlyInversePos)
             {
-                animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? originalPos + animationEndPos : animationEndPos, movementRelativeToOriginalPos ? originalPos : animationStartPos, animationCurve.Evaluate(time / animationTime));
+                animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? animator.originalPos + animationEndPos : animationEndPos, movementRelativeToOriginalPos ? animator.originalPos : animationStartPos, animationCurve.Evaluate(time / animationTime));
                 animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationEndRot), Quaternion.Euler(0, 0, animationStartRot), customRotCurve ? rotAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
                 animatedTransform.localScale = Vector3.Lerp(animationEndScale, animationStartScale, customScaleCurve ? scaleAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
             }
             else
             {
-                animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? originalPos : animationStartPos, movementRelativeToOriginalPos ? originalPos + animationEndPos : animationEndPos, animationCurve.Evaluate(1 - (time / animationTime)));
+                animatedTransform.anchoredPosition = Vector2.Lerp(movementRelativeToOriginalPos ? animator.originalPos : animationStartPos, movementRelativeToOriginalPos ? animator.originalPos + animationEndPos : animationEndPos, animationCurve.Evaluate(1 - (time / animationTime)));
                 animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationStartRot), Quaternion.Euler(0, 0, animationEndRot), customRotCurve ? rotAnimationCurve.Evaluate(1 - (time / animationTime)) : animationCurve.Evaluate(1 - (time / animationTime)));
                 animatedTransform.localScale = Vector3.Lerp(animationStartScale, animationEndScale, customScaleCurve ? scaleAnimationCurve.Evaluate(1- (time / animationTime)) : animationCurve.Evaluate(1 - (time / animationTime)));
             }
@@ -198,70 +142,7 @@ public class TweeningAnim : ScriptableObject
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? originalPos : animationStartPos;
-        animatedTransform.localRotation = Quaternion.Euler(0, 0, animationStartRot);
-        animatedTransform.localScale = animationStartScale;
-
-        if (useColorChange && colorImage != null)
-        {
-            colorImage.color = colorAnimation.Evaluate(0);
-            if (canvasGroup != null)
-            {
-                colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
-            }
-        }
-
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = colorAnimation.Evaluate(0).a;
-        }
-    }
-
-    public IEnumerator PlayBackward(TweeningAnimator animator, bool onlyInversePos)
-    {
-        animatedTransform = animator.rectTransform;
-        canvasGroup = animator.canvasGroup;
-        float time = 0;
-        animatedTransform.anchoredPosition = animationEndPos;
-
-        if (useColorChange)
-        {
-            colorImage = animatedTransform.GetComponent<Image>();
-        }
-
-        while (time < animationTime)
-        {
-            if (useColorChange && colorImage != null)
-            {
-                colorImage.color = colorAnimation.Evaluate(1 - (time / animationTime));
-                if (canvasGroup != null)
-                {
-                    colorImage.color = new Color(colorImage.color.r, colorImage.color.g, colorImage.color.b, 1);
-                }
-            }
-
-            if (onlyInversePos)
-            {
-                animatedTransform.anchoredPosition = Vector2.Lerp(animationEndPos, animationStartPos, animationCurve.Evaluate(time / animationTime));
-                animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationEndRot), Quaternion.Euler(0, 0, animationStartRot), customRotCurve ? rotAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
-                animatedTransform.localScale = Vector3.Lerp(animationEndScale, animationStartScale, customScaleCurve ? scaleAnimationCurve.Evaluate(time / animationTime) : animationCurve.Evaluate(time / animationTime));
-            }
-            else
-            {
-                animatedTransform.anchoredPosition = Vector2.Lerp(animationStartPos, animationEndPos, animationCurve.Evaluate(1 - (time / animationTime)));
-                animatedTransform.localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, animationStartRot), Quaternion.Euler(0, 0, animationEndRot), customRotCurve ? rotAnimationCurve.Evaluate(1 - (time / animationTime)) : animationCurve.Evaluate(1 - (time / animationTime)));
-                animatedTransform.localScale = Vector3.Lerp(animationStartScale, animationEndScale, customScaleCurve ? scaleAnimationCurve.Evaluate(1 - (time / animationTime)) : animationCurve.Evaluate(1 - (time / animationTime)));
-            }
-
-            if (canvasGroup != null)
-            {
-                canvasGroup.alpha = colorAnimation.Evaluate(1 - (time / animationTime)).a;
-            }
-
-            time += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        animatedTransform.anchoredPosition = animationStartPos;
+        animatedTransform.anchoredPosition = movementRelativeToOriginalPos ? animator.originalPos : animationStartPos;
         animatedTransform.localRotation = Quaternion.Euler(0, 0, animationStartRot);
         animatedTransform.localScale = animationStartScale;
 

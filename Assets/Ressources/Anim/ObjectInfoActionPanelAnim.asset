@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
-  m_Name: StandObjectHoverAnim
+  m_Name: ObjectInfoActionPanelAnim
   m_EditorClassIdentifier: 
   animationTime: 0.2
   animationCurve:
@@ -19,29 +19,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.7499998
-      outSlope: 3.7499998
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.033333335
-    - serializedVersion: 3
-      time: 0.3439563
-      value: 0.79840857
-      inSlope: 0.9066409
-      outSlope: 0.9066409
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.5583551
-      outWeight: 0.27133495
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.044519767
-      outSlope: 0.044519767
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.37083334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -52,29 +43,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.7499998
-      outSlope: 3.7499998
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.033333335
-    - serializedVersion: 3
-      time: 0.3439563
-      value: 0.79840857
-      inSlope: 0.9066409
-      outSlope: 0.9066409
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.5583551
-      outWeight: 0.27133495
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.044519767
-      outSlope: 0.044519767
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.37083334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -85,29 +67,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.7499998
-      outSlope: 3.7499998
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.033333335
-    - serializedVersion: 3
-      time: 0.3439563
-      value: 0.79840857
-      inSlope: 0.9066409
-      outSlope: 0.9066409
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.5583551
-      outWeight: 0.27133495
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.044519767
-      outSlope: 0.044519767
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.37083334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -115,16 +88,16 @@ MonoBehaviour:
   customRotCurve: 0
   customScaleCurve: 0
   animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: 0, y: 0}
+  animationEndPos: {x: 0, y: -50}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1.1, y: 1.1, z: 1.1}
+  animationEndScale: {x: 1, y: 1, z: 1}
   animationStartRot: 0
   animationEndRot: 0
   movementRelativeToOriginalPos: 1
   colorAnimation:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 0}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}

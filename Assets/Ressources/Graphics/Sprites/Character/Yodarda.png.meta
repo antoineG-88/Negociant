@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 5951965144175918990
     second: Yodarda_0
+  - first:
+      213: -405942562607742374
+    second: Yodarda_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 390
         height: 498
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: e8fbc1683c0a99250800000000000000
       internalID: 5951965144175918990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yodarda_1
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 475
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a52cd8cd36dcd5af0800000000000000
+      internalID: -405942562607742374
       vertices: []
       indices: 
       edges: []

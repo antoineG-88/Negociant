@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 1805088148058408668
     second: Seruel_0
+  - first:
+      213: 2185620427363274992
+    second: Seruel_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 560
         height: 748
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: cd60a4d5b16fc0910800000000000000
       internalID: 1805088148058408668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seruel_1
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 632
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f053d2e232e45e10800000000000000
+      internalID: 2185620427363274992
       vertices: []
       indices: 
       edges: []

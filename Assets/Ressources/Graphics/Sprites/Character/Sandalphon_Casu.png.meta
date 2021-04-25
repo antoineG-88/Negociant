@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -8758374864151249627
     second: Sandalphon_Casu_0
+  - first:
+      213: -9215628799201902632
+    second: Sandalphon_Casu_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 342
         height: 790
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: 52dfd840770047680800000000000000
       internalID: -8758374864151249627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandalphon_Casu_1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 650
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dff5b10f628b1080800000000000000
+      internalID: -9215628799201902632
       vertices: []
       indices: 
       edges: []

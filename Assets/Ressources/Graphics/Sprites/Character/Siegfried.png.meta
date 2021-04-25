@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -9166689707693640997
     second: Siegfried_0
+  - first:
+      213: 4667139692136922147
+    second: Siegfried_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 448
         height: 786
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: bd2f0be274069c080800000000000000
       internalID: -9166689707693640997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Siegfried_1
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 566
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c72fa82d205c040800000000000000
+      internalID: 4667139692136922147
       vertices: []
       indices: 
       edges: []

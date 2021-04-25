@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -1536020125514087618
     second: Garma_0
+  - first:
+      213: -2686590059311066220
+    second: Garma_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
         width: 415
         height: 784
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,6 +121,27 @@ TextureImporter:
       bones: []
       spriteID: e33c1e285d5feaae0800000000000000
       internalID: -1536020125514087618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Garma_1
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 619
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4931ba1439057bad0800000000000000
+      internalID: -2686590059311066220
       vertices: []
       indices: 
       edges: []

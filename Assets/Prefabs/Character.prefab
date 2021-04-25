@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: 423}
+  m_AnchoredPosition: {x: 183, y: 218}
   m_SizeDelta: {x: 56.914963, y: 268.34436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1053211539
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -296,29 +296,40 @@ MonoBehaviour:
   gazeHeadOffset: 100
   nameText: {fileID: 6636841298738713827}
   enthousiasmFiller: {fileID: 167399558}
-  d_initialInterestLevel: 5
-  d_initialCuriosityLevel: 0.3
-  d_gazeReflexionAlternance: 010100010101000100
-  d_minLookingTime: 5
-  d_reflexionTime: 10
-  d_curiosityDecreaseSpeed: 0.3
-  d_curiosityIncreaseSpeed: 0.03
-  d_initialInterestCuriosityBoost: 3
-  d_initialInterestLookTimeRatio: 1
-  minMaxRandomCuriosity: {x: 0.1, y: 0.4}
-  d_enthousiasmIncreaseWithCorrectPresent: 0.1
-  d_enthousiasmDecreaseWithIncorrectPresent: 0.1
-  d_enthousiasmBonusIncreaseWhenlooking: 0.2
-  d_interestLevelIncreaseByPresenting: 2
-  d_initialEntousiasm: 0.5
-  timeBeforeEnthousiasmDecrease: 5
-  enthousiasmDecreaseRate: 0.005
+  characterCanvasRectTransform: {fileID: 0}
+  annoyedFxPrefab: {fileID: 5232284876384432290, guid: 6425c34d35ea1744b9a1075c4ec9ca43,
+    type: 3}
+  happyFxPrefab: {fileID: 4786305868150849728, guid: f0da53d191a01014f839723b09729709,
+    type: 3}
+  backWardApparitionAnim:
+    anim: {fileID: 11400000, guid: d1d7a8e3f4ce4c748ad197304dd963c6, type: 2}
+    rectTransform: {fileID: 6150439527280269211}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  enthousiasmGauge: {fileID: 1053211536}
   gazeLerpRatio: 5
   identificationCircle: {fileID: 2078761732196462719}
+  d_initialInterestLevel: 5
+  d_initialCuriosityLevel: 0.3
+  d_minLookingTime: 3
+  d_baseLookingTime: 7
+  d_reflexionTime: 10
+  d_curiosityIncreaseSpeed: 1
+  d_highLevelInterestCuriosityBoost: 2
+  d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine: 01000000020000000300000004000000
+  minMaxRandomCuriosity: {x: 0, y: 10}
+  d_enthousiasmIncreaseWithCorrectPresent: 0.4
+  d_enthousiasmDecreaseWithIncorrectPresent: 0.05
+  d_interestLevelIncreaseByPresenting: 2
+  d_curiosityLevelIncreaseByPresenting: 30
+  d_initialEntousiasm: 0.7
+  timeBeforeEnthousiasmDecrease: 5
+  enthousiasmDecreaseRate: 0.01
   isSelected: 0
   gazeDisplay: {fileID: 0}
   identificationColor: {r: 0, g: 0, b: 0, a: 0}
   isLeaving: 0
+  isTalking: 0
   potentialObjects: []
 --- !u!222 &7756144542866971032
 CanvasRenderer:
@@ -392,7 +403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 423}
+  m_AnchoredPosition: {x: 0.000011444, y: 357}
   m_SizeDelta: {x: 204.6549, y: 66.68085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3490794462803413341

@@ -28,10 +28,6 @@ public class StallObject : UIInteractable
         hoverAnim.anim = Instantiate(hoverAnim.anim);
     }
 
-    public override void Update()
-    {
-        base.Update();
-    }
 
     public void RefreshDisplay()
     {
@@ -48,7 +44,7 @@ public class StallObject : UIInteractable
     {
         if(canBeHovered)
         {
-            StartCoroutine(hoverAnim.anim.Play(hoverAnim, hoverAnim.originalPos));
+            StartCoroutine(hoverAnim.anim.Play(hoverAnim));
         }
         else
         {
@@ -58,6 +54,6 @@ public class StallObject : UIInteractable
 
     public override void OnHoverOut()
     {
-        StartCoroutine(hoverAnim.anim.PlayBackward(hoverAnim, hoverAnim.originalPos, true));
+        StartCoroutine(hoverAnim.anim.PlayBackward(hoverAnim, true));
     }
 }
