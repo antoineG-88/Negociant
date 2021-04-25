@@ -11,10 +11,11 @@ public class PlayerHandler : MonoBehaviour
     [Header("Stand Display")]
     public GameObject objectInfoWindow;
     public TweeningAnimator objectInfoWindowAnimator;
-    public RectTransform standRectTransform; 
+    public RectTransform stallRectTransform; 
     public float distanceBetweenStandObject;
-    public Vector2 standObjectsOriginPosLine1;
-    public Vector2 standObjectsOriginPosLine2;
+    public List<StallSpace> allStallSpaces;
+    public int vitrineStallSpacesAvailable;
+    public int backStallSpacesAvailable;
     [Header("Reference")]
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
@@ -23,29 +24,40 @@ public class PlayerHandler : MonoBehaviour
     public Text objectInfoDescriptionText;
     public Text objectInfoOriginText;
     public Image objectInfoIllustration;
-    public StandObject standObjectPrefab;
+    public StallObject stallObjectPrefab;
     [Space]
     public RectTransform playerActionPanel;
     public TweeningAnimator playerActionPanelAnim;
 
-    [HideInInspector] public List<StandObject> allStandObjects;
+    [HideInInspector] public List<StallObject> allStallObjects;
     private bool atleastOneHovered;
     private bool atLeastOnePressed;
-    private StandObject selectedStandObject;
-    private StandObject previousSelectedObject;
-    private StandObject hoveredStandObject;
-    private StandObject previousHoveredObject;
+    private StallObject selectedStallObject;
+    private StallObject previousSelectedObject;
+    private StallObject hoveredStallObject;
+    private StallObject previousHoveredObject;
+    [HideInInspector] public StallObject draggedStallObject;
+    private Camera cam;
+    private int vitrineSpaceNumber;
 
     private void Start()
     {
+        cam = Camera.main;
         objectInfoWindowAnimator.GetReferences();
         objectInfoWindowAnimator.anim.SetAtStartState(objectInfoWindowAnimator);
         playerActionPanelAnim.GetReferences();
         playerActionPanelAnim.canvasGroup.interactable = false;
         playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
         playerActionPanelAnim.anim.SetAtEndState(playerActionPanelAnim);
+        foreach(StallSpace stallSpace in allStallSpaces)
+        {
+            if(stallSpace.isVitrine)
+            {
+                vitrineSpaceNumber++;
+            }
+        }
         InitPlayerInfo();
-        InitStandLayout();
+        InitStallLayout();
     }
 
     private void Update()
@@ -57,60 +69,117 @@ public class PlayerHandler : MonoBehaviour
     {
         atleastOneHovered = false;
         atLeastOnePressed = false;
-        for (int i = 0; i < allStandObjects.Count; i++)
+        for (int i = 0; i < allStallObjects.Count; i++)
         {
-            if(selectedStandObject == null && allStandObjects[i].isPressed)
+            /*
+            if(selectedStallObject == null && allStallObjects[i].isPressed)
             {
-                if (selectedStandObject != null)
+                if (selectedStallObject != null)
                 {
-                    previousSelectedObject = selectedStandObject;
+                    previousSelectedObject = selectedStallObject;
                 }
-                selectedStandObject = allStandObjects[i];
+                selectedStallObject = allStallObjects[i];
                 atLeastOnePressed = true;
-            }
+            }*/
 
-            if (selectedStandObject == null)
+            if (selectedStallObject == null)
             {
-                if (allStandObjects[i].isHovered)
+                if (allStallObjects[i].isHovered)
                 {
-                    SetHoveredObject(allStandObjects[i]);
+                    SetHoveredObject(allStallObjects[i]);
                 }
             }
             else
             {
-                SetHoveredObject(selectedStandObject);
+                SetHoveredObject(selectedStallObject);
+            }
+
+            if (draggedStallObject == null && allStallObjects[i].isDragged)
+            {
+                draggedStallObject = allStallObjects[i];
             }
         }
 
-        if (atleastOneHovered && previousHoveredObject != hoveredStandObject)
+        if (atleastOneHovered && previousHoveredObject != hoveredStallObject)
         {
             StartCoroutine(objectInfoWindowAnimator.anim.Play(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos));
         }
-        if (!atleastOneHovered && hoveredStandObject != null)
+        if (!atleastOneHovered && hoveredStallObject != null)
         {
-            hoveredStandObject = null;
+            hoveredStallObject = null;
             previousHoveredObject = null;
             StartCoroutine(objectInfoWindowAnimator.anim.PlayBackward(objectInfoWindowAnimator, objectInfoWindowAnimator.originalPos, true));
         }
 
-        if (atLeastOnePressed && previousSelectedObject != selectedStandObject)
+        if (atLeastOnePressed && previousSelectedObject != selectedStallObject)
         {
-            playerActionPanel.position = hoveredStandObject.rectTransform.position;
+            /*playerActionPanel.position = hoveredStallObject.rectTransform.position;
             playerActionPanelAnim.GetReferences();
             playerActionPanelAnim.canvasGroup.interactable = true;
             playerActionPanelAnim.canvasGroup.blocksRaycasts = true;
-            StartCoroutine(playerActionPanelAnim.anim.PlayBackward(playerActionPanelAnim, playerActionPanelAnim.originalPos, true));
+            StartCoroutine(playerActionPanelAnim.anim.PlayBackward(playerActionPanelAnim, playerActionPanelAnim.originalPos, true));*/
         }
 
-        if (selectedStandObject != null)
+        if (selectedStallObject != null)
         {
-            if(selectedStandObject.isPressed == false)
+            if(selectedStallObject.isPressed == false)
             {
-                selectedStandObject = null;
+                /*selectedStallObject = null;
                 previousSelectedObject = null;
                 playerActionPanelAnim.canvasGroup.interactable = false;
                 playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
-                StartCoroutine(playerActionPanelAnim.anim.Play(playerActionPanelAnim, playerActionPanelAnim.originalPos));
+                StartCoroutine(playerActionPanelAnim.anim.Play(playerActionPanelAnim, playerActionPanelAnim.originalPos));*/
+            }
+        }
+
+        if(draggedStallObject != null)
+        {
+            foreach(StallObject stallObject in allStallObjects)
+            {
+                stallObject.canvasGroup.blocksRaycasts = false;
+            }
+            draggedStallObject.rectTransform.position = Input.mousePosition;
+
+
+            if(Input.GetMouseButtonUp(0))
+            {
+                bool droppedOnStallSpace = false;
+                StallSpace draggedObjectStallSpace = draggedStallObject.stallSpace;
+                foreach(StallSpace hoveredStallSpace in allStallSpaces)
+                {
+                    if(hoveredStallSpace.isHovered)
+                    {
+                        droppedOnStallSpace = true;
+                        if(hoveredStallSpace.stallObject != null)
+                        {
+                            hoveredStallSpace.stallObject.stallSpace = draggedObjectStallSpace;
+                            draggedObjectStallSpace.stallObject = hoveredStallSpace.stallObject;
+                            draggedObjectStallSpace.stallObject.rectTransform.position = draggedObjectStallSpace.rectTransform.position;
+                        }
+                        else
+                        {
+                            draggedObjectStallSpace.stallObject = null;
+                        }
+                        draggedStallObject.rectTransform.position = hoveredStallSpace.rectTransform.position;
+                        hoveredStallSpace.stallObject = draggedStallObject;
+                        draggedStallObject.stallSpace = hoveredStallSpace;
+                    }
+                }
+
+                if(!droppedOnStallSpace)
+                {
+                    draggedStallObject.rectTransform.position = draggedStallObject.stallSpace.rectTransform.position;
+                }
+                draggedObjectStallSpace = null;
+                draggedStallObject.isDragged = false;
+                draggedStallObject = null;
+            }
+        }
+        else
+        {
+            foreach (StallObject stallObject in allStallObjects)
+            {
+                stallObject.canvasGroup.blocksRaycasts = true;
             }
         }
     }
@@ -128,50 +197,64 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    private void SetHoveredObject(StandObject newHoveredObject)
+    private void SetHoveredObject(StallObject newHoveredObject)
     {
-        if (hoveredStandObject != null)
+        if (hoveredStallObject != null)
         {
-            previousHoveredObject = hoveredStandObject;
+            previousHoveredObject = hoveredStallObject;
         }
-        hoveredStandObject = newHoveredObject;
-        objectInfoNameText.text = hoveredStandObject.linkedObject.objectName;
-        objectInfoTitleText.text = hoveredStandObject.linkedObject.title;
-        objectInfoCategoryText.text = hoveredStandObject.linkedObject.categories[0].ToString() + " / " + (hoveredStandObject.linkedObject.categories.Count > 1 ? hoveredStandObject.linkedObject.categories[1].ToString() : "");
-        objectInfoDescriptionText.text = hoveredStandObject.linkedObject.description;
-        objectInfoOriginText.text = hoveredStandObject.linkedObject.originDescription;
-        objectInfoIllustration.sprite = hoveredStandObject.linkedObject.illustration;
+        hoveredStallObject = newHoveredObject;
+        objectInfoNameText.text = hoveredStallObject.linkedObject.objectName;
+        objectInfoTitleText.text = hoveredStallObject.linkedObject.title;
+        objectInfoCategoryText.text = hoveredStallObject.linkedObject.categories[0].ToString() + " / " + (hoveredStallObject.linkedObject.categories.Count > 1 ? hoveredStallObject.linkedObject.categories[1].ToString() : "");
+        objectInfoDescriptionText.text = hoveredStallObject.linkedObject.description;
+        objectInfoOriginText.text = hoveredStallObject.linkedObject.originDescription;
+        objectInfoIllustration.sprite = hoveredStallObject.linkedObject.illustration;
         atleastOneHovered = true;
     }
 
-    private int maxObjectOnLine;
+    private int halfObjectNumber;
 
-    private void InitStandLayout()
+    private void InitStallLayout()
     {
-        allStandObjects = new List<StandObject>();
-        StandObject newStandObject;
-        maxObjectOnLine = playerInventory.belongings.Count / 2;
+        allStallObjects = new List<StallObject>();
+        StallObject newStallObject;
+        halfObjectNumber = playerInventory.belongings.Count / 2;
+        foreach(StallSpace stallSpace in allStallSpaces)
+        {
+            stallSpace.Init();
+        }
         for (int o = 0; o < playerInventory.belongings.Count; o++)
         {
-            newStandObject = Instantiate(standObjectPrefab, standRectTransform);
+            newStallObject = Instantiate(stallObjectPrefab, stallRectTransform);
 
-            if(o < maxObjectOnLine)
+            if(o < halfObjectNumber)
             {
-                newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine1 + new Vector2(o % 2 == 0 ? ((o+0.5f)/2 * distanceBetweenStandObject) : (-(o + 0.5f)/2 * distanceBetweenStandObject), 0);
-                //newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine1 + new Vector2(-((distanceBetweenStandObject * (Mathf.Clamp(playerInventory.belongings.Count - 1, 0, maxObjectOnLine - 1))) * 0.5f) + distanceBetweenStandObject * o, 0);
+                newStallObject.GetComponent<RectTransform>().position = allStallSpaces[o].rectTransform.position;
+                newStallObject.stallSpace = allStallSpaces[o];
+                newStallObject.stallSpace.stallObject = newStallObject;
             }
             else
             {
-                int realo = o - maxObjectOnLine;
-                newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine2 + new Vector2(realo % 2 == 0 ? ((realo + 0.5f) / 2 * distanceBetweenStandObject) : (-(realo + 0.5f) / 2 * distanceBetweenStandObject), 0);
-                //newStandObject.GetComponent<RectTransform>().anchoredPosition = standObjectsOriginPosLine2 + new Vector2(-((distanceBetweenStandObject * (playerInventory.belongings.Count - (1 + maxObjectOnLine))) * 0.5f) + distanceBetweenStandObject * o, 0);
+                int realo = o - halfObjectNumber + vitrineSpaceNumber;
+                newStallObject.GetComponent<RectTransform>().position = allStallSpaces[realo].rectTransform.position;
+                newStallObject.stallSpace = allStallSpaces[realo];
+                newStallObject.stallSpace.stallObject = newStallObject;
             }
+            newStallObject.linkedObject = playerInventory.belongings[o].ownedObject;
+            newStallObject.rectTransform = newStallObject.GetComponent<RectTransform>();
+            newStallObject.name = newStallObject.linkedObject.objectName;
+            newStallObject.RefreshDisplay();
+            allStallObjects.Add(newStallObject);
+        }
 
-            newStandObject.linkedObject = playerInventory.belongings[o].ownedObject;
-            newStandObject.rectTransform = newStandObject.GetComponent<RectTransform>();
-            newStandObject.name = newStandObject.linkedObject.objectName;
-            newStandObject.RefreshDisplay();
-            allStandObjects.Add(newStandObject);
+
+        for (int i = 0; i < allStallSpaces.Count; i++)
+        {
+            if((i >= vitrineStallSpacesAvailable && i < vitrineSpaceNumber) || (i >= vitrineSpaceNumber && i >= (backStallSpacesAvailable + vitrineSpaceNumber)))
+            {
+                allStallSpaces[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -179,7 +262,7 @@ public class PlayerHandler : MonoBehaviour
     {
         if(NegoceManager.I.characterSelected != null)
         {
-            NegoceManager.I.characterSelected.PresentObject(selectedStandObject);
+            NegoceManager.I.characterSelected.PresentObject(selectedStallObject);
         }
         else
         {

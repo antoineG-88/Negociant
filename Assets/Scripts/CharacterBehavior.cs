@@ -110,7 +110,7 @@ public class CharacterBehavior : UIInteractable
         {
             if(d_gazeReflexionAlternance[alternanceIndex])
             {
-                LookObject(GetMaxCuriosityObject(), d_minLookingTime * (DoesObjectHasCommonCategory(GetMaxCuriosityObject().standObject.linkedObject, character.initialInterests) ? d_initialInterestLookTimeRatio : 1));
+                LookObject(GetMaxCuriosityObject(), d_minLookingTime * (DoesObjectHasCommonCategory(GetMaxCuriosityObject().stallObject.linkedObject, character.initialInterests) ? d_initialInterestLookTimeRatio : 1));
             }
             else
             {
@@ -118,24 +118,12 @@ public class CharacterBehavior : UIInteractable
             }
         }
 
-        if(lookedObject != null)
-        {
-            if(lookedObject.curiosityLevel > 0)
-            {
-                lookedObject.curiosityLevel -= Time.deltaTime * d_curiosityDecreaseSpeed;
-            }
-            else
-            {
-                lookedObject.curiosityLevel = 0;
-            }
-        }
-
         foreach(PotentialObject potentialObject in potentialObjects)
         {
-            if(potentialObject != lookedObject)
+            if(potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine)
             {
                 potentialObject.curiosityLevel += Time.deltaTime * d_curiosityIncreaseSpeed
-                    * (DoesObjectHasCommonCategory(potentialObject.standObject.linkedObject, character.initialInterests) ? d_initialInterestCuriosityBoost : 1);
+                    * (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests) ? d_initialInterestCuriosityBoost : 1);
             }
         }
 
@@ -157,19 +145,19 @@ public class CharacterBehavior : UIInteractable
     }
     #endregion
 
-    public void PresentObject(StandObject presentedObject)
+    public void PresentObject(StallObject presentedObject)
     {
         RefreshEnthousiasm();
         PotentialObject presentedPotentialObject = null;
         foreach(PotentialObject potentialObject in potentialObjects)
         {
-            if(potentialObject.standObject == presentedObject)
+            if(potentialObject.stallObject == presentedObject)
             {
                 presentedPotentialObject = potentialObject;
             }
         }
 
-        if(DoesObjectHasCommonCategory(presentedPotentialObject.standObject.linkedObject, character.initialInterests))
+        if(DoesObjectHasCommonCategory(presentedPotentialObject.stallObject.linkedObject, character.initialInterests))
         {
             currentEnthousiasm += d_enthousiasmIncreaseWithCorrectPresent;
             Debug.Log("Great ! C'était un objet de ses préférences");
@@ -212,7 +200,7 @@ public class CharacterBehavior : UIInteractable
         potential = null;
         foreach (PotentialObject potentialObject in potentialObjects)
         {
-            if (potentialObject.curiosityLevel > maxCuriosityLevel)
+            if (potentialObject.curiosityLevel > maxCuriosityLevel && potentialObject.stallObject.stallSpace.isVitrine)
             {
                 potential = potentialObject;
                 maxCuriosityLevel = potentialObject.curiosityLevel;
@@ -227,6 +215,7 @@ public class CharacterBehavior : UIInteractable
         {
             IncreaseAlternanceIndex();
         }
+        objectToLook.curiosityLevel = 0;
         gazeTimeRmn = timeToLook;
         lookedObject = objectToLook;
     }
@@ -248,7 +237,7 @@ public class CharacterBehavior : UIInteractable
         currentEnthousiasm = startEnthousiasm;
         foreach(PotentialObject potentialObject in potentialObjects)
         {
-            if(DoesObjectHasCommonCategory(potentialObject.standObject.linkedObject, character.initialInterests))
+            if(DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
             {
                 potentialObject.interestLevel = startInterestLevel;
                 potentialObject.curiosityLevel = startCuriosityLevel;
@@ -286,7 +275,7 @@ public class CharacterBehavior : UIInteractable
             gazeDisplay.rotation = Quaternion.Euler(0, 0, gazeAngle);
 
 
-            gazeDisplay.position = Vector2.Lerp(gazeDisplay.position , lookedObject.standObject.rectTransform.position, gazeLerpRatio * Time.deltaTime);
+            gazeDisplay.position = Vector2.Lerp(gazeDisplay.position , lookedObject.stallObject.rectTransform.position, gazeLerpRatio * Time.deltaTime);
             if(!gazeDisplay.gameObject.activeSelf)
             {
                 RefreshGazeOrigin();
@@ -313,18 +302,18 @@ public class CharacterBehavior : UIInteractable
 
         foreach(PotentialObject potentialObject in potentialObjects)
         {
-            if(!NegoceManager.I.playerHandler.allStandObjects.Contains(potentialObject.standObject))
+            if(!NegoceManager.I.playerHandler.allStallObjects.Contains(potentialObject.stallObject))
             {
                 potentialObjects.Remove(potentialObject);
             }
         }
 
-        for (int i = 0; i < NegoceManager.I.playerHandler.allStandObjects.Count; i++)
+        for (int i = 0; i < NegoceManager.I.playerHandler.allStallObjects.Count; i++)
         {
             bool isMissingStandObjectInPotentialObjects = true;
             foreach (PotentialObject potentialObject in potentialObjects)
             {
-                if(potentialObject.standObject == NegoceManager.I.playerHandler.allStandObjects[i])
+                if(potentialObject.stallObject == NegoceManager.I.playerHandler.allStallObjects[i])
                 {
                     isMissingStandObjectInPotentialObjects = false;
                 }
@@ -332,7 +321,7 @@ public class CharacterBehavior : UIInteractable
 
             if(isMissingStandObjectInPotentialObjects)
             {
-                potentialObjects.Add(new PotentialObject(NegoceManager.I.playerHandler.allStandObjects[i]));
+                potentialObjects.Add(new PotentialObject(NegoceManager.I.playerHandler.allStallObjects[i]));
             }
         }
     }
@@ -386,13 +375,13 @@ public class CharacterBehavior : UIInteractable
     [System.Serializable]
     public class PotentialObject
     {
-        public StandObject standObject;
+        public StallObject stallObject;
         public float interestLevel;
         public float curiosityLevel;
 
-        public PotentialObject(StandObject _standObject)
+        public PotentialObject(StallObject _standObject)
         {
-            standObject = _standObject;
+            stallObject = _standObject;
             interestLevel = 0;
             curiosityLevel = 0;
         }

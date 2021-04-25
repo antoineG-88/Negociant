@@ -283,6 +283,8 @@ MonoBehaviour:
   isClicked: 0
   clickedDown: 0
   clickedUp: 0
+  isDragged: 0
+  isDropped: 0
   character: {fileID: 0}
   illustrationImage: {fileID: 6244530951691481489}
   selectionAnim:
@@ -297,8 +299,8 @@ MonoBehaviour:
   d_initialInterestLevel: 5
   d_initialCuriosityLevel: 0.3
   d_gazeReflexionAlternance: 010100010101000100
-  d_minLookingTime: 4
-  d_reflexionTime: 4
+  d_minLookingTime: 5
+  d_reflexionTime: 10
   d_curiosityDecreaseSpeed: 0.3
   d_curiosityIncreaseSpeed: 0.03
   d_initialInterestCuriosityBoost: 3
@@ -309,8 +311,8 @@ MonoBehaviour:
   d_enthousiasmBonusIncreaseWhenlooking: 0.2
   d_interestLevelIncreaseByPresenting: 2
   d_initialEntousiasm: 0.5
-  timeBeforeEnthousiasmDecrease: 10
-  enthousiasmDecreaseRate: 0.003
+  timeBeforeEnthousiasmDecrease: 5
+  enthousiasmDecreaseRate: 0.005
   gazeLerpRatio: 5
   identificationCircle: {fileID: 2078761732196462719}
   isSelected: 0

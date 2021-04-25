@@ -49,6 +49,11 @@ public class NegoceManager : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            debugInfo = !debugInfo;
+        }
+
         if(unfoldTime)
         {
             negoceTimeSpend += Time.deltaTime;
@@ -98,16 +103,20 @@ public class NegoceManager : MonoBehaviour
             {
                 charaInfoPanel.SetActive(true);
             }
-            foreach (StandObject standObject in playerHandler.allStandObjects)
+            else
+            {
+                charaInfoPanel.SetActive(false);
+            }
+            foreach (StallObject standObject in playerHandler.allStallObjects)
             {
                 if(debugInfo)
                 {
                     standObject.interestLevel.gameObject.SetActive(true);
                     foreach (CharacterBehavior.PotentialObject potentialObject in characterSelected.potentialObjects)
                     {
-                        if (standObject == potentialObject.standObject)
+                        if (standObject == potentialObject.stallObject)
                         {
-                            standObject.interestLevel.text = potentialObject.interestLevel.ToString();
+                            standObject.interestLevel.text = potentialObject.curiosityLevel.ToString();
                         }
                     }
                 }

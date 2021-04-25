@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IDropHandler
 {
     [HideInInspector] public bool isHovered;
     [HideInInspector] public bool isPressed;
     [HideInInspector] public bool isClicked;
     [HideInInspector] public bool clickedDown;
     [HideInInspector] public bool clickedUp;
+    [HideInInspector] public bool isDragged;
+    [HideInInspector] public bool isDropped;
 
     private bool hasBeenClickedWithoutLeaving;
     private bool hoveredFlag;
@@ -29,6 +31,11 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
         if (clickedUp)
         {
             clickedUp = false;
+        }
+
+        if (isDropped)
+        {
+            isDropped = false;
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -86,4 +93,15 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public abstract void OnHoverIn();
     public abstract void OnHoverOut();
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        isDragged = true;
+    }
+
+    public virtual void OnDrop(PointerEventData eventData)
+    {
+        isDragged = false;
+        isDropped = true;
+    }
 }
