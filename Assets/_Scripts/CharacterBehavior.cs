@@ -19,6 +19,7 @@ public class CharacterBehavior : UIInteractable
     public GameObject enthousiasmGauge;
     public float gazeLerpRatio;
     public Image identificationCircle;
+    public TweeningAnimator hoveredWithStallObjectAnim;
 
     [Header("Decisive options")]
     public float d_initialInterestLevel;
@@ -54,9 +55,13 @@ public class CharacterBehavior : UIInteractable
     private float currentEnthousiasm;
     private int gazedObjectThisGazeTime;
     private bool isAppearing;
+    [HideInInspector] public bool isHoveredWithStallObject;
+    private bool hoveredWithObjectFlag;
 
     void Start()
     {
+        hoveredWithStallObjectAnim.GetReferences();
+        hoveredWithStallObjectAnim.anim = Instantiate(hoveredWithStallObjectAnim.anim);
         timeSpendRefreshEnthousiasm = 0;
         if(character.temper == Temper.Decisive)
         {
@@ -84,6 +89,32 @@ public class CharacterBehavior : UIInteractable
             UpdateGazeDisplay();
 
             UpdateCharacterInfoDisplay();
+
+            UpdatePlayerActionAsTarget();
+        }
+    }
+
+    private void UpdatePlayerActionAsTarget()
+    {
+        if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered)
+        {
+            isHoveredWithStallObject = true;
+        }
+        if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredWithCorrectObject && !NegoceManager.I.playerHandler.argumentOption.isCurrentlyHoveredWithCorrectObject))
+        {
+            isHoveredWithStallObject = false;
+        }
+
+        if(isHoveredWithStallObject && !hoveredWithObjectFlag)
+        {
+            hoveredWithObjectFlag = true;
+            StartCoroutine(hoveredWithStallObjectAnim.anim.Play(hoveredWithStallObjectAnim));
+        }
+
+        if (!isHoveredWithStallObject && hoveredWithObjectFlag)
+        {
+            hoveredWithObjectFlag = false;
+            StartCoroutine(hoveredWithStallObjectAnim.anim.PlayBackward(hoveredWithStallObjectAnim, true));
         }
     }
 
@@ -98,7 +129,6 @@ public class CharacterBehavior : UIInteractable
             nameText.gameObject.SetActive(false);
         }
     }
-
 
     #region Tempers Behaviors
     private void DecisiveBehavior()
@@ -408,7 +438,7 @@ public class CharacterBehavior : UIInteractable
     {
         selectionAnim.anim = Instantiate(selectionAnim.anim);
         illustrationImage.sprite = character.illustration;
-        illustrationImage.SetNativeSize();
+        illustrationImage.preserveAspect = true;
         if(gazeDisplay != null)
         {
             gazeDisplay.GetComponent<Image>().color = identificationColor;

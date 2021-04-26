@@ -150,5 +150,5 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  useColorChange: 1
+  useColorChange: 0
   colorImage: {fileID: 0}

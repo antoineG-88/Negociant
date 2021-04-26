@@ -33,10 +33,10 @@ public class PlayerHandler : MonoBehaviour
     public Image objectInfoIllustration;
     public StallObject stallObjectPrefab;
     [Space]
-    public RectTransform playerActionPanel;
-    public TweeningAnimator playerActionPanelAnim;
-    public RadialOption presentButton;
-    public RadialOption argumentButton;
+    public TweeningAnimator objectInfoPanel;
+    public RectTransform characterInteractionPanel;
+    public DropOption presentOption;
+    public DropOption argumentOption;
 
     [HideInInspector] public List<StallObject> allStallObjects;
     private bool atleastOneHovered;
@@ -55,11 +55,13 @@ public class PlayerHandler : MonoBehaviour
 
     private void Start()
     {
-        playerActionPanelAnim.GetReferences();
-        playerActionPanelAnim.canvasGroup.interactable = false;
-        playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
-        playerActionPanelAnim.anim.SetAtEndState(playerActionPanelAnim);
-        foreach(StallSpace stallSpace in allStallSpaces)
+        objectInfoPanel.GetReferences();
+        objectInfoPanel.canvasGroup.interactable = false;
+        objectInfoPanel.canvasGroup.blocksRaycasts = false;
+        objectInfoPanel.anim.SetAtEndState(objectInfoPanel);
+        presentOption.Disable();
+        argumentOption.Disable();
+        foreach (StallSpace stallSpace in allStallSpaces)
         {
             if(stallSpace.isVitrine)
             {
@@ -92,11 +94,6 @@ public class PlayerHandler : MonoBehaviour
 
     public void UpdatePresentAction()
     {
-        if (presentButton.isClicked && presentedStallObject == null)
-        {
-            PresentObject();
-        }
-
         if (presentedStallObject != null)
         {
             actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentPresentTime;
@@ -123,32 +120,25 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void PresentObject()
+    public void PresentObject(StallObject stallObjectToPresent, CharacterBehavior targetCharacter)
     {
-        if (NegoceManager.I.characterSelected != null)
+        currentCharacterTalkingTo = targetCharacter;
+        currentCharacterTalkingTo.isTalking = true;
+        timeSpendOnCurrentAction = 0;
+        presentedStallObject = stallObjectToPresent;
+        currentActionText.text = "Présente";
+        objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
+        targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
+        objectOfTheActionDisplay.sprite = presentedStallObject.linkedObject.illustration;
+        targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
+        targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
+        if (currentCharacterTalkingTo.IsLookingAt(presentedStallObject))
         {
-            currentCharacterTalkingTo = NegoceManager.I.characterSelected;
-            currentCharacterTalkingTo.isTalking = true;
-            timeSpendOnCurrentAction = 0;
-            presentedStallObject = selectedStallObject;
-            currentActionText.text = "Présente";
-            objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
-            targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
-            objectOfTheActionDisplay.sprite = selectedStallObject.linkedObject.illustration;
-            targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
-            targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
-            if (currentCharacterTalkingTo.IsLookingAt(presentedStallObject))
-            {
-                currentPresentTime = presentShortTime;
-            }
-            else
-            {
-                currentPresentTime = presentTime;
-            }
+            currentPresentTime = presentShortTime;
         }
         else
         {
-            Debug.Log("Aucun personnage sélectionné");
+            currentPresentTime = presentTime;
         }
     }
 
@@ -161,6 +151,7 @@ public class PlayerHandler : MonoBehaviour
         DragAndDropStallObjectUpdate();
     }
 
+    CharacterBehavior charaHovered;
     private void DragAndDropStallObjectUpdate()
     {
         for (int i = 0; i < allStallObjects.Count; i++)
@@ -177,7 +168,48 @@ public class PlayerHandler : MonoBehaviour
             {
                 stallObject.canvasGroup.blocksRaycasts = false;
             }
-            draggedStallObject.rectTransform.position = Input.mousePosition;
+            charaHovered = null;
+            foreach (CharacterBehavior charaPresent in NegoceManager.I.allPresentCharacters)
+            {
+                if(charaPresent.isHoveredWithStallObject)
+                {
+                    charaHovered = charaPresent;
+                }
+            }
+
+            Vector3 objectPosToFollow = Input.mousePosition;
+
+            if (charaHovered != null)
+            {
+                characterInteractionPanel.position = charaHovered.rectTransform.position;
+
+                if (presentedStallObject == null)
+                {
+                    presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
+                    argumentOption.Enable("");
+                }
+                else
+                {
+                    presentOption.Disable();
+                    argumentOption.Disable();
+                }
+
+                if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                {
+                    objectPosToFollow = presentOption.rectTransform.position;
+                }
+                if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                {
+                    objectPosToFollow = argumentOption.rectTransform.position;
+                }
+            }
+            else
+            {
+                presentOption.Disable();
+                argumentOption.Disable();
+            }
+
+            draggedStallObject.rectTransform.position = objectPosToFollow;
 
 
             if (Input.GetMouseButtonUp(0))
@@ -196,12 +228,25 @@ public class PlayerHandler : MonoBehaviour
                 {
                     draggedStallObject.rectTransform.position = draggedStallObject.stallSpace.rectTransform.position;
                 }
+
+                if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                {
+                    StartCoroutine(presentOption.Select());
+                    PresentObject(draggedStallObject, charaHovered);
+                }
+                else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                {
+                    Debug.LogWarning("No argumentation yet");
+                }
+
                 draggedStallObject.isDragged = false;
                 draggedStallObject = null;
             }
         }
         else
         {
+            presentOption.Disable();
+            argumentOption.Disable();
             foreach (StallObject stallObject in allStallObjects)
             {
                 stallObject.canvasGroup.blocksRaycasts = true;
@@ -231,19 +276,19 @@ public class PlayerHandler : MonoBehaviour
             {
                 if(previousSelectedObject != selectedStallObject)
                 {
-                    playerActionPanelAnim.canvasGroup.interactable = true;
-                    playerActionPanelAnim.canvasGroup.blocksRaycasts = true;
-                    StartCoroutine(playerActionPanelAnim.anim.PlayBackward(playerActionPanelAnim, true));
+                    objectInfoPanel.canvasGroup.interactable = true;
+                    objectInfoPanel.canvasGroup.blocksRaycasts = true;
+                    StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
                     UpdateObjectInfoWindow(selectedStallObject);
                 }
             }
-            else if(selectedStallObject != null && !presentButton.isHovered && !argumentButton.isHovered)
+            else if(selectedStallObject != null)
             {
                 selectedStallObject = null;
                 previousSelectedObject = null;
-                playerActionPanelAnim.canvasGroup.interactable = false;
-                playerActionPanelAnim.canvasGroup.blocksRaycasts = false;
-                StartCoroutine(playerActionPanelAnim.anim.Play(playerActionPanelAnim));
+                objectInfoPanel.canvasGroup.interactable = false;
+                objectInfoPanel.canvasGroup.blocksRaycasts = false;
+                StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
             }
         }
     }

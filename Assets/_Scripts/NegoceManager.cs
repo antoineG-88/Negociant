@@ -54,7 +54,7 @@ public class NegoceManager : MonoBehaviour
         {
             allPossibleCharacters.Add(GetRandomGeneratedCharacter());
         }
-        nextCharacterApparitionTime = UnityEngine.Random.Range(2, 5);
+        nextCharacterApparitionTime = UnityEngine.Random.Range(1, 2);
     }
 
     void Update()
@@ -218,7 +218,7 @@ public class NegoceManager : MonoBehaviour
             characterNeeds.Add(new Character.Need((Trait)Enum.ToObject(typeof(Trait), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Trait)).Length)), UnityEngine.Random.Range(0f, 1f)));
         }
 
-        System.Random rnd = new System.Random();
+        System.Random rnd = new System.Random(UnityEngine.Random.Range(2000, 3000));
         newCharacter.name = "";
         for (int i = 0; i < 8; i++)
         {
