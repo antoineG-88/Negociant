@@ -5089,6 +5089,7 @@ GameObject:
   - component: {fileID: 1690220234}
   - component: {fileID: 1690220233}
   - component: {fileID: 1690220232}
+  - component: {fileID: 1690220235}
   m_Layer: 5
   m_Name: PresentOption
   m_TagString: Untagged
@@ -5142,7 +5143,7 @@ MonoBehaviour:
     originalPos: {x: 0, y: 0}
   selectAnim:
     anim: {fileID: 11400000, guid: 8b0d2eb9dc3dedf479d770bc8813b451, type: 2}
-    rectTransform: {fileID: 1458695103}
+    rectTransform: {fileID: 1690220231}
     canvasGroup: {fileID: 0}
     originalPos: {x: 0, y: 0}
   rectTransform: {fileID: 0}
@@ -5187,6 +5188,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690220230}
   m_CullTransparentMesh: 0
+--- !u!225 &1690220235
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690220230}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1717349081
 GameObject:
   m_ObjectHideFlags: 0

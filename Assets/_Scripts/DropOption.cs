@@ -53,6 +53,7 @@ public class DropOption : UIInteractable
         yield return new WaitForSeconds(selectAnim.anim.animationTime);
         isPlaying = false;
         hoverAnim.anim.SetAtStartState(hoverAnim);
+        selectAnim.anim.SetAtStartState(selectAnim);
         Disable();
     }
 
