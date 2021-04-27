@@ -170,7 +170,7 @@ public class NegoceManager : MonoBehaviour
         newCharacterBehavior = Instantiate(characterBehaviorPrefab, charactersDisplay);
         allPresentCharacters.Add(newCharacterBehavior);
         newCharacterBehavior.character = theCharacter;
-        if(allPresentCharacters.Count > maxCharacterPresent)
+        if (allPresentCharacters.Count > maxCharacterPresent)
         {
             //MakeCharacterLeave(allPresentCharacters[0]);
             Debug.LogWarning("There is too many character at the stall");
@@ -182,6 +182,9 @@ public class NegoceManager : MonoBehaviour
         newCharacterBehavior.gameObject.name = newCharacterBehavior.character.characterName;
         newCharacterBehavior.gazeDisplay.gameObject.name = newCharacterBehavior.character.characterName + "'s gaze";
         newCharacterBehavior.characterCanvasRectTransform = charactersDisplay;
+        newCharacterBehavior.Init();
+        newCharacterBehavior.SetRandomListOfCharaObject();
+
         RefreshCharactersDisplay();
         StartCoroutine(newCharacterBehavior.Appear());
     }
@@ -211,7 +214,6 @@ public class NegoceManager : MonoBehaviour
         newCharacter.initialInterests = new List<Category>(characterInitialPreferences);
 
         newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
-
         List<Character.Need> characterNeeds = new List<Character.Need>();
         for (int i = 0; i < UnityEngine.Random.Range(minChNeeds, maxChNeeds); i++)
         {

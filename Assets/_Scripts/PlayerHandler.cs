@@ -61,6 +61,7 @@ public class PlayerHandler : MonoBehaviour
         objectInfoPanel.anim.SetAtEndState(objectInfoPanel);
         presentOption.Disable();
         argumentOption.Disable();
+        characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (StallSpace stallSpace in allStallSpaces)
         {
             if(stallSpace.isVitrine)
@@ -187,9 +188,11 @@ public class PlayerHandler : MonoBehaviour
                 {
                     presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
                     argumentOption.Enable("");
+                    characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 }
                 else
                 {
+                    characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
                     presentOption.Disable();
                     argumentOption.Disable();
                 }
@@ -205,6 +208,7 @@ public class PlayerHandler : MonoBehaviour
             }
             else
             {
+                characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 presentOption.Disable();
                 argumentOption.Disable();
             }
@@ -245,6 +249,7 @@ public class PlayerHandler : MonoBehaviour
         }
         else
         {
+            characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
             presentOption.Disable();
             argumentOption.Disable();
             foreach (StallObject stallObject in allStallObjects)

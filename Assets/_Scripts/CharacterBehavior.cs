@@ -19,7 +19,13 @@ public class CharacterBehavior : UIInteractable
     public GameObject enthousiasmGauge;
     public float gazeLerpRatio;
     public Image identificationCircle;
+    public List<RectTransform> belongingsSpaces;
+    public TweeningAnimator belongingsAnim;
     public TweeningAnimator hoveredWithStallObjectAnim;
+    [Header("Random object > Temporary")]
+    public List<Object> allObjectsForCharacter;
+    public Vector2Int minMaxObjectPerChara;
+    public CharaObject charaObjectPrefab;
 
     [Header("Decisive options")]
     public float d_initialInterestLevel;
@@ -40,6 +46,7 @@ public class CharacterBehavior : UIInteractable
     public float timeBeforeEnthousiasmDecrease;
     public float enthousiasmDecreaseRate;
 
+    [HideInInspector] public List<CharaObject> belongings;
     [HideInInspector] public bool isSelected;
     [HideInInspector] public RectTransform gazeDisplay;
     [HideInInspector] public Color identificationColor;
@@ -57,16 +64,23 @@ public class CharacterBehavior : UIInteractable
     private bool isAppearing;
     [HideInInspector] public bool isHoveredWithStallObject;
     private bool hoveredWithObjectFlag;
+    private bool selectedFlag;
 
-    void Start()
+    public void Init()
     {
         hoveredWithStallObjectAnim.GetReferences();
         hoveredWithStallObjectAnim.anim = Instantiate(hoveredWithStallObjectAnim.anim);
+        belongingsAnim.GetReferences();
+        belongingsAnim.anim = Instantiate(belongingsAnim.anim);
+        belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
         if(character.temper == Temper.Decisive)
         {
             SetInitialState(d_initialInterestLevel, d_initialCuriosityLevel, d_initialEntousiasm);
         }
+
+        belongingsAnim.canvasGroup.blocksRaycasts = false;
+        belongingsAnim.canvasGroup.interactable = false;
     }
 
     public void Update()
@@ -122,10 +136,24 @@ public class CharacterBehavior : UIInteractable
     {
         if(isSelected)
         {
+            if(!selectedFlag)
+            {
+                StartCoroutine(belongingsAnim.anim.PlayBackward(belongingsAnim, true));
+                belongingsAnim.canvasGroup.blocksRaycasts = true;
+                belongingsAnim.canvasGroup.interactable = true;
+                selectedFlag = true;
+            }
             nameText.gameObject.SetActive(true);
         }
         else
         {
+            if(selectedFlag)
+            {
+                StartCoroutine(belongingsAnim.anim.Play(belongingsAnim));
+                belongingsAnim.canvasGroup.blocksRaycasts = false;
+                belongingsAnim.canvasGroup.interactable = false;
+                selectedFlag = false;
+            }
             nameText.gameObject.SetActive(false);
         }
     }
@@ -445,6 +473,32 @@ public class CharacterBehavior : UIInteractable
         }
         identificationCircle.color = new Color(identificationColor.r, identificationColor.g, identificationColor.b, 0.5f);
         selectionAnim.GetReferences();
+
+        for (int i = 0; i < belongingsSpaces.Count; i++)
+        {
+
+            if(i >= belongings.Count)
+            {
+                belongingsSpaces[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < belongings.Count; i++)
+        {
+            belongings[i].rectTransform.position = belongingsSpaces[i].position;
+        }
+    }
+
+    public void SetRandomListOfCharaObject()
+    {
+        CharaObject newCharaObject = null;
+        for (int i = 0; i < Random.Range(minMaxObjectPerChara.x, minMaxObjectPerChara.y + 1); i++)
+        {
+            newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
+            newCharaObject.linkedObject = allObjectsForCharacter[Random.Range(0, allObjectsForCharacter.Count)];
+            newCharaObject.illustration.sprite = newCharaObject.linkedObject.illustration;
+            belongings.Add(newCharaObject);
+        }
     }
 
     public override void OnHoverIn()
