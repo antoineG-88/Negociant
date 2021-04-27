@@ -26,6 +26,7 @@ public class CharacterBehavior : UIInteractable
     public List<Object> allObjectsForCharacter;
     public Vector2Int minMaxObjectPerChara;
     public CharaObject charaObjectPrefab;
+    public Vector2 minMaxObjectPersonnalValue;
 
     [Header("Decisive options")]
     public float d_initialInterestLevel;
@@ -52,6 +53,7 @@ public class CharacterBehavior : UIInteractable
     [HideInInspector] public Color identificationColor;
     [HideInInspector] public bool isLeaving;
     [HideInInspector] public bool isTalking;
+    [HideInInspector] public float exchangeTreshold;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
     private PotentialObject lookedObject;
@@ -238,7 +240,12 @@ public class CharacterBehavior : UIInteractable
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
 
-        presentedPotentialObject.interestLevel += d_interestLevelIncreaseByPresenting;
+        presentedPotentialObject.IncreaseInterestLevel(d_interestLevelIncreaseByPresenting, true);
+
+        if (NegoceManager.I.selectedCharacter == this)
+        {
+            presentedObject.SetInterestLevelDisplay(presentedPotentialObject.knownInterestLevel / exchangeTreshold);
+        }
         presentedPotentialObject.curiosityLevel += d_curiosityLevelIncreaseByPresenting;
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm ,0f, 1f);
     }
@@ -247,21 +254,6 @@ public class CharacterBehavior : UIInteractable
     {
         NegoceManager.I.MakeCharacterLeave(this);
         isLeaving = true;
-    }
-
-    private PotentialObject GetMaxCuriosityObject()
-    {
-        maxCuriosityLevel = 0;
-        PotentialObject maxCuriosityObject = null;
-        foreach (PotentialObject potentialObject in potentialObjects)
-        {
-            if (potentialObject.curiosityLevel > maxCuriosityLevel && potentialObject.stallObject.stallSpace.isVitrine)
-            {
-                maxCuriosityObject = potentialObject;
-                maxCuriosityLevel = potentialObject.curiosityLevel;
-            }
-        }
-        return maxCuriosityObject;
     }
 
     private void LookObject(PotentialObject objectToLook, float timeToLook)
@@ -289,18 +281,19 @@ public class CharacterBehavior : UIInteractable
         return lookedObject != null && lookedObject.stallObject == stallObject;
     }
 
-    private void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
+    private PotentialObject GetMaxCuriosityObject()
     {
-        currentEnthousiasm = startEnthousiasm;
-        foreach(PotentialObject potentialObject in potentialObjects)
+        maxCuriosityLevel = 0;
+        PotentialObject maxCuriosityObject = null;
+        foreach (PotentialObject potentialObject in potentialObjects)
         {
-            if(DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
+            if (potentialObject.curiosityLevel > maxCuriosityLevel && potentialObject.stallObject.stallSpace.isVitrine)
             {
-                potentialObject.interestLevel = startInterestLevel;
-                potentialObject.curiosityLevel = startCuriosityLevel;
+                maxCuriosityObject = potentialObject;
+                maxCuriosityLevel = potentialObject.curiosityLevel;
             }
-            potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
         }
+        return maxCuriosityObject;
     }
 
     private bool DoesObjectHasCommonCategory(Object objectToCheck, List<Category> categoryPool)
@@ -345,7 +338,7 @@ public class CharacterBehavior : UIInteractable
         return numberOnVitrine;
     }
 
-    private PotentialObject GetPotentialFromStallObject(StallObject searchedStallObject)
+    public PotentialObject GetPotentialFromStallObject(StallObject searchedStallObject)
     {
         PotentialObject potentialObjectSearched = null;
         foreach (PotentialObject potentialObject in potentialObjects)
@@ -381,6 +374,7 @@ public class CharacterBehavior : UIInteractable
             StartCoroutine(selectionAnim.anim.Play(selectionAnim));
         }
     }
+
     public void UnSelect(bool forced)
     {
         if (forced)
@@ -394,6 +388,20 @@ public class CharacterBehavior : UIInteractable
             isSelected = false;
         }
 
+    }
+
+    private void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
+    {
+        currentEnthousiasm = startEnthousiasm;
+        foreach (PotentialObject potentialObject in potentialObjects)
+        {
+            if (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
+            {
+                potentialObject.interestLevel = startInterestLevel;
+                potentialObject.curiosityLevel = startCuriosityLevel;
+            }
+            potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
+        }
     }
 
     #region Display
@@ -497,8 +505,16 @@ public class CharacterBehavior : UIInteractable
             newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
             newCharaObject.linkedObject = allObjectsForCharacter[Random.Range(0, allObjectsForCharacter.Count)];
             newCharaObject.illustration.sprite = newCharaObject.linkedObject.illustration;
+            newCharaObject.personnalValue = Random.Range(minMaxObjectPersonnalValue.x, minMaxObjectPersonnalValue.y);
             belongings.Add(newCharaObject);
         }
+
+        exchangeTreshold = 0;
+        for (int i = 0; i < belongings.Count; i++)
+        {
+            exchangeTreshold += belongings[i].personnalValue;
+        }
+        exchangeTreshold /= belongings.Count;
     }
 
     public override void OnHoverIn()
@@ -519,12 +535,27 @@ public class CharacterBehavior : UIInteractable
         public StallObject stallObject;
         public float interestLevel;
         public float curiosityLevel;
+        public float knownInterestLevel;
 
+        public void IncreaseInterestLevel(float amount, bool refreshKnownLevel)
+        {
+            if (interestLevel < 0)
+            {
+                interestLevel = 0;
+            }
+            interestLevel += amount;
+
+            if (refreshKnownLevel)
+            {
+                knownInterestLevel = interestLevel;
+            }
+        }
         public PotentialObject(StallObject _standObject)
         {
             stallObject = _standObject;
             interestLevel = 0;
             curiosityLevel = 0;
+            knownInterestLevel = -1;
         }
     }
 }

@@ -35,9 +35,10 @@ public class NegoceManager : MonoBehaviour
     [HideInInspector] public List<CharacterBehavior> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
-    [HideInInspector] public CharacterBehavior characterSelected;
+    [HideInInspector] public CharacterBehavior selectedCharacter;
     private float timeSpendSinceLastCharacterApparition;
     private float nextCharacterApparitionTime;
+    private CharacterBehavior previousSelectedCharacter;
 
     public static NegoceManager I;
     private void Awake()
@@ -55,6 +56,10 @@ public class NegoceManager : MonoBehaviour
             allPossibleCharacters.Add(GetRandomGeneratedCharacter());
         }
         nextCharacterApparitionTime = UnityEngine.Random.Range(1, 2);
+        for (int i = 0; i < playerHandler.allStallObjects.Count; i++)
+        {
+            playerHandler.allStallObjects[i].interestLevelToShow = -1;
+        }
     }
 
     void Update()
@@ -101,12 +106,14 @@ public class NegoceManager : MonoBehaviour
 
     private void UpdateSelectedCharaInfo()
     {
-        if(characterSelected != null)
+        if (selectedCharacter != null && previousSelectedCharacter != selectedCharacter)
         {
-            charaInitialInterestsText.text = characterSelected.character.initialInterests[0].ToString()
-                + " / " + (characterSelected.character.initialInterests.Count > 1 ? characterSelected.character.initialInterests[1].ToString() : "")
-                + " / " + (characterSelected.character.initialInterests.Count > 2 ? characterSelected.character.initialInterests[2].ToString() : "");
-            charaNameText.text = characterSelected.character.characterName;
+            previousSelectedCharacter = selectedCharacter;
+
+            charaInitialInterestsText.text = selectedCharacter.character.initialInterests[0].ToString()
+                + " / " + (selectedCharacter.character.initialInterests.Count > 1 ? selectedCharacter.character.initialInterests[1].ToString() : "")
+                + " / " + (selectedCharacter.character.initialInterests.Count > 2 ? selectedCharacter.character.initialInterests[2].ToString() : "");
+            charaNameText.text = selectedCharacter.character.characterName;
             if(debugInfo)
             {
                 charaInfoPanel.SetActive(true);
@@ -117,24 +124,19 @@ public class NegoceManager : MonoBehaviour
             }
             foreach (StallObject standObject in playerHandler.allStallObjects)
             {
-                if(debugInfo)
+                foreach (CharacterBehavior.PotentialObject potentialObject in selectedCharacter.potentialObjects)
                 {
-                    standObject.interestLevel.gameObject.SetActive(true);
-                    foreach (CharacterBehavior.PotentialObject potentialObject in characterSelected.potentialObjects)
+                    if (standObject == potentialObject.stallObject)
                     {
-                        if (standObject == potentialObject.stallObject)
-                        {
-                            standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
-                        }
+                        standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
+                        standObject.SetInterestLevelDisplay(potentialObject.knownInterestLevel / selectedCharacter.exchangeTreshold);
                     }
                 }
-                else
-                {
-                    standObject.interestLevel.gameObject.SetActive(false);
-                }
+
+                standObject.interestLevel.gameObject.SetActive(debugInfo);
             }
         }
-        else
+        if(selectedCharacter == null)
         {
             charaInfoPanel.SetActive(false);
         }
@@ -248,11 +250,11 @@ public class NegoceManager : MonoBehaviour
 
     public void SelectCharacter(CharacterBehavior theCharacter)
     {
-        characterSelected = theCharacter;
-        characterSelected.Select();
+        selectedCharacter = theCharacter;
+        selectedCharacter.Select();
         foreach (CharacterBehavior character in NegoceManager.I.allPresentCharacters)
         {
-            if (character != characterSelected)
+            if (character != selectedCharacter)
             {
                 character.UnSelect(false);
             }

@@ -9,6 +9,7 @@ public class CharaObject : UIInteractable
     public Image illustration;
     public RectTransform rectTransform;
     public TweeningAnimator hoverAnim;
+    public float personnalValue;
 
     private void Start()
     {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class StallObject : UIInteractable
 {
@@ -18,6 +17,9 @@ public class StallObject : UIInteractable
     public Image categoryDisplay2;
     public List<Sprite> categoriesIcon;
     public List<Color> categoriesColor;
+    public Image interestLevelFiller;
+    [HideInInspector] public float interestLevelToShow;
+    public float interestLevelAnimLerpRatio;
     [HideInInspector] public bool canBeHovered;
 
     private void Start()
@@ -28,6 +30,24 @@ public class StallObject : UIInteractable
         hoverAnim.anim = Instantiate(hoverAnim.anim);
     }
 
+    private void Update()
+    {
+        if(interestLevelToShow < 0)
+        {
+            interestLevelFiller.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            interestLevelFiller.transform.parent.gameObject.SetActive(true);
+            interestLevelFiller.fillAmount = Mathf.Lerp(interestLevelFiller.fillAmount, interestLevelToShow, interestLevelAnimLerpRatio * Time.deltaTime);
+        }
+    }
+
+    public void SetInterestLevelDisplay(float level)
+    {
+        interestLevelFiller.fillAmount = 0;
+        interestLevelToShow = level;
+    }
 
     public void RefreshDisplay()
     {
