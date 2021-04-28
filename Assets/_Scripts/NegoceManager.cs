@@ -106,6 +106,14 @@ public class NegoceManager : MonoBehaviour
 
     private void UpdateSelectedCharaInfo()
     {
+        if (debugInfo)
+        {
+            charaInfoPanel.SetActive(true);
+        }
+        else
+        {
+            charaInfoPanel.SetActive(false);
+        }
         if (selectedCharacter != null && previousSelectedCharacter != selectedCharacter)
         {
             previousSelectedCharacter = selectedCharacter;
@@ -114,14 +122,6 @@ public class NegoceManager : MonoBehaviour
                 + " / " + (selectedCharacter.character.initialInterests.Count > 1 ? selectedCharacter.character.initialInterests[1].ToString() : "")
                 + " / " + (selectedCharacter.character.initialInterests.Count > 2 ? selectedCharacter.character.initialInterests[2].ToString() : "");
             charaNameText.text = selectedCharacter.character.characterName;
-            if(debugInfo)
-            {
-                charaInfoPanel.SetActive(true);
-            }
-            else
-            {
-                charaInfoPanel.SetActive(false);
-            }
             foreach (StallObject standObject in playerHandler.allStallObjects)
             {
                 foreach (CharacterBehavior.PotentialObject potentialObject in selectedCharacter.potentialObjects)
@@ -129,7 +129,7 @@ public class NegoceManager : MonoBehaviour
                     if (standObject == potentialObject.stallObject)
                     {
                         standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
-                        standObject.SetInterestLevelDisplay(potentialObject.knownInterestLevel / selectedCharacter.exchangeTreshold);
+                        standObject.SetInterestLevelDisplay(potentialObject.knownInterestLevel / selectedCharacter.exchangeTreshold, selectedCharacter.identificationColor);
                     }
                 }
 

@@ -15,9 +15,8 @@ public class StallObject : UIInteractable
     public CanvasGroup canvasGroup;
     public Image categoryDisplay1;
     public Image categoryDisplay2;
-    public List<Sprite> categoriesIcon;
-    public List<Color> categoriesColor;
     public Image interestLevelFiller;
+    public RectTransform objectDirectInfoPanel;
     [HideInInspector] public float interestLevelToShow;
     public float interestLevelAnimLerpRatio;
     [HideInInspector] public bool canBeHovered;
@@ -32,20 +31,23 @@ public class StallObject : UIInteractable
 
     private void Update()
     {
+        objectDirectInfoPanel.gameObject.SetActive(!isDragged);
+
         if(interestLevelToShow < 0)
         {
-            interestLevelFiller.transform.parent.gameObject.SetActive(false);
+            interestLevelFiller.gameObject.SetActive(false);
         }
         else
         {
-            interestLevelFiller.transform.parent.gameObject.SetActive(true);
+            interestLevelFiller.gameObject.SetActive(true);
             interestLevelFiller.fillAmount = Mathf.Lerp(interestLevelFiller.fillAmount, interestLevelToShow, interestLevelAnimLerpRatio * Time.deltaTime);
         }
     }
 
-    public void SetInterestLevelDisplay(float level)
+    public void SetInterestLevelDisplay(float level, Color interestFillerColor)
     {
         interestLevelFiller.fillAmount = 0;
+        interestLevelFiller.color = interestFillerColor;
         interestLevelToShow = level;
     }
 
@@ -53,10 +55,10 @@ public class StallObject : UIInteractable
     {
         nameText.text = linkedObject.objectName;
         illustration.sprite = linkedObject.illustration;
-        categoryDisplay1.color = categoriesColor[(int)linkedObject.categories[0]];
-        categoryDisplay1.sprite = categoriesIcon[(int)linkedObject.categories[0]];
-        categoryDisplay2.color = categoriesColor[(int)linkedObject.categories[1]];
-        categoryDisplay2.sprite = categoriesIcon[(int)linkedObject.categories[1]];
+        categoryDisplay1.color = GameData.categoriesColor[(int)linkedObject.categories[0]];
+        categoryDisplay1.sprite = GameData.categoriesIcon[(int)linkedObject.categories[0]];
+        categoryDisplay2.color = GameData.categoriesColor[(int)linkedObject.categories[1]];
+        categoryDisplay2.sprite = GameData.categoriesIcon[(int)linkedObject.categories[1]];
 
     }
 

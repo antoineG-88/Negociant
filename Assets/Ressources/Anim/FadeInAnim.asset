@@ -10,30 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
-  m_Name: CharacterSelectionAnim
+  m_Name: FadeInAnim
   m_EditorClassIdentifier: 
-  animationTime: 0.4
+  animationTime: 0.1
   animationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.011154011
-      outSlope: -0.011154011
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.40659332
-    - serializedVersion: 3
-      time: 0.5101746
-      value: 0.5021486
-      inSlope: 2.7030928
-      outSlope: 2.7030928
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.058975372
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
@@ -52,21 +43,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.011154011
-      outSlope: -0.011154011
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.40659332
-    - serializedVersion: 3
-      time: 0.5101746
-      value: 0.5021486
-      inSlope: 2.7030928
-      outSlope: 2.7030928
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.058975372
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
@@ -85,21 +67,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.011154011
-      outSlope: -0.011154011
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.40659332
-    - serializedVersion: 3
-      time: 0.5101746
-      value: 0.5021486
-      inSlope: 2.7030928
-      outSlope: 2.7030928
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.058975372
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
@@ -117,15 +90,15 @@ MonoBehaviour:
   animationStartPos: {x: 0, y: 0}
   animationEndPos: {x: 0, y: 0}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1.1, y: 1.1, z: 1.1}
+  animationEndScale: {x: 1, y: 1, z: 1}
   animationStartRot: 0
   animationEndRot: 0
   movementRelativeToOriginalPos: 1
   colorAnimation:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 1, g: 1, b: 1, a: 0}
     key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 1, b: 1, a: 0}
+    key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -133,7 +106,7 @@ MonoBehaviour:
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 65535
-    ctime2: 65535
+    ctime2: 0
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -150,5 +123,5 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  useColorChange: 1
+  useColorChange: 0
   colorImage: {fileID: 0}

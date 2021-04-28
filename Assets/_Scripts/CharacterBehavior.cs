@@ -244,7 +244,7 @@ public class CharacterBehavior : UIInteractable
 
         if (NegoceManager.I.selectedCharacter == this)
         {
-            presentedObject.SetInterestLevelDisplay(presentedPotentialObject.knownInterestLevel / exchangeTreshold);
+            presentedObject.SetInterestLevelDisplay(presentedPotentialObject.knownInterestLevel / exchangeTreshold, identificationColor);
         }
         presentedPotentialObject.curiosityLevel += d_curiosityLevelIncreaseByPresenting;
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm ,0f, 1f);
@@ -354,6 +354,7 @@ public class CharacterBehavior : UIInteractable
     public IEnumerator Appear()
     {
         isAppearing = true;
+        backWardApparitionAnim.anim = Instantiate(backWardApparitionAnim.anim);
         backWardApparitionAnim.GetReferences();
         nameText.gameObject.SetActive(false);
         identificationCircle.gameObject.SetActive(false);
@@ -504,8 +505,8 @@ public class CharacterBehavior : UIInteractable
         {
             newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
             newCharaObject.linkedObject = allObjectsForCharacter[Random.Range(0, allObjectsForCharacter.Count)];
-            newCharaObject.illustration.sprite = newCharaObject.linkedObject.illustration;
             newCharaObject.personnalValue = Random.Range(minMaxObjectPersonnalValue.x, minMaxObjectPersonnalValue.y);
+            newCharaObject.RefreshDisplay();
             belongings.Add(newCharaObject);
         }
 

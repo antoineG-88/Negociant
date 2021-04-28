@@ -22,7 +22,7 @@ public class PlayerHandler : MonoBehaviour
     public Image objectOfTheActionDisplay;
     public Text targetedCharacterNameText;
     public Image targetedCharacterFaceDisplay;
-    public GameObject actionBar;
+    public RectTransform actionBar;
     [Header("Reference")]
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
@@ -85,11 +85,12 @@ public class PlayerHandler : MonoBehaviour
 
         if(presentedStallObject == null)
         {
-            actionBar.SetActive(false);
+            actionBar.gameObject.SetActive(false);
         }
         else
         {
-            actionBar.SetActive(true);
+            actionBar.gameObject.SetActive(true);
+            actionBar.position = new Vector3(currentCharacterTalkingTo.rectTransform.position.x, actionBar.position.y, 0);
         }
     }
 

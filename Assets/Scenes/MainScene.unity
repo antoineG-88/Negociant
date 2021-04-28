@@ -222,7 +222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 239, y: -748.5}
+  m_AnchoredPosition: {x: 276, y: -571}
   m_SizeDelta: {x: 368.81476, y: 338.66345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85291363
@@ -3898,7 +3898,7 @@ MonoBehaviour:
   objectOfTheActionDisplay: {fileID: 564274530}
   targetedCharacterNameText: {fileID: 1952753965}
   targetedCharacterFaceDisplay: {fileID: 692003998}
-  actionBar: {fileID: 1517037942}
+  actionBar: {fileID: 1521167075}
   playerInventory:
     belongings: []
   objectInfoNameText: {fileID: 2114448166}
@@ -4278,9 +4278,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f00e317b6267f1048b721c543bfb28ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allUniqueObjects:
-  - {fileID: 11400000, guid: a7338198a7355d8439db3bcd4b98c212, type: 2}
-  - {fileID: 11400000, guid: 1cb9040edaaf8824ca3df064f71341c3, type: 2}
+  _allObjects: []
+  _categoriesColor:
+  - {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+  - {r: 0.7294118, g: 0.2272052, b: 0.13725491, a: 1}
+  - {r: 0.7647059, g: 0.64177567, b: 0.18039215, a: 1}
+  - {r: 0.2235294, g: 0.6431373, b: 0.48673773, a: 1}
+  - {r: 0.5568628, g: 0.27450982, b: 0.5019608, a: 1}
+  _categoriesIcon:
+  - {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+  - {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+  - {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+  - {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+  - {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
 --- !u!4 &1481276638
 Transform:
   m_ObjectHideFlags: 0
@@ -4328,7 +4338,7 @@ MonoBehaviour:
   - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
   - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
   - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
-  timeRangeBetweenCharacterApparition: {x: 10, y: 30}
+  timeRangeBetweenCharacterApparition: {x: 2, y: 5}
   randomCharacterGenerated: 10
   minChInitialInterest: 1
   maxChInitialInterest: 1
@@ -4381,7 +4391,7 @@ MonoBehaviour:
   allPresentCharacters: []
   unfoldTime: 0
   negoceTimeSpend: 0
-  characterSelected: {fileID: 0}
+  selectedCharacter: {fileID: 0}
 --- !u!1 &1492683813
 GameObject:
   m_ObjectHideFlags: 0
@@ -4495,8 +4505,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.015136719, y: 353.40002}
-  m_SizeDelta: {x: -0.03125, y: -706.7492}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1517037944
 CanvasRenderer:
@@ -4547,7 +4557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 211, y: -459}
+  m_AnchoredPosition: {x: 211, y: -104.49}
   m_SizeDelta: {x: 401.84937, y: 208.97733}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521167076
