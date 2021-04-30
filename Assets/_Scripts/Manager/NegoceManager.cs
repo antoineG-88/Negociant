@@ -8,7 +8,7 @@ public class NegoceManager : MonoBehaviour
 {
     public List<Character> allPossibleCharacters;
     public PlayerHandler playerHandler;
-    public CharacterBehavior characterBehaviorPrefab;
+    public CharacterHandler characterHandlerPrefab;
     public RectTransform charactersDisplay;
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
@@ -32,13 +32,13 @@ public class NegoceManager : MonoBehaviour
     public List<Sprite> allCharacterIllustrations;
     public List<Sprite> allCharacterFaces;
 
-    [HideInInspector] public List<CharacterBehavior> allPresentCharacters;
+    [HideInInspector] public List<CharacterHandler> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
-    [HideInInspector] public CharacterBehavior selectedCharacter;
+    [HideInInspector] public CharacterHandler selectedCharacter;
     private float timeSpendSinceLastCharacterApparition;
     private float nextCharacterApparitionTime;
-    private CharacterBehavior previousSelectedCharacter;
+    private CharacterHandler previousSelectedCharacter;
 
     public static NegoceManager I;
     private void Awake()
@@ -50,7 +50,7 @@ public class NegoceManager : MonoBehaviour
     {
         unfoldTime = true;
         negoceTimeSpend = 0;
-        allPresentCharacters = new List<CharacterBehavior>();
+        allPresentCharacters = new List<CharacterHandler>();
         for (int i = 0; i < randomCharacterGenerated; i++)
         {
             allPossibleCharacters.Add(GetRandomGeneratedCharacter());
@@ -124,7 +124,7 @@ public class NegoceManager : MonoBehaviour
             charaNameText.text = selectedCharacter.character.characterName;
             foreach (StallObject standObject in playerHandler.allStallObjects)
             {
-                foreach (CharacterBehavior.PotentialObject potentialObject in selectedCharacter.potentialObjects)
+                foreach (CharacterHandler.PotentialObject potentialObject in selectedCharacter.potentialObjects)
                 {
                     if (standObject == potentialObject.stallObject)
                     {
@@ -168,27 +168,27 @@ public class NegoceManager : MonoBehaviour
 
     private void AppearCharacter(Character theCharacter)
     {
-        CharacterBehavior newCharacterBehavior;
-        newCharacterBehavior = Instantiate(characterBehaviorPrefab, charactersDisplay);
-        allPresentCharacters.Add(newCharacterBehavior);
-        newCharacterBehavior.character = theCharacter;
+        CharacterHandler newCharacterHandler;
+        newCharacterHandler = Instantiate(characterHandlerPrefab, charactersDisplay);
+        allPresentCharacters.Add(newCharacterHandler);
+        newCharacterHandler.character = theCharacter;
         if (allPresentCharacters.Count > maxCharacterPresent)
         {
             //MakeCharacterLeave(allPresentCharacters[0]);
             Debug.LogWarning("There is too many character at the stall");
         }
 
-        newCharacterBehavior.RefreshPotentialObjects();
-        newCharacterBehavior.gazeDisplay = Instantiate(gazePrefab, gazePanel);
-        newCharacterBehavior.nameText.text = newCharacterBehavior.character.characterName;
-        newCharacterBehavior.gameObject.name = newCharacterBehavior.character.characterName;
-        newCharacterBehavior.gazeDisplay.gameObject.name = newCharacterBehavior.character.characterName + "'s gaze";
-        newCharacterBehavior.characterCanvasRectTransform = charactersDisplay;
-        newCharacterBehavior.Init();
-        newCharacterBehavior.SetRandomListOfCharaObject();
+        newCharacterHandler.RefreshPotentialObjects();
+        newCharacterHandler.gazeDisplay = Instantiate(gazePrefab, gazePanel);
+        newCharacterHandler.nameText.text = newCharacterHandler.character.characterName;
+        newCharacterHandler.gameObject.name = newCharacterHandler.character.characterName;
+        newCharacterHandler.gazeDisplay.gameObject.name = newCharacterHandler.character.characterName + "'s gaze";
+        newCharacterHandler.characterCanvasRectTransform = charactersDisplay;
+        newCharacterHandler.Init();
+        newCharacterHandler.SetRandomListOfCharaObject();
 
         RefreshCharactersDisplay();
-        StartCoroutine(newCharacterBehavior.Appear());
+        StartCoroutine(newCharacterHandler.Appear());
     }
 
     private void RefreshCharactersDisplay()
@@ -215,7 +215,8 @@ public class NegoceManager : MonoBehaviour
         }
         newCharacter.initialInterests = new List<Category>(characterInitialPreferences);
 
-        newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
+        //newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
+        newCharacter.temper = Temper.Decisive;
         List<Character.Need> characterNeeds = new List<Character.Need>();
         for (int i = 0; i < UnityEngine.Random.Range(minChNeeds, maxChNeeds); i++)
         {
@@ -239,7 +240,7 @@ public class NegoceManager : MonoBehaviour
         return newCharacter;
     }
 
-    public void MakeCharacterLeave(CharacterBehavior leavingCharacter)
+    public void MakeCharacterLeave(CharacterHandler leavingCharacter)
     {
         leavingCharacter.isLeaving = true;
         allPresentCharacters.Remove(leavingCharacter);
@@ -248,11 +249,11 @@ public class NegoceManager : MonoBehaviour
         RefreshCharactersDisplay();
     }
 
-    public void SelectCharacter(CharacterBehavior theCharacter)
+    public void SelectCharacter(CharacterHandler theCharacter)
     {
         selectedCharacter = theCharacter;
         selectedCharacter.Select();
-        foreach (CharacterBehavior character in NegoceManager.I.allPresentCharacters)
+        foreach (CharacterHandler character in NegoceManager.I.allPresentCharacters)
         {
             if (character != selectedCharacter)
             {

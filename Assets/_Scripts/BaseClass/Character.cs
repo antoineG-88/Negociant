@@ -27,4 +27,4 @@ public class Character : ScriptableObject
     public List<Object> ownedObjects;
 }
 
-public enum Temper { Decisive};
+public enum Temper { Decisive, OpenMinded};

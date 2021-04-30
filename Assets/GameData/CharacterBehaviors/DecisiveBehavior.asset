@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5588293b70aee4bab94700c1e3062d, type: 3}
+  m_Name: DecisiveBehavior
+  m_EditorClassIdentifier: 
+  temper: 0
+  initialInterestLevel: 5
+  initialCuriosityLevel: 0
+  baseLookingTime: 1.4
+  reflexionTime: 5
+  curiosityIncreaseSpeed: 1
+  minMaxRandomCuriosity: {x: 5, y: 10}
+  enthousiasmIncreaseWithCorrectPresent: 0.3
+  enthousiasmDecreaseWithIncorrectPresent: 0.2
+  interestLevelMultiplierWithCorrectCategoryArgument: 1
+  interestLevelMultiplierWithIncorrectCategoryArgument: 0.6
+  enthousiasmDecreaseWithIncorrectArgument: 0.4
+  initialEntousiasm: 0.6
+  timeBeforeEnthousiasmDecrease: 5
+  enthousiasmDecreaseRate: 0.01

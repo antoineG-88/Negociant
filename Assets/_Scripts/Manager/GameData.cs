@@ -7,14 +7,17 @@ public class GameData : MonoBehaviour
 {
     public List<Object> _allObjects;
     public List<CategoryProperties> _categoriesProperties;
+    public List<CharacterBehavior> _allTempersBehavior;
 
     public static List<Object> allObjects;
     public static List<CategoryProperties> categoriesProperties;
+    public static List<CharacterBehavior> allTempersBehavior;
 
     private void Awake()
     {
         allObjects = _allObjects;
         categoriesProperties = _categoriesProperties;
+        allTempersBehavior = _allTempersBehavior;
     }
 
     [Serializable]
@@ -38,5 +41,18 @@ public class GameData : MonoBehaviour
             }
         }
         return theCategoryProperties;
+    }
+
+    public static CharacterBehavior GetBehaviorFromTemper(Temper searchedTemper)
+    {
+        CharacterBehavior theBehavior = null;
+        for (int i = 0; i < allTempersBehavior.Count; i++)
+        {
+            if (allTempersBehavior[i].temper == searchedTemper)
+            {
+                theBehavior = allTempersBehavior[i];
+            }
+        }
+        return theBehavior;
     }
 }

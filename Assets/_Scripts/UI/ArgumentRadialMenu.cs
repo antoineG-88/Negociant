@@ -15,7 +15,7 @@ public class ArgumentRadialMenu : UIInteractable
 
     private bool isOpened;
     private StallObject currentStallObject;
-    private CharacterBehavior characterTargeted;
+    private CharacterHandler characterTargeted;
     private void Start()
     {
         appearAnim.GetReferences();
@@ -48,7 +48,7 @@ public class ArgumentRadialMenu : UIInteractable
         }
     }
 
-    public void Initialize(StallObject stallObject, CharacterBehavior characterBehavior)
+    public void Initialize(StallObject stallObject, CharacterHandler characterHandler)
     {
         StartCoroutine(appearAnim.anim.PlayBackward(appearAnim, true));
         categoryRadialOptions[0].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).icon;
@@ -65,9 +65,9 @@ public class ArgumentRadialMenu : UIInteractable
 
         currentStallObject = stallObject;
         objectIllustration.sprite = stallObject.linkedObject.illustration;
-        characterFace.sprite = characterBehavior.character.faceSprite;
+        characterFace.sprite = characterHandler.character.faceSprite;
         objectNameText.text = stallObject.linkedObject.objectName;
-        characterTargeted = characterBehavior;
+        characterTargeted = characterHandler;
         isOpened = true;
     }
 

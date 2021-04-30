@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterBehavior : UIInteractable
+public class CharacterHandler : UIInteractable
 {
-    public Character character;
+    [HideInInspector] public Character character;
     public Image illustrationImage;
     public TweeningAnimator selectionAnim;
     public RectTransform rectTransform;
     public float gazeHeadOffset;
     public Text nameText;
     public Image enthousiasmFiller;
-    public RectTransform characterCanvasRectTransform;
+    [HideInInspector] public RectTransform characterCanvasRectTransform;
     public GameObject annoyedFxPrefab;
     public GameObject happyFxPrefab;
     public TweeningAnimator backWardApparitionAnim;
@@ -28,26 +28,6 @@ public class CharacterBehavior : UIInteractable
     public CharaObject charaObjectPrefab;
     public Vector2 minMaxObjectPersonnalValue;
 
-    [Header("Decisive options")]
-    public float d_initialInterestLevel;
-    public float d_initialCuriosityLevel;
-    public float d_minLookingTime;
-    public float d_baseLookingTime;
-    public float d_reflexionTime;
-    public float d_curiosityIncreaseSpeed;
-    public float d_highLevelInterestCuriosityBoost;
-    public int[] d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine;
-    public Vector2 minMaxRandomCuriosity;
-    public float d_enthousiasmIncreaseWithCorrectPresent;
-    public float d_enthousiasmDecreaseWithIncorrectPresent;
-    public float d_interestLevelMultiplierWithCorrectCategoryArgument;
-    public float d_interestLevelMultiplierWithIncorrectCategoryArgument;
-    public float d_ethousiasmDecreaseWithIncorrectArgument;
-    [Range(0f, 1f)] public float d_initialEntousiasm;
-    [Header("More options")]
-    public float timeBeforeEnthousiasmDecrease;
-    public float enthousiasmDecreaseRate;
-
     [HideInInspector] public List<CharaObject> belongings;
     [HideInInspector] public bool isSelected;
     [HideInInspector] public RectTransform gazeDisplay;
@@ -57,30 +37,30 @@ public class CharacterBehavior : UIInteractable
     [HideInInspector] public float exchangeTreshold;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
-    private PotentialObject lookedObject;
-    private float gazeTimeRmn;
-    private float reflexionTimeRMN;
-    private float maxCuriosityLevel;
-    private float timeSpendRefreshEnthousiasm;
-    private float currentEnthousiasm;
-    private int gazedObjectThisGazeTime;
-    private bool isAppearing;
+    [HideInInspector] public PotentialObject lookedObject;
+    [HideInInspector] public float gazeTimeRmn;
+    [HideInInspector] public float reflexionTimeRMN;
+    [HideInInspector] public float maxCuriosityLevel;
+    [HideInInspector] public float timeSpendRefreshEnthousiasm;
+    [HideInInspector] public float currentEnthousiasm;
+    [HideInInspector] public bool isAppearing;
     [HideInInspector] public bool isHoveredWithStallObject;
     private bool hoveredWithObjectFlag;
     private bool selectedFlag;
 
+    private CharacterBehavior behavior;
+
     public void Init()
     {
+        behavior = Instantiate(GameData.GetBehaviorFromTemper(character.temper));
         hoveredWithStallObjectAnim.GetReferences();
         hoveredWithStallObjectAnim.anim = Instantiate(hoveredWithStallObjectAnim.anim);
         belongingsAnim.GetReferences();
         belongingsAnim.anim = Instantiate(belongingsAnim.anim);
         belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
-        if(character.temper == Temper.Decisive)
-        {
-            SetInitialState(d_initialInterestLevel, d_initialCuriosityLevel, d_initialEntousiasm);
-        }
+        SetInitialState(behavior.initialInterestLevel, behavior.initialCuriosityLevel, behavior.initialEntousiasm);
+        behavior.Init(this, ref potentialObjects);
 
         belongingsAnim.canvasGroup.blocksRaycasts = false;
         belongingsAnim.canvasGroup.interactable = false;
@@ -97,10 +77,7 @@ public class CharacterBehavior : UIInteractable
 
             if (potentialObjects != null)
             {
-                if (character.temper == Temper.Decisive)
-                {
-                    DecisiveBehavior();
-                }
+                behavior.UpdateBehavior(this, ref potentialObjects);
             }
 
             UpdateGazeDisplay();
@@ -159,82 +136,21 @@ public class CharacterBehavior : UIInteractable
             }
             nameText.gameObject.SetActive(false);
         }
-    }
 
-    #region Tempers Behaviors
-    private void DecisiveBehavior()
-    {
-        if(!isTalking)
-        {
-            if (gazeTimeRmn > 0)
-            {
-                gazeTimeRmn -= Time.deltaTime;
-            }
-
-            if (reflexionTimeRMN > 0)
-            {
-                reflexionTimeRMN -= Time.deltaTime;
-            }
-
-            if (reflexionTimeRMN <= 0 && gazeTimeRmn <= 0)
-            {
-                if (d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)] - gazedObjectThisGazeTime > 0)
-                {
-                    LookObject(GetMaxCuriosityObject(), Mathf.Max(d_minLookingTime, d_baseLookingTime / d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, d_gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)]));
-                }
-                else
-                {
-                    StartReflexion(d_reflexionTime);
-                }
-            }
-        }
-        else
-        {
-            StartReflexion(d_reflexionTime);
-        }
-
-
-        foreach(PotentialObject potentialObject in potentialObjects)
-        {
-            if(potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine)
-            {
-                potentialObject.curiosityLevel += Time.deltaTime * d_curiosityIncreaseSpeed
-                    * (DoesObjectHaveHigherInterestLevel(potentialObject) ? d_highLevelInterestCuriosityBoost : 1);
-            }
-        }
-
-        timeSpendRefreshEnthousiasm += Time.deltaTime;
-
-        if(timeSpendRefreshEnthousiasm > timeBeforeEnthousiasmDecrease)
-        {
-            if(currentEnthousiasm > 0)
-            {
-                currentEnthousiasm -= Time.deltaTime * enthousiasmDecreaseRate;
-            }
-            else
-            {
-                if(!isTalking)
-                {
-                    Leave();
-                }
-                currentEnthousiasm = 0;
-            }
-        }
         enthousiasmFiller.fillAmount = currentEnthousiasm / 1;
     }
-    #endregion
 
     public void PresentObject(StallObject presentedObject)
     {
         PotentialObject presentedPotentialObject = GetPotentialFromStallObject(presentedObject);
         if (DoesObjectHaveHigherInterestLevel(presentedPotentialObject))
         {
-            currentEnthousiasm += d_enthousiasmIncreaseWithCorrectPresent;
+            currentEnthousiasm += behavior.enthousiasmIncreaseWithCorrectPresent;
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
-            currentEnthousiasm -= d_enthousiasmDecreaseWithIncorrectPresent;
+            currentEnthousiasm -= behavior.enthousiasmDecreaseWithIncorrectPresent;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         presentedPotentialObject.IncreaseInterestLevel(0, true);
@@ -259,13 +175,13 @@ public class CharacterBehavior : UIInteractable
 
         if(categoryInitialInterest)
         {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(d_interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(behavior.interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(d_interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
-            currentEnthousiasm -= d_ethousiasmDecreaseWithIncorrectArgument;
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(behavior.interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            currentEnthousiasm -= behavior.enthousiasmDecreaseWithIncorrectArgument;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
 
@@ -277,23 +193,21 @@ public class CharacterBehavior : UIInteractable
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
     }
 
-    private void Leave()
+    public void Leave()
     {
         NegoceManager.I.MakeCharacterLeave(this);
         isLeaving = true;
     }
 
-    private void LookObject(PotentialObject objectToLook, float timeToLook)
+    public void LookObject(PotentialObject objectToLook, float timeToLook)
     {
-        gazedObjectThisGazeTime++;
         objectToLook.curiosityLevel = 0;
         gazeTimeRmn = timeToLook;
         lookedObject = objectToLook;
     }
 
-    private void StartReflexion(float reflexionTime)
+    public void StartReflexion(float reflexionTime)
     {
-        gazedObjectThisGazeTime = 0;
         reflexionTimeRMN = reflexionTime;
         lookedObject = null;
     }
@@ -308,11 +222,11 @@ public class CharacterBehavior : UIInteractable
         return lookedObject != null && lookedObject.stallObject == stallObject;
     }
 
-    private PotentialObject GetMaxCuriosityObject()
+    public PotentialObject GetMaxCuriosityObjectOnVitrine(List<PotentialObject> potentialObjectsToCheck)
     {
         maxCuriosityLevel = 0;
         PotentialObject maxCuriosityObject = null;
-        foreach (PotentialObject potentialObject in potentialObjects)
+        foreach (PotentialObject potentialObject in potentialObjectsToCheck)
         {
             if (potentialObject.curiosityLevel > maxCuriosityLevel && potentialObject.stallObject.stallSpace.isVitrine)
             {
@@ -323,7 +237,7 @@ public class CharacterBehavior : UIInteractable
         return maxCuriosityObject;
     }
 
-    private bool DoesObjectHasCommonCategory(Object objectToCheck, List<Category> categoryPool)
+    public bool DoesObjectHasCommonCategory(Object objectToCheck, List<Category> categoryPool)
     {
         bool hasCommonCategory = false;
         for (int y = 0; y < categoryPool.Count; y++)
@@ -339,7 +253,7 @@ public class CharacterBehavior : UIInteractable
         return hasCommonCategory;
     }
 
-    private bool DoesObjectHaveHigherInterestLevel(PotentialObject objectToCheck)
+    public bool DoesObjectHaveHigherInterestLevel(PotentialObject objectToCheck)
     {
         float averageInterestLevel = 0;
         for (int i = 0; i < potentialObjects.Count; i++)
@@ -351,7 +265,7 @@ public class CharacterBehavior : UIInteractable
         return objectToCheck.interestLevel > averageInterestLevel;
     }
 
-    private int GetNumberOfInterestingObjectOnVitrine()
+    public int GetNumberOfInterestingObjectOnVitrine()
     {
         int numberOnVitrine = 0;
 
@@ -418,7 +332,7 @@ public class CharacterBehavior : UIInteractable
 
     }
 
-    private void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
+    public void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
     {
         currentEnthousiasm = startEnthousiasm;
         foreach (PotentialObject potentialObject in potentialObjects)
@@ -428,7 +342,7 @@ public class CharacterBehavior : UIInteractable
                 potentialObject.interestLevel = startInterestLevel;
                 potentialObject.curiosityLevel = startCuriosityLevel;
             }
-            potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
+            potentialObject.curiosityLevel = Random.Range(behavior.minMaxRandomCuriosity.x, behavior.minMaxRandomCuriosity.y);
         }
     }
 

@@ -5252,8 +5252,8 @@ MonoBehaviour:
   - {fileID: 850432373}
   vitrineStallSpacesAvailable: 5
   backStallSpacesAvailable: 6
-  presentTime: 8
-  presentShortTime: 3
+  presentTime: 3
+  presentShortTime: 1
   actionBarFiller: {fileID: 1717349083}
   currentActionText: {fileID: 794614087}
   objectOfTheActionDisplay: {fileID: 564274530}
@@ -5645,35 +5645,38 @@ MonoBehaviour:
   - category: 0
     color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
     icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
-    argumentTime: 15
+    argumentTime: 5
     argumentInterestLevelIncrease: 5
     argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
   - category: 1
     color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
     icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
-    argumentTime: 12
+    argumentTime: 4
     argumentInterestLevelIncrease: 4
     argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos affrontements
       les plus f\xE9roces"
   - category: 2
     color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
     icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
-    argumentTime: 10
+    argumentTime: 3
     argumentInterestLevelIncrease: 10
     argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
   - category: 3
     color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
     icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
-    argumentTime: 20
+    argumentTime: 6
     argumentInterestLevelIncrease: 8
     argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
   - category: 4
     color: {r: 0.5568628, g: 0.27450982, b: 0.5019608, a: 1}
     icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
-    argumentTime: 18
+    argumentTime: 6
     argumentInterestLevelIncrease: 3
     argumentDescription: Un ouvrage comportant des informations exclusive qui saura
       satisfaire votre soif de connaissance
+  _allTempersBehavior:
+  - {fileID: 11400000, guid: d17e96526bbdcb44381b8439c25fe356, type: 2}
+  - {fileID: 11400000, guid: 97a4358850ba43f44af7deb0be9d1002, type: 2}
 --- !u!4 &1481276638
 Transform:
   m_ObjectHideFlags: 0
@@ -5702,7 +5705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allPossibleCharacters: []
   playerHandler: {fileID: 1423591360}
-  characterBehaviorPrefab: {fileID: 9165996161038736757, guid: 2b6b508496f34b745b71e825e382b5dc,
+  characterHandlerPrefab: {fileID: 9165996161038736757, guid: 2b6b508496f34b745b71e825e382b5dc,
     type: 3}
   charactersDisplay: {fileID: 955235472}
   minCharacterPos: {x: -500, y: 0}
@@ -5721,7 +5724,7 @@ MonoBehaviour:
   - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
   - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
   - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
-  timeRangeBetweenCharacterApparition: {x: 2, y: 5}
+  timeRangeBetweenCharacterApparition: {x: 5, y: 30}
   randomCharacterGenerated: 10
   minChInitialInterest: 1
   maxChInitialInterest: 1

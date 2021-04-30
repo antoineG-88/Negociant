@@ -53,7 +53,7 @@ public class PlayerHandler : MonoBehaviour
     private StallObject argumentedStallObject;
     private float timeSpendOnCurrentAction;
     private float currentActionTime;
-    private CharacterBehavior currentCharacterTalkingTo;
+    private CharacterHandler currentCharacterTalkingTo;
     private GameData.CategoryProperties argumentedCategory; // temporary
 
     private void Start()
@@ -141,7 +141,7 @@ public class PlayerHandler : MonoBehaviour
         return presentedStallObject != null || argumentedStallObject != null;
     }
 
-    public void PresentObject(StallObject stallObjectToPresent, CharacterBehavior targetCharacter)
+    public void PresentObject(StallObject stallObjectToPresent, CharacterHandler targetCharacter)
     {
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isTalking = true;
@@ -163,7 +163,7 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void ArgumentCategory(StallObject stallObjectArgumented, CharacterBehavior targetCharacter, GameData.CategoryProperties categoryProperties)
+    public void ArgumentCategory(StallObject stallObjectArgumented, CharacterHandler targetCharacter, GameData.CategoryProperties categoryProperties)
     {
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isTalking = true;
@@ -188,7 +188,7 @@ public class PlayerHandler : MonoBehaviour
         DragAndDropStallObjectUpdate();
     }
 
-    CharacterBehavior charaHovered;
+    CharacterHandler charaHovered;
     private void DragAndDropStallObjectUpdate()
     {
         for (int i = 0; i < allStallObjects.Count; i++)
@@ -206,7 +206,7 @@ public class PlayerHandler : MonoBehaviour
                 stallObject.canvasGroup.blocksRaycasts = false;
             }
             charaHovered = null;
-            foreach (CharacterBehavior charaPresent in NegoceManager.I.allPresentCharacters)
+            foreach (CharacterHandler charaPresent in NegoceManager.I.allPresentCharacters)
             {
                 if(charaPresent.isHoveredWithStallObject)
                 {
