@@ -24,6 +24,7 @@ public class PlayerHandler : MonoBehaviour
     public Image targetedCharacterFaceDisplay;
     public RectTransform actionBar;
     [Header("Reference")]
+    public ArgumentRadialMenu argumentRadialMenu;   
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
     public Text objectInfoTitleText;
@@ -49,9 +50,11 @@ public class PlayerHandler : MonoBehaviour
     private int vitrineSpaceNumber;
 
     private StallObject presentedStallObject;
+    private StallObject argumentedStallObject;
     private float timeSpendOnCurrentAction;
-    private float currentPresentTime;
+    private float currentActionTime;
     private CharacterBehavior currentCharacterTalkingTo;
+    private GameData.CategoryProperties argumentedCategory; // temporary
 
     private void Start()
     {
@@ -81,9 +84,9 @@ public class PlayerHandler : MonoBehaviour
 
     private void UpdatePlayerAction()
     {
-        UpdatePresentAction();
+        UpdateCurrentAction();
 
-        if(presentedStallObject == null)
+        if(presentedStallObject == null && argumentedStallObject == null)
         {
             actionBar.gameObject.SetActive(false);
         }
@@ -94,22 +97,33 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void UpdatePresentAction()
+    public void UpdateCurrentAction()
     {
-        if (presentedStallObject != null)
+        if (presentedStallObject != null || argumentedStallObject != null)
         {
-            actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentPresentTime;
+            actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
+            currentCharacterTalkingTo.RefreshEnthousiasm();
 
-
-            if(timeSpendOnCurrentAction < currentPresentTime)
+            if (timeSpendOnCurrentAction < currentActionTime)
             {
                 timeSpendOnCurrentAction += Time.deltaTime;
             }
             else
             {
-                currentCharacterTalkingTo.PresentObject(presentedStallObject);
-                currentCharacterTalkingTo.isTalking = false;
-                presentedStallObject = null;
+                if(presentedStallObject != null)
+                {
+                    currentCharacterTalkingTo.PresentObject(presentedStallObject);
+                    currentCharacterTalkingTo.isTalking = false;
+                    presentedStallObject = null;
+                }
+                else if (argumentedStallObject != null)
+                {
+                    currentCharacterTalkingTo.ArgumentCategoryOnObject(argumentedCategory, argumentedStallObject);
+                    currentCharacterTalkingTo.isTalking = false;
+                    currentCharacterTalkingTo = null;
+                    argumentedStallObject = null;
+                    argumentedCategory = null;
+                }
             }
         }
         else
@@ -120,6 +134,11 @@ public class PlayerHandler : MonoBehaviour
             targetedCharacterNameText.text = "";
             actionBarFiller.fillAmount = 0;
         }
+    }
+
+    public bool IsPlayerTalking()
+    {
+        return presentedStallObject != null || argumentedStallObject != null;
     }
 
     public void PresentObject(StallObject stallObjectToPresent, CharacterBehavior targetCharacter)
@@ -136,12 +155,28 @@ public class PlayerHandler : MonoBehaviour
         targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
         if (currentCharacterTalkingTo.IsLookingAt(presentedStallObject))
         {
-            currentPresentTime = presentShortTime;
+            currentActionTime = presentShortTime;
         }
         else
         {
-            currentPresentTime = presentTime;
+            currentActionTime = presentTime;
         }
+    }
+
+    public void ArgumentCategory(StallObject stallObjectArgumented, CharacterBehavior targetCharacter, GameData.CategoryProperties categoryProperties)
+    {
+        currentCharacterTalkingTo = targetCharacter;
+        currentCharacterTalkingTo.isTalking = true;
+        timeSpendOnCurrentAction = 0;
+        argumentedStallObject = stallObjectArgumented;
+        currentActionText.text = "Argumente";
+        objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
+        targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
+        objectOfTheActionDisplay.sprite = argumentedStallObject.linkedObject.illustration;
+        targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
+        targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
+        currentActionTime = categoryProperties.argumentTime;
+        argumentedCategory = categoryProperties;
     }
 
     private void UpdateObjectInteraction()
@@ -185,6 +220,10 @@ public class PlayerHandler : MonoBehaviour
             {
                 characterInteractionPanel.position = charaHovered.rectTransform.position;
 
+                presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
+                argumentOption.Enable("");
+                characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
                 if (presentedStallObject == null)
                 {
                     presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
@@ -193,9 +232,10 @@ public class PlayerHandler : MonoBehaviour
                 }
                 else
                 {
-                    characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                    presentOption.Disable();
-                    argumentOption.Disable();
+                    //characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                    //presentOption.Disable();
+                    //argumentOption.Disable();
+                    presentOption.canReceive = false;
                 }
 
                 if (presentOption.isCurrentlyHoveredWithCorrectObject)
@@ -241,7 +281,7 @@ public class PlayerHandler : MonoBehaviour
                 }
                 else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
                 {
-                    Debug.LogWarning("No argumentation yet");
+                    argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
                 }
 
                 draggedStallObject.isDragged = false;

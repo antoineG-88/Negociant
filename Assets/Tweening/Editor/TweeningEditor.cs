@@ -53,6 +53,7 @@ public class TweeningEditor : Editor
 
         tweeningAnimCreator.colorAnimation = EditorGUILayout.GradientField("Color Animation", tweeningAnimCreator.colorAnimation);
         tweeningAnimCreator.useColorChange = EditorGUILayout.Toggle("Use Color Change", tweeningAnimCreator.useColorChange);
+        tweeningAnimCreator.disableRaycastIfTransparent = EditorGUILayout.Toggle("No Interaction When Transparent", tweeningAnimCreator.disableRaycastIfTransparent);
 
         GUILayout.Space(15);
 

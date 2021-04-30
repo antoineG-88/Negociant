@@ -178,4 +178,5 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 3
   useColorChange: 1
+  disableRaycastIfTransparent: 1
   colorImage: {fileID: 0}

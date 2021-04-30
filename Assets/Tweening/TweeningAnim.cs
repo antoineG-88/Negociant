@@ -20,6 +20,7 @@ public class TweeningAnim : ScriptableObject
     public bool movementRelativeToOriginalPos;
     public Gradient colorAnimation;
     public bool useColorChange;
+    public bool disableRaycastIfTransparent;
     public Image colorImage;
 
     private RectTransform animatedTransform;
@@ -87,6 +88,19 @@ public class TweeningAnim : ScriptableObject
         if (canvasGroup != null)
         {
             canvasGroup.alpha = colorAnimation.Evaluate(1).a;
+            if(disableRaycastIfTransparent)
+            {
+                if(colorAnimation.Evaluate(1).a == 0)
+                {
+                    canvasGroup.blocksRaycasts = false;
+                    canvasGroup.interactable = false;
+                }
+                else
+                {
+                    canvasGroup.blocksRaycasts = true;
+                    canvasGroup.interactable = true;
+                }
+            }
         }
     }
 
@@ -158,6 +172,19 @@ public class TweeningAnim : ScriptableObject
         if (canvasGroup != null)
         {
             canvasGroup.alpha = colorAnimation.Evaluate(0).a;
+            if (disableRaycastIfTransparent)
+            {
+                if (colorAnimation.Evaluate(0).a == 0)
+                {
+                    canvasGroup.blocksRaycasts = false;
+                    canvasGroup.interactable = false;
+                }
+                else
+                {
+                    canvasGroup.blocksRaycasts = true;
+                    canvasGroup.interactable = true;
+                }
+            }
         }
     }
 
@@ -198,6 +225,19 @@ public class TweeningAnim : ScriptableObject
         if (canvasGroup != null)
         {
             canvasGroup.alpha = colorAnimation.Evaluate(0).a;
+            if (disableRaycastIfTransparent)
+            {
+                if (colorAnimation.Evaluate(0).a == 0)
+                {
+                    canvasGroup.blocksRaycasts = false;
+                    canvasGroup.interactable = false;
+                }
+                else
+                {
+                    canvasGroup.blocksRaycasts = true;
+                    canvasGroup.interactable = true;
+                }
+            }
         }
     }
 
@@ -237,6 +277,19 @@ public class TweeningAnim : ScriptableObject
         if (canvasGroup != null)
         {
             canvasGroup.alpha = colorAnimation.Evaluate(1).a;
+            if (disableRaycastIfTransparent)
+            {
+                if (colorAnimation.Evaluate(1).a == 0)
+                {
+                    canvasGroup.blocksRaycasts = false;
+                    canvasGroup.interactable = false;
+                }
+                else
+                {
+                    canvasGroup.blocksRaycasts = true;
+                    canvasGroup.interactable = true;
+                }
+            }
         }
     }
 }

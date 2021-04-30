@@ -6,20 +6,6 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "UniqueObject", menuName = "Negociant/Create new unique object", order = 1)]
 public class Object : ScriptableObject
 {
-    [System.Serializable]
-    public class Feature
-    {
-        public string argumentDescription;
-        public float argumentTime;
-        public List<Trait> featureTraits;
-        [TextArea] public string featureDescription;
-        public bool isKnownWhenObjectAcquired;
-        [Range(0f, 1f)] public float visibility;
-        public Feature()
-        {
-        }
-    }
-
     public string objectName;
     public string title;
     public Sprite illustration;
@@ -31,6 +17,20 @@ public class Object : ScriptableObject
 
     public Object()
     {
+    }
+
+    [System.Serializable]
+    public class Feature
+    {
+        public string argumentDescription;
+        public float argumentTime;
+        public List<Trait> featureTraits;
+        [TextArea] public string featureDescription;
+        public bool isKnownWhenObjectAcquired;
+
+        public Feature()
+        {
+        }
     }
 }
 

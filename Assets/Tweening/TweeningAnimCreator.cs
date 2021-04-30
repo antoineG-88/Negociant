@@ -17,6 +17,7 @@ public class TweeningAnimCreator : MonoBehaviour
     [HideInInspector] public float animationStartRot;
     [HideInInspector] public float animationEndRot;
     [HideInInspector] public bool movementRelativeToOriginalPos;
+    [HideInInspector] public bool disableRaycastIfTransparent;
 
     [Header("Test Animation > Press \"T\" and \"U\" at runtime to preview")]
     public TweeningAnimator testTweenAnimator;
@@ -65,6 +66,7 @@ public class TweeningAnimCreator : MonoBehaviour
         anim.scaleAnimationCurve = customScaleCurve ? scaleAnimationCurve : animationCurve;
         anim.rotAnimationCurve = customRotCurve ? rotAnimationCurve : animationCurve;
         anim.movementRelativeToOriginalPos = movementRelativeToOriginalPos;
+        anim.disableRaycastIfTransparent = disableRaycastIfTransparent;
 
         return anim;
     }

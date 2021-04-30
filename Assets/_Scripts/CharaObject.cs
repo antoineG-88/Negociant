@@ -35,10 +35,10 @@ public class CharaObject : UIInteractable
     public void RefreshDisplay()
     {
         illustration.sprite = linkedObject.illustration;
-        categoryDisplay1.color = GameData.categoriesColor[(int)linkedObject.categories[0]];
-        categoryDisplay1.sprite = GameData.categoriesIcon[(int)linkedObject.categories[0]];
-        categoryDisplay2.color = GameData.categoriesColor[(int)linkedObject.categories[1]];
-        categoryDisplay2.sprite = GameData.categoriesIcon[(int)linkedObject.categories[1]];
+        categoryDisplay1.color = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[0]).color;
+        categoryDisplay1.sprite = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[0]).icon;
+        categoryDisplay2.color = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).color;
+        categoryDisplay2.sprite = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).icon;
 
     }
 

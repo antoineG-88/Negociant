@@ -40,8 +40,9 @@ public class CharacterBehavior : UIInteractable
     public Vector2 minMaxRandomCuriosity;
     public float d_enthousiasmIncreaseWithCorrectPresent;
     public float d_enthousiasmDecreaseWithIncorrectPresent;
-    public float d_interestLevelIncreaseByPresenting;
-    public float d_curiosityLevelIncreaseByPresenting;
+    public float d_interestLevelMultiplierWithCorrectCategoryArgument;
+    public float d_interestLevelMultiplierWithIncorrectCategoryArgument;
+    public float d_ethousiasmDecreaseWithIncorrectArgument;
     [Range(0f, 1f)] public float d_initialEntousiasm;
     [Header("More options")]
     public float timeBeforeEnthousiasmDecrease;
@@ -225,29 +226,55 @@ public class CharacterBehavior : UIInteractable
 
     public void PresentObject(StallObject presentedObject)
     {
-        RefreshEnthousiasm();
         PotentialObject presentedPotentialObject = GetPotentialFromStallObject(presentedObject);
         if (DoesObjectHaveHigherInterestLevel(presentedPotentialObject))
         {
             currentEnthousiasm += d_enthousiasmIncreaseWithCorrectPresent;
-            //Debug.Log("Great ! C'était un objet de ses préférences");
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
             currentEnthousiasm -= d_enthousiasmDecreaseWithIncorrectPresent;
-            //Debug.Log("Raté ... Il n'aime ce genre d'objet");
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
-
-        presentedPotentialObject.IncreaseInterestLevel(d_interestLevelIncreaseByPresenting, true);
+        presentedPotentialObject.IncreaseInterestLevel(0, true);
 
         if (NegoceManager.I.selectedCharacter == this)
         {
             presentedObject.SetInterestLevelDisplay(presentedPotentialObject.knownInterestLevel / exchangeTreshold, identificationColor);
         }
-        presentedPotentialObject.curiosityLevel += d_curiosityLevelIncreaseByPresenting;
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm ,0f, 1f);
+    }
+
+    public void ArgumentCategoryOnObject(GameData.CategoryProperties categoryProperties, StallObject argumentedObject)
+    {
+        bool categoryInitialInterest = false;
+        for (int i = 0; i < character.initialInterests.Count; i++)
+        {
+            if(character.initialInterests[i] == categoryProperties.category)
+            {
+                categoryInitialInterest = true;
+            }
+        }
+
+        if(categoryInitialInterest)
+        {
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(d_interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
+        }
+        else
+        {
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(d_interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            currentEnthousiasm -= d_ethousiasmDecreaseWithIncorrectArgument;
+            Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
+        }
+
+        if (NegoceManager.I.selectedCharacter == this)
+        {
+            argumentedObject.SetInterestLevelDisplay(GetPotentialFromStallObject(argumentedObject).knownInterestLevel / exchangeTreshold, identificationColor);
+        }
+
+        currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
     }
 
     private void Leave()
@@ -271,7 +298,7 @@ public class CharacterBehavior : UIInteractable
         lookedObject = null;
     }
 
-    private void RefreshEnthousiasm()
+    public void RefreshEnthousiasm()
     {
         timeSpendRefreshEnthousiasm = 0;
     }

@@ -624,8 +624,9 @@ MonoBehaviour:
   minMaxRandomCuriosity: {x: 0, y: 10}
   d_enthousiasmIncreaseWithCorrectPresent: 0.4
   d_enthousiasmDecreaseWithIncorrectPresent: 0.05
-  d_interestLevelIncreaseByPresenting: 0
-  d_curiosityLevelIncreaseByPresenting: 30
+  d_interestLevelMultiplierWithCorrectCategoryArgument: 1
+  d_interestLevelMultiplierWithIncorrectCategoryArgument: 0.6
+  d_ethousiasmDecreaseWithIncorrectArgument: 0.3
   d_initialEntousiasm: 0.7
   timeBeforeEnthousiasmDecrease: 5
   enthousiasmDecreaseRate: 0.01

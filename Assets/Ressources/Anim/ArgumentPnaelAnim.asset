@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
-  m_Name: BelongingsAnim
+  m_Name: ArgumentPnaelAnim
   m_EditorClassIdentifier: 
-  animationTime: 0.4
+  animationTime: 0.2
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -115,7 +115,7 @@ MonoBehaviour:
   customRotCurve: 0
   customScaleCurve: 0
   animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: 0, y: 36.700012}
+  animationEndPos: {x: 0, y: -10}
   animationStartScale: {x: 1, y: 1, z: 1}
   animationEndScale: {x: 1, y: 1, z: 1}
   animationStartRot: 0

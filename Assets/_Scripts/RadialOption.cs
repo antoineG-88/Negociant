@@ -6,17 +6,25 @@ using UnityEngine.UI;
 
 public class RadialOption : UIInteractable
 {
-    public Image buttonBackground;
-    public Color baseColor;
-    public Color hoveredColor;
+    public TweeningAnimator hoverAnim;
+    public Image icon;
+    public Text info;
+    public Text time;
+
+    private void Start()
+    {
+        hoverAnim.GetReferences();
+        hoverAnim.anim = Instantiate(hoverAnim.anim);
+        hoverAnim.anim.SetAtStartState(hoverAnim);
+    }
 
     public override void OnHoverIn()
     {
-        buttonBackground.color = hoveredColor;
+        StartCoroutine(hoverAnim.anim.Play(hoverAnim));
     }
 
     public override void OnHoverOut()
     {
-        buttonBackground.color = baseColor;
+        StartCoroutine(hoverAnim.anim.PlayBackward(hoverAnim, true));
     }
 }
