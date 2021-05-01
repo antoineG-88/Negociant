@@ -15,7 +15,7 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
 
     private bool hasBeenClickedWithoutLeaving;
     private bool hoveredFlag;
-
+    private bool dragDisabler;
     public void LateUpdate()
     {
         if (isClicked)
@@ -51,12 +51,12 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
         if(Input.GetMouseButtonUp(0))
         {
             isPressed = false;
+            dragDisabler = false;
             if (isHovered)
             {
                 clickedUp = true;
             }
         }
-
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -92,12 +92,19 @@ public abstract class UIInteractable : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void OnDrag(PointerEventData eventData)
     {
-        isDragged = true;
+        if(!dragDisabler)
+            isDragged = true;
     }
 
     public virtual void OnDrop(PointerEventData eventData)
     {
         isDragged = false;
         isDropped = true;
+    }
+
+    public void StopDrag()
+    {
+        isDragged = false;
+        dragDisabler = true;
     }
 }

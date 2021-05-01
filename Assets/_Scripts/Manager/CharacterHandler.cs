@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterHandler : UIInteractable
+public abstract class CharacterHandler : UIInteractable
 {
+    [Header("References")]
     [HideInInspector] public Character character;
     public Image illustrationImage;
     public TweeningAnimator selectionAnim;
@@ -27,6 +28,21 @@ public class CharacterHandler : UIInteractable
     public Vector2Int minMaxObjectPerChara;
     public CharaObject charaObjectPrefab;
     public Vector2 minMaxObjectPersonnalValue;
+    [Header("Behavior General Options")]
+    public float initialInterestLevel;
+    public float initialCuriosityLevel;
+    public float baseLookingTime;
+    public float reflexionTime;
+    public float curiosityIncreaseSpeed;
+    public Vector2 minMaxRandomCuriosity;
+    public float enthousiasmIncreaseWithCorrectPresent;
+    public float enthousiasmDecreaseWithIncorrectPresent;
+    public float interestLevelMultiplierWithCorrectCategoryArgument;
+    public float interestLevelMultiplierWithIncorrectCategoryArgument;
+    public float enthousiasmDecreaseWithIncorrectArgument;
+    [Range(0f, 1f)] public float initialEntousiasm;
+    public float timeBeforeEnthousiasmDecrease;
+    public float enthousiasmDecreaseRate;
 
     [HideInInspector] public List<CharaObject> belongings;
     [HideInInspector] public bool isSelected;
@@ -48,23 +64,21 @@ public class CharacterHandler : UIInteractable
     private bool hoveredWithObjectFlag;
     private bool selectedFlag;
 
-    private CharacterBehavior behavior;
-
-    public void Init()
+    public virtual void Init()
     {
-        behavior = Instantiate(GameData.GetBehaviorFromTemper(character.temper));
         hoveredWithStallObjectAnim.GetReferences();
         hoveredWithStallObjectAnim.anim = Instantiate(hoveredWithStallObjectAnim.anim);
         belongingsAnim.GetReferences();
         belongingsAnim.anim = Instantiate(belongingsAnim.anim);
         belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
-        SetInitialState(behavior.initialInterestLevel, behavior.initialCuriosityLevel, behavior.initialEntousiasm);
-        behavior.Init(this, ref potentialObjects);
+        SetInitialState(initialInterestLevel, initialCuriosityLevel, initialEntousiasm);
 
         belongingsAnim.canvasGroup.blocksRaycasts = false;
         belongingsAnim.canvasGroup.interactable = false;
     }
+
+    public abstract void UpdateBehavior();
 
     public void Update()
     {
@@ -77,7 +91,7 @@ public class CharacterHandler : UIInteractable
 
             if (potentialObjects != null)
             {
-                behavior.UpdateBehavior(this, ref potentialObjects);
+                UpdateBehavior();
             }
 
             UpdateGazeDisplay();
@@ -145,12 +159,12 @@ public class CharacterHandler : UIInteractable
         PotentialObject presentedPotentialObject = GetPotentialFromStallObject(presentedObject);
         if (DoesObjectHaveHigherInterestLevel(presentedPotentialObject))
         {
-            currentEnthousiasm += behavior.enthousiasmIncreaseWithCorrectPresent;
+            currentEnthousiasm += enthousiasmIncreaseWithCorrectPresent;
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
-            currentEnthousiasm -= behavior.enthousiasmDecreaseWithIncorrectPresent;
+            currentEnthousiasm -= enthousiasmDecreaseWithIncorrectPresent;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         presentedPotentialObject.IncreaseInterestLevel(0, true);
@@ -175,13 +189,13 @@ public class CharacterHandler : UIInteractable
 
         if(categoryInitialInterest)
         {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(behavior.interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
         else
         {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(behavior.interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
-            currentEnthousiasm -= behavior.enthousiasmDecreaseWithIncorrectArgument;
+            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
+            currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
 
@@ -342,7 +356,7 @@ public class CharacterHandler : UIInteractable
                 potentialObject.interestLevel = startInterestLevel;
                 potentialObject.curiosityLevel = startCuriosityLevel;
             }
-            potentialObject.curiosityLevel = Random.Range(behavior.minMaxRandomCuriosity.x, behavior.minMaxRandomCuriosity.y);
+            potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
         }
     }
 
@@ -354,19 +368,26 @@ public class CharacterHandler : UIInteractable
     {
         if (lookedObject != null)
         {
-            gazeDirection = rectTransform.position + Vector3.up * gazeHeadOffset - gazeDisplay.position;
-            gazeDirection.Normalize();
-            gazeAngle = Vector2.SignedAngle(Vector2.up, gazeDirection);
-
-            gazeDisplay.rotation = Quaternion.Euler(0, 0, gazeAngle);
-
-
-            gazeDisplay.position = Vector2.Lerp(gazeDisplay.position , lookedObject.stallObject.rectTransform.position, gazeLerpRatio * Time.deltaTime);
-            if(!gazeDisplay.gameObject.activeSelf)
+            if (lookedObject.stallObject == null)
             {
-                RefreshGazeOrigin();
+                lookedObject = null;
             }
-            gazeDisplay.gameObject.SetActive(true);
+            else
+            {
+                gazeDirection = rectTransform.position + Vector3.up * gazeHeadOffset - gazeDisplay.position;
+                gazeDirection.Normalize();
+                gazeAngle = Vector2.SignedAngle(Vector2.up, gazeDirection);
+
+                gazeDisplay.rotation = Quaternion.Euler(0, 0, gazeAngle);
+
+
+                gazeDisplay.position = Vector2.Lerp(gazeDisplay.position, lookedObject.stallObject.rectTransform.position, gazeLerpRatio * Time.deltaTime);
+                if (!gazeDisplay.gameObject.activeSelf)
+                {
+                    RefreshGazeOrigin();
+                }
+                gazeDisplay.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -386,11 +407,12 @@ public class CharacterHandler : UIInteractable
             potentialObjects = new List<PotentialObject>();
         }
 
-        foreach(PotentialObject potentialObject in potentialObjects)
+        for (int i = 0; i < potentialObjects.Count; i++)
         {
-            if(!NegoceManager.I.playerHandler.allStallObjects.Contains(potentialObject.stallObject))
+            if (!NegoceManager.I.playerHandler.allStallObjects.Contains(potentialObjects[i].stallObject))
             {
-                potentialObjects.Remove(potentialObject);
+                potentialObjects.RemoveAt(i);
+                i--;
             }
         }
 
@@ -436,6 +458,7 @@ public class CharacterHandler : UIInteractable
         for (int i = 0; i < belongings.Count; i++)
         {
             belongings[i].rectTransform.position = belongingsSpaces[i].position;
+            belongings[i].charaBelongingSpace = belongingsSpaces[i];
         }
     }
 

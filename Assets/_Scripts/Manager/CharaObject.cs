@@ -12,7 +12,10 @@ public class CharaObject : UIInteractable
     public TweeningAnimator categoriesAppearAnim;
     public Image categoryDisplay1;
     public Image categoryDisplay2;
-    public Image personnalValueFiller; 
+    public Image personnalValueFiller;
+    [HideInInspector] public RectTransform charaBelongingSpace;
+    public RectTransform objectDirectInfoPanel;
+    public CanvasGroup canvasGroup;
     [HideInInspector] public float personnalValue;
     [HideInInspector] public bool isPersonnalValueKnown;
 
@@ -29,6 +32,7 @@ public class CharaObject : UIInteractable
 
     private void Update()
     {
+        objectDirectInfoPanel.gameObject.SetActive(!isDragged);
         personnalValueFiller.gameObject.SetActive(isPersonnalValueKnown);
     }
 

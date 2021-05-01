@@ -7,17 +7,20 @@ public class GameData : MonoBehaviour
 {
     public List<Object> _allObjects;
     public List<CategoryProperties> _categoriesProperties;
-    public List<CharacterBehavior> _allTempersBehavior;
+    public DecisiveCharacterHandler _decisiveCharaPrefab;
+    public OpenMindedCharacterHandler _openMindedCharaPrefab;
 
     public static List<Object> allObjects;
     public static List<CategoryProperties> categoriesProperties;
-    public static List<CharacterBehavior> allTempersBehavior;
+    public static DecisiveCharacterHandler decisiveCharaPrefab;
+    public static OpenMindedCharacterHandler openMindedCharaPrefab;
 
     private void Awake()
     {
         allObjects = _allObjects;
         categoriesProperties = _categoriesProperties;
-        allTempersBehavior = _allTempersBehavior;
+        decisiveCharaPrefab = _decisiveCharaPrefab;
+        openMindedCharaPrefab = _openMindedCharaPrefab;
     }
 
     [Serializable]
@@ -43,16 +46,19 @@ public class GameData : MonoBehaviour
         return theCategoryProperties;
     }
 
-    public static CharacterBehavior GetBehaviorFromTemper(Temper searchedTemper)
+    public static CharacterHandler GetCharacterHandlerPrefabFromTemper(Temper searchedTemper)
     {
-        CharacterBehavior theBehavior = null;
-        for (int i = 0; i < allTempersBehavior.Count; i++)
+        CharacterHandler theCharacterPrefab = null;
+        switch (searchedTemper)
         {
-            if (allTempersBehavior[i].temper == searchedTemper)
-            {
-                theBehavior = allTempersBehavior[i];
-            }
+            case Temper.Decisive:
+                theCharacterPrefab = decisiveCharaPrefab;
+                break;
+
+            case Temper.OpenMinded:
+                theCharacterPrefab = openMindedCharaPrefab;
+                break;
         }
-        return theBehavior;
+        return theCharacterPrefab;
     }
 }

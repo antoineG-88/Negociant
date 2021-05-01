@@ -8,7 +8,7 @@ public class NegoceManager : MonoBehaviour
 {
     public List<Character> allPossibleCharacters;
     public PlayerHandler playerHandler;
-    public CharacterHandler characterHandlerPrefab;
+    public ExchangeHandler exchangeHandler;
     public RectTransform charactersDisplay;
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
@@ -169,7 +169,7 @@ public class NegoceManager : MonoBehaviour
     private void AppearCharacter(Character theCharacter)
     {
         CharacterHandler newCharacterHandler;
-        newCharacterHandler = Instantiate(characterHandlerPrefab, charactersDisplay);
+        newCharacterHandler = Instantiate(GameData.GetCharacterHandlerPrefabFromTemper(theCharacter.temper), charactersDisplay);
         allPresentCharacters.Add(newCharacterHandler);
         newCharacterHandler.character = theCharacter;
         if (allPresentCharacters.Count > maxCharacterPresent)
@@ -253,6 +253,7 @@ public class NegoceManager : MonoBehaviour
     {
         selectedCharacter = theCharacter;
         selectedCharacter.Select();
+        exchangeHandler.Close();
         foreach (CharacterHandler character in NegoceManager.I.allPresentCharacters)
         {
             if (character != selectedCharacter)

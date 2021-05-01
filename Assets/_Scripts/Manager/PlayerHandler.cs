@@ -15,6 +15,7 @@ public class PlayerHandler : MonoBehaviour
     public int vitrineStallSpacesAvailable;
     public int backStallSpacesAvailable;
     [Header("Actions")]
+    public bool useDropToAct;
     public float presentTime;
     public float presentShortTime;
     public Image actionBarFiller;
@@ -47,6 +48,7 @@ public class PlayerHandler : MonoBehaviour
     private StallObject hoveredStallObject;
     private StallObject previousHoveredObject;
     [HideInInspector] public StallObject draggedStallObject;
+    [HideInInspector] public CharaObject draggedCharaObject;
     private int vitrineSpaceNumber;
 
     private StallObject presentedStallObject;
@@ -99,40 +101,104 @@ public class PlayerHandler : MonoBehaviour
 
     public void UpdateCurrentAction()
     {
-        if (presentedStallObject != null || argumentedStallObject != null)
+        if(useDropToAct)
         {
-            actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
-            currentCharacterTalkingTo.RefreshEnthousiasm();
-
-            if (timeSpendOnCurrentAction < currentActionTime)
+            if (presentedStallObject != null || argumentedStallObject != null)
             {
-                timeSpendOnCurrentAction += Time.deltaTime;
+                actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
+                currentCharacterTalkingTo.RefreshEnthousiasm();
+
+                if (timeSpendOnCurrentAction < currentActionTime)
+                {
+                    timeSpendOnCurrentAction += Time.deltaTime;
+                }
+                else
+                {
+                    if (presentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.PresentObject(presentedStallObject);
+                        currentCharacterTalkingTo.isTalking = false;
+                        presentedStallObject = null;
+                    }
+                    else if (argumentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.ArgumentCategoryOnObject(argumentedCategory, argumentedStallObject);
+                        currentCharacterTalkingTo.isTalking = false;
+                        currentCharacterTalkingTo = null;
+                        argumentedStallObject = null;
+                        argumentedCategory = null;
+                    }
+                }
             }
             else
             {
-                if(presentedStallObject != null)
-                {
-                    currentCharacterTalkingTo.PresentObject(presentedStallObject);
-                    currentCharacterTalkingTo.isTalking = false;
-                    presentedStallObject = null;
-                }
-                else if (argumentedStallObject != null)
-                {
-                    currentCharacterTalkingTo.ArgumentCategoryOnObject(argumentedCategory, argumentedStallObject);
-                    currentCharacterTalkingTo.isTalking = false;
-                    currentCharacterTalkingTo = null;
-                    argumentedStallObject = null;
-                    argumentedCategory = null;
-                }
+                currentActionText.text = "";
+                objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
+                targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(false);
+                targetedCharacterNameText.text = "";
+                actionBarFiller.fillAmount = 0;
             }
         }
         else
         {
-            currentActionText.text = "";
-            objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
-            targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(false);
-            targetedCharacterNameText.text = "";
-            actionBarFiller.fillAmount = 0;
+            if ((presentedStallObject != null || argumentedStallObject != null) && Input.GetButton("Talk"))
+            {
+                actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
+                currentCharacterTalkingTo.RefreshEnthousiasm();
+
+                if (timeSpendOnCurrentAction < currentActionTime)
+                {
+                    timeSpendOnCurrentAction += Time.deltaTime;
+                }
+                else
+                {
+                    if (presentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.PresentObject(presentedStallObject);
+                        if(Input.GetButton("Talk"))
+                        {
+                            PresentObject(presentedStallObject, currentCharacterTalkingTo);
+                        }
+                        else
+                        {
+                            currentCharacterTalkingTo.isTalking = false;
+                            currentCharacterTalkingTo = null;
+                            presentedStallObject = null;
+                        }
+                    }
+                    else if (argumentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.ArgumentCategoryOnObject(argumentedCategory, argumentedStallObject);
+                        if (Input.GetButton("Talk"))
+                        {
+                            ArgumentCategory(argumentedStallObject, currentCharacterTalkingTo, argumentedCategory);
+                        }
+                        else
+                        {
+                            currentCharacterTalkingTo.isTalking = false;
+                            currentCharacterTalkingTo = null;
+                            argumentedStallObject = null;
+                            argumentedCategory = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                currentActionText.text = "";
+                objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
+                targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(false);
+                targetedCharacterNameText.text = "";
+                actionBarFiller.fillAmount = 0;
+                if(currentCharacterTalkingTo != null)
+                {
+                    currentCharacterTalkingTo.isTalking = false;
+                    currentCharacterTalkingTo = null;
+                }
+                presentedStallObject = null;
+                argumentedStallObject = null;
+                argumentedCategory = null;
+            }
         }
     }
 
@@ -186,6 +252,7 @@ public class PlayerHandler : MonoBehaviour
         SelectionStallObjectUpdate();
 
         DragAndDropStallObjectUpdate();
+        DragAndDropCharaObjectUpdate();
     }
 
     CharacterHandler charaHovered;
@@ -232,10 +299,9 @@ public class PlayerHandler : MonoBehaviour
                 }
                 else
                 {
-                    //characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                    //presentOption.Disable();
-                    //argumentOption.Disable();
-                    presentOption.canReceive = false;
+                    characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                    presentOption.Disable();
+                    argumentOption.Disable();
                 }
 
                 if (presentOption.isCurrentlyHoveredWithCorrectObject)
@@ -256,9 +322,41 @@ public class PlayerHandler : MonoBehaviour
 
             draggedStallObject.rectTransform.position = objectPosToFollow;
 
-
-            if (Input.GetMouseButtonUp(0))
+            if (useDropToAct)
             {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                    {
+                        StartCoroutine(presentOption.Select());
+                        PresentObject(draggedStallObject, charaHovered);
+                    }
+                    else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                    {
+                        argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Talk"))
+                {
+                    if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                    {
+                        StartCoroutine(presentOption.Select());
+                        PresentObject(draggedStallObject, charaHovered);
+                    }
+                    else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                    {
+                        argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0) || (!useDropToAct && Input.GetButtonDown("Talk")))
+            {
+                NegoceManager.I.exchangeHandler.DropStallObject(draggedStallObject);
+                draggedStallObject.StopDrag();
                 bool droppedOnStallSpace = false;
                 foreach (StallSpace hoveredStallSpace in allStallSpaces)
                 {
@@ -272,16 +370,6 @@ public class PlayerHandler : MonoBehaviour
                 if (!droppedOnStallSpace)
                 {
                     draggedStallObject.rectTransform.position = draggedStallObject.stallSpace.rectTransform.position;
-                }
-
-                if (presentOption.isCurrentlyHoveredWithCorrectObject)
-                {
-                    StartCoroutine(presentOption.Select());
-                    PresentObject(draggedStallObject, charaHovered);
-                }
-                else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
-                {
-                    argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
                 }
 
                 draggedStallObject.isDragged = false;
@@ -300,6 +388,48 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
+    private void DragAndDropCharaObjectUpdate()
+    {
+        if(NegoceManager.I.selectedCharacter != null)
+        {
+            for (int i = 0; i < NegoceManager.I.selectedCharacter.belongings.Count; i++)
+            {
+                if (draggedCharaObject == null && NegoceManager.I.selectedCharacter.belongings[i].isDragged)
+                {
+                    draggedCharaObject = NegoceManager.I.selectedCharacter.belongings[i];
+                }
+            }
+
+            if (draggedCharaObject != null)
+            {
+                foreach (CharaObject charaObject in NegoceManager.I.selectedCharacter.belongings)
+                {
+                    charaObject.canvasGroup.blocksRaycasts = false;
+                }
+
+                Vector3 objectPosToFollow = Input.mousePosition;
+
+                draggedCharaObject.rectTransform.position = objectPosToFollow;
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    NegoceManager.I.exchangeHandler.DropCharaObject(draggedCharaObject);
+                    draggedCharaObject.StopDrag();
+                    draggedCharaObject.rectTransform.position = draggedCharaObject.charaBelongingSpace.position;
+
+                    draggedCharaObject.isDragged = false;
+                    draggedCharaObject = null;
+                }
+            }
+            else
+            {
+                foreach (CharaObject charaObject in NegoceManager.I.selectedCharacter.belongings)
+                {
+                    charaObject.canvasGroup.blocksRaycasts = true;
+                }
+            }
+        }
+    }
     private void SelectionStallObjectUpdate()
     {
         if (Input.GetMouseButtonUp(0))
@@ -383,6 +513,18 @@ public class PlayerHandler : MonoBehaviour
         movedStallObject.rectTransform.position = targetStallSpace.rectTransform.position;
         targetStallSpace.stallObject = movedStallObject;
         movedStallObject.stallSpace = targetStallSpace;
+    }
+
+    public void RemoveStallObject(StallObject stallObjectToRemove)
+    {
+        stallObjectToRemove.stallSpace.stallObject = null;
+        allStallObjects.Remove(stallObjectToRemove);
+        Destroy(stallObjectToRemove.gameObject);
+
+        foreach (CharacterHandler characterHandler in NegoceManager.I.allPresentCharacters)
+        {
+            characterHandler.RefreshPotentialObjects();
+        }
     }
 
     private void InitPlayerInfo()

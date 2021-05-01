@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3181077565079966321}
   - component: {fileID: 4476535179830518203}
   - component: {fileID: 6885132985364474872}
+  - component: {fileID: 661661239751392576}
   m_Layer: 5
   m_Name: CharaObject
   m_TagString: Untagged
@@ -83,6 +84,9 @@ MonoBehaviour:
   categoryDisplay1: {fileID: 702542325034055759}
   categoryDisplay2: {fileID: 6106922960546610222}
   personnalValueFiller: {fileID: 6946319365189806335}
+  charaBelongingSpace: {fileID: 0}
+  objectDirectInfoPanel: {fileID: 5638794437440901758}
+  canvasGroup: {fileID: 661661239751392576}
   personnalValue: 0
   isPersonnalValueKnown: 0
 --- !u!114 &6885132985364474872
@@ -114,6 +118,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &661661239751392576
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373763630373671257}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2425817442746895154
 GameObject:
   m_ObjectHideFlags: 0

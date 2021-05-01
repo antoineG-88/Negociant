@@ -9,6 +9,7 @@ public class UIFx : MonoBehaviour
     {
         timeSpend = 0;
         fxAnimator.GetReferences();
+        fxAnimator.anim = Instantiate(fxAnimator.anim);
         StartCoroutine(fxAnimator.anim.Play(fxAnimator));
     }
 
