@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
-  m_Name: OldCloak
+  m_Name: SandHelme
   m_EditorClassIdentifier: 
-  objectName: Cape ancienne
-  title: du gouffre
-  illustration: {fileID: 21300000, guid: 5c47208b74aff00478da937f384dad6c, type: 3}
-  description: Elle est vertes
-  originDescription: "Je l'ai trouv\xE9 devant  par terre"
-  origin: 0
-  categories: 00000000
+  objectName: Casque radiant
+  title: des nomades du duhua
+  illustration: {fileID: 21300000, guid: 102a0709f86ddd04d9219eae3877f652, type: 3}
+  description: "Un casque permettant de se prot\xE9ger des temp\xEAtes de sable"
+  originDescription: "C'est un cadeau du peuples nomades oubli\xE9"
+  origin: 1
+  categories: 0000000003000000
   features: []

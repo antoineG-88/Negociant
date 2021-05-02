@@ -57,8 +57,15 @@ public class StallObject : UIInteractable
         illustration.sprite = linkedObject.illustration;
         categoryDisplay1.color = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[0]).color;
         categoryDisplay1.sprite = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[0]).icon;
-        categoryDisplay2.color = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).color;
-        categoryDisplay2.sprite = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).icon;
+        if(linkedObject.categories.Count > 1)
+        {
+            categoryDisplay2.color = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).color;
+            categoryDisplay2.sprite = GameData.GetCategoryPropertiesFromCategory(linkedObject.categories[1]).icon;
+        }
+        else
+        {
+            categoryDisplay2.transform.parent.gameObject.SetActive(false);
+        }
 
     }
 

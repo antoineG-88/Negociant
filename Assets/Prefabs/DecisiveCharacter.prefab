@@ -603,12 +603,15 @@ MonoBehaviour:
     originalPos: {x: 0, y: 0}
   allObjectsForCharacter:
   - {fileID: 11400000, guid: ee9f55a6e0cfbea4294cede5e2cd9f84, type: 2}
-  - {fileID: 11400000, guid: d35a275d06b1c904f8a7f3742361b837, type: 2}
-  - {fileID: 11400000, guid: f613a9db076ee8947b19a11aca13859c, type: 2}
+  - {fileID: 11400000, guid: 04ceb3ac36f6c0940a57a14fac963de5, type: 2}
   - {fileID: 11400000, guid: 69601289a8bca4a45a0a8f07380a9fd4, type: 2}
   - {fileID: 11400000, guid: a7338198a7355d8439db3bcd4b98c212, type: 2}
-  - {fileID: 11400000, guid: 1cb9040edaaf8824ca3df064f71341c3, type: 2}
   - {fileID: 11400000, guid: 2162cbdfe590ad74ab5159c282c71f2f, type: 2}
+  - {fileID: 11400000, guid: 9ae2c6e1181c7f84c92cf26861020bcd, type: 2}
+  - {fileID: 11400000, guid: 495334a907439f54082ed28169e4f956, type: 2}
+  - {fileID: 11400000, guid: aefdcc5731d01fc48a28ad5f34c9814d, type: 2}
+  - {fileID: 11400000, guid: 41b4cb43e8fbde340a1d8f425c387dfe, type: 2}
+  - {fileID: 11400000, guid: c82ae221d46217a4ba70b693ed8a1cce, type: 2}
   minMaxObjectPerChara: {x: 2, y: 3}
   charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
     type: 3}

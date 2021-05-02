@@ -77,11 +77,15 @@ public class DecisiveCharacterHandler : CharacterHandler
             }
             else
             {
-                if (!isTalking)
-                {
-                    Leave();
-                }
                 currentEnthousiasm = 0;
+            }
+        }
+
+        if (currentEnthousiasm <= 0)
+        {
+            if (!isTalking)
+            {
+                Leave();
             }
         }
     }

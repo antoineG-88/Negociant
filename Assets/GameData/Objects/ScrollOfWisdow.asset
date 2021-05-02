@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: ScrollOfWisdow
+  m_EditorClassIdentifier: 
+  objectName: Parchemin de sagesse
+  title: "des \xE9rudits d'Hagdon"
+  illustration: {fileID: 21300000, guid: f35fd1bb04c75b640aef42fa143b0a57, type: 3}
+  description: "Ce parchemin renferme l'entrainement intensif suivis par les \xE9rudits
+    d'Hagdon pour ne jamais s'\xE9carter de la raison"
+  originDescription: "Il a \xE9t\xE9 ramen\xE9 par un des \xE9rudits de la cit\xE9
+    d'Hagdon"
+  origin: 3
+  categories: 04000000
+  features: []

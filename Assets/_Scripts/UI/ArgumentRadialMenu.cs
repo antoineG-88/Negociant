@@ -52,16 +52,23 @@ public class ArgumentRadialMenu : UIInteractable
     {
         StartCoroutine(appearAnim.anim.PlayBackward(appearAnim, true));
         categoryRadialOptions[0].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).icon;
-        categoryRadialOptions[1].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).icon;
-
         categoryRadialOptions[0].radialOption.icon.color = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).color;
-        categoryRadialOptions[1].radialOption.icon.color = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).color;
-
         categoryRadialOptions[0].category = stallObject.linkedObject.categories[0];
-        categoryRadialOptions[1].category = stallObject.linkedObject.categories[1];
-
         categoryRadialOptions[0].radialOption.time.text = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).argumentTime.ToString() + " s.";
-        categoryRadialOptions[1].radialOption.time.text = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).argumentTime.ToString() + " s.";
+
+        if(stallObject.linkedObject.categories.Count > 1)
+        {
+            categoryRadialOptions[1].radialOption.gameObject.SetActive(true);
+            categoryRadialOptions[1].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).icon;
+            categoryRadialOptions[1].radialOption.icon.color = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).color;
+            categoryRadialOptions[1].category = stallObject.linkedObject.categories[1];
+            categoryRadialOptions[1].radialOption.time.text = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).argumentTime.ToString() + " s.";
+        }
+        else
+        {
+            categoryRadialOptions[1].radialOption.icon.color = Color.clear;
+            categoryRadialOptions[1].radialOption.gameObject.SetActive(false);
+        }
 
         currentStallObject = stallObject;
         objectIllustration.sprite = stallObject.linkedObject.illustration;

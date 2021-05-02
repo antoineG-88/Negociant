@@ -36,6 +36,6 @@ public class Object : ScriptableObject
 
 
 public enum Trait { ColdResistant, HeatResistant, Shiny, Heavy, Light, Mysterious, Magic, SkeletonProof, SandWormProof, Clean, Old, NobleOrigins, Sharp, GoodMaterial, VigorUp};
-public enum Category { Armor, Weapon, Accessory, Relic, Knowledge };
+public enum Category { Armor, Weapon, Accessory, Relic, Knowledge, Magic};
 public enum Origin { Unknown, DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, FrozenRuinedTower};
 
