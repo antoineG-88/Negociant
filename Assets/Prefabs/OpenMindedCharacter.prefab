@@ -508,11 +508,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2919613208417944377}
+  - component: {fileID: 7490402062767212952}
   - component: {fileID: 9165996161038736757}
   - component: {fileID: 7756144542866971032}
   - component: {fileID: 7964137432250745116}
   m_Layer: 5
-  m_Name: DecisiveCharacter
+  m_Name: OpenMindedCharacter 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +543,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 593.2522, y: 975.6085}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9165996161038736757
+--- !u!114 &7490402062767212952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -550,6 +551,118 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3879967711343790202}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4967778f083e1be4e89bbf1205fce660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHovered: 0
+  isPressed: 0
+  isClicked: 0
+  clickedDown: 0
+  clickedUp: 0
+  isDragged: 0
+  isDropped: 0
+  character: {fileID: 0}
+  illustrationImage: {fileID: 6244530951691481489}
+  selectionAnim:
+    anim: {fileID: 11400000, guid: f7615f0be8a749949ae43f2866783ae2, type: 2}
+    rectTransform: {fileID: 6150439527280269211}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  rectTransform: {fileID: 2919613208417944377}
+  gazeHeadOffset: 150
+  nameText: {fileID: 6636841298738713827}
+  enthousiasmFiller: {fileID: 167399558}
+  characterCanvasRectTransform: {fileID: 0}
+  annoyedFxPrefab: {fileID: 5232284876384432290, guid: 6425c34d35ea1744b9a1075c4ec9ca43,
+    type: 3}
+  happyFxPrefab: {fileID: 4786305868150849728, guid: f0da53d191a01014f839723b09729709,
+    type: 3}
+  backWardApparitionAnim:
+    anim: {fileID: 11400000, guid: d1d7a8e3f4ce4c748ad197304dd963c6, type: 2}
+    rectTransform: {fileID: 6150439527280269211}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  enthousiasmGauge: {fileID: 1053211536}
+  gazeLerpRatio: 8
+  identificationCircle: {fileID: 2078761732196462719}
+  belongingsSpaces:
+  - {fileID: 1213305831}
+  - {fileID: 4303452645287978474}
+  - {fileID: 7677456779505536652}
+  - {fileID: 6308401062236805115}
+  - {fileID: 7759023992106520038}
+  belongingsAnim:
+    anim: {fileID: 11400000, guid: b4462b12bbdef3447a0d9a9db09fb415, type: 2}
+    rectTransform: {fileID: 1562319768254030510}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  hoveredWithStallObjectAnim:
+    anim: {fileID: 11400000, guid: 1df9c76473c72cd42be143fbd42c2ebb, type: 2}
+    rectTransform: {fileID: 1479823198151711238}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  allObjectsForCharacter:
+  - {fileID: 11400000, guid: ee9f55a6e0cfbea4294cede5e2cd9f84, type: 2}
+  - {fileID: 11400000, guid: 04ceb3ac36f6c0940a57a14fac963de5, type: 2}
+  - {fileID: 11400000, guid: 69601289a8bca4a45a0a8f07380a9fd4, type: 2}
+  - {fileID: 11400000, guid: a7338198a7355d8439db3bcd4b98c212, type: 2}
+  - {fileID: 11400000, guid: 2162cbdfe590ad74ab5159c282c71f2f, type: 2}
+  - {fileID: 11400000, guid: 9ae2c6e1181c7f84c92cf26861020bcd, type: 2}
+  - {fileID: 11400000, guid: 495334a907439f54082ed28169e4f956, type: 2}
+  - {fileID: 11400000, guid: aefdcc5731d01fc48a28ad5f34c9814d, type: 2}
+  - {fileID: 11400000, guid: 41b4cb43e8fbde340a1d8f425c387dfe, type: 2}
+  - {fileID: 11400000, guid: c82ae221d46217a4ba70b693ed8a1cce, type: 2}
+  minMaxObjectPerChara: {x: 2, y: 3}
+  charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
+    type: 3}
+  minMaxObjectPersonnalValue: {x: 10, y: 20}
+  initialInterestLevel: 5
+  initialCuriosityLevel: 0
+  baseLookingTime: 3
+  reflexionTime: 6
+  curiosityIncreaseSpeed: 1
+  minMaxRandomCuriosity: {x: 5, y: 10}
+  enthousiasmIncreaseWithCorrectPresent: 0.3
+  enthousiasmDecreaseWithIncorrectPresent: 0.1
+  interestLevelMultiplierWithCorrectCategoryArgument: 1
+  interestLevelMultiplierWithIncorrectCategoryArgument: 0.6
+  enthousiasmDecreaseWithIncorrectArgument: 0.2
+  initialEntousiasm: 0.7
+  timeBeforeEnthousiasmDecrease: 15
+  enthousiasmDecreaseRate: 0.001
+  belongings: []
+  isSelected: 0
+  gazeDisplay: {fileID: 0}
+  identificationColor: {r: 0, g: 0, b: 0, a: 0}
+  isLeaving: 0
+  isTalking: 0
+  exchangeTreshold: 0
+  potentialObjects: []
+  lookedObject:
+    stallObject: {fileID: 0}
+    interestLevel: 0
+    curiosityLevel: 0
+    knownInterestLevel: 0
+  gazeTimeRmn: 0
+  reflexionTimeRMN: 0
+  maxCuriosityLevel: 0
+  timeSpendRefreshEnthousiasm: 0
+  currentEnthousiasm: 0
+  isAppearing: 0
+  isHoveredWithStallObject: 0
+  minLookingTime: 3
+  highLevelInterestCuriosityBoost: 2
+  gazedObjectPerGazeTimePerInterestingObjectOnVitrine: 01000000020000000300000004000000
+  gazedObjectThisGazeTime: 0
+--- !u!114 &9165996161038736757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3879967711343790202}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f035a5defe46077409f282ac999fc13c, type: 3}
   m_Name: 
