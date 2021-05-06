@@ -62,7 +62,7 @@ public class ExchangeHandler : MonoBehaviour
 
                 foreach (ExchangeSpace charaSpace in characterSpaces)
                 {
-                    charaSpace.canBeUsed = NegoceManager.I.playerHandler.draggedCharaObject != null;
+                    charaSpace.canBeUsed = NegoceManager.I.draggedCharaObject != null;
 
                     if (charaSpace.isClicked)
                     {

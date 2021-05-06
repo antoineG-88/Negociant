@@ -19,7 +19,7 @@ public class DecisiveCharacterHandler : CharacterHandler
     {
         if (!isTalking)
         {
-            if (reflexionTimeRMN <= 0 && gazeTimeRmn <= 0)
+            if (nonGazingTimeRMN <= 0 && gazeTimeRmn <= 0)
             {
                 potentialObjectsToLook.Clear();
                 potentialObjectsToLook.AddRange(GetAllInterestingObjectsOnVitrine());
@@ -38,7 +38,7 @@ public class DecisiveCharacterHandler : CharacterHandler
                 }
                 else
                 {
-                    StartReflexion(reflexionTime);
+                    StartNonGazing(reflexionTime);
                     reflexionFlag = true;
                 }
             }
@@ -48,14 +48,14 @@ public class DecisiveCharacterHandler : CharacterHandler
                 gazeTimeRmn -= Time.deltaTime;
             }
 
-            if (reflexionTimeRMN > 0)
+            if (nonGazingTimeRMN > 0)
             {
-                reflexionTimeRMN -= Time.deltaTime;
+                nonGazingTimeRMN -= Time.deltaTime;
             }
         }
         else
         {
-            StartReflexion(reflexionTime);
+            StartNonGazing(reflexionTime);
         }
 
 

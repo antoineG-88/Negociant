@@ -11,7 +11,7 @@ public class DropOption : UIInteractable
     public GameObject display;
     public Text actionTimeText;
 
-    [HideInInspector] public bool isCurrentlyHoveredWithCorrectObject;
+    [HideInInspector] public bool isCurrentlyHoveredCorrectly;
     [HideInInspector] public bool canReceive;
     private bool isPlaying;
 
@@ -24,9 +24,9 @@ public class DropOption : UIInteractable
 
     void Update()
     {
-        if(!canReceive && isCurrentlyHoveredWithCorrectObject)
+        if(!canReceive && isCurrentlyHoveredCorrectly)
         {
-            isCurrentlyHoveredWithCorrectObject = false;
+            isCurrentlyHoveredCorrectly = false;
         }
     }
 
@@ -59,18 +59,18 @@ public class DropOption : UIInteractable
 
     public override void OnHoverIn()
     {
-        if(canReceive && !isCurrentlyHoveredWithCorrectObject)
+        if(canReceive && !isCurrentlyHoveredCorrectly)
         {
-            isCurrentlyHoveredWithCorrectObject = true;
+            isCurrentlyHoveredCorrectly = true;
             StartCoroutine(hoverAnim.anim.Play(hoverAnim));
         }
     }
 
     public override void OnHoverOut()
     {
-        if (canReceive && isCurrentlyHoveredWithCorrectObject)
+        if (canReceive && isCurrentlyHoveredCorrectly)
         {
-            isCurrentlyHoveredWithCorrectObject = false;
+            isCurrentlyHoveredCorrectly = false;
             StartCoroutine(hoverAnim.anim.PlayBackward(hoverAnim, true));
         }
     }

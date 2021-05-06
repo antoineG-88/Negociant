@@ -36,6 +36,7 @@ public class NegoceManager : MonoBehaviour
     [HideInInspector] public bool unfoldTime;
     [HideInInspector] public float negoceTimeSpend;
     [HideInInspector] public CharacterHandler selectedCharacter;
+    [HideInInspector] public CharaObject draggedCharaObject;
     private float timeSpendSinceLastCharacterApparition;
     private float nextCharacterApparitionTime;
     private CharacterHandler previousSelectedCharacter;
@@ -77,6 +78,11 @@ public class NegoceManager : MonoBehaviour
         UpdateCharacterApparition();
 
         UpdateSelectedCharaInfo();
+
+        if(selectedCharacter == null)
+        {
+            draggedCharaObject = null;
+        }
     }
 
     private void UpdateCharacterApparition()
@@ -216,7 +222,7 @@ public class NegoceManager : MonoBehaviour
         newCharacter.initialInterests = new List<Category>(characterInitialPreferences);
 
         //newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
-        newCharacter.temper = Temper.OpenMinded;
+        newCharacter.temper = Temper.Decisive;
         List<Character.Need> characterNeeds = new List<Character.Need>();
         for (int i = 0; i < UnityEngine.Random.Range(minChNeeds, maxChNeeds); i++)
         {

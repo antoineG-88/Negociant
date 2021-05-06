@@ -23,6 +23,13 @@ public abstract class CharacterHandler : UIInteractable
     public List<RectTransform> belongingsSpaces;
     public TweeningAnimator belongingsAnim;
     public TweeningAnimator hoveredWithStallObjectAnim;
+    [Header("Speak&Think Options")]
+    public TweeningAnimator speakingBoxAnim;
+    public RectTransform speakingBox;
+    public Text speakingText;
+    public TweeningAnimator thinkingBoxAnim;
+    public RectTransform thinkingBox;
+    public Image thinkingObjectImage;
     [Header("Random object > Temporary")]
     public List<Object> allObjectsForCharacter;
     public Vector2Int minMaxObjectPerChara;
@@ -43,6 +50,10 @@ public abstract class CharacterHandler : UIInteractable
     [Range(0f, 1f)] public float initialEntousiasm;
     public float timeBeforeEnthousiasmDecrease;
     public float enthousiasmDecreaseRate;
+    [Space]
+    public float reactTimePresent;
+    public DropOption askOption;
+    public CanvasGroup dropOptionCanvasGroup;
 
     [HideInInspector] public List<CharaObject> belongings;
     [HideInInspector] public bool isSelected;
@@ -55,7 +66,7 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public List<PotentialObject> potentialObjects;
     [HideInInspector] public PotentialObject lookedObject;
     [HideInInspector] public float gazeTimeRmn;
-    [HideInInspector] public float reflexionTimeRMN;
+    [HideInInspector] public float nonGazingTimeRMN;
     [HideInInspector] public float maxCuriosityLevel;
     [HideInInspector] public float timeSpendRefreshEnthousiasm;
     [HideInInspector] public float currentEnthousiasm;
@@ -63,6 +74,12 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public bool isHoveredWithStallObject;
     private bool hoveredWithObjectFlag;
     private bool selectedFlag;
+    [HideInInspector] public bool isSpeaking;
+    [HideInInspector] public bool isThinking;
+    private float currentThinkTimeRmn;
+    private float currentSpeakTimeRmn;
+    private PotentialObject presentedObjectToThink;
+    private CharaObject draggedCharaObject;
 
     public virtual void Init()
     {
@@ -73,9 +90,16 @@ public abstract class CharacterHandler : UIInteractable
         belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
         SetInitialState(initialInterestLevel, initialCuriosityLevel, initialEntousiasm);
-
+        thinkingBoxAnim.anim = Instantiate(thinkingBoxAnim.anim);
+        thinkingBoxAnim.GetReferences();
+        thinkingBoxAnim.anim.SetAtEndState(thinkingBoxAnim);
+        speakingBoxAnim.anim = Instantiate(speakingBoxAnim.anim);
+        speakingBoxAnim.GetReferences();
+        speakingBoxAnim.anim.SetAtEndState(speakingBoxAnim);
         belongingsAnim.canvasGroup.blocksRaycasts = false;
         belongingsAnim.canvasGroup.interactable = false;
+        dropOptionCanvasGroup.blocksRaycasts = false;
+        askOption.Disable();
     }
 
     public abstract void UpdateBehavior();
@@ -99,6 +123,10 @@ public abstract class CharacterHandler : UIInteractable
             UpdateCharacterInfoDisplay();
 
             UpdatePlayerActionAsTarget();
+
+            UpdateSpeakingAndThinking();
+
+            DragAndDropCharaObjectUpdate();
         }
     }
 
@@ -108,7 +136,7 @@ public abstract class CharacterHandler : UIInteractable
         {
             isHoveredWithStallObject = true;
         }
-        if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredWithCorrectObject && !NegoceManager.I.playerHandler.argumentOption.isCurrentlyHoveredWithCorrectObject))
+        if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredCorrectly && !NegoceManager.I.playerHandler.argumentOption.isCurrentlyHoveredCorrectly))
         {
             isHoveredWithStallObject = false;
         }
@@ -154,10 +182,27 @@ public abstract class CharacterHandler : UIInteractable
         enthousiasmFiller.fillAmount = currentEnthousiasm / 1;
     }
 
-    public void PresentObject(StallObject presentedObject)
+    public void UpdateSpeakingAndThinking()
     {
-        PotentialObject presentedPotentialObject = GetPotentialFromStallObject(presentedObject);
-        if (DoesObjectHaveHigherInterestLevel(presentedPotentialObject))
+        if (currentThinkTimeRmn > 0)
+        {
+            currentThinkTimeRmn -= Time.deltaTime;
+        }
+
+        if (presentedObjectToThink != null)
+        {
+            if(currentThinkTimeRmn <= 0)
+            {
+                ReactToPresent(presentedObjectToThink);
+                presentedObjectToThink = null;
+                StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+            }
+        }
+    }
+
+    public void ReactToPresent(PotentialObject presentedObject)
+    {
+        if (DoesObjectHaveHigherInterestLevel(presentedObject))
         {
             currentEnthousiasm += enthousiasmIncreaseWithCorrectPresent;
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
@@ -167,13 +212,20 @@ public abstract class CharacterHandler : UIInteractable
             currentEnthousiasm -= enthousiasmDecreaseWithIncorrectPresent;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
-        presentedPotentialObject.IncreaseInterestLevel(0, true);
+        presentedObject.IncreaseInterestLevel(0, true);
 
         if (NegoceManager.I.selectedCharacter == this)
         {
-            presentedObject.SetInterestLevelDisplay(presentedPotentialObject.knownInterestLevel / exchangeTreshold, identificationColor);
+            presentedObject.stallObject.SetInterestLevelDisplay(presentedObject.knownInterestLevel / exchangeTreshold, identificationColor);
         }
-        currentEnthousiasm = Mathf.Clamp(currentEnthousiasm ,0f, 1f);
+        currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
+    }
+
+    public void PresentObject(StallObject presentedObject)
+    {
+        presentedObjectToThink = GetPotentialFromStallObject(presentedObject);
+        LookObject(presentedObjectToThink, reactTimePresent);
+        Think(reactTimePresent, presentedObjectToThink);
     }
 
     public void ArgumentCategoryOnObject(GameData.CategoryProperties categoryProperties, StallObject argumentedObject)
@@ -220,9 +272,9 @@ public abstract class CharacterHandler : UIInteractable
         lookedObject = objectToLook;
     }
 
-    public void StartReflexion(float reflexionTime)
+    public void StartNonGazing(float nonGazingTime)
     {
-        reflexionTimeRMN = reflexionTime;
+        nonGazingTimeRMN = nonGazingTime;
         lookedObject = null;
     }
 
@@ -230,6 +282,93 @@ public abstract class CharacterHandler : UIInteractable
     {
         timeSpendRefreshEnthousiasm = 0;
     }
+
+    public void Think(float timeToThink, PotentialObject potentialObjectToThink)
+    {
+        currentThinkTimeRmn = timeToThink;
+        if(potentialObjectToThink != null)
+        {
+            thinkingObjectImage.color = Color.white;
+            thinkingObjectImage.sprite = potentialObjectToThink.stallObject.linkedObject.illustration;
+        }
+        else
+        {
+            thinkingObjectImage.color = Color.clear;
+        }
+        StartCoroutine(thinkingBoxAnim.anim.PlayBackward(thinkingBoxAnim, true));
+    }
+
+
+    private void DragAndDropCharaObjectUpdate()
+    {
+        if (isSelected)
+        {
+            for (int i = 0; i < belongings.Count; i++)
+            {
+                if (draggedCharaObject == null && belongings[i].isDragged)
+                {
+                    draggedCharaObject = belongings[i];
+                }
+            }
+
+            if (draggedCharaObject != null)
+            {
+                foreach (CharaObject charaObject in belongings)
+                {
+                    charaObject.canvasGroup.blocksRaycasts = false;
+                }
+
+                Vector3 objectPosToFollow = Input.mousePosition;
+
+                if (!NegoceManager.I.playerHandler.IsPlayerTalking())
+                {
+                    askOption.Enable("");
+                    dropOptionCanvasGroup.blocksRaycasts = true;
+                }
+                else
+                {
+                    dropOptionCanvasGroup.blocksRaycasts = false;
+                    askOption.Disable();
+                }
+
+                if (askOption.isCurrentlyHoveredCorrectly)
+                {
+                    objectPosToFollow = askOption.rectTransform.position;
+                }
+
+                draggedCharaObject.rectTransform.position = objectPosToFollow;
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        if (askOption.isCurrentlyHoveredCorrectly)
+                        {
+                            StartCoroutine(askOption.Select());
+                            Debug.Log("discute");
+                        }
+                    }
+
+                    NegoceManager.I.exchangeHandler.DropCharaObject(draggedCharaObject);
+                    draggedCharaObject.StopDrag();
+                    draggedCharaObject.rectTransform.position = draggedCharaObject.charaBelongingSpace.position;
+
+                    draggedCharaObject.isDragged = false;
+                    draggedCharaObject = null;
+                }
+                NegoceManager.I.draggedCharaObject = draggedCharaObject;
+            }
+            else
+            {
+                foreach (CharaObject charaObject in belongings)
+                {
+                    charaObject.canvasGroup.blocksRaycasts = true;
+                }
+            }
+        }
+    }
+
+    #region UsefullFunctions
 
     public bool IsLookingAt(StallObject stallObject)
     {
@@ -359,6 +498,8 @@ public abstract class CharacterHandler : UIInteractable
             potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
         }
     }
+
+    #endregion
 
     #region Display
 

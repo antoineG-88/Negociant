@@ -16,14 +16,14 @@ public class PlayerHandler : MonoBehaviour
     public int backStallSpacesAvailable;
     [Header("Actions")]
     public bool useDropToAct;
+    public string presentSpokenText;
     public float presentTime;
-    public float presentShortTime;
-    public Image actionBarFiller;
-    public Text currentActionText;
-    public Image objectOfTheActionDisplay;
-    public Text targetedCharacterNameText;
-    public Image targetedCharacterFaceDisplay;
-    public RectTransform actionBar;
+    //public Image actionBarFiller;
+    public Text currentSpokenText;
+    //public Image objectOfTheActionDisplay;
+    //public Text targetedCharacterNameText;
+    //public Image targetedCharacterFaceDisplay;
+    public RectTransform speakBar;
     [Header("Reference")]
     public ArgumentRadialMenu argumentRadialMenu;   
     [HideInInspector] public PlayerInventory playerInventory;
@@ -48,13 +48,12 @@ public class PlayerHandler : MonoBehaviour
     private StallObject hoveredStallObject;
     private StallObject previousHoveredObject;
     [HideInInspector] public StallObject draggedStallObject;
-    [HideInInspector] public CharaObject draggedCharaObject;
     private int vitrineSpaceNumber;
 
     private StallObject presentedStallObject;
     private StallObject argumentedStallObject;
-    private float timeSpendOnCurrentAction;
-    private float currentActionTime;
+    private float timeSpendSpeaking;
+    private float currentSpeakingTime;
     private CharacterHandler currentCharacterTalkingTo;
     private GameData.CategoryProperties argumentedCategory; // temporary
 
@@ -90,12 +89,12 @@ public class PlayerHandler : MonoBehaviour
 
         if(presentedStallObject == null && argumentedStallObject == null)
         {
-            actionBar.gameObject.SetActive(false);
+            speakBar.gameObject.SetActive(false);
         }
         else
         {
-            actionBar.gameObject.SetActive(true);
-            actionBar.position = new Vector3(currentCharacterTalkingTo.rectTransform.position.x, actionBar.position.y, 0);
+            speakBar.gameObject.SetActive(true);
+            speakBar.position = new Vector3(currentCharacterTalkingTo.rectTransform.position.x, speakBar.position.y, 0);
         }
     }
 
@@ -105,12 +104,12 @@ public class PlayerHandler : MonoBehaviour
         {
             if (presentedStallObject != null || argumentedStallObject != null)
             {
-                actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
+                //actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
                 currentCharacterTalkingTo.RefreshEnthousiasm();
 
-                if (timeSpendOnCurrentAction < currentActionTime)
+                if (timeSpendSpeaking < currentSpeakingTime)
                 {
-                    timeSpendOnCurrentAction += Time.deltaTime;
+                    timeSpendSpeaking += Time.deltaTime;
                 }
                 else
                 {
@@ -132,21 +131,21 @@ public class PlayerHandler : MonoBehaviour
             }
             else
             {
-                currentActionText.text = "";
-                objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
+                currentSpokenText.text = "";
+                /*objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
                 targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(false);
                 targetedCharacterNameText.text = "";
-                actionBarFiller.fillAmount = 0;
+                actionBarFiller.fillAmount = 0;*/
             }
-        }
+        }/*
         else
         {
             if ((presentedStallObject != null || argumentedStallObject != null) && Input.GetButton("Talk"))
             {
-                actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
+                //actionBarFiller.fillAmount = timeSpendOnCurrentAction / currentActionTime;
                 currentCharacterTalkingTo.RefreshEnthousiasm();
 
-                if (timeSpendOnCurrentAction < currentActionTime)
+                if (timeSpendOnCurrentAction < currentSpeakingTime)
                 {
                     timeSpendOnCurrentAction += Time.deltaTime;
                 }
@@ -185,11 +184,11 @@ public class PlayerHandler : MonoBehaviour
             }
             else
             {
-                currentActionText.text = "";
+                currentSpokenText.text = "";
                 objectOfTheActionDisplay.transform.parent.gameObject.SetActive(false);
                 targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(false);
                 targetedCharacterNameText.text = "";
-                actionBarFiller.fillAmount = 0;
+                //actionBarFiller.fillAmount = 0;
                 if(currentCharacterTalkingTo != null)
                 {
                     currentCharacterTalkingTo.isTalking = false;
@@ -199,7 +198,7 @@ public class PlayerHandler : MonoBehaviour
                 argumentedStallObject = null;
                 argumentedCategory = null;
             }
-        }
+        }*/
     }
 
     public bool IsPlayerTalking()
@@ -211,37 +210,30 @@ public class PlayerHandler : MonoBehaviour
     {
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isTalking = true;
-        timeSpendOnCurrentAction = 0;
+        timeSpendSpeaking = 0;
         presentedStallObject = stallObjectToPresent;
-        currentActionText.text = "Présente";
-        objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
-        targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
-        objectOfTheActionDisplay.sprite = presentedStallObject.linkedObject.illustration;
-        targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
-        targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
-        if (currentCharacterTalkingTo.IsLookingAt(presentedStallObject))
-        {
-            currentActionTime = presentShortTime;
-        }
-        else
-        {
-            currentActionTime = presentTime;
-        }
+        currentSpokenText.text = presentSpokenText + stallObjectToPresent.linkedObject.objectName + ", " + targetCharacter.character.characterName + " ?";
+        //objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
+        //targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
+        //objectOfTheActionDisplay.sprite = presentedStallObject.linkedObject.illustration;
+        //targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
+        //targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
+        currentSpeakingTime = presentTime;
     }
 
     public void ArgumentCategory(StallObject stallObjectArgumented, CharacterHandler targetCharacter, GameData.CategoryProperties categoryProperties)
     {
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isTalking = true;
-        timeSpendOnCurrentAction = 0;
+        timeSpendSpeaking = 0;
         argumentedStallObject = stallObjectArgumented;
-        currentActionText.text = "Argumente";
-        objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
+        currentSpokenText.text = "Argumente";
+        /*objectOfTheActionDisplay.transform.parent.gameObject.SetActive(true);
         targetedCharacterFaceDisplay.transform.parent.gameObject.SetActive(true);
         objectOfTheActionDisplay.sprite = argumentedStallObject.linkedObject.illustration;
         targetedCharacterFaceDisplay.sprite = currentCharacterTalkingTo.character.faceSprite;
-        targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;
-        currentActionTime = categoryProperties.argumentTime;
+        targetedCharacterNameText.text = currentCharacterTalkingTo.character.characterName;*/
+        currentSpeakingTime = categoryProperties.argumentTime;
         argumentedCategory = categoryProperties;
     }
 
@@ -252,7 +244,6 @@ public class PlayerHandler : MonoBehaviour
         SelectionStallObjectUpdate();
 
         DragAndDropStallObjectUpdate();
-        DragAndDropCharaObjectUpdate();
     }
 
     CharacterHandler charaHovered;
@@ -287,13 +278,13 @@ public class PlayerHandler : MonoBehaviour
             {
                 characterInteractionPanel.position = charaHovered.rectTransform.position;
 
-                presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
+                /*presentOption.Enable(presentTime.ToString() + " s.");
                 argumentOption.Enable("");
-                characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+                characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;*/
 
                 if (presentedStallObject == null)
                 {
-                    presentOption.Enable((charaHovered.IsLookingAt(draggedStallObject) ? presentShortTime.ToString() : presentTime.ToString()) + " s.");
+                    presentOption.Enable(presentTime.ToString() + " s.");
                     argumentOption.Enable("");
                     characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 }
@@ -304,11 +295,11 @@ public class PlayerHandler : MonoBehaviour
                     argumentOption.Disable();
                 }
 
-                if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                if (presentOption.isCurrentlyHoveredCorrectly)
                 {
                     objectPosToFollow = presentOption.rectTransform.position;
                 }
-                if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                if (argumentOption.isCurrentlyHoveredCorrectly)
                 {
                     objectPosToFollow = argumentOption.rectTransform.position;
                 }
@@ -326,12 +317,12 @@ public class PlayerHandler : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                    if (presentOption.isCurrentlyHoveredCorrectly)
                     {
                         StartCoroutine(presentOption.Select());
                         PresentObject(draggedStallObject, charaHovered);
                     }
-                    else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                    else if (argumentOption.isCurrentlyHoveredCorrectly)
                     {
                         argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
                     }
@@ -341,12 +332,12 @@ public class PlayerHandler : MonoBehaviour
             {
                 if (Input.GetButtonDown("Talk"))
                 {
-                    if (presentOption.isCurrentlyHoveredWithCorrectObject)
+                    if (presentOption.isCurrentlyHoveredCorrectly)
                     {
                         StartCoroutine(presentOption.Select());
                         PresentObject(draggedStallObject, charaHovered);
                     }
-                    else if (argumentOption.isCurrentlyHoveredWithCorrectObject)
+                    else if (argumentOption.isCurrentlyHoveredCorrectly)
                     {
                         argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
                     }
@@ -387,7 +378,7 @@ public class PlayerHandler : MonoBehaviour
             }
         }
     }
-
+    /*wouhouououououou
     private void DragAndDropCharaObjectUpdate()
     {
         if(NegoceManager.I.selectedCharacter != null)
@@ -429,7 +420,8 @@ public class PlayerHandler : MonoBehaviour
                 }
             }
         }
-    }
+    } 
+    */
     private void SelectionStallObjectUpdate()
     {
         if (Input.GetMouseButtonUp(0))

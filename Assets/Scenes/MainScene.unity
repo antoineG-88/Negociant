@@ -3605,7 +3605,7 @@ GameObject:
   - component: {fileID: 794614088}
   - component: {fileID: 794614087}
   m_Layer: 5
-  m_Name: ActionNameText
+  m_Name: SpokenText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3627,8 +3627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -73.5, y: 50.889}
-  m_SizeDelta: {x: -222.56212, y: -141.03763}
+  m_AnchoredPosition: {x: 1.3307953, y: 4.1868973}
+  m_SizeDelta: {x: -72.90042, y: -47.633453}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &794614087
 MonoBehaviour:
@@ -3650,13 +3650,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 50e7703b80ff93240a331325dbd5410b, type: 3}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: cb40b7c3529cd1f4e841a7d4fb0f2b90, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 2
     m_MaxSize: 50
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3688,7 +3688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &800655459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6095,7 +6095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302096109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6594,14 +6594,10 @@ MonoBehaviour:
   vitrineStallSpacesAvailable: 3
   backStallSpacesAvailable: 6
   useDropToAct: 1
-  presentTime: 8
-  presentShortTime: 3
-  actionBarFiller: {fileID: 1717349083}
-  currentActionText: {fileID: 794614087}
-  objectOfTheActionDisplay: {fileID: 564274530}
-  targetedCharacterNameText: {fileID: 1952753965}
-  targetedCharacterFaceDisplay: {fileID: 692003998}
-  actionBar: {fileID: 1521167075}
+  presentSpokenText: 'Que pensez-vous de '
+  presentTime: 2
+  currentSpokenText: {fileID: 794614087}
+  speakBar: {fileID: 1521167075}
   argumentRadialMenu: {fileID: 749781129}
   playerInventory:
     belongings: []
@@ -6623,7 +6619,6 @@ MonoBehaviour:
   argumentOption: {fileID: 1749002517}
   allStallObjects: []
   draggedStallObject: {fileID: 0}
-  draggedCharaObject: {fileID: 0}
 --- !u!4 &1423591361
 Transform:
   m_ObjectHideFlags: 0
@@ -6713,7 +6708,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
@@ -7202,6 +7197,7 @@ MonoBehaviour:
   unfoldTime: 0
   negoceTimeSpend: 0
   selectedCharacter: {fileID: 0}
+  draggedCharaObject: {fileID: 0}
 --- !u!1 &1492683813
 GameObject:
   m_ObjectHideFlags: 0
@@ -8448,7 +8444,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 3
   m_TargetDisplay: 0
@@ -8648,7 +8644,7 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   display: {fileID: 78125538}
   actionTimeText: {fileID: 1098802360}
-  isCurrentlyHoveredWithCorrectObject: 0
+  isCurrentlyHoveredCorrectly: 0
   canReceive: 0
 --- !u!114 &1690220233
 MonoBehaviour:
@@ -8716,7 +8712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1717349082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9145,7 +9141,7 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   display: {fileID: 1836444155}
   actionTimeText: {fileID: 1492683815}
-  isCurrentlyHoveredWithCorrectObject: 0
+  isCurrentlyHoveredCorrectly: 0
   canReceive: 0
 --- !u!222 &1749002518
 CanvasRenderer:
@@ -10000,7 +9996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1952753964
 RectTransform:
   m_ObjectHideFlags: 0

@@ -19,12 +19,12 @@ public class OpenMindedCharacterHandler : CharacterHandler
                 gazeTimeRmn -= Time.deltaTime;
             }
 
-            if (reflexionTimeRMN > 0)
+            if (nonGazingTimeRMN > 0)
             {
-                reflexionTimeRMN -= Time.deltaTime;
+                nonGazingTimeRMN -= Time.deltaTime;
             }
 
-            if (reflexionTimeRMN <= 0 && gazeTimeRmn <= 0)
+            if (nonGazingTimeRMN <= 0 && gazeTimeRmn <= 0)
             {
                 if (gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)] - gazedObjectThisGazeTime > 0)
                 {
@@ -34,13 +34,13 @@ public class OpenMindedCharacterHandler : CharacterHandler
                 else
                 {
                     gazedObjectThisGazeTime = 0;
-                    StartReflexion(reflexionTime);
+                    StartNonGazing(reflexionTime);
                 }
             }
         }
         else
         {
-            StartReflexion(reflexionTime);
+            StartNonGazing(reflexionTime);
         }
 
 
