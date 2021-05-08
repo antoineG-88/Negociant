@@ -13,6 +13,7 @@ public abstract class CharacterHandler : UIInteractable
     public float gazeHeadOffset;
     public Text nameText;
     public Image enthousiasmFiller;
+    public float enthousiasmLerpRatio;
     [HideInInspector] public RectTransform characterCanvasRectTransform;
     public GameObject annoyedFxPrefab;
     public GameObject happyFxPrefab;
@@ -30,14 +31,16 @@ public abstract class CharacterHandler : UIInteractable
     public TweeningAnimator thinkingBoxAnim;
     public RectTransform thinkingBox;
     public Image thinkingObjectImage;
+    public Image speakBoxDeco;
+    public Image thinkBoxDeco;
     [Header("Random object > Temporary")]
     public List<Object> allObjectsForCharacter;
     public Vector2Int minMaxObjectPerChara;
     public CharaObject charaObjectPrefab;
     public Vector2 minMaxObjectPersonnalValue;
     [Header("Behavior General Options")]
-    public float initialInterestLevel;
-    public float initialCuriosityLevel;
+    //public float initialInterestLevel;
+    //public float initialCuriosityLevel;
     public float baseLookingTime;
     public float reflexionTime;
     public float curiosityIncreaseSpeed;
@@ -45,7 +48,7 @@ public abstract class CharacterHandler : UIInteractable
     public float enthousiasmIncreaseWithCorrectPresent;
     public float enthousiasmDecreaseWithIncorrectPresent;
     public float interestLevelMultiplierWithCorrectCategoryArgument;
-    public float interestLevelMultiplierWithIncorrectCategoryArgument;
+    public float interestLevelMultiplierWithCorrectFeatureArgument;
     public float enthousiasmDecreaseWithIncorrectArgument;
     [Range(0f, 1f)] public float initialEntousiasm;
     public float timeBeforeEnthousiasmDecrease;
@@ -54,13 +57,14 @@ public abstract class CharacterHandler : UIInteractable
     public float reactTimePresent;
     public DropOption askOption;
     public CanvasGroup dropOptionCanvasGroup;
+    public float reactTimeArgument;
 
     [HideInInspector] public List<CharaObject> belongings;
     [HideInInspector] public bool isSelected;
     [HideInInspector] public RectTransform gazeDisplay;
     [HideInInspector] public Color identificationColor;
     [HideInInspector] public bool isLeaving;
-    [HideInInspector] public bool isTalking;
+    [HideInInspector] public bool isListening;
     [HideInInspector] public float exchangeTreshold;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
@@ -72,6 +76,7 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public float currentEnthousiasm;
     [HideInInspector] public bool isAppearing;
     [HideInInspector] public bool isHoveredWithStallObject;
+    [HideInInspector] public bool isHoveredWithCharaObject;
     private bool hoveredWithObjectFlag;
     private bool selectedFlag;
     [HideInInspector] public bool isSpeaking;
@@ -79,7 +84,10 @@ public abstract class CharacterHandler : UIInteractable
     private float currentThinkTimeRmn;
     private float currentSpeakTimeRmn;
     private PotentialObject presentedObjectToThink;
+    private PotentialObject argumentedObjectToThink;
+    private Object.Feature argumentedFeatureToThink;
     private CharaObject draggedCharaObject;
+    private Speech currentSpeech;
 
     public virtual void Init()
     {
@@ -89,7 +97,7 @@ public abstract class CharacterHandler : UIInteractable
         belongingsAnim.anim = Instantiate(belongingsAnim.anim);
         belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
-        SetInitialState(initialInterestLevel, initialCuriosityLevel, initialEntousiasm);
+        SetInitialState(initialEntousiasm);
         thinkingBoxAnim.anim = Instantiate(thinkingBoxAnim.anim);
         thinkingBoxAnim.GetReferences();
         thinkingBoxAnim.anim.SetAtEndState(thinkingBoxAnim);
@@ -100,6 +108,7 @@ public abstract class CharacterHandler : UIInteractable
         belongingsAnim.canvasGroup.interactable = false;
         dropOptionCanvasGroup.blocksRaycasts = false;
         askOption.Disable();
+        enthousiasmFiller.fillAmount = initialEntousiasm;
     }
 
     public abstract void UpdateBehavior();
@@ -116,6 +125,12 @@ public abstract class CharacterHandler : UIInteractable
             if (potentialObjects != null)
             {
                 UpdateBehavior();
+
+                UpdateSpeakingAndThinking();
+
+                DragAndDropCharaObjectUpdate();
+
+                UpdateKnownFeatures();
             }
 
             UpdateGazeDisplay();
@@ -124,15 +139,12 @@ public abstract class CharacterHandler : UIInteractable
 
             UpdatePlayerActionAsTarget();
 
-            UpdateSpeakingAndThinking();
-
-            DragAndDropCharaObjectUpdate();
         }
     }
 
     private void UpdatePlayerActionAsTarget()
     {
-        if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered)
+        if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered )
         {
             isHoveredWithStallObject = true;
         }
@@ -141,45 +153,54 @@ public abstract class CharacterHandler : UIInteractable
             isHoveredWithStallObject = false;
         }
 
-        if(isHoveredWithStallObject && !hoveredWithObjectFlag)
+        if (draggedCharaObject != null && isHovered)
+        {
+            isHoveredWithCharaObject = true;
+        }
+        if (draggedCharaObject == null || (!isHovered && !askOption.isCurrentlyHoveredCorrectly))
+        {
+            isHoveredWithCharaObject = false;
+        }
+
+
+        if ((isHoveredWithStallObject || isHoveredWithCharaObject) && !hoveredWithObjectFlag)
         {
             hoveredWithObjectFlag = true;
             StartCoroutine(hoveredWithStallObjectAnim.anim.Play(hoveredWithStallObjectAnim));
         }
 
-        if (!isHoveredWithStallObject && hoveredWithObjectFlag)
+        if (!isHoveredWithStallObject && !isHoveredWithCharaObject && hoveredWithObjectFlag)
         {
             hoveredWithObjectFlag = false;
             StartCoroutine(hoveredWithStallObjectAnim.anim.PlayBackward(hoveredWithStallObjectAnim, true));
         }
     }
 
-    private void UpdateCharacterInfoDisplay()
+    public void UpdateKnownFeatures()
     {
-        if(isSelected)
+        foreach(PotentialObject potentialObject in potentialObjects)
         {
-            if(!selectedFlag)
+            foreach (PotentialObject.KnownFeature knownFeature in potentialObject.knownFeatures)
             {
-                StartCoroutine(belongingsAnim.anim.PlayBackward(belongingsAnim, true));
-                belongingsAnim.canvasGroup.blocksRaycasts = true;
-                belongingsAnim.canvasGroup.interactable = true;
-                selectedFlag = true;
+                if(knownFeature.isKnown)
+                {
+                    if(knownFeature.timeRememberedRmn > 0)
+                    {
+                        knownFeature.timeRememberedRmn -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        knownFeature.ForgetFeature();
+                    }
+                }
             }
-            nameText.gameObject.SetActive(true);
-        }
-        else
-        {
-            if(selectedFlag)
-            {
-                StartCoroutine(belongingsAnim.anim.Play(belongingsAnim));
-                belongingsAnim.canvasGroup.blocksRaycasts = false;
-                belongingsAnim.canvasGroup.interactable = false;
-                selectedFlag = false;
-            }
-            nameText.gameObject.SetActive(false);
-        }
 
-        enthousiasmFiller.fillAmount = currentEnthousiasm / 1;
+            potentialObject.RefreshInterestLevel();
+            if (NegoceManager.I.selectedCharacter == this)
+            {
+                potentialObject.stallObject.SetInterestLevelDisplay(potentialObject.interestLevel / exchangeTreshold, identificationColor, false);
+            }
+        }
     }
 
     public void UpdateSpeakingAndThinking()
@@ -187,6 +208,10 @@ public abstract class CharacterHandler : UIInteractable
         if (currentThinkTimeRmn > 0)
         {
             currentThinkTimeRmn -= Time.deltaTime;
+        }
+        else
+        {
+            isThinking = false;
         }
 
         if (presentedObjectToThink != null)
@@ -198,11 +223,31 @@ public abstract class CharacterHandler : UIInteractable
                 StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
             }
         }
+
+        if (argumentedObjectToThink != null)
+        {
+            if (currentThinkTimeRmn <= 0)
+            {
+                ReactToArgumentFeature(argumentedFeatureToThink, argumentedObjectToThink.stallObject);
+                argumentedObjectToThink = null;
+                StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+            }
+        }
+
+        if (isSpeaking)
+        {
+            speakingText.text = currentSpeech.GetCurrentSpeechProgression(Time.deltaTime);
+            if(currentSpeech.isFinished)
+            {
+                StartCoroutine(speakingBoxAnim.anim.Play(speakingBoxAnim));
+                isSpeaking = false;
+            }
+        }
     }
 
     public void ReactToPresent(PotentialObject presentedObject)
     {
-        if (DoesObjectHaveHigherInterestLevel(presentedObject))
+        if (DoesObjectHasCommonCategory(presentedObject.stallObject.linkedObject, character.initialInterests))
         {
             currentEnthousiasm += enthousiasmIncreaseWithCorrectPresent;
             Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
@@ -212,11 +257,11 @@ public abstract class CharacterHandler : UIInteractable
             currentEnthousiasm -= enthousiasmDecreaseWithIncorrectPresent;
             Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
         }
-        presentedObject.IncreaseInterestLevel(0, true);
+        presentedObject.RefreshInterestLevel();
 
         if (NegoceManager.I.selectedCharacter == this)
         {
-            presentedObject.stallObject.SetInterestLevelDisplay(presentedObject.knownInterestLevel / exchangeTreshold, identificationColor);
+            presentedObject.stallObject.SetInterestLevelDisplay(presentedObject.interestLevel / exchangeTreshold, identificationColor, false);
         }
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
     }
@@ -228,35 +273,125 @@ public abstract class CharacterHandler : UIInteractable
         Think(reactTimePresent, presentedObjectToThink);
     }
 
-    public void ArgumentCategoryOnObject(GameData.CategoryProperties categoryProperties, StallObject argumentedObject)
+    public void AskAbout(CharaObject askedObject)
     {
-        bool categoryInitialInterest = false;
-        for (int i = 0; i < character.initialInterests.Count; i++)
+        askedObject.isPersonnalValueKnown = true;
+        if(character.randomlyGenerated)
         {
-            if(character.initialInterests[i] == categoryProperties.category)
-            {
-                categoryInitialInterest = true;
-            }
-        }
-
-        if(categoryInitialInterest)
-        {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(interestLevelMultiplierWithCorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
-            Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
+            Speak(character.needs[Random.Range(0, character.needs.Count)].defaultHintToTell, 6);
         }
         else
         {
-            GetPotentialFromStallObject(argumentedObject).IncreaseInterestLevel(interestLevelMultiplierWithIncorrectCategoryArgument * categoryProperties.argumentInterestLevelIncrease, true);
-            currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
-            Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
+            Speak(character.GetPersonnalObjectFromObject(askedObject.linkedObject).infoGivenWhenAsked);
+        }
+    }
+
+    public void ReactToArgumentFeature(Object.Feature featureArgumented, StallObject argumentedObject)
+    {
+        PotentialObject argumentedPotentialObject = GetPotentialFromStallObject(argumentedObject);
+        PotentialObject.KnownFeature knownFeatureArgumented = null;
+        for (int i = 0; i < argumentedPotentialObject.knownFeatures.Count; i++)
+        {
+            if(featureArgumented == argumentedPotentialObject.knownFeatures[i].feature)
+            {
+                knownFeatureArgumented = argumentedPotentialObject.knownFeatures[i];
+            }
         }
 
-        if (NegoceManager.I.selectedCharacter == this)
+        if (featureArgumented.isCategoryFeature)
         {
-            argumentedObject.SetInterestLevelDisplay(GetPotentialFromStallObject(argumentedObject).knownInterestLevel / exchangeTreshold, identificationColor);
+            bool categoryIsInitialInterest = false;
+            for (int i = 0; i < character.initialInterests.Count; i++)
+            {
+                if (character.initialInterests[i] == featureArgumented.categoryProperties.category)
+                {
+                    categoryIsInitialInterest = true;
+                }
+            }
+
+            if (categoryIsInitialInterest)
+            {
+                knownFeatureArgumented.LearnFeature(10, interestLevelMultiplierWithCorrectCategoryArgument * featureArgumented.categoryProperties.argumentInterestLevelIncrease);
+                Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
+                Speak(featureArgumented.categoryProperties.argumentSpeechGoodReaction, 5);
+            }
+            else
+            {
+                currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
+                Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
+                Speak(featureArgumented.categoryProperties.argumentSpeechBadReaction, 5);
+            }
+        }
+        else
+        {
+            Character.Need correspondingNeed = null;
+            for (int i = 0; i < character.needs.Count; i++)
+            {
+                for (int y = 0; y < featureArgumented.traits.Count; y++)
+                {
+                    if (character.needs[i].trait == featureArgumented.traits[y])
+                    {
+                        correspondingNeed = character.needs[i];
+                    }
+                }
+            }
+
+            if (correspondingNeed != null)
+            {
+                knownFeatureArgumented.LearnFeature(10, interestLevelMultiplierWithCorrectFeatureArgument * featureArgumented.interestLevelIncrease);
+                Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
+                Speak(correspondingNeed.reactionSpokenWhenArgumented);
+            }
+            else
+            {
+                Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
+                currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
+                Speak(character.defaultSpeachWhenWrongArgument);
+            }
         }
 
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
+    }
+
+    public void ArgumentFeature(Object.Feature featureArgumented, StallObject argumentedObject)
+    {
+        argumentedObjectToThink = GetPotentialFromStallObject(argumentedObject);
+        argumentedFeatureToThink = featureArgumented;
+        Think(reactTimeArgument, argumentedObjectToThink);
+    }
+
+    public void Think(float timeToThink, PotentialObject potentialObjectToThink)
+    {
+        isThinking = true;
+        currentThinkTimeRmn = timeToThink;
+        if (potentialObjectToThink != null)
+        {
+            thinkingObjectImage.color = Color.white;
+            thinkingObjectImage.sprite = potentialObjectToThink.stallObject.linkedObject.illustration;
+        }
+        else
+        {
+            thinkingObjectImage.color = Color.clear;
+        }
+        StartCoroutine(thinkingBoxAnim.anim.PlayBackward(thinkingBoxAnim, true));
+    }
+
+    public void Speak(Speech speechToSpeak)
+    {
+        isSpeaking = true;
+        currentSpeech = speechToSpeak;
+        currentSpeech.InitSpeechStructure(character);
+        currentSpeech.ResetProgression();
+        StartCoroutine(speakingBoxAnim.anim.PlayBackward(speakingBoxAnim, true));
+    }
+
+    public void Speak(string singleSentenceToSpeak, float speakTime)
+    {
+        isSpeaking = true;
+        currentSpeech = new Speech(singleSentenceToSpeak);
+        currentSpeech.InitSpeechStructure(character);
+        currentSpeech.ResetProgression();
+        StartCoroutine(speakingBoxAnim.anim.PlayBackward(speakingBoxAnim, true));
     }
 
     public void Leave()
@@ -283,22 +418,6 @@ public abstract class CharacterHandler : UIInteractable
         timeSpendRefreshEnthousiasm = 0;
     }
 
-    public void Think(float timeToThink, PotentialObject potentialObjectToThink)
-    {
-        currentThinkTimeRmn = timeToThink;
-        if(potentialObjectToThink != null)
-        {
-            thinkingObjectImage.color = Color.white;
-            thinkingObjectImage.sprite = potentialObjectToThink.stallObject.linkedObject.illustration;
-        }
-        else
-        {
-            thinkingObjectImage.color = Color.clear;
-        }
-        StartCoroutine(thinkingBoxAnim.anim.PlayBackward(thinkingBoxAnim, true));
-    }
-
-
     private void DragAndDropCharaObjectUpdate()
     {
         if (isSelected)
@@ -319,11 +438,23 @@ public abstract class CharacterHandler : UIInteractable
                 }
 
                 Vector3 objectPosToFollow = Input.mousePosition;
-
-                if (!NegoceManager.I.playerHandler.IsPlayerTalking())
+                if(isHoveredWithCharaObject && !isThinking && !isSpeaking && !isListening)
                 {
-                    askOption.Enable("");
-                    dropOptionCanvasGroup.blocksRaycasts = true;
+                    if (!NegoceManager.I.playerHandler.IsPlayerTalking())
+                    {
+                        askOption.Enable("");
+                        dropOptionCanvasGroup.blocksRaycasts = true;
+                    }
+                    else
+                    {
+                        dropOptionCanvasGroup.blocksRaycasts = false;
+                        askOption.Disable();
+                    }
+
+                    if (askOption.isCurrentlyHoveredCorrectly)
+                    {
+                        objectPosToFollow = askOption.rectTransform.position;
+                    }
                 }
                 else
                 {
@@ -331,22 +462,14 @@ public abstract class CharacterHandler : UIInteractable
                     askOption.Disable();
                 }
 
-                if (askOption.isCurrentlyHoveredCorrectly)
-                {
-                    objectPosToFollow = askOption.rectTransform.position;
-                }
-
                 draggedCharaObject.rectTransform.position = objectPosToFollow;
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (Input.GetMouseButtonUp(0))
+                    if (askOption.isCurrentlyHoveredCorrectly)
                     {
-                        if (askOption.isCurrentlyHoveredCorrectly)
-                        {
-                            StartCoroutine(askOption.Select());
-                            Debug.Log("discute");
-                        }
+                        StartCoroutine(askOption.Select());
+                        NegoceManager.I.playerHandler.AskAbout(draggedCharaObject, this);
                     }
 
                     NegoceManager.I.exchangeHandler.DropCharaObject(draggedCharaObject);
@@ -360,6 +483,8 @@ public abstract class CharacterHandler : UIInteractable
             }
             else
             {
+                dropOptionCanvasGroup.blocksRaycasts = false;
+                askOption.Disable();
                 foreach (CharaObject charaObject in belongings)
                 {
                     charaObject.canvasGroup.blocksRaycasts = true;
@@ -445,6 +570,19 @@ public abstract class CharacterHandler : UIInteractable
         return potentialObjectSearched;
     }
 
+    public CharaObject GetCharaObjectFromObject(Object searchedObject)
+    {
+        CharaObject potentialCharaObject = null;
+        foreach (CharaObject charaObject in belongings)
+        {
+            if (charaObject.linkedObject == searchedObject)
+            {
+                potentialCharaObject = charaObject;
+            }
+        }
+        return potentialCharaObject;
+    }
+
     public IEnumerator Appear()
     {
         isAppearing = true;
@@ -485,16 +623,16 @@ public abstract class CharacterHandler : UIInteractable
 
     }
 
-    public void SetInitialState(float startInterestLevel, float startCuriosityLevel, float startEnthousiasm)
+    public void SetInitialState(float startEnthousiasm)
     {
         currentEnthousiasm = startEnthousiasm;
         foreach (PotentialObject potentialObject in potentialObjects)
         {
-            if (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
+            /*if (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
             {
                 potentialObject.interestLevel = startInterestLevel;
                 potentialObject.curiosityLevel = startCuriosityLevel;
-            }
+            }*/
             potentialObject.curiosityLevel = Random.Range(minMaxRandomCuriosity.x, minMaxRandomCuriosity.y);
         }
     }
@@ -502,6 +640,34 @@ public abstract class CharacterHandler : UIInteractable
     #endregion
 
     #region Display
+
+    private void UpdateCharacterInfoDisplay()
+    {
+        if (isSelected)
+        {
+            if (!selectedFlag)
+            {
+                StartCoroutine(belongingsAnim.anim.PlayBackward(belongingsAnim, true));
+                belongingsAnim.canvasGroup.blocksRaycasts = true;
+                belongingsAnim.canvasGroup.interactable = true;
+                selectedFlag = true;
+            }
+            nameText.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (selectedFlag)
+            {
+                StartCoroutine(belongingsAnim.anim.Play(belongingsAnim));
+                belongingsAnim.canvasGroup.blocksRaycasts = false;
+                belongingsAnim.canvasGroup.interactable = false;
+                selectedFlag = false;
+            }
+            nameText.gameObject.SetActive(false);
+        }
+
+        enthousiasmFiller.fillAmount =  Mathf.Lerp(enthousiasmFiller.fillAmount, currentEnthousiasm / 1, Time.deltaTime * enthousiasmLerpRatio);
+    }
 
     Vector2 gazeDirection;
     float gazeAngle;
@@ -586,10 +752,10 @@ public abstract class CharacterHandler : UIInteractable
         }
         identificationCircle.color = new Color(identificationColor.r, identificationColor.g, identificationColor.b, 0.5f);
         selectionAnim.GetReferences();
-
+        thinkBoxDeco.color = identificationColor;
+        speakBoxDeco.color = identificationColor;
         for (int i = 0; i < belongingsSpaces.Count; i++)
         {
-
             if(i >= belongings.Count)
             {
                 belongingsSpaces[i].gameObject.SetActive(false);
@@ -623,6 +789,26 @@ public abstract class CharacterHandler : UIInteractable
         exchangeTreshold /= belongings.Count;
     }
 
+    public void GetBelongingsFromCharacter()
+    {
+        CharaObject newCharaObject = null;
+        for (int i = 0; i < character.personnalObjects.Count; i++)
+        {
+            newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
+            newCharaObject.linkedObject = character.personnalObjects[i].ownedObject;
+            newCharaObject.personnalValue = character.personnalObjects[i].value;
+            newCharaObject.RefreshDisplay();
+            belongings.Add(newCharaObject);
+        }
+
+        exchangeTreshold = 0;
+        for (int i = 0; i < belongings.Count; i++)
+        {
+            exchangeTreshold += belongings[i].personnalValue;
+        }
+        exchangeTreshold /= belongings.Count;
+    }
+
     public override void OnHoverIn()
     {
 
@@ -641,19 +827,15 @@ public abstract class CharacterHandler : UIInteractable
         public StallObject stallObject;
         public float interestLevel;
         public float curiosityLevel;
-        public float knownInterestLevel;
+        public List<KnownFeature> knownFeatures;
 
-        public void IncreaseInterestLevel(float amount, bool refreshKnownLevel)
+        public void RefreshInterestLevel()
         {
-            if (interestLevel < 0)
-            {
-                interestLevel = 0;
-            }
-            interestLevel += amount;
+            interestLevel = 0;
 
-            if (refreshKnownLevel)
+            for (int i = 0; i < knownFeatures.Count; i++)
             {
-                knownInterestLevel = interestLevel;
+                interestLevel += knownFeatures[i].interest;
             }
         }
         public PotentialObject(StallObject _standObject)
@@ -661,7 +843,45 @@ public abstract class CharacterHandler : UIInteractable
             stallObject = _standObject;
             interestLevel = 0;
             curiosityLevel = 0;
-            knownInterestLevel = -1;
+            knownFeatures = new List<KnownFeature>();
+            for (int i = 0; i < stallObject.linkedObject.features.Count; i++)
+            {
+                KnownFeature newKnownFeature = new KnownFeature();
+                newKnownFeature.feature = stallObject.linkedObject.features[i];
+                newKnownFeature.interest = 0;
+                newKnownFeature.timeRememberedRmn = 0;
+                newKnownFeature.isKnown = false;
+                knownFeatures.Add(newKnownFeature);
+            }
+        }
+
+        public class KnownFeature
+        {
+            /// <summary>
+            /// the current interest toward the feature, if the feature is not known it must be set to zero
+            /// </summary>
+            public float interest;
+            public Object.Feature feature;
+            public float timeRememberedRmn;
+            public bool isKnown;
+
+            public void LearnFeature(float timeToRemember, float _interest)
+            {
+                interest = _interest;
+                isKnown = true;
+                timeRememberedRmn = timeToRemember;
+            }
+            public void ForgetFeature()
+            {
+                interest = 0;
+                isKnown = false;
+                timeRememberedRmn = 0;
+            }
+
+            public KnownFeature()
+            {
+
+            }
         }
     }
 }

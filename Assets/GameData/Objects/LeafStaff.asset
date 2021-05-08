@@ -20,9 +20,41 @@ MonoBehaviour:
   origin: 5
   categories: 0100000005000000
   features:
-  - argumentDescription: Magie des plantes
-    argumentTime: 5
-    featureTraits: 0600000007000000
-    featureDescription: "Le baton permet de maitriser des plantes particuli\xE8rement
-      n\xE9fastes pour des squelettes."
-    isKnownWhenObjectAcquired: 0
+  - traits: 
+    argumentTitle: 'default : Weapon'
+    argumentSpokenText: "Une arme fiable qui ne vous decevra point lors de vos affrontements
+      les plus f\xE9roces"
+    argumentSpeakTime: 3
+    description: 'default : Weapon'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 4
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 1
+      color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
+      icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 4
+      argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
+        affrontements les plus f\xE9roces"
+      argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
+      argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
+  - traits: 
+    argumentTitle: 'default : Magic'
+    argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
+      ne pourrez plus vous passer
+    argumentSpeakTime: 3
+    description: 'default : Magic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
+        ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie ce n'est pas ce que j'ai besoin

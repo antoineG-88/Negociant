@@ -15,7 +15,7 @@ MonoBehaviour:
   objectName: Poing Trident
   title: des Akmars
   illustration: {fileID: 21300000, guid: fa000256533b3f54c99ee20a8d239059, type: 3}
-  description: C'est une arme ancinne qui se porte sur le poings
+  description: C'est une arme ancienne qui se porte sur le poings
   originDescription: "Elle proviens d'un peuple \xE9teint aujourd'hui"
   origin: 3
   categories: 0100000003000000

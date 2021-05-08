@@ -13,13 +13,124 @@ MonoBehaviour:
   m_Name: Hecia
   m_EditorClassIdentifier: 
   characterName: Hecia
-  illustration: {fileID: 21300000, guid: 9d35e06f3fd156b4482bb41174d6cf47, type: 3}
+  illustration: {fileID: 3067962901903917793, guid: 2ec6b97270573f7469cd29b7365471ef,
+    type: 3}
+  faceSprite: {fileID: -8636346921316109455, guid: 2ec6b97270573f7469cd29b7365471ef,
+    type: 3}
   temper: 0
+  initialInterests: 00000000
   needs:
   - trait: 11
-    importance: 0.5
-  - trait: 9
-    importance: 0.9
-  - trait: 8
-    importance: 0.8
-  initialInterest: 0000000003000000
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Je suis toujours int\xE9ress\xE9 par les mat\xE9riaux rare,_
+        ca me plait !"
+      sentences:
+      - sentencePart:
+        - "Je suis toujours int\xE9ress\xE9 par les mat\xE9riaux rare,"
+        - ' ca me plait !'
+      speakingSpeed: 0
+      sentencePartPauseTime: 0.4
+      sentencePauseToNext: 1.5
+      isFinished: 1
+  - trait: 16
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Je me retrouve souvent confront\xE9 \xE0 des Heskmar,_ ca me
+        sera utile."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 1
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: De la corruption,_ j'aime beaucoup ca !
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 12
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Si c'est l\xE9ger c'est toujours mieux."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 7
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Je manque toujours de moyen d'affaiblir mes ennemis.
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 5
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: J'avoue j'ai un petit faible pour les objets de la noblesse.
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: d35a275d06b1c904f8a7f3742361b837, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Oh ! Cette dague ..._ cela fait un moment que je la garde.&Je
+        nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9_ et j'ai
+        arrach\xE9 cette arme des mains de leur chef que j'avais corrompu.&J'ai cru
+        qu'elle \xE9tait forg\xE9 dans du Cateruim _mais j'ai \xE9t\xE9 d\xE9cu."
+      sentences:
+      - sentencePart:
+        - Oh ! Cette dague ...
+        - ' cela fait un moment que je la garde.'
+      - sentencePart:
+        - "Je nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9"
+        - " et j'ai arrach\xE9 cette arme des mains de leur chef que j'avais corrompu."
+      - sentencePart:
+        - "J'ai cru qu'elle \xE9tait forg\xE9 dans du Cateruim "
+        - "mais j'ai \xE9t\xE9 d\xE9cu."
+      speakingSpeed: 0
+      sentencePartPauseTime: 0.4
+      sentencePauseToNext: 1.5
+      isFinished: 0
+    traitHintedWithInfo: 010000000b00000010000000
+    value: 23
+  - ownedObject: {fileID: 11400000, guid: 495334a907439f54082ed28169e4f956, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Cette pi\xE8ce d'armure est trop lourde pour moi. &Je l'avais
+        \xE9changer au d\xE9part car on m'avais dit qu'il \xE9tait port\xE9 par la
+        garde imp\xE9rial &mais je commence me dire que j'aurais du le laisser et
+        prendre la potion d'aveuglement \xE0 la place."
+      sentences:
+      - sentencePart:
+        - "Cette pi\xE8ce d'armure est trop lourde pour moi. "
+      - sentencePart:
+        - "Je l'avais \xE9changer au d\xE9part car on m'avais dit qu'il \xE9tait
+          port\xE9 par la garde imp\xE9rial "
+      - sentencePart:
+        - "mais je commence me dire que j'aurais du le laisser et prendre la potion
+          d'aveuglement \xE0 la place."
+      speakingSpeed: 0
+      sentencePartPauseTime: 0.4
+      sentencePauseToNext: 1.5
+      isFinished: 1
+    traitHintedWithInfo: 05000000070000000c000000
+    value: 12
+  defaultSpeachWhenWrongArgument:
+    speechRawText: 
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 1.5
+  speechPauseTimeBetweenSentenceParts: 0.4
+  randomlyGenerated: 0

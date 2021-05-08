@@ -534,7 +534,7 @@ MonoBehaviour:
   interestLevelFiller: {fileID: 7607098083002528895}
   objectDirectInfoPanel: {fileID: 8598219009351978363}
   interestLevelToShow: 0
-  interestLevelAnimLerpRatio: 20
+  interestLevelAnimLerpRatio: 10
   canBeHovered: 0
 --- !u!222 &2288157123040881636
 CanvasRenderer:

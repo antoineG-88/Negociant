@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ArgumentRadialMenu : UIInteractable
 {
-    public List<CategoryRadialOption> categoryRadialOptions;
-    public List<RadialOption> featureRadialOptions;
+    public List<FeatureRadialOption> categoryRadialOptions;
+    public List<FeatureRadialOption> featureRadialOptions;
     public Image objectIllustration;
     public Image characterFace;
     public Text objectNameText;
@@ -31,12 +31,27 @@ public class ArgumentRadialMenu : UIInteractable
             {
                 if(categoryRadialOptions[i].radialOption.isHovered)
                 {
-                    argumentDescriptionText.text = GameData.GetCategoryPropertiesFromCategory(categoryRadialOptions[i].category).argumentDescription;
+                    argumentDescriptionText.text = categoryRadialOptions[i].feature.categoryProperties.argumentDescription;
                 }
 
                 if(categoryRadialOptions[i].radialOption.isClicked && !NegoceManager.I.playerHandler.IsPlayerTalking())
                 {
-                    NegoceManager.I.playerHandler.ArgumentCategory(currentStallObject, characterTargeted, GameData.GetCategoryPropertiesFromCategory(categoryRadialOptions[i].category));
+                    NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, categoryRadialOptions[i].feature);
+                    Close();
+                }
+            }
+
+            
+            for (int i = 0; i < featureRadialOptions.Count; i++)
+            {
+                if (featureRadialOptions[i].radialOption.isHovered)
+                {
+                    argumentDescriptionText.text = featureRadialOptions[i].feature.description;
+                }
+
+                if (featureRadialOptions[i].radialOption.isClicked && !NegoceManager.I.playerHandler.IsPlayerTalking())
+                {
+                    NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, featureRadialOptions[i].feature);
                     Close();
                 }
             }
@@ -51,23 +66,39 @@ public class ArgumentRadialMenu : UIInteractable
     public void Initialize(StallObject stallObject, CharacterHandler characterHandler)
     {
         StartCoroutine(appearAnim.anim.PlayBackward(appearAnim, true));
-        categoryRadialOptions[0].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).icon;
-        categoryRadialOptions[0].radialOption.icon.color = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).color;
-        categoryRadialOptions[0].category = stallObject.linkedObject.categories[0];
-        categoryRadialOptions[0].radialOption.time.text = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[0]).argumentTime.ToString() + " s.";
+        categoryRadialOptions[0].radialOption.icon.sprite = stallObject.linkedObject.features[0].categoryProperties.icon;
+        categoryRadialOptions[0].radialOption.icon.color = stallObject.linkedObject.features[0].categoryProperties.color;
+        categoryRadialOptions[0].feature = stallObject.linkedObject.features[0];
+        categoryRadialOptions[0].radialOption.time.text = stallObject.linkedObject.features[0].categoryProperties.argumentTime.ToString() + " s.";
 
         if(stallObject.linkedObject.categories.Count > 1)
         {
             categoryRadialOptions[1].radialOption.gameObject.SetActive(true);
-            categoryRadialOptions[1].radialOption.icon.sprite = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).icon;
-            categoryRadialOptions[1].radialOption.icon.color = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).color;
-            categoryRadialOptions[1].category = stallObject.linkedObject.categories[1];
-            categoryRadialOptions[1].radialOption.time.text = GameData.GetCategoryPropertiesFromCategory(stallObject.linkedObject.categories[1]).argumentTime.ToString() + " s.";
+            categoryRadialOptions[1].radialOption.icon.sprite = stallObject.linkedObject.features[1].categoryProperties.icon;
+            categoryRadialOptions[1].radialOption.icon.color = stallObject.linkedObject.features[1].categoryProperties.color;
+            categoryRadialOptions[1].feature = stallObject.linkedObject.features[1];
+            categoryRadialOptions[1].radialOption.time.text = stallObject.linkedObject.features[1].categoryProperties.argumentTime.ToString() + " s.";
         }
         else
         {
             categoryRadialOptions[1].radialOption.icon.color = Color.clear;
             categoryRadialOptions[1].radialOption.gameObject.SetActive(false);
+        }
+
+
+        for (int i = 0; i < featureRadialOptions.Count; i++)
+        {
+            if(i + 2 < stallObject.linkedObject.features.Count)
+            {
+                featureRadialOptions[i].radialOption.gameObject.SetActive(true);
+                featureRadialOptions[i].radialOption.info.text = stallObject.linkedObject.features[i + 2].argumentTitle;
+                featureRadialOptions[i].radialOption.time.text = stallObject.linkedObject.features[i + 2].argumentSpeakTime.ToString() + " s.";
+                featureRadialOptions[i].feature = stallObject.linkedObject.features[i + 2];
+            }
+            else
+            {
+                featureRadialOptions[i].radialOption.gameObject.SetActive(false);
+            }
         }
 
         currentStallObject = stallObject;
@@ -95,9 +126,9 @@ public class ArgumentRadialMenu : UIInteractable
     }
 
     [System.Serializable]
-    public class CategoryRadialOption
+    public class FeatureRadialOption
     {
         public RadialOption radialOption;
-        [HideInInspector] public Category category;
+        [HideInInspector] public Object.Feature feature;
     }
 }

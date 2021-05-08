@@ -2,29 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Character", menuName = "Negociant/Create new unique character", order = 2)]
+[CreateAssetMenu(fileName = "Character", menuName = "Negociant/new Character", order = 2)]
 public class Character : ScriptableObject
 {
-    [System.Serializable]
-    public class Need
-    {
-        public Trait trait;
-        [Range(0f, 1f)] public float importance;
-
-        public Need(Trait needTrait, float needImportance)
-        {
-            trait = needTrait;
-            importance = needImportance;
-        }
-    }
-
     public string characterName;
     public Sprite illustration;
     public Sprite faceSprite;
     public Temper temper;
-    public List<Need> needs;
     public List<Category> initialInterests;
-    public List<Object> ownedObjects;
+    public List<Need> needs;
+    public List<PersonnalObject> personnalObjects;
+    public Speech defaultSpeachWhenWrongArgument;
+    public float speechBaseSpeed;
+    public float speechPauseTimeBetweenSentences;
+    public float speechPauseTimeBetweenSentenceParts;
+    public bool randomlyGenerated;
+
+    public PersonnalObject GetPersonnalObjectFromObject(Object searchedObject)
+    {
+        PersonnalObject potentialPersonnalObject = null;
+        foreach(PersonnalObject personnalObject in personnalObjects)
+        {
+            if(personnalObject.ownedObject == searchedObject)
+            {
+                potentialPersonnalObject = personnalObject;
+            }
+        }
+        return potentialPersonnalObject;
+    }
+
+    [System.Serializable]
+    public class Need
+    {
+        public Trait trait;
+        [HideInInspector] public string defaultHintToTell;
+        public Speech reactionSpokenWhenArgumented;
+
+        public Need(Trait needTrait, bool automaticHint)
+        {
+            trait = needTrait;
+            if(automaticHint)
+            {
+                defaultHintToTell = "hum ... j'aime le " + trait.ToString();
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class PersonnalObject
+    {
+        public Object ownedObject;
+        public Speech infoGivenWhenAsked;
+        public List<Trait> traitHintedWithInfo;
+        public float value;
+    }
 }
 
-public enum Temper { Decisive, OpenMinded};
+public enum Temper {Decisive, OpenMinded};

@@ -32,11 +32,13 @@ public class GameData : MonoBehaviour
         public float argumentTime;
         public float argumentInterestLevelIncrease; 
         [TextArea] public string argumentDescription;
+        [TextArea] public string argumentSpeechGoodReaction;
+        [TextArea] public string argumentSpeechBadReaction;
     }
     public static CategoryProperties GetCategoryPropertiesFromCategory(Category searchedCategory)
     {
         CategoryProperties theCategoryProperties = null;
-        for (int i = 0; i < categoriesProperties.Count; i++)
+        for (int i =0; i < categoriesProperties.Count; i++)
         {
             if (categoriesProperties[i].category == searchedCategory)
             {

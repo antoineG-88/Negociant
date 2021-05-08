@@ -12,7 +12,7 @@ public class OpenMindedCharacterHandler : CharacterHandler
 
     public override void UpdateBehavior()
     {
-        if (!isTalking)
+        if (!isListening)
         {
             if (gazeTimeRmn > 0)
             {
@@ -63,7 +63,7 @@ public class OpenMindedCharacterHandler : CharacterHandler
             }
             else
             {
-                if (!isTalking)
+                if (!isListening)
                 {
                     Leave();
                 }

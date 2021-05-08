@@ -26,7 +26,6 @@ public class CharaObject : UIInteractable
         categoriesAppearAnim.anim = Instantiate(categoriesAppearAnim.anim);
         categoriesAppearAnim.GetReferences();
         personnalValueFiller.fillAmount = personnalValue / 50;
-        isPersonnalValueKnown = true; // remove 
         categoriesAppearAnim.anim.SetAtStartState(categoriesAppearAnim);
     }
 

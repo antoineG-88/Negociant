@@ -21,4 +21,61 @@ MonoBehaviour:
     la Tour ruin\xE9e au nord."
   origin: 6
   categories: 0300000005000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Relic'
+    argumentSpokenText: Une relique ancienne qui ne se fabrique de nos jours
+    argumentSpeakTime: 1
+    description: 'default : Relic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - traits: 
+    argumentTitle: 'default : Magic'
+    argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
+      ne pourrez plus vous passer
+    argumentSpeakTime: 2
+    description: 'default : Magic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 2
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
+        ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - traits: 0700000004000000
+    argumentTitle: Malaisant
+    argumentSpokenText: "Tenez, si vous le toucher vous vous sentirez malais\xE9...
+      c'est parce qu'elle est imbib\xE9 de magie du cr\xE9puscule. C'est le parfait
+      cadeau empoisonn\xE9"
+    argumentSpeakTime: 5
+    description: "Elle a \xE9t\xE9 impr\xE9gn\xE9 de magie cr\xE9pusculaire rendant
+      n'importe qui la touchant malais\xE9"
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 

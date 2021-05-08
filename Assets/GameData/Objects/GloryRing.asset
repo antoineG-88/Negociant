@@ -23,19 +23,40 @@ MonoBehaviour:
   origin: 1
   categories: 0200000003000000
   features:
-  - argumentDescription: Anneau vigoureux
-    argumentTime: 8
-    featureTraits: 060000000e000000
-    featureDescription: "Lorsque l'anneau est port\xE9 au doigt, il donne une augmentation
-      d'\xE9nergie e tde vigueur \xE0 son porteur."
-    isKnownWhenObjectAcquired: 0
-    visibility: 0
-  - argumentDescription: "Gagn\xE9 lors d'un tournoi de Gladiateur"
-    argumentTime: 15
-    featureTraits: 0a0000000b000000
-    featureDescription: "L'anneau a \xE9t\xE9 la r\xE9compense d'un grand tournoi
-      de gladiateur qui a eu lieu i ly a plus de 200 ans. Il a \xE9t\xE9 transmit
-      de g\xE9n\xE9ration en g\xE9n\xE9ration jusqu'a \xEAtre retrouv\xE9 sur le
-      cadavre d'une femme au temple du serpent."
-    isKnownWhenObjectAcquired: 0
-    visibility: 0.3
+  - traits: 
+    argumentTitle: 'default : Accessory'
+    argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
+    argumentSpeakTime: 3
+    description: 'default : Accessory'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 2
+      color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+      icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 10
+      argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
+        style"
+      argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
+        mon style"
+      argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+  - traits: 
+    argumentTitle: 'default : Relic'
+    argumentSpokenText: Une relique ancienne qui ne se fabrique de nos jours
+    argumentSpeakTime: 3
+    description: 'default : Relic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...

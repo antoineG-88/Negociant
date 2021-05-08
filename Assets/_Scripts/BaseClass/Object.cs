@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "UniqueObject", menuName = "Negociant/Create new unique object", order = 1)]
+[CreateAssetMenu(fileName = "UniqueObject", menuName = "Negociant/new Object", order = 1)]
 public class Object : ScriptableObject
 {
     public string objectName;
@@ -15,6 +15,36 @@ public class Object : ScriptableObject
     public List<Category> categories;
     public List<Feature> features;
 
+    public void SetAutomaticCategoryFeatures()
+    {
+        Feature newCategoryFeature = null;
+        List<Feature> existingFeatures = new List<Feature>();
+        existingFeatures.AddRange(features);
+        for (int i = 0; i < existingFeatures.Count; i++)
+        {
+            if (existingFeatures[i].isCategoryFeature)
+            {
+                existingFeatures.RemoveAt(i);
+                i--;
+            }
+        }
+        features.Clear();
+        foreach (Category category in categories)
+        {
+            newCategoryFeature = new Feature();
+            newCategoryFeature.categoryProperties = GameData.GetCategoryPropertiesFromCategory(category);
+            newCategoryFeature.argumentTitle = "default : " + newCategoryFeature.categoryProperties.category.ToString();
+            newCategoryFeature.argumentSpokenText = newCategoryFeature.categoryProperties.argumentDescription;
+            newCategoryFeature.argumentSpeakTime = newCategoryFeature.categoryProperties.argumentTime;
+            newCategoryFeature.description = "default : " + newCategoryFeature.categoryProperties.category.ToString();
+            newCategoryFeature.isKnownWhenObjectAcquired = true;
+            newCategoryFeature.interestLevelIncrease = newCategoryFeature.categoryProperties.argumentInterestLevelIncrease;
+            newCategoryFeature.isCategoryFeature = true;
+            features.Add(newCategoryFeature);
+        }
+        features.AddRange(existingFeatures);
+    }
+
     public Object()
     {
     }
@@ -22,11 +52,15 @@ public class Object : ScriptableObject
     [System.Serializable]
     public class Feature
     {
-        public string argumentDescription;
-        public float argumentTime;
-        public List<Trait> featureTraits;
-        [TextArea] public string featureDescription;
+        public List<Trait> traits;
+        public string argumentTitle;
+        [TextArea] public string argumentSpokenText;
+        public float argumentSpeakTime;
+        [TextArea] public string description;
         public bool isKnownWhenObjectAcquired;
+        public float interestLevelIncrease;
+        public bool isCategoryFeature;
+        public GameData.CategoryProperties categoryProperties;
 
         public Feature()
         {
@@ -35,7 +69,7 @@ public class Object : ScriptableObject
 }
 
 
-public enum Trait { ColdResistant, HeatResistant, Shiny, Heavy, Light, Mysterious, Magic, SkeletonProof, SandWormProof, Clean, Old, NobleOrigins, Sharp, GoodMaterial, VigorUp};
+public enum Trait { SandWorm, Corruption, Shiny, AuroraMagic, DuskMagic, Noble, Sharp, WeaknessGiving, StrenghGiving, Lost, Glorious, RareMaterial, Light, Heavy, Cold, Hot, Heskmar};
 public enum Category { Armor, Weapon, Accessory, Relic, Knowledge, Magic};
 public enum Origin { Unknown, DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, FrozenRuinedTower};
 

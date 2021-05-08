@@ -23,7 +23,6 @@ public class NegoceManager : MonoBehaviour
     public RectTransform gazePanel;
     public List<Color> identificationColors;
     public Vector2 timeRangeBetweenCharacterApparition;
-    public int randomCharacterGenerated;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -31,6 +30,7 @@ public class NegoceManager : MonoBehaviour
     public int maxChNeeds;
     public List<Sprite> allCharacterIllustrations;
     public List<Sprite> allCharacterFaces;
+    public int randomCharacterGenerated;
 
     [HideInInspector] public List<CharacterHandler> allPresentCharacters;
     [HideInInspector] public bool unfoldTime;
@@ -52,10 +52,18 @@ public class NegoceManager : MonoBehaviour
         unfoldTime = true;
         negoceTimeSpend = 0;
         allPresentCharacters = new List<CharacterHandler>();
-        for (int i = 0; i < randomCharacterGenerated; i++)
+        if(randomCharacterGenerated > 0)
         {
-            allPossibleCharacters.Add(GetRandomGeneratedCharacter());
+            for (int i = 0; i < randomCharacterGenerated; i++)
+            {
+                allPossibleCharacters.Add(GetRandomGeneratedCharacter());
+            }
         }
+        else
+        {
+
+        }
+
         nextCharacterApparitionTime = UnityEngine.Random.Range(1, 2);
         for (int i = 0; i < playerHandler.allStallObjects.Count; i++)
         {
@@ -135,7 +143,7 @@ public class NegoceManager : MonoBehaviour
                     if (standObject == potentialObject.stallObject)
                     {
                         standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
-                        standObject.SetInterestLevelDisplay(potentialObject.knownInterestLevel / selectedCharacter.exchangeTreshold, selectedCharacter.identificationColor);
+                        standObject.SetInterestLevelDisplay(potentialObject.interestLevel / selectedCharacter.exchangeTreshold, selectedCharacter.identificationColor, true);
                     }
                 }
 
@@ -150,26 +158,21 @@ public class NegoceManager : MonoBehaviour
 
     private Character GetRandomAbsentCharacter()
     {
-        Character chosenChara;
-        bool charaAlreadyPresent = false;
-        int iteration = 0;
-        do
+        Character chosenChara = null;
+
+        List<Character> allAbsentCharacter = new List<Character>();
+        allAbsentCharacter.AddRange(allPossibleCharacters);
+        for (int i = 0; i < allPresentCharacters.Count; i++)
         {
-            charaAlreadyPresent = false;
-            iteration++;
-            chosenChara = allPossibleCharacters[UnityEngine.Random.Range(0, allPossibleCharacters.Count)];
+            allAbsentCharacter.Remove(allPresentCharacters[i].character);
+        }
 
-            for (int i = 0; i < allPresentCharacters.Count; i++)
-            {
-                if (allPresentCharacters[i].character == chosenChara)
-                {
-                    charaAlreadyPresent = true;
-                }
-            }
+        if (allAbsentCharacter.Count > 0)
+        {
+            chosenChara = allAbsentCharacter[UnityEngine.Random.Range(0, allAbsentCharacter.Count)];
+        }
 
-        } while (charaAlreadyPresent && iteration < 200);
-
-        return charaAlreadyPresent ? null : chosenChara;
+        return chosenChara;
     }
 
     private void AppearCharacter(Character theCharacter)
@@ -191,7 +194,14 @@ public class NegoceManager : MonoBehaviour
         newCharacterHandler.gazeDisplay.gameObject.name = newCharacterHandler.character.characterName + "'s gaze";
         newCharacterHandler.characterCanvasRectTransform = charactersDisplay;
         newCharacterHandler.Init();
-        newCharacterHandler.SetRandomListOfCharaObject();
+        if(newCharacterHandler.character.randomlyGenerated)
+        {
+            newCharacterHandler.SetRandomListOfCharaObject();
+        }
+        else
+        {
+            newCharacterHandler.GetBelongingsFromCharacter();
+        }
 
         RefreshCharactersDisplay();
         StartCoroutine(newCharacterHandler.Appear());
@@ -223,12 +233,11 @@ public class NegoceManager : MonoBehaviour
 
         //newCharacter.temper = (Temper)Enum.ToObject(typeof(Temper), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Temper)).Length));
         newCharacter.temper = Temper.Decisive;
-        List<Character.Need> characterNeeds = new List<Character.Need>();
+        newCharacter.needs = new List<Character.Need>();
         for (int i = 0; i < UnityEngine.Random.Range(minChNeeds, maxChNeeds); i++)
         {
-            characterNeeds.Add(new Character.Need((Trait)Enum.ToObject(typeof(Trait), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Trait)).Length)), UnityEngine.Random.Range(0f, 1f)));
+            newCharacter.needs.Add(new Character.Need((Trait)Enum.ToObject(typeof(Trait), UnityEngine.Random.Range(0, Enum.GetValues(typeof(Trait)).Length)), true));
         }
-
         System.Random rnd = new System.Random(UnityEngine.Random.Range(2000, 3000));
         newCharacter.name = "";
         for (int i = 0; i < 8; i++)
@@ -242,7 +251,10 @@ public class NegoceManager : MonoBehaviour
         newCharacter.illustration = allCharacterIllustrations[rand];
         newCharacter.faceSprite = allCharacterFaces[rand];
         newCharacter.name = newCharacter.characterName;
-        //Debug.Log(newCharacter.characterName + " added to possibleCharacters");
+
+        newCharacter.personnalObjects = new List<Character.PersonnalObject>();
+        newCharacter.randomlyGenerated = true;
+
         return newCharacter;
     }
 

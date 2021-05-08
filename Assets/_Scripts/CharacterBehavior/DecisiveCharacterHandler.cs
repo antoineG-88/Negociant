@@ -17,12 +17,13 @@ public class DecisiveCharacterHandler : CharacterHandler
 
     public override void UpdateBehavior()
     {
-        if (!isTalking)
+        if (!isListening)
         {
             if (nonGazingTimeRMN <= 0 && gazeTimeRmn <= 0)
             {
                 potentialObjectsToLook.Clear();
                 potentialObjectsToLook.AddRange(GetAllInterestingObjectsOnVitrine());
+
                 if (reflexionFlag)
                 {
                     reflexionFlag = false;
@@ -33,8 +34,11 @@ public class DecisiveCharacterHandler : CharacterHandler
 
                 if (objectsLookedNumber < potentialObjectsToLook.Count)
                 {
-                    LookObject(GetMaxCuriosityObjectOnVitrine(potentialObjectsToLook), baseLookingTime);
-                    objectsLookedNumber++;
+                    if(GetMaxCuriosityObjectOnVitrine(potentialObjectsToLook) != null)
+                    {
+                        LookObject(GetMaxCuriosityObjectOnVitrine(potentialObjectsToLook), baseLookingTime);
+                        objectsLookedNumber++;
+                    }
                 }
                 else
                 {
@@ -61,7 +65,7 @@ public class DecisiveCharacterHandler : CharacterHandler
 
         foreach (PotentialObject potentialObject in potentialObjects)
         {
-            if (potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine && DoesObjectHaveHigherInterestLevel(potentialObject))
+            if (potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine && DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
             {
                 potentialObject.curiosityLevel += Time.deltaTime * curiosityIncreaseSpeed;
             }
@@ -69,7 +73,7 @@ public class DecisiveCharacterHandler : CharacterHandler
 
         timeSpendRefreshEnthousiasm += Time.deltaTime;
 
-        if (timeSpendRefreshEnthousiasm > timeBeforeEnthousiasmDecrease)
+        if (timeSpendRefreshEnthousiasm > timeBeforeEnthousiasmDecrease || GetAllInterestingObjectsOnVitrine().Count == 0)
         {
             if (currentEnthousiasm > 0)
             {
@@ -83,7 +87,7 @@ public class DecisiveCharacterHandler : CharacterHandler
 
         if (currentEnthousiasm <= 0)
         {
-            if (!isTalking)
+            if (!isListening)
             {
                 Leave();
             }
@@ -95,7 +99,7 @@ public class DecisiveCharacterHandler : CharacterHandler
         List<PotentialObject> interestingPotentialObjects = new List<PotentialObject>();
         for (int i = 0; i < potentialObjects.Count; i++)
         {
-            if (DoesObjectHaveHigherInterestLevel(potentialObjects[i]) && potentialObjects[i].stallObject.stallSpace.isVitrine)
+            if (DoesObjectHasCommonCategory(potentialObjects[i].stallObject.linkedObject, character.initialInterests) && potentialObjects[i].stallObject.stallSpace.isVitrine)
             {
                 interestingPotentialObjects.Add(potentialObjects[i]);
             }

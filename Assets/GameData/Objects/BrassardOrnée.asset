@@ -16,10 +16,85 @@ MonoBehaviour:
   title: des fonds du canyon de sable
   illustration: {fileID: 21300000, guid: 56fa23485d91de64d9566f47c1df8a1b, type: 3}
   description: "C'est un brassard sans effet magique, cependant il permet de se prot\xE9ger
-    des coups tout en gardantla classe"
+    des coups tout en gardant la classe"
   originDescription: "Il a \xE9t\xE9 trouver lors d'une temp\xEAte qui a frapp\xE9
     le canyon, le vent ayant balayer les sables, le brassard a \xE9t\xE9 r\xE9v\xE9l\xE9
     alors qu'il \xE9t\xE9 enfoui depuis bien longtemps"
   origin: 2
   categories: 0000000002000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Armor'
+    argumentSpokenText: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
+    argumentSpeakTime: 3
+    description: 'default : Armor'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 5
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 5
+      argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"
+  - traits: 
+    argumentTitle: 'default : Accessory'
+    argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
+    argumentSpeakTime: 3
+    description: 'default : Accessory'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 2
+      color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+      icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+      argumentTime: 3
+      argumentInterestLevelIncrease: 10
+      argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
+        style"
+      argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
+        mon style"
+      argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+  - traits: 020000000b000000
+    argumentTitle: "Orn\xE9e d'or et d'un rubis"
+    argumentSpokenText: Je vous permet de vous montrez la dorure qui recouvre cet
+      objet. C'est un rubis d'ailleurs qui orne le centre de ce brassard.
+    argumentSpeakTime: 4
+    description: "Il est orn\xE9e d'un rubis en son centre et poss\xE8de un dorure
+      sur ses extr\xE9mit\xE9s."
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+  - traits: 09000000
+    argumentTitle: Perdu dans le canyon
+    argumentSpokenText: "Avant de le retrouver, il appartenait \xE0 un aventurier
+      de passage dans le canyon."
+    argumentSpeakTime: 2
+    description: Un aventurier l'a perdu dans le canyon, personne ne connais son
+      origine.
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 5
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 

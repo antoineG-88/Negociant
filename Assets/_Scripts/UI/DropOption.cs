@@ -32,6 +32,10 @@ public class DropOption : UIInteractable
 
     public void Enable(string timeText)
     {
+        if (selectAnim.anim != null)
+        {
+            selectAnim.anim.SetAtStartState(selectAnim);
+        }
         display.SetActive(true);
         canReceive = true;
         actionTimeText.text = timeText;
@@ -52,8 +56,8 @@ public class DropOption : UIInteractable
         isPlaying = true;
         yield return new WaitForSeconds(selectAnim.anim.animationTime);
         isPlaying = false;
-        hoverAnim.anim.SetAtStartState(hoverAnim);
         selectAnim.anim.SetAtStartState(selectAnim);
+        hoverAnim.anim.SetAtStartState(hoverAnim);
         Disable();
     }
 

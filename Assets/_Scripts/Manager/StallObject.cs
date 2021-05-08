@@ -44,9 +44,10 @@ public class StallObject : UIInteractable
         }
     }
 
-    public void SetInterestLevelDisplay(float level, Color interestFillerColor)
+    public void SetInterestLevelDisplay(float level, Color interestFillerColor, bool startAnimAtZero)
     {
-        interestLevelFiller.fillAmount = 0;
+        if(startAnimAtZero)
+            interestLevelFiller.fillAmount = 0;
         interestLevelFiller.color = interestFillerColor;
         interestLevelToShow = level;
     }
@@ -66,7 +67,6 @@ public class StallObject : UIInteractable
         {
             categoryDisplay2.transform.parent.gameObject.SetActive(false);
         }
-
     }
 
     public override void OnHoverIn()

@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 229.38, y: 215}
+  m_AnchoredPosition: {x: 187, y: 214}
   m_SizeDelta: {x: 56.914963, y: 268.34436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1053211539
@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4924221571407976762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -358,6 +358,84 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &89820245763948504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7807083206381847171}
+  - component: {fileID: 8777646313577045261}
+  - component: {fileID: 6491632724770189962}
+  m_Layer: 5
+  m_Name: ThinkText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7807083206381847171
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89820245763948504}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5028719612341286684}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 22.785, y: -1.1238}
+  m_SizeDelta: {x: 188.7102, y: 133.44073}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8777646313577045261
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89820245763948504}
+  m_CullTransparentMesh: 0
+--- !u!114 &6491632724770189962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89820245763948504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8018868, g: 0.6107472, b: 0.374466, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: cb40b7c3529cd1f4e841a7d4fb0f2b90, type: 3}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 80
+    m_Alignment: 3
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: ...
 --- !u!1 &739543330411524690
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +942,85 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Questionner
+--- !u!1 &3814696454959202863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8115314406873749531}
+  - component: {fileID: 9088324322619267904}
+  - component: {fileID: 5678129144892574877}
+  m_Layer: 5
+  m_Name: SpeakText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8115314406873749531
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814696454959202863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7912697687623740003}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 3.4673004, y: 0.5}
+  m_SizeDelta: {x: -71.00549, y: -33.31717}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9088324322619267904
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814696454959202863}
+  m_CullTransparentMesh: 0
+--- !u!114 &5678129144892574877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814696454959202863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7924528, g: 0.66870695, b: 0.42239228, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: cb40b7c3529cd1f4e841a7d4fb0f2b90, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Je me suis retrouv\xE9 face \xE0 face avec un loup sauvage dans les montagnes
+    d'Hagdon ..."
 --- !u!1 &3879967711343790202
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +1097,7 @@ MonoBehaviour:
   gazeHeadOffset: 150
   nameText: {fileID: 6636841298738713827}
   enthousiasmFiller: {fileID: 167399558}
+  enthousiasmLerpRatio: 15
   characterCanvasRectTransform: {fileID: 0}
   annoyedFxPrefab: {fileID: 5232284876384432290, guid: 6425c34d35ea1744b9a1075c4ec9ca43,
     type: 3}
@@ -975,7 +1133,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     originalPos: {x: 0, y: 0}
   speakingBox: {fileID: 7912697687623740003}
-  speakingText: {fileID: 0}
+  speakingText: {fileID: 5678129144892574877}
   thinkingBoxAnim:
     anim: {fileID: 11400000, guid: 2377429b756d9964298fec1f43a8c10b, type: 2}
     rectTransform: {fileID: 5028719612341286684}
@@ -983,6 +1141,8 @@ MonoBehaviour:
     originalPos: {x: 0, y: 0}
   thinkingBox: {fileID: 5028719612341286684}
   thinkingObjectImage: {fileID: 4425443791337910146}
+  speakBoxDeco: {fileID: 5503544648237059046}
+  thinkBoxDeco: {fileID: 2601204722136901721}
   allObjectsForCharacter:
   - {fileID: 11400000, guid: ee9f55a6e0cfbea4294cede5e2cd9f84, type: 2}
   - {fileID: 11400000, guid: 04ceb3ac36f6c0940a57a14fac963de5, type: 2}
@@ -998,8 +1158,6 @@ MonoBehaviour:
   charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
     type: 3}
   minMaxObjectPersonnalValue: {x: 10, y: 20}
-  initialInterestLevel: 5
-  initialCuriosityLevel: 0
   baseLookingTime: 1.8
   reflexionTime: 4
   curiosityIncreaseSpeed: 1
@@ -1007,27 +1165,27 @@ MonoBehaviour:
   enthousiasmIncreaseWithCorrectPresent: 0.2
   enthousiasmDecreaseWithIncorrectPresent: 0.1
   interestLevelMultiplierWithCorrectCategoryArgument: 1
-  interestLevelMultiplierWithIncorrectCategoryArgument: 0.6
+  interestLevelMultiplierWithCorrectFeatureArgument: 1
   enthousiasmDecreaseWithIncorrectArgument: 0.3
   initialEntousiasm: 0.7
-  timeBeforeEnthousiasmDecrease: 15
-  enthousiasmDecreaseRate: 0.01
-  reactTimePresent: 8
+  timeBeforeEnthousiasmDecrease: 30
+  enthousiasmDecreaseRate: 0.02
+  reactTimePresent: 3
   askOption: {fileID: 6102746438244712882}
   dropOptionCanvasGroup: {fileID: 6302768126947571058}
+  reactTimeArgument: 4
   belongings: []
   isSelected: 0
   gazeDisplay: {fileID: 0}
   identificationColor: {r: 0, g: 0, b: 0, a: 0}
   isLeaving: 0
-  isTalking: 0
+  isListening: 0
   exchangeTreshold: 0
   potentialObjects: []
   lookedObject:
     stallObject: {fileID: 0}
     interestLevel: 0
     curiosityLevel: 0
-    knownInterestLevel: 0
   gazeTimeRmn: 0
   nonGazingTimeRMN: 0
   maxCuriosityLevel: 0
@@ -1035,6 +1193,7 @@ MonoBehaviour:
   currentEnthousiasm: 0
   isAppearing: 0
   isHoveredWithStallObject: 0
+  isHoveredWithCharaObject: 0
   isSpeaking: 0
   isThinking: 0
 --- !u!222 &7756144542866971032
@@ -1321,7 +1480,7 @@ GameObject:
   - component: {fileID: 8338166817696098616}
   - component: {fileID: 2601204722136901721}
   m_Layer: 5
-  m_Name: SpeakDeco
+  m_Name: ThinkDeco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1504,6 +1663,7 @@ RectTransform:
   - {fileID: 2698218514304409093}
   - {fileID: 6767450323265368306}
   - {fileID: 4735135776245377448}
+  - {fileID: 7807083206381847171}
   m_Father: {fileID: 2919613208417944377}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1980,6 +2140,7 @@ RectTransform:
   m_Children:
   - {fileID: 3444209304565693709}
   - {fileID: 4924221571407976762}
+  - {fileID: 8115314406873749531}
   m_Father: {fileID: 2919613208417944377}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2054,7 +2215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6767450323265368306
 RectTransform:
   m_ObjectHideFlags: 0
