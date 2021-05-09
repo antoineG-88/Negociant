@@ -17,6 +17,7 @@ public class ObjectEditor : Editor
         if (GUILayout.Button("Create default category feature"))
         {
             objectToEdit.SetAutomaticCategoryFeatures();
+            EditorUtility.SetDirty(objectToEdit);
         }
     }
 }

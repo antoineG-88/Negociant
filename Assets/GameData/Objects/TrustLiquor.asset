@@ -21,4 +21,42 @@ MonoBehaviour:
     contre le g\xE9ants des sables"
   origin: 0
   categories: 0200000005000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Accessory'
+    argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
+    argumentSpeakTime: 1
+    description: 'default : Accessory'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 2
+      color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+      icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+      argumentTime: 1
+      argumentInterestLevelIncrease: 10
+      argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
+        style"
+      argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
+        mon style"
+      argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+  - traits: 
+    argumentTitle: 'default : Magic'
+    argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
+      ne pourrez plus vous passer
+    argumentSpeakTime: 2
+    description: 'default : Magic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 2
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
+        ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin

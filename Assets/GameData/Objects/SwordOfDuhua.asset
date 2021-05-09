@@ -20,4 +20,23 @@ MonoBehaviour:
     alonger au milieu du d\xE9sert"
   origin: 1
   categories: 01000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Weapon'
+    argumentSpokenText: "Une arme fiable qui ne vous decevra point lors de vos affrontements
+      les plus f\xE9roces"
+    argumentSpeakTime: 1.5
+    description: 'default : Weapon'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 4
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 1
+      color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
+      icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 4
+      argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
+        affrontements les plus f\xE9roces"
+      argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
+      argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"

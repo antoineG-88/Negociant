@@ -38,12 +38,13 @@ public class Character : ScriptableObject
         [HideInInspector] public string defaultHintToTell;
         public Speech reactionSpokenWhenArgumented;
 
-        public Need(Trait needTrait, bool automaticHint)
+        public Need(Trait needTrait, bool defaultResponse)
         {
             trait = needTrait;
-            if(automaticHint)
+            if(defaultResponse)
             {
                 defaultHintToTell = "hum ... j'aime le " + trait.ToString();
+                reactionSpokenWhenArgumented = new Speech("Parfait !_ J'aime le " + trait.ToString());
             }
         }
     }

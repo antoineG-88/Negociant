@@ -8,7 +8,8 @@ public abstract class CharacterHandler : UIInteractable
     [Header("References")]
     [HideInInspector] public Character character;
     public Image illustrationImage;
-    public TweeningAnimator selectionAnim;
+    public TweeningAnimator permanentDisplaySelectionAnim;
+    public TweeningAnimator illuSelectionAnim;
     public RectTransform rectTransform;
     public float gazeHeadOffset;
     public Text nameText;
@@ -24,6 +25,7 @@ public abstract class CharacterHandler : UIInteractable
     public List<RectTransform> belongingsSpaces;
     public TweeningAnimator belongingsAnim;
     public TweeningAnimator hoveredWithStallObjectAnim;
+    public TweeningAnimator selectionDisplayAppearAnim;
     [Header("Speak&Think Options")]
     public TweeningAnimator speakingBoxAnim;
     public RectTransform speakingBox;
@@ -75,6 +77,7 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public bool isAppearing;
     [HideInInspector] public bool isHoveredWithStallObject;
     [HideInInspector] public bool isHoveredWithCharaObject;
+    [HideInInspector] public Vector2 targetPositionAtTheStall;
     private bool hoveredWithObjectFlag;
     private bool selectedFlag;
     [HideInInspector] public bool isSpeaking;
@@ -91,9 +94,6 @@ public abstract class CharacterHandler : UIInteractable
     {
         hoveredWithStallObjectAnim.GetReferences();
         hoveredWithStallObjectAnim.anim = Instantiate(hoveredWithStallObjectAnim.anim);
-        belongingsAnim.GetReferences();
-        belongingsAnim.anim = Instantiate(belongingsAnim.anim);
-        belongingsAnim.anim.SetAtEndState(belongingsAnim);
         timeSpendRefreshEnthousiasm = 0;
         SetInitialState(initialEntousiasm);
         thinkingBoxAnim.anim = Instantiate(thinkingBoxAnim.anim);
@@ -102,11 +102,20 @@ public abstract class CharacterHandler : UIInteractable
         speakingBoxAnim.anim = Instantiate(speakingBoxAnim.anim);
         speakingBoxAnim.GetReferences();
         speakingBoxAnim.anim.SetAtEndState(speakingBoxAnim);
-        belongingsAnim.canvasGroup.blocksRaycasts = false;
-        belongingsAnim.canvasGroup.interactable = false;
         dropOptionCanvasGroup.blocksRaycasts = false;
         askOption.Disable();
         enthousiasmFiller.fillAmount = initialEntousiasm;
+        selectionDisplayAppearAnim.anim = Instantiate(selectionDisplayAppearAnim.anim);
+        selectionDisplayAppearAnim.GetReferences();
+        selectionDisplayAppearAnim.anim.SetAtStartState(selectionDisplayAppearAnim);
+        illuSelectionAnim.anim = Instantiate(illuSelectionAnim.anim);
+        permanentDisplaySelectionAnim.anim = Instantiate(permanentDisplaySelectionAnim.anim);
+        belongingsAnim.anim = Instantiate(belongingsAnim.anim);
+        selectionDisplayAppearAnim.anim = Instantiate(selectionDisplayAppearAnim.anim);
+        illuSelectionAnim.GetReferences();
+        permanentDisplaySelectionAnim.GetReferences();
+        belongingsAnim.GetReferences();
+        selectionDisplayAppearAnim.GetReferences();
     }
 
     public abstract void UpdateBehavior();
@@ -145,6 +154,7 @@ public abstract class CharacterHandler : UIInteractable
         if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered )
         {
             isHoveredWithStallObject = true;
+            NegoceManager.I.SelectCharacter(this);
         }
         if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredCorrectly && !NegoceManager.I.playerHandler.argumentOption.isCurrentlyHoveredCorrectly))
         {
@@ -276,7 +286,7 @@ public abstract class CharacterHandler : UIInteractable
         askedObject.isPersonnalValueKnown = true;
         if(character.randomlyGenerated)
         {
-            Speak(character.needs[Random.Range(0, character.needs.Count)].defaultHintToTell, 6);
+            Speak(character.needs[Random.Range(0, character.needs.Count)].defaultHintToTell, 3);
         }
         else
         {
@@ -586,15 +596,14 @@ public abstract class CharacterHandler : UIInteractable
         isAppearing = true;
         backWardApparitionAnim.anim = Instantiate(backWardApparitionAnim.anim);
         backWardApparitionAnim.GetReferences();
-        nameText.gameObject.SetActive(false);
         identificationCircle.gameObject.SetActive(false);
         enthousiasmGauge.SetActive(false);
+        UnSelect(true);
         StartCoroutine(backWardApparitionAnim.anim.PlayBackward(backWardApparitionAnim, true));
         yield return new WaitForSeconds(backWardApparitionAnim.anim.animationTime);
         identificationCircle.gameObject.SetActive(true);
         enthousiasmGauge.SetActive(true);
         isAppearing = false;
-        UnSelect(true);
     }
 
     public void Select()
@@ -602,7 +611,12 @@ public abstract class CharacterHandler : UIInteractable
         if (!isSelected)
         {
             isSelected = true;
-            StartCoroutine(selectionAnim.anim.Play(selectionAnim));
+            StartCoroutine(illuSelectionAnim.anim.Play(illuSelectionAnim));
+            StartCoroutine(permanentDisplaySelectionAnim.anim.Play(permanentDisplaySelectionAnim));
+            StartCoroutine(selectionDisplayAppearAnim.anim.Play(selectionDisplayAppearAnim));
+            StartCoroutine(belongingsAnim.anim.PlayBackward(belongingsAnim, true));
+            belongingsAnim.canvasGroup.blocksRaycasts = true;
+            belongingsAnim.canvasGroup.interactable = true;
         }
     }
 
@@ -610,12 +624,22 @@ public abstract class CharacterHandler : UIInteractable
     {
         if (forced)
         {
-            selectionAnim.anim.SetAtStartState(selectionAnim);
+            illuSelectionAnim.anim.SetAtStartState(illuSelectionAnim);
+            permanentDisplaySelectionAnim.anim.SetAtStartState(permanentDisplaySelectionAnim);
+            selectionDisplayAppearAnim.anim.SetAtStartState(selectionDisplayAppearAnim);
+            belongingsAnim.anim.SetAtEndState(belongingsAnim);
+            belongingsAnim.canvasGroup.blocksRaycasts = false;
+            belongingsAnim.canvasGroup.interactable = false;
             isSelected = false;
         }
         else if (isSelected)
         {
-            StartCoroutine(selectionAnim.anim.PlayBackward(selectionAnim, true));
+            StartCoroutine(illuSelectionAnim.anim.PlayBackward(illuSelectionAnim, true));
+            StartCoroutine(permanentDisplaySelectionAnim.anim.PlayBackward(permanentDisplaySelectionAnim, true));
+            StartCoroutine(selectionDisplayAppearAnim.anim.PlayBackward(selectionDisplayAppearAnim, true));
+            StartCoroutine(belongingsAnim.anim.Play(belongingsAnim));
+            belongingsAnim.canvasGroup.blocksRaycasts = false;
+            belongingsAnim.canvasGroup.interactable = false;
             isSelected = false;
         }
 
@@ -641,13 +665,10 @@ public abstract class CharacterHandler : UIInteractable
 
     private void UpdateCharacterInfoDisplay()
     {
-        if (isSelected)
+        /*if (isSelected)
         {
             if (!selectedFlag)
             {
-                StartCoroutine(belongingsAnim.anim.PlayBackward(belongingsAnim, true));
-                belongingsAnim.canvasGroup.blocksRaycasts = true;
-                belongingsAnim.canvasGroup.interactable = true;
                 selectedFlag = true;
             }
             nameText.gameObject.SetActive(true);
@@ -656,13 +677,10 @@ public abstract class CharacterHandler : UIInteractable
         {
             if (selectedFlag)
             {
-                StartCoroutine(belongingsAnim.anim.Play(belongingsAnim));
-                belongingsAnim.canvasGroup.blocksRaycasts = false;
-                belongingsAnim.canvasGroup.interactable = false;
                 selectedFlag = false;
             }
             nameText.gameObject.SetActive(false);
-        }
+        }*/
 
         enthousiasmFiller.fillAmount =  Mathf.Lerp(enthousiasmFiller.fillAmount, currentEnthousiasm / 1, Time.deltaTime * enthousiasmLerpRatio);
     }
@@ -741,7 +759,6 @@ public abstract class CharacterHandler : UIInteractable
 
     public void RefreshCharacterDisplay()
     {
-        selectionAnim.anim = Instantiate(selectionAnim.anim);
         illustrationImage.sprite = character.illustration;
         illustrationImage.preserveAspect = true;
         if(gazeDisplay != null)
@@ -749,7 +766,6 @@ public abstract class CharacterHandler : UIInteractable
             gazeDisplay.GetComponent<Image>().color = identificationColor;
         }
         identificationCircle.color = new Color(identificationColor.r, identificationColor.g, identificationColor.b, 0.5f);
-        selectionAnim.GetReferences();
         thinkBoxDeco.color = identificationColor;
         speakBoxName.text = character.characterName;
         speakBoxName.color = identificationColor;

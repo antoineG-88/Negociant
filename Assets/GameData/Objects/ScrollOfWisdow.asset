@@ -21,4 +21,24 @@ MonoBehaviour:
     d'Hagdon"
   origin: 3
   categories: 04000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Knowledge'
+    argumentSpokenText: Un ouvrage comportant des informations exclusive qui saura
+      satisfaire votre soif de connaissance
+    argumentSpeakTime: 2
+    description: 'default : Knowledge'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 3
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 4
+      color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+      icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+      argumentTime: 2
+      argumentInterestLevelIncrease: 3
+      argumentDescription: Un ouvrage comportant des informations exclusive qui saura
+        satisfaire votre soif de connaissance
+      argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+      argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
+        pour l'instant

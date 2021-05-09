@@ -22,4 +22,23 @@ MonoBehaviour:
     dans le sable."
   origin: 2
   categories: 02000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Accessory'
+    argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
+    argumentSpeakTime: 1
+    description: 'default : Accessory'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 2
+      color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+      icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+      argumentTime: 1
+      argumentInterestLevelIncrease: 10
+      argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
+        style"
+      argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
+        mon style"
+      argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire

@@ -19,4 +19,41 @@ MonoBehaviour:
   originDescription: "Il vient du 34 \xE9tages de la tour gel\xE9e"
   origin: 6
   categories: 0000000001000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Armor'
+    argumentSpokenText: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
+    argumentSpeakTime: 1
+    description: 'default : Armor'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 5
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 1
+      argumentInterestLevelIncrease: 5
+      argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"
+  - traits: 
+    argumentTitle: 'default : Weapon'
+    argumentSpokenText: "Une arme fiable qui ne vous decevra point lors de vos affrontements
+      les plus f\xE9roces"
+    argumentSpeakTime: 1.5
+    description: 'default : Weapon'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 4
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 1
+      color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
+      icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 4
+      argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
+        affrontements les plus f\xE9roces"
+      argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
+      argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"

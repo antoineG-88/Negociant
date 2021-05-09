@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class PlayerHandler : MonoBehaviour
 {
@@ -17,13 +16,8 @@ public class PlayerHandler : MonoBehaviour
     [Header("Actions")]
     public string presentSpokenText;
     public float presentTime;
-    //public Image actionBarFiller;
     public Text currentSpokenText;
-    //public Image objectOfTheActionDisplay;
-    //public Text targetedCharacterNameText;
-    //public Image targetedCharacterFaceDisplay;
     public TweeningAnimator speakBoxAnim;
-    //public RectTransform speakBar;
     public string askSpokenText;
     public float askTime;
     public float speechPauseTime;
@@ -33,10 +27,15 @@ public class PlayerHandler : MonoBehaviour
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
     public Text objectInfoTitleText;
-    public Text objectInfoCategoryText;
+    public Text objectInfoCategory1Text;
+    public Text objectInfoCategory2Text;
+    public Image objectInfoCategory1Icon;
+    public Image objectInfoCategory2Icon;
     public Text objectInfoDescriptionText;
     public Text objectInfoOriginText;
     public Image objectInfoIllustration;
+    public RectTransform featureContentRect;
+    public RectTransform[] featuresInfo;
     public StallObject stallObjectPrefab;
     [Space]
     public TweeningAnimator objectInfoPanel;
@@ -347,11 +346,13 @@ public class PlayerHandler : MonoBehaviour
             }
             else if(selectedStallObject != null)
             {
+                /*
                 selectedStallObject = null;
                 previousSelectedObject = null;
                 objectInfoPanel.canvasGroup.interactable = false;
                 objectInfoPanel.canvasGroup.blocksRaycasts = false;
                 StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
+                */
             }
         }
     }
@@ -431,10 +432,39 @@ public class PlayerHandler : MonoBehaviour
     {
         objectInfoNameText.text = shownObject.linkedObject.objectName;
         objectInfoTitleText.text = shownObject.linkedObject.title;
-        objectInfoCategoryText.text = shownObject.linkedObject.categories[0].ToString() + " / " + (shownObject.linkedObject.categories.Count > 1 ? shownObject.linkedObject.categories[1].ToString() : "");
+        objectInfoCategory1Text.text = shownObject.linkedObject.categories[0].ToString();
+        objectInfoCategory1Icon.sprite = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).icon;
+        objectInfoCategory1Icon.color = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).color;
+
+        if (shownObject.linkedObject.categories.Count > 1)
+        {
+            objectInfoCategory2Icon.gameObject.SetActive(true);
+            objectInfoCategory2Text.text = shownObject.linkedObject.categories[1].ToString();
+            objectInfoCategory2Icon.sprite = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[1]).icon;
+            objectInfoCategory2Icon.color = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[1]).color;
+        }
+        else
+        {
+            objectInfoCategory2Icon.gameObject.SetActive(false);
+        }
         objectInfoDescriptionText.text = shownObject.linkedObject.description;
         objectInfoOriginText.text = shownObject.linkedObject.originDescription;
         objectInfoIllustration.sprite = shownObject.linkedObject.illustration;
+
+        for (int i = 0; i < featuresInfo.Length; i++)
+        {
+            if(i + 2 < shownObject.linkedObject.features.Count)
+            {
+                featuresInfo[i].gameObject.SetActive(true);
+                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].argumentTitle;
+                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].description;
+            }
+            else
+            {
+                featuresInfo[i].gameObject.SetActive(false);
+            }
+        }
+        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - 2) * 130 + 10);
     }
 
     private int halfObjectNumber;

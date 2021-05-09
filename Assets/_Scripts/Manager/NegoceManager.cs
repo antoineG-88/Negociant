@@ -23,6 +23,8 @@ public class NegoceManager : MonoBehaviour
     public RectTransform gazePanel;
     public List<Color> identificationColors;
     public Vector2 timeRangeBetweenCharacterApparition;
+    public float characterMoveLerpRatio;
+    public int additionnalSpaceTakenBySelectedCharacter;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -154,6 +156,13 @@ public class NegoceManager : MonoBehaviour
         {
             charaInfoPanel.SetActive(false);
         }
+
+        RefreshCharactersDisplay();
+
+        foreach (CharacterHandler characterPresent in allPresentCharacters)
+        {
+            characterPresent.rectTransform.anchoredPosition = Vector2.Lerp(characterPresent.rectTransform.anchoredPosition, characterPresent.targetPositionAtTheStall, characterMoveLerpRatio * Time.deltaTime);
+        }
     }
 
     private Character GetRandomAbsentCharacter()
@@ -209,12 +218,22 @@ public class NegoceManager : MonoBehaviour
 
     private void RefreshCharactersDisplay()
     {
+        float passedSelectedCharacter = 0;
         for (int i = 0; i < allPresentCharacters.Count; i++)
         {
             if(!allPresentCharacters[i].isLeaving)
             {
-                allPresentCharacters[i].rectTransform.anchoredPosition = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)i / allPresentCharacters.Count),
-                    Vector2.Lerp(minCharacterPos, maxCharacterPos, (float)(i + 1) / allPresentCharacters.Count), 0.5f);
+                if(allPresentCharacters[i].isSelected)
+                {
+                    passedSelectedCharacter = additionnalSpaceTakenBySelectedCharacter;
+                }
+
+                allPresentCharacters[i].targetPositionAtTheStall = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (i * 20 + (allPresentCharacters[i].isSelected ? 0 : passedSelectedCharacter)) / (allPresentCharacters.Count * 20 + (selectedCharacter != null ? additionnalSpaceTakenBySelectedCharacter : 0))),
+                    Vector2.Lerp(minCharacterPos, maxCharacterPos, ((i + 1) * 20 + passedSelectedCharacter) / (allPresentCharacters.Count * 20 + (selectedCharacter != null ? additionnalSpaceTakenBySelectedCharacter : 0))), 0.5f);
+                if(allPresentCharacters[i].rectTransform.anchoredPosition == Vector2.zero)
+                {
+                    allPresentCharacters[i].rectTransform.anchoredPosition = allPresentCharacters[i].targetPositionAtTheStall;
+                }
                 allPresentCharacters[i].identificationColor = identificationColors[i];
                 allPresentCharacters[i].RefreshCharacterDisplay();
             }
@@ -254,6 +273,10 @@ public class NegoceManager : MonoBehaviour
 
         newCharacter.personnalObjects = new List<Character.PersonnalObject>();
         newCharacter.randomlyGenerated = true;
+
+        newCharacter.speechBaseSpeed = 30;
+        newCharacter.speechPauseTimeBetweenSentenceParts = 0.3f;
+        newCharacter.speechPauseTimeBetweenSentences = 3f;
 
         return newCharacter;
     }

@@ -20,4 +20,23 @@ MonoBehaviour:
   originDescription: "Un aventurier \xE0 su la vol\xE9 d'un nid de vers des sables"
   origin: 1
   categories: 05000000
-  features: []
+  features:
+  - traits: 
+    argumentTitle: 'default : Magic'
+    argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
+      ne pourrez plus vous passer
+    argumentSpeakTime: 2
+    description: 'default : Magic'
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 8
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 2
+      argumentInterestLevelIncrease: 8
+      argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
+        ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
