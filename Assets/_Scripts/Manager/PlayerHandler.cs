@@ -125,37 +125,6 @@ public class PlayerHandler : MonoBehaviour
                     askedCharaObject = null;
                 }
             }
-            /*
-            if (timeSpendSpeaking < currentSpeakingTime)
-            {
-                timeSpendSpeaking += Time.deltaTime;
-            }
-            else
-            {
-                if (presentedStallObject != null)
-                {
-                    currentCharacterTalkingTo.PresentObject(presentedStallObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    presentedStallObject = null;
-                    speakBar.gameObject.SetActive(false);
-                }
-                else if (argumentedStallObject != null)
-                {
-                    currentCharacterTalkingTo.ReactToArgumentFeature(featureArgumented, argumentedStallObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    currentCharacterTalkingTo = null;
-                    argumentedStallObject = null;
-                    featureArgumented = null;
-                    speakBar.gameObject.SetActive(false);
-                }
-                else if (askedCharaObject != null)
-                {
-                    currentCharacterTalkingTo.AskAbout(askedCharaObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    askedCharaObject = null;
-                    speakBar.gameObject.SetActive(false);
-                }
-            }*/
         }
     }
 
