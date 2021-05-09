@@ -31,7 +31,7 @@ public abstract class CharacterHandler : UIInteractable
     public TweeningAnimator thinkingBoxAnim;
     public RectTransform thinkingBox;
     public Image thinkingObjectImage;
-    public Image speakBoxDeco;
+    public Text speakBoxName;
     public Image thinkBoxDeco;
     [Header("Random object > Temporary")]
     public List<Object> allObjectsForCharacter;
@@ -39,8 +39,6 @@ public abstract class CharacterHandler : UIInteractable
     public CharaObject charaObjectPrefab;
     public Vector2 minMaxObjectPersonnalValue;
     [Header("Behavior General Options")]
-    //public float initialInterestLevel;
-    //public float initialCuriosityLevel;
     public float baseLookingTime;
     public float reflexionTime;
     public float curiosityIncreaseSpeed;
@@ -753,7 +751,8 @@ public abstract class CharacterHandler : UIInteractable
         identificationCircle.color = new Color(identificationColor.r, identificationColor.g, identificationColor.b, 0.5f);
         selectionAnim.GetReferences();
         thinkBoxDeco.color = identificationColor;
-        speakBoxDeco.color = identificationColor;
+        speakBoxName.text = character.characterName;
+        speakBoxName.color = identificationColor;
         for (int i = 0; i < belongingsSpaces.Count; i++)
         {
             if(i >= belongings.Count)
