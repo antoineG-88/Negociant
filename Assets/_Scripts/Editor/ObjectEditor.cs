@@ -19,5 +19,10 @@ public class ObjectEditor : Editor
             objectToEdit.SetAutomaticCategoryFeatures();
             EditorUtility.SetDirty(objectToEdit);
         }
+        if (GUILayout.Button("Create 1 random trait feature"))
+        {
+            objectToEdit.CreateOneRandomFeature();
+            EditorUtility.SetDirty(objectToEdit);
+        }
     }
 }

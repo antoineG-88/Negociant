@@ -62,3 +62,42 @@ MonoBehaviour:
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
     rememberTime: 15
+  - traits: 06000000
+    argumentTitle: Sharp
+    argumentSpokenText: C'est Sharp
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Sharp, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 16
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 12
+  - traits: 0d00000010000000
+    argumentTitle: Heavy & Heskmar
+    argumentSpokenText: C'est Heavy et Heskmar
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Heavy,
+      Heskmar, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 17
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 26

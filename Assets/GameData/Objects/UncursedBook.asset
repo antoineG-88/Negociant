@@ -64,3 +64,82 @@ MonoBehaviour:
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
     rememberTime: 15
+  - traits: 0a00000008000000
+    argumentTitle: Glorious & StrenghGiving
+    argumentSpokenText: C'est Glorious et StrenghGiving
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious,
+      StrenghGiving, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 26
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 12
+  - traits: 010000000b000000
+    argumentTitle: Corruption & RareMaterial
+    argumentSpokenText: C'est Corruption et RareMaterial
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Corruption,
+      RareMaterial, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 13
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18
+  - traits: 0500000007000000
+    argumentTitle: Noble & WeaknessGiving
+    argumentSpokenText: C'est Noble et WeaknessGiving
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Noble,
+      WeaknessGiving, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 22
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 6
+  - traits: 0e000000
+    argumentTitle: Cold
+    argumentSpokenText: C'est Cold
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Cold, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 12
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 40

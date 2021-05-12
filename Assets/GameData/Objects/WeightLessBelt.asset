@@ -62,3 +62,62 @@ MonoBehaviour:
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
     rememberTime: 15
+  - traits: 0400000008000000
+    argumentTitle: DuskMagic & StrenghGiving
+    argumentSpokenText: C'est DuskMagic et StrenghGiving
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les DuskMagic,
+      StrenghGiving, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 20
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 21
+  - traits: 0500000001000000
+    argumentTitle: Noble & Corruption
+    argumentSpokenText: C'est Noble et Corruption
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Noble,
+      Corruption, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 25
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 8
+  - traits: 05000000
+    argumentTitle: Noble
+    argumentSpokenText: C'est Noble
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Noble, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 27
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 38

@@ -44,3 +44,61 @@ MonoBehaviour:
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
     rememberTime: 15
+  - traits: 00000000
+    argumentTitle: SandWorm
+    argumentSpokenText: C'est SandWorm
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les SandWorm, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 15
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 29
+  - traits: 0c000000
+    argumentTitle: Light
+    argumentSpokenText: C'est Light
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Light, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 17
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 32
+  - traits: 0000000001000000
+    argumentTitle: SandWorm & Corruption
+    argumentSpokenText: C'est SandWorm et Corruption
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les SandWorm,
+      Corruption, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 16
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 26

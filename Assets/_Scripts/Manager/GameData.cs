@@ -9,11 +9,20 @@ public class GameData : MonoBehaviour
     public List<CategoryProperties> _categoriesProperties;
     public DecisiveCharacterHandler _decisiveCharaPrefab;
     public OpenMindedCharacterHandler _openMindedCharaPrefab;
+    [Header("Random Feature option / Temporary")]
+    public Vector2Int _minMaxArgumentTime;
+    public Vector2Int _minMaxRememberTime;
+    public Vector2Int _minMaxNumberOfTraits;
+    public Vector2Int _minMaxInterestIncrease;
 
     public static List<Object> allObjects;
     public static List<CategoryProperties> categoriesProperties;
     public static DecisiveCharacterHandler decisiveCharaPrefab;
     public static OpenMindedCharacterHandler openMindedCharaPrefab;
+    public static Vector2Int minMaxArgumentTime;
+    public static Vector2Int minMaxRememberTime;
+    public static Vector2Int minMaxNumberOfTraits;
+    public static Vector2Int minMaxInterestIncrease;
 
     private void Awake()
     {
@@ -21,6 +30,10 @@ public class GameData : MonoBehaviour
         categoriesProperties = _categoriesProperties;
         decisiveCharaPrefab = _decisiveCharaPrefab;
         openMindedCharaPrefab = _openMindedCharaPrefab;
+        minMaxArgumentTime = _minMaxArgumentTime;
+        minMaxRememberTime = _minMaxRememberTime;
+        minMaxNumberOfTraits = _minMaxNumberOfTraits;
+        minMaxInterestIncrease = _minMaxInterestIncrease;
     }
 
     [Serializable]

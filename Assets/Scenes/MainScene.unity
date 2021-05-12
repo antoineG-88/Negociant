@@ -8994,8 +8994,8 @@ MonoBehaviour:
     color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
     icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
     argumentTime: 1
-    argumentInterestLevelIncrease: 5
-    argumentRememberTime: 15
+    argumentInterestLevelIncrease: 15
+    argumentRememberTime: 30
     argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
     argumentSpeechGoodReaction: J'ai justement besoin d'une armure
     argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
@@ -9004,7 +9004,7 @@ MonoBehaviour:
     color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
     icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
     argumentTime: 1.5
-    argumentInterestLevelIncrease: 4
+    argumentInterestLevelIncrease: 20
     argumentRememberTime: 15
     argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos affrontements
       les plus f\xE9roces"
@@ -9013,8 +9013,8 @@ MonoBehaviour:
   - category: 2
     color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
     icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
-    argumentTime: 1
-    argumentInterestLevelIncrease: 10
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 15
     argumentRememberTime: 15
     argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
     argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9 mon
@@ -9024,7 +9024,7 @@ MonoBehaviour:
     color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
     icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
     argumentTime: 1
-    argumentInterestLevelIncrease: 8
+    argumentInterestLevelIncrease: 10
     argumentRememberTime: 15
     argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
     argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
@@ -9034,8 +9034,8 @@ MonoBehaviour:
     color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
     icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
     argumentTime: 2
-    argumentInterestLevelIncrease: 3
-    argumentRememberTime: 15
+    argumentInterestLevelIncrease: 25
+    argumentRememberTime: 8
     argumentDescription: Un ouvrage comportant des informations exclusive qui saura
       satisfaire votre soif de connaissance
     argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
@@ -9045,8 +9045,8 @@ MonoBehaviour:
     color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
     icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
     argumentTime: 2
-    argumentInterestLevelIncrease: 8
-    argumentRememberTime: 15
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 20
     argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
       ne pourrez plus vous passer
     argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
@@ -9055,6 +9055,10 @@ MonoBehaviour:
     type: 3}
   _openMindedCharaPrefab: {fileID: 7490402062767212952, guid: 04334ea4d4ab5ab4f8945c9602579c48,
     type: 3}
+  _minMaxArgumentTime: {x: 1, y: 3}
+  _minMaxRememberTime: {x: 6, y: 40}
+  _minMaxNumberOfTraits: {x: 1, y: 2}
+  _minMaxInterestIncrease: {x: 10, y: 30}
 --- !u!4 &1481276638
 Transform:
   m_ObjectHideFlags: 0
@@ -9102,15 +9106,15 @@ MonoBehaviour:
   - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
   - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
   - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
-  timeRangeBetweenCharacterApparition: {x: 5, y: 10}
+  timeRangeBetweenCharacterApparition: {x: 10, y: 30}
   characterMoveLerpRatio: 10
   additionnalSpaceTakenBySelectedCharacter: 5
   additionnalSpaceTakenBySelectedCharacterWhileTrading: 12
   selectedCharacterPositionRatioOffsetWhileTrading: 0.65
   minChInitialInterest: 1
   maxChInitialInterest: 1
-  minChNeeds: 1
-  maxChNeeds: 6
+  minChNeeds: 4
+  maxChNeeds: 7
   allCharacterIllustrations:
   - {fileID: -1413388721454057509, guid: b498245ae8971b74c91915d3dba56280, type: 3}
   - {fileID: 8965860129341218014, guid: 56077c04119ec8d4b8231f4acd8e5813, type: 3}
@@ -9155,7 +9159,7 @@ MonoBehaviour:
   - {fileID: 4800353797765959337, guid: 46a2636f046ac1a46b0ae2a2c149c912, type: 3}
   - {fileID: 5250556089858733034, guid: 68e2a5a6a85bdd4468b6ab30cacadffc, type: 3}
   - {fileID: -405942562607742374, guid: f0f0d37f12fd46e49b9c4ca4e849db39, type: 3}
-  randomCharacterGenerated: 0
+  randomCharacterGenerated: 10
   allPresentCharacters: []
   unfoldTime: 0
   negoceTimeSpend: 0

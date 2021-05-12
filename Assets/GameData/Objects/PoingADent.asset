@@ -61,3 +61,42 @@ MonoBehaviour:
         relique"
       argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
     rememberTime: 15
+  - traits: 06000000
+    argumentTitle: Sharp
+    argumentSpokenText: C'est Sharp
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Sharp, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 24
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 8
+  - traits: 0600000010000000
+    argumentTitle: Sharp & Heskmar
+    argumentSpokenText: C'est Sharp et Heskmar
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Sharp,
+      Heskmar, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 20
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 25

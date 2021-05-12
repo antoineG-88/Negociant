@@ -85,3 +85,22 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 5
+  - traits: 09000000
+    argumentTitle: Lost
+    argumentSpokenText: C'est Lost
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Lost, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 26
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 22

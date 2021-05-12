@@ -64,3 +64,79 @@ MonoBehaviour:
         relique"
       argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
     rememberTime: 15
+  - traits: 0a000000
+    argumentTitle: Glorious
+    argumentSpokenText: C'est Glorious
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 30
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 39
+  - traits: 0d000000
+    argumentTitle: Heavy
+    argumentSpokenText: C'est Heavy
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Heavy, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 13
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18
+  - traits: 0a000000
+    argumentTitle: Glorious
+    argumentSpokenText: C'est Glorious
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 21
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 24
+  - traits: 05000000
+    argumentTitle: Noble
+    argumentSpokenText: C'est Noble
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Noble, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 12
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 26

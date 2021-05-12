@@ -40,3 +40,62 @@ MonoBehaviour:
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
     rememberTime: 15
+  - traits: 0e0000000a000000
+    argumentTitle: Cold & Glorious
+    argumentSpokenText: C'est Cold et Glorious
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Cold,
+      Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 30
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 27
+  - traits: 0a000000
+    argumentTitle: Glorious
+    argumentSpokenText: C'est Glorious
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 30
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 35
+  - traits: 050000000c000000
+    argumentTitle: Noble & Light
+    argumentSpokenText: C'est Noble et Light
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Noble,
+      Light, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 29
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18

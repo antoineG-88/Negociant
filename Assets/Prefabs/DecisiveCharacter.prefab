@@ -2595,8 +2595,8 @@ MonoBehaviour:
   minMaxObjectPerChara: {x: 2, y: 3}
   charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
     type: 3}
-  minMaxObjectPersonnalValue: {x: 10, y: 20}
-  maxPersonnalValue: 30
+  minMaxObjectPersonnalValue: {x: 30, y: 70}
+  maxPersonnalValue: 70
   baseLookingTime: 1.8
   reflexionTime: 4
   curiosityIncreaseSpeed: 1

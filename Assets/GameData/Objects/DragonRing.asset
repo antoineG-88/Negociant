@@ -44,3 +44,61 @@ MonoBehaviour:
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
     rememberTime: 15
+  - traits: 
+    argumentTitle: 
+    argumentSpokenText: 'C''est '
+    argumentSpeakTime: 0
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 0
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 0
+  - traits: 0700000003000000
+    argumentTitle: WeaknessGiving & AuroraMagic
+    argumentSpokenText: C'est WeaknessGiving et AuroraMagic
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les WeaknessGiving,
+      AuroraMagic, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 20
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 11
+  - traits: 0a000000
+    argumentTitle: Glorious
+    argumentSpokenText: C'est Glorious
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 15
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 40

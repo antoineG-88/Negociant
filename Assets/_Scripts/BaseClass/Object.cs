@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [CreateAssetMenu(fileName = "UniqueObject", menuName = "Negociant/new Object", order = 1)]
 public class Object : ScriptableObject
@@ -46,6 +47,46 @@ public class Object : ScriptableObject
         features.AddRange(existingFeatures);
     }
 
+    public void CreateOneRandomFeature()
+    {
+        Feature newFeature = new Feature();
+        newFeature.argumentSpeakTime = UnityEngine.Random.Range(GameData.minMaxArgumentTime.x, GameData.minMaxArgumentTime.y + 1);
+        newFeature.traits = new List<Trait>();
+        int rand = UnityEngine.Random.Range(GameData.minMaxNumberOfTraits.x, GameData.minMaxNumberOfTraits.y + 1);
+
+        List<Trait> availableTraits = new List<Trait>();
+        for (int i = 0; i < Enum.GetValues(typeof(Trait)).Length; i++)
+        {
+            availableTraits.Add((Trait)Enum.ToObject(typeof(Trait), i));
+        }
+
+        for (int i = 0; i < rand; i++)
+        {
+            Trait newTrait = availableTraits[UnityEngine.Random.Range(0, availableTraits.Count)];
+            newFeature.traits.Add(newTrait);
+            availableTraits.Remove(newTrait);
+        }
+
+        newFeature.argumentSpokenText = "C'est ";
+        newFeature.description = "Cet objet est convoités par les aventuriers qui aime les ";
+        for (int i = 0; i < newFeature.traits.Count; i++)
+        {
+            if(i != 0)
+            {
+                newFeature.argumentTitle = newFeature.argumentTitle + " & ";
+                newFeature.argumentSpokenText = newFeature.argumentSpokenText + " et ";
+            }
+            newFeature.argumentTitle = newFeature.argumentTitle + newFeature.traits[i].ToString();
+            newFeature.argumentSpokenText = newFeature.argumentSpokenText + newFeature.traits[i].ToString();
+            newFeature.description = newFeature.description + newFeature.traits[i].ToString() + ", ";
+        }
+        newFeature.isKnownWhenObjectAcquired = true;
+        newFeature.interestLevelIncrease = UnityEngine.Random.Range(GameData.minMaxInterestIncrease.x, GameData.minMaxInterestIncrease.y + 1);
+        newFeature.isCategoryFeature = false;
+        newFeature.rememberTime = UnityEngine.Random.Range(GameData.minMaxRememberTime.x, GameData.minMaxRememberTime.y + 1);
+
+        features.Add(newFeature);
+    }
     public Object()
     {
     }

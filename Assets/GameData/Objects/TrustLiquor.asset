@@ -64,3 +64,82 @@ MonoBehaviour:
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
     rememberTime: 15
+  - traits: 090000000b000000
+    argumentTitle: Lost & RareMaterial
+    argumentSpokenText: C'est Lost et RareMaterial
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Lost,
+      RareMaterial, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 13
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 14
+  - traits: 0b000000
+    argumentTitle: RareMaterial
+    argumentSpokenText: C'est RareMaterial
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les RareMaterial, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 18
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 28
+  - traits: 0c0000000a000000
+    argumentTitle: Light & Glorious
+    argumentSpokenText: C'est Light et Glorious
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Light,
+      Glorious, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 27
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 12
+  - traits: 0000000004000000
+    argumentTitle: SandWorm & DuskMagic
+    argumentSpokenText: C'est SandWorm et DuskMagic
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les SandWorm,
+      DuskMagic, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 15
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 22

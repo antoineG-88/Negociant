@@ -62,3 +62,41 @@ MonoBehaviour:
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
     rememberTime: 15
+  - traits: 0b000000
+    argumentTitle: RareMaterial
+    argumentSpokenText: C'est RareMaterial
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les RareMaterial, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 13
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 38
+  - traits: 08000000
+    argumentTitle: StrenghGiving
+    argumentSpokenText: C'est StrenghGiving
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les StrenghGiving, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 26
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 13
