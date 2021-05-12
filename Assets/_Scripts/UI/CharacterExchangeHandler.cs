@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ExchangeHandler : MonoBehaviour
+public class CharacterExchangeHandler : MonoBehaviour
 {
-    public SimpleButton windowButton;
+    public CharacterHandler characterHandler;
     public SimpleButton exchangeButton;
     public List<ExchangeSpace> characterSpaces;
     public List<ExchangeSpace> playerSpaces;
     public TweeningAnimator windowAnim;
-    public Image characterFace;
     public Image totalInterestFiller;
     public Image totalPersonnalValueFiller;
+    public SimpleButton closeButton;
+    private ArgumentRadialMenu argumentRadialMenu;
 
-    private bool isOpened;
+    [HideInInspector] public bool isOpened;
     private List<StallObject> stallObjectsSelected;
     private List<CharaObject> charaObjectsSelected;
     private float totalInterest;
@@ -26,12 +27,18 @@ public class ExchangeHandler : MonoBehaviour
         stallObjectsSelected = new List<StallObject>();
         charaObjectsSelected = new List<CharaObject>();
         exchangeButton.SetEnable(false);
+        closeButton.SetEnable(true);
+        argumentRadialMenu = NegoceManager.I.argumentRadialMenu;
     }
 
     void Update()
     {
-        UpdateWindow();
         UpdateTrade();
+
+        if(closeButton.isClicked)
+        {
+            Close();
+        }
     }
 
     private void UpdateTrade()
@@ -48,7 +55,7 @@ public class ExchangeHandler : MonoBehaviour
                 {
                     playerSpace.canBeUsed = NegoceManager.I.playerHandler.draggedStallObject != null;
 
-                    if (playerSpace.isClicked)
+                    /*if (playerSpace.isClicked)    a rremmtre d'une autre manière
                     {
                         if (playerSpace.stallObjectHeld != null)
                         {
@@ -56,6 +63,11 @@ public class ExchangeHandler : MonoBehaviour
                             playerSpace.stallObjectHeld = null;
                             playerSpace.objectImage.color = Color.clear;
                         }
+                    }*/
+
+                    if(playerSpace.clickedDown && playerSpace.stallObjectHeld != null)
+                    {
+                        argumentRadialMenu.OpenRadialMenu(playerSpace.stallObjectHeld, characterHandler, playerSpace);
                     }
                 }
 
@@ -64,7 +76,7 @@ public class ExchangeHandler : MonoBehaviour
                 {
                     charaSpace.canBeUsed = NegoceManager.I.draggedCharaObject != null;
 
-                    if (charaSpace.isClicked)
+                    /*if (charaSpace.isClicked)    a rremmtre d'une autre manière
                     {
                         if (charaSpace.charaObjectHeld != null)
                         {
@@ -72,7 +84,7 @@ public class ExchangeHandler : MonoBehaviour
                             charaSpace.charaObjectHeld = null;
                             charaSpace.objectImage.color = Color.clear;
                         }
-                    }
+                    }*/
                 }
 
                 if (charaObjectsSelected.Count > 0 && stallObjectsSelected.Count > 0)
@@ -84,7 +96,7 @@ public class ExchangeHandler : MonoBehaviour
                     exchangeButton.SetEnable(false);
                 }
 
-
+                /*
                 totalInterest = 0;
                 foreach (StallObject stallObjectSelected in stallObjectsSelected)
                 {
@@ -98,7 +110,7 @@ public class ExchangeHandler : MonoBehaviour
                 }
                 totalPersonnalValueFiller.fillAmount = totalPersonnalValue / Mathf.Max(totalPersonnalValue, totalInterest);
                 totalInterestFiller.fillAmount = totalInterest / Mathf.Max(totalPersonnalValue, totalInterest);
-
+                */
 
                 if (exchangeButton.canBeUsed && exchangeButton.isClicked)
                 {
@@ -108,31 +120,57 @@ public class ExchangeHandler : MonoBehaviour
         }
     }
 
-    private void UpdateWindow()
+    public void AddObjectToTrade(StallObject addedStallobject, CharaObject addedCharaObject)
     {
-        if (NegoceManager.I.selectedCharacter != null)
+        Open();
+        if(addedCharaObject != null && !charaObjectsSelected.Contains(addedCharaObject))
         {
-            windowButton.SetEnable(true);
-            characterFace.color = Color.white;
-            characterFace.sprite = NegoceManager.I.selectedCharacter.character.faceSprite;
-
-            if (windowButton.isClicked)
+            if(charaObjectsSelected.Count < 3)
             {
-                if (!isOpened)
+                bool objectPlaced = false;
+                int i = 0;
+                while (i < characterSpaces.Count && !objectPlaced)
                 {
-                    Open();
-                }
-                else
-                {
-                    Close();
+                    if(characterSpaces[i].charaObjectHeld == null)
+                    {
+                        charaObjectsSelected.Add(addedCharaObject);
+                        characterSpaces[i].charaObjectHeld = addedCharaObject;
+                        characterSpaces[i].objectImage.color = Color.white;
+                        characterSpaces[i].objectImage.sprite = addedCharaObject.linkedObject.illustration;
+                        objectPlaced = true;
+                    }
+                    i++;
                 }
             }
+            else
+            {
+                Debug.Log("can't add chara object to trade");
+            }
         }
-        else
+
+        if (addedStallobject != null && !stallObjectsSelected.Contains(addedStallobject))
         {
-            windowButton.SetEnable(false);
-            exchangeButton.SetEnable(false);
-            characterFace.color = Color.clear;
+            if (stallObjectsSelected.Count < 3)
+            {
+                bool objectPlaced = false;
+                int i = 0;
+                while (i < playerSpaces.Count && !objectPlaced)
+                {
+                    if (playerSpaces[i].stallObjectHeld == null)
+                    {
+                        stallObjectsSelected.Add(addedStallobject);
+                        playerSpaces[i].stallObjectHeld = addedStallobject;
+                        playerSpaces[i].objectImage.color = Color.white;
+                        playerSpaces[i].objectImage.sprite = addedStallobject.linkedObject.illustration;
+                        objectPlaced = true;
+                    }
+                    i++;
+                }
+            }
+            else
+            {
+                Debug.Log("can't add stall object to trade");
+            }
         }
     }
 
@@ -142,19 +180,6 @@ public class ExchangeHandler : MonoBehaviour
         {
             StartCoroutine(windowAnim.anim.PlayBackward(windowAnim, true));
             isOpened = true;
-            foreach (ExchangeSpace playerSpace in playerSpaces)
-            {
-                playerSpace.stallObjectHeld = null;
-                playerSpace.objectImage.color = Color.clear;
-                stallObjectsSelected.Clear();
-            }
-
-            foreach (ExchangeSpace charaSpace in characterSpaces)
-            {
-                charaSpace.charaObjectHeld = null;
-                charaSpace.objectImage.color = Color.clear;
-                charaObjectsSelected.Clear();
-            }
         }
     }
 
@@ -238,6 +263,4 @@ public class ExchangeHandler : MonoBehaviour
             Debug.Log("I can't accept this !");
         }
     }
-
-
 }

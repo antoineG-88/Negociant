@@ -40,6 +40,7 @@ public class Object : ScriptableObject
             newCategoryFeature.isKnownWhenObjectAcquired = true;
             newCategoryFeature.interestLevelIncrease = newCategoryFeature.categoryProperties.argumentInterestLevelIncrease;
             newCategoryFeature.isCategoryFeature = true;
+            newCategoryFeature.rememberTime = newCategoryFeature.categoryProperties.argumentRememberTime;
             features.Add(newCategoryFeature);
         }
         features.AddRange(existingFeatures);
@@ -61,6 +62,7 @@ public class Object : ScriptableObject
         public float interestLevelIncrease;
         public bool isCategoryFeature;
         public GameData.CategoryProperties categoryProperties;
+        public float rememberTime;
 
         public Feature()
         {

@@ -30,7 +30,8 @@ public class GameData : MonoBehaviour
         public Color color;
         public Sprite icon;
         public float argumentTime;
-        public float argumentInterestLevelIncrease; 
+        public float argumentInterestLevelIncrease;
+        public float argumentRememberTime;
         [TextArea] public string argumentDescription;
         [TextArea] public string argumentSpeechGoodReaction;
         [TextArea] public string argumentSpeechBadReaction;

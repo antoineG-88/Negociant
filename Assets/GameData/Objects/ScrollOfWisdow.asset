@@ -37,8 +37,10 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
       argumentTime: 2
       argumentInterestLevelIncrease: 3
+      argumentRememberTime: 15
       argumentDescription: Un ouvrage comportant des informations exclusive qui saura
         satisfaire votre soif de connaissance
       argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
+    rememberTime: 15

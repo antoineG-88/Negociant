@@ -24,7 +24,7 @@ MonoBehaviour:
     argumentTitle: 'default : Weapon'
     argumentSpokenText: "Une arme fiable qui ne vous decevra point lors de vos affrontements
       les plus f\xE9roces"
-    argumentSpeakTime: 3
+    argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
     interestLevelIncrease: 4
@@ -33,16 +33,18 @@ MonoBehaviour:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
-      argumentTime: 3
+      argumentTime: 1.5
       argumentInterestLevelIncrease: 4
+      argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
       argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
+    rememberTime: 15
   - traits: 
     argumentTitle: 'default : Accessory'
     argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
-    argumentSpeakTime: 3
+    argumentSpeakTime: 1
     description: 'default : Accessory'
     isKnownWhenObjectAcquired: 1
     interestLevelIncrease: 10
@@ -51,10 +53,12 @@ MonoBehaviour:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
       icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
-      argumentTime: 3
+      argumentTime: 1
       argumentInterestLevelIncrease: 10
+      argumentRememberTime: 15
       argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
         style"
       argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+    rememberTime: 15

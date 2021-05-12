@@ -23,7 +23,7 @@ public class PlayerHandler : MonoBehaviour
     public float speechPauseTime;
     public float speechTimeBetweenSentences;
     [Header("Reference")]
-    public ArgumentRadialMenu argumentRadialMenu;   
+    //public ArgumentRadialMenu argumentRadialMenu;   
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
     public Text objectInfoTitleText;
@@ -41,7 +41,7 @@ public class PlayerHandler : MonoBehaviour
     public TweeningAnimator objectInfoPanel;
     public RectTransform characterInteractionPanel;
     public DropOption presentOption;
-    public DropOption argumentOption;
+    public DropOption exchangeOption;
 
     [HideInInspector] public List<StallObject> allStallObjects;
     private bool atleastOneHovered;
@@ -68,7 +68,7 @@ public class PlayerHandler : MonoBehaviour
         objectInfoPanel.canvasGroup.blocksRaycasts = false;
         objectInfoPanel.anim.SetAtEndState(objectInfoPanel);
         presentOption.Disable();
-        argumentOption.Disable();
+        exchangeOption.Disable();
         characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         speakBoxAnim.anim = Instantiate(speakBoxAnim.anim);
         speakBoxAnim.GetReferences();
@@ -210,30 +210,30 @@ public class PlayerHandler : MonoBehaviour
                 if (!isTalking)
                 {
                     presentOption.Enable(presentTime.ToString() + " s.");
-                    argumentOption.Enable("");
+                    exchangeOption.Enable("");
                     characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
                 }
                 else
                 {
                     characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
                     presentOption.Disable();
-                    argumentOption.Disable();
+                    exchangeOption.Disable();
                 }
 
                 if (presentOption.isCurrentlyHoveredCorrectly)
                 {
                     objectPosToFollow = presentOption.rectTransform.position;
                 }
-                if (argumentOption.isCurrentlyHoveredCorrectly)
+                if (exchangeOption.isCurrentlyHoveredCorrectly)
                 {
-                    objectPosToFollow = argumentOption.rectTransform.position;
+                    objectPosToFollow = exchangeOption.rectTransform.position;
                 }
             }
             else
             {
                 characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
                 presentOption.Disable();
-                argumentOption.Disable();
+                exchangeOption.Disable();
             }
 
             draggedStallObject.rectTransform.position = objectPosToFollow;
@@ -245,15 +245,19 @@ public class PlayerHandler : MonoBehaviour
                     StartCoroutine(presentOption.Select());
                     PresentObject(draggedStallObject, charaHovered);
                 }
-                else if (argumentOption.isCurrentlyHoveredCorrectly)
+                else if (exchangeOption.isCurrentlyHoveredCorrectly)
                 {
-                    argumentRadialMenu.Initialize(draggedStallObject, charaHovered);
+                    charaHovered.characterExchangeHandler.AddObjectToTrade(draggedStallObject, null);
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                NegoceManager.I.exchangeHandler.DropStallObject(draggedStallObject);
+                foreach(CharacterHandler presentCharacter in NegoceManager.I.allPresentCharacters)
+                {
+                    presentCharacter.characterExchangeHandler.DropStallObject(draggedStallObject);
+                }
+
                 draggedStallObject.StopDrag();
                 bool droppedOnStallSpace = false;
                 foreach (StallSpace hoveredStallSpace in allStallSpaces)
@@ -278,7 +282,7 @@ public class PlayerHandler : MonoBehaviour
         {
             characterInteractionPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
             presentOption.Disable();
-            argumentOption.Disable();
+            exchangeOption.Disable();
             foreach (StallObject stallObject in allStallObjects)
             {
                 stallObject.canvasGroup.blocksRaycasts = true;

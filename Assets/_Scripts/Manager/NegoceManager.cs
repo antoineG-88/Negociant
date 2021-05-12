@@ -8,7 +8,7 @@ public class NegoceManager : MonoBehaviour
 {
     public List<Character> allPossibleCharacters;
     public PlayerHandler playerHandler;
-    public ExchangeHandler exchangeHandler;
+    public ArgumentRadialMenu argumentRadialMenu;
     public RectTransform charactersDisplay;
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
@@ -25,6 +25,8 @@ public class NegoceManager : MonoBehaviour
     public Vector2 timeRangeBetweenCharacterApparition;
     public float characterMoveLerpRatio;
     public int additionnalSpaceTakenBySelectedCharacter;
+    public int additionnalSpaceTakenBySelectedCharacterWhileTrading;
+    public float selectedCharacterPositionRatioOffsetWhileTrading;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -219,17 +221,19 @@ public class NegoceManager : MonoBehaviour
     private void RefreshCharactersDisplay()
     {
         float passedSelectedCharacter = 0;
+        int modifiedCount = allPresentCharacters.Count * 20 + (selectedCharacter != null ? (selectedCharacter.characterExchangeHandler.isOpened ? additionnalSpaceTakenBySelectedCharacterWhileTrading : additionnalSpaceTakenBySelectedCharacter) : 0);
         for (int i = 0; i < allPresentCharacters.Count; i++)
         {
             if(!allPresentCharacters[i].isLeaving)
             {
                 if(allPresentCharacters[i].isSelected)
                 {
-                    passedSelectedCharacter = additionnalSpaceTakenBySelectedCharacter;
+                    passedSelectedCharacter = allPresentCharacters[i].characterExchangeHandler.isOpened ? additionnalSpaceTakenBySelectedCharacterWhileTrading : additionnalSpaceTakenBySelectedCharacter;
                 }
 
-                allPresentCharacters[i].targetPositionAtTheStall = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (i * 20 + (allPresentCharacters[i].isSelected ? 0 : passedSelectedCharacter)) / (allPresentCharacters.Count * 20 + (selectedCharacter != null ? additionnalSpaceTakenBySelectedCharacter : 0))),
-                    Vector2.Lerp(minCharacterPos, maxCharacterPos, ((i + 1) * 20 + passedSelectedCharacter) / (allPresentCharacters.Count * 20 + (selectedCharacter != null ? additionnalSpaceTakenBySelectedCharacter : 0))), 0.5f);
+                allPresentCharacters[i].targetPositionAtTheStall = Vector2.Lerp(Vector2.Lerp(minCharacterPos, maxCharacterPos, (i * 20 + (allPresentCharacters[i].isSelected ? 0 : passedSelectedCharacter)) / modifiedCount),
+                    Vector2.Lerp(minCharacterPos, maxCharacterPos, ((i + 1) * 20 + passedSelectedCharacter) / modifiedCount), allPresentCharacters[i].isSelected && allPresentCharacters[i].characterExchangeHandler.isOpened ? selectedCharacterPositionRatioOffsetWhileTrading : 0.5f);
+
                 if(allPresentCharacters[i].rectTransform.anchoredPosition == Vector2.zero)
                 {
                     allPresentCharacters[i].rectTransform.anchoredPosition = allPresentCharacters[i].targetPositionAtTheStall;
@@ -294,7 +298,6 @@ public class NegoceManager : MonoBehaviour
     {
         selectedCharacter = theCharacter;
         selectedCharacter.Select();
-        exchangeHandler.Close();
         foreach (CharacterHandler character in NegoceManager.I.allPresentCharacters)
         {
             if (character != selectedCharacter)

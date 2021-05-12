@@ -34,7 +34,9 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
       argumentTime: 1
       argumentInterestLevelIncrease: 5
+      argumentRememberTime: 15
       argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
+    rememberTime: 15

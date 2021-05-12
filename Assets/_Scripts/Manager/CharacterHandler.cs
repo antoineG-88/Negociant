@@ -26,6 +26,7 @@ public abstract class CharacterHandler : UIInteractable
     public TweeningAnimator belongingsAnim;
     public TweeningAnimator hoveredWithStallObjectAnim;
     public TweeningAnimator selectionDisplayAppearAnim;
+    public CharacterExchangeHandler characterExchangeHandler;
     [Header("Speak&Think Options")]
     public TweeningAnimator speakingBoxAnim;
     public RectTransform speakingBox;
@@ -156,7 +157,7 @@ public abstract class CharacterHandler : UIInteractable
             isHoveredWithStallObject = true;
             NegoceManager.I.SelectCharacter(this);
         }
-        if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredCorrectly && !NegoceManager.I.playerHandler.argumentOption.isCurrentlyHoveredCorrectly))
+        if(NegoceManager.I.playerHandler.draggedStallObject == null || (!isHovered && !NegoceManager.I.playerHandler.presentOption.isCurrentlyHoveredCorrectly && !NegoceManager.I.playerHandler.exchangeOption.isCurrentlyHoveredCorrectly))
         {
             isHoveredWithStallObject = false;
         }
@@ -297,14 +298,7 @@ public abstract class CharacterHandler : UIInteractable
     public void ReactToArgumentFeature(Object.Feature featureArgumented, StallObject argumentedObject)
     {
         PotentialObject argumentedPotentialObject = GetPotentialFromStallObject(argumentedObject);
-        PotentialObject.KnownFeature knownFeatureArgumented = null;
-        for (int i = 0; i < argumentedPotentialObject.knownFeatures.Count; i++)
-        {
-            if(featureArgumented == argumentedPotentialObject.knownFeatures[i].feature)
-            {
-                knownFeatureArgumented = argumentedPotentialObject.knownFeatures[i];
-            }
-        }
+        PotentialObject.KnownFeature knownFeatureArgumented = argumentedPotentialObject.GetKnownFeatureFromFeature(featureArgumented);
 
         if (featureArgumented.isCategoryFeature)
         {
@@ -319,7 +313,7 @@ public abstract class CharacterHandler : UIInteractable
 
             if (categoryIsInitialInterest)
             {
-                knownFeatureArgumented.LearnFeature(10, interestLevelMultiplierWithCorrectCategoryArgument * featureArgumented.categoryProperties.argumentInterestLevelIncrease);
+                knownFeatureArgumented.LearnFeature(featureArgumented.rememberTime, interestLevelMultiplierWithCorrectCategoryArgument * featureArgumented.categoryProperties.argumentInterestLevelIncrease);
                 Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
                 Speak(featureArgumented.categoryProperties.argumentSpeechGoodReaction, 5);
             }
@@ -346,7 +340,7 @@ public abstract class CharacterHandler : UIInteractable
 
             if (correspondingNeed != null)
             {
-                knownFeatureArgumented.LearnFeature(10, interestLevelMultiplierWithCorrectFeatureArgument * featureArgumented.interestLevelIncrease);
+                knownFeatureArgumented.LearnFeature(featureArgumented.rememberTime, interestLevelMultiplierWithCorrectFeatureArgument * featureArgumented.interestLevelIncrease);
                 Instantiate(happyFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
                 Speak(correspondingNeed.reactionSpokenWhenArgumented);
             }
@@ -480,7 +474,8 @@ public abstract class CharacterHandler : UIInteractable
                         NegoceManager.I.playerHandler.AskAbout(draggedCharaObject, this);
                     }
 
-                    NegoceManager.I.exchangeHandler.DropCharaObject(draggedCharaObject);
+                    characterExchangeHandler.DropCharaObject(draggedCharaObject);
+
                     draggedCharaObject.StopDrag();
                     draggedCharaObject.rectTransform.position = draggedCharaObject.charaBelongingSpace.position;
 
@@ -868,6 +863,19 @@ public abstract class CharacterHandler : UIInteractable
                 newKnownFeature.isKnown = false;
                 knownFeatures.Add(newKnownFeature);
             }
+        }
+
+        public KnownFeature GetKnownFeatureFromFeature(Object.Feature searchedFeature)
+        {
+            KnownFeature potentialknownFeature = null;
+            for (int i = 0; i < knownFeatures.Count; i++)
+            {
+                if (searchedFeature == knownFeatures[i].feature)
+                {
+                    potentialknownFeature = knownFeatures[i];
+                }
+            }
+            return potentialknownFeature;
         }
 
         public class KnownFeature

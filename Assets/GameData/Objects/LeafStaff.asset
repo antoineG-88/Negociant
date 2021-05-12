@@ -35,10 +35,12 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
       argumentInterestLevelIncrease: 4
+      argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
       argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
+    rememberTime: 15
   - traits: 
     argumentTitle: 'default : Magic'
     argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
@@ -54,7 +56,9 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
       argumentTime: 2
       argumentInterestLevelIncrease: 8
+      argumentRememberTime: 15
       argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
         ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+    rememberTime: 15

@@ -117,7 +117,7 @@ MonoBehaviour:
   animationStartPos: {x: 0, y: 0}
   animationEndPos: {x: 0, y: 0}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1.2, y: 1.2, z: 1.2}
+  animationEndScale: {x: 1.05, y: 1.05, z: 1.05}
   animationStartRot: 0
   animationEndRot: 0
   movementRelativeToOriginalPos: 1
