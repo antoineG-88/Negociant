@@ -248,6 +248,7 @@ public class PlayerHandler : MonoBehaviour
                 else if (exchangeOption.isCurrentlyHoveredCorrectly)
                 {
                     charaHovered.characterExchangeHandler.AddObjectToTrade(draggedStallObject, null);
+                    charaHovered.characterExchangeHandler.Open();
                 }
             }
 

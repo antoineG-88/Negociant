@@ -116,7 +116,7 @@ public class NegoceManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("Can't appear character because he is already present at the stall");
+                    //Debug.LogWarning("Can't appear character because he is already present at the stall");
                 }
             }
         }
@@ -147,7 +147,7 @@ public class NegoceManager : MonoBehaviour
                     if (standObject == potentialObject.stallObject)
                     {
                         standObject.interestLevel.text = Mathf.RoundToInt(potentialObject.interestLevel).ToString();
-                        standObject.SetInterestLevelDisplay(potentialObject.interestLevel / selectedCharacter.exchangeTreshold, selectedCharacter.identificationColor, true);
+                        standObject.SetInterestLevelDisplay(potentialObject.interestLevel / selectedCharacter.maxPersonnalValue, selectedCharacter.identificationColor, true);
                     }
                 }
 

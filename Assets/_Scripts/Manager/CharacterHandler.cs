@@ -42,6 +42,7 @@ public abstract class CharacterHandler : UIInteractable
     public CharaObject charaObjectPrefab;
     public Vector2 minMaxObjectPersonnalValue;
     [Header("Behavior General Options")]
+    public float maxPersonnalValue;
     public float baseLookingTime;
     public float reflexionTime;
     public float curiosityIncreaseSpeed;
@@ -57,6 +58,7 @@ public abstract class CharacterHandler : UIInteractable
     [Space]
     public float reactTimePresent;
     public DropOption askOption;
+    public DropOption exchangeOption;
     public CanvasGroup dropOptionCanvasGroup;
     public float reactTimeArgument;
 
@@ -66,7 +68,7 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public Color identificationColor;
     [HideInInspector] public bool isLeaving;
     [HideInInspector] public bool isListening;
-    [HideInInspector] public float exchangeTreshold;
+    //[HideInInspector] public float exchangeTreshold;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
     [HideInInspector] public PotentialObject lookedObject;
@@ -105,6 +107,7 @@ public abstract class CharacterHandler : UIInteractable
         speakingBoxAnim.anim.SetAtEndState(speakingBoxAnim);
         dropOptionCanvasGroup.blocksRaycasts = false;
         askOption.Disable();
+        exchangeOption.Disable();
         enthousiasmFiller.fillAmount = initialEntousiasm;
         selectionDisplayAppearAnim.anim = Instantiate(selectionDisplayAppearAnim.anim);
         selectionDisplayAppearAnim.GetReferences();
@@ -166,7 +169,7 @@ public abstract class CharacterHandler : UIInteractable
         {
             isHoveredWithCharaObject = true;
         }
-        if (draggedCharaObject == null || (!isHovered && !askOption.isCurrentlyHoveredCorrectly))
+        if (draggedCharaObject == null || (!isHovered && !askOption.isCurrentlyHoveredCorrectly && !exchangeOption.isCurrentlyHoveredCorrectly))
         {
             isHoveredWithCharaObject = false;
         }
@@ -207,7 +210,7 @@ public abstract class CharacterHandler : UIInteractable
             potentialObject.RefreshInterestLevel();
             if (NegoceManager.I.selectedCharacter == this)
             {
-                potentialObject.stallObject.SetInterestLevelDisplay(potentialObject.interestLevel / exchangeTreshold, identificationColor, false);
+                potentialObject.stallObject.SetInterestLevelDisplay(potentialObject.interestLevel / maxPersonnalValue, identificationColor, false);
             }
         }
     }
@@ -270,7 +273,7 @@ public abstract class CharacterHandler : UIInteractable
 
         if (NegoceManager.I.selectedCharacter == this)
         {
-            presentedObject.stallObject.SetInterestLevelDisplay(presentedObject.interestLevel / exchangeTreshold, identificationColor, false);
+            presentedObject.stallObject.SetInterestLevelDisplay(presentedObject.interestLevel / maxPersonnalValue, identificationColor, false);
         }
         currentEnthousiasm = Mathf.Clamp(currentEnthousiasm, 0f, 1f);
     }
@@ -445,23 +448,31 @@ public abstract class CharacterHandler : UIInteractable
                     if (!NegoceManager.I.playerHandler.IsPlayerTalking())
                     {
                         askOption.Enable("");
+                        exchangeOption.Enable("");
                         dropOptionCanvasGroup.blocksRaycasts = true;
                     }
                     else
                     {
                         dropOptionCanvasGroup.blocksRaycasts = false;
                         askOption.Disable();
+                        exchangeOption.Disable();
                     }
 
                     if (askOption.isCurrentlyHoveredCorrectly)
                     {
                         objectPosToFollow = askOption.rectTransform.position;
                     }
+
+                    if (exchangeOption.isCurrentlyHoveredCorrectly)
+                    {
+                        objectPosToFollow = exchangeOption.rectTransform.position;
+                    }
                 }
                 else
                 {
                     dropOptionCanvasGroup.blocksRaycasts = false;
                     askOption.Disable();
+                    exchangeOption.Disable();
                 }
 
                 draggedCharaObject.rectTransform.position = objectPosToFollow;
@@ -472,6 +483,13 @@ public abstract class CharacterHandler : UIInteractable
                     {
                         StartCoroutine(askOption.Select());
                         NegoceManager.I.playerHandler.AskAbout(draggedCharaObject, this);
+                    }
+
+                    if (exchangeOption.isCurrentlyHoveredCorrectly)
+                    {
+                        StartCoroutine(exchangeOption.Select());
+                        characterExchangeHandler.AddObjectToTrade(null, draggedCharaObject);
+                        characterExchangeHandler.Open();
                     }
 
                     characterExchangeHandler.DropCharaObject(draggedCharaObject);
@@ -488,6 +506,7 @@ public abstract class CharacterHandler : UIInteractable
             {
                 dropOptionCanvasGroup.blocksRaycasts = false;
                 askOption.Disable();
+                exchangeOption.Disable();
                 foreach (CharaObject charaObject in belongings)
                 {
                     charaObject.canvasGroup.blocksRaycasts = true;
@@ -787,16 +806,17 @@ public abstract class CharacterHandler : UIInteractable
             newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
             newCharaObject.linkedObject = allObjectsForCharacter[Random.Range(0, allObjectsForCharacter.Count)];
             newCharaObject.personnalValue = Random.Range(minMaxObjectPersonnalValue.x, minMaxObjectPersonnalValue.y);
+            newCharaObject.personnalValueMaxRatio = maxPersonnalValue;
             newCharaObject.RefreshDisplay();
             belongings.Add(newCharaObject);
         }
 
-        exchangeTreshold = 0;
+        /*exchangeTreshold = 0;
         for (int i = 0; i < belongings.Count; i++)
         {
             exchangeTreshold += belongings[i].personnalValue;
         }
-        exchangeTreshold /= belongings.Count;
+        exchangeTreshold /= belongings.Count;*/
     }
 
     public void GetBelongingsFromCharacter()
@@ -807,16 +827,17 @@ public abstract class CharacterHandler : UIInteractable
             newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
             newCharaObject.linkedObject = character.personnalObjects[i].ownedObject;
             newCharaObject.personnalValue = character.personnalObjects[i].value;
+            newCharaObject.personnalValueMaxRatio = maxPersonnalValue;
             newCharaObject.RefreshDisplay();
             belongings.Add(newCharaObject);
         }
 
-        exchangeTreshold = 0;
+        /*exchangeTreshold = 0;
         for (int i = 0; i < belongings.Count; i++)
         {
             exchangeTreshold += belongings[i].personnalValue;
         }
-        exchangeTreshold /= belongings.Count;
+        exchangeTreshold /= belongings.Count;*/
     }
 
     public override void OnHoverIn()

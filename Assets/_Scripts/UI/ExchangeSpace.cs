@@ -7,6 +7,7 @@ public class ExchangeSpace : UIInteractable
     public TweeningAnimator hoverWithObjectAnim;
     public Image objectImage;
     [HideInInspector] public StallObject stallObjectHeld;
+    public Image interestFiller;
     [HideInInspector] public CharaObject charaObjectHeld;
     [HideInInspector] public bool canBeUsed;
     [HideInInspector] public RectTransform rectTransform;
@@ -24,7 +25,8 @@ public class ExchangeSpace : UIInteractable
     {
         if(isBig && !canBeUsed)
         {
-            StartCoroutine(hoverWithObjectAnim.anim.PlayBackward(hoverWithObjectAnim, true));
+            hoverWithObjectAnim.GetReferences();
+            //StartCoroutine(hoverWithObjectAnim.anim.PlayBackward(hoverWithObjectAnim, true));
             isBig = false;
         }
     }
@@ -33,7 +35,8 @@ public class ExchangeSpace : UIInteractable
     {
         if(canBeUsed)
         {
-            StartCoroutine(hoverWithObjectAnim.anim.Play(hoverWithObjectAnim));
+            hoverWithObjectAnim.GetReferences();
+            //StartCoroutine(hoverWithObjectAnim.anim.Play(hoverWithObjectAnim));
             isBig = true;
         }
     }
@@ -42,7 +45,8 @@ public class ExchangeSpace : UIInteractable
     {
         if(isBig)
         {
-            StartCoroutine(hoverWithObjectAnim.anim.PlayBackward(hoverWithObjectAnim, true));
+            hoverWithObjectAnim.GetReferences();
+            //StartCoroutine(hoverWithObjectAnim.anim.PlayBackward(hoverWithObjectAnim, true));
             isBig = false;
         }
     }

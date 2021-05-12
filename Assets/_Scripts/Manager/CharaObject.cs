@@ -16,6 +16,7 @@ public class CharaObject : UIInteractable
     [HideInInspector] public RectTransform charaBelongingSpace;
     public RectTransform objectDirectInfoPanel;
     public CanvasGroup canvasGroup;
+    [HideInInspector] public float personnalValueMaxRatio;
     [HideInInspector] public float personnalValue;
     [HideInInspector] public bool isPersonnalValueKnown;
 
@@ -25,7 +26,7 @@ public class CharaObject : UIInteractable
         hoverAnim.GetReferences();
         categoriesAppearAnim.anim = Instantiate(categoriesAppearAnim.anim);
         categoriesAppearAnim.GetReferences();
-        personnalValueFiller.fillAmount = personnalValue / 50;
+        personnalValueFiller.fillAmount = personnalValue / personnalValueMaxRatio;
         categoriesAppearAnim.anim.SetAtStartState(categoriesAppearAnim);
     }
 

@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
-  m_Name: SoySpeakBoxAnim
+  m_Name: ExchancheCharaSpaceSizeAnim 1
   m_EditorClassIdentifier: 
-  animationTime: 0.3
+  animationTime: 0.1
   animationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.10875151
+      outSlope: 0.10875151
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.27106225
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -43,20 +43,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.10875151
+      outSlope: 0.10875151
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.27106225
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -67,37 +67,37 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.10875151
+      outSlope: 0.10875151
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.27106225
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   customRotCurve: 0
   customScaleCurve: 0
-  animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: -100, y: -100}
+  animationStartPos: {x: 0, y: 162.8}
+  animationEndPos: {x: 60, y: 112}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1, y: 1, z: 1}
+  animationEndScale: {x: 0.62381655, y: 0.62381655, z: 0.62381655}
   animationStartRot: 0
   animationEndRot: 0
-  movementRelativeToOriginalPos: 1
+  movementRelativeToOriginalPos: 0
   colorAnimation:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -124,5 +124,5 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   useColorChange: 0
-  disableRaycastIfTransparent: 1
+  disableRaycastIfTransparent: 0
   colorImage: {fileID: 0}

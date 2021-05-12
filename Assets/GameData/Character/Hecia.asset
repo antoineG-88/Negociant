@@ -29,7 +29,7 @@ MonoBehaviour:
       - sentencePart:
         - "Je suis toujours int\xE9ress\xE9 par les mat\xE9riaux rare,"
         - ' ca me plait !'
-      speakingSpeed: 0
+      speakingSpeed: 30
       sentencePartPauseTime: 0.4
       sentencePauseToNext: 1.5
       isFinished: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
   - ownedObject: {fileID: 11400000, guid: d35a275d06b1c904f8a7f3742361b837, type: 2}
     infoGivenWhenAsked:
       speechRawText: "Oh ! Cette dague ..._ cela fait un moment que je la garde.&Je
-        nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9_ et j'ai
+        nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9.& J'ai
         arrach\xE9 cette arme des mains de leur chef que j'avais corrompu.&J'ai cru
         qu'elle \xE9tait forg\xE9 dans du Cateruim _mais j'ai \xE9t\xE9 d\xE9cu."
       sentences:
@@ -91,15 +91,16 @@ MonoBehaviour:
         - Oh ! Cette dague ...
         - ' cela fait un moment que je la garde.'
       - sentencePart:
-        - "Je nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9"
-        - " et j'ai arrach\xE9 cette arme des mains de leur chef que j'avais corrompu."
+        - "Je nettoyer les plages au sud des Heskmar qui \xE9tais venu y camp\xE9."
+      - sentencePart:
+        - " J'ai arrach\xE9 cette arme des mains de leur chef que j'avais corrompu."
       - sentencePart:
         - "J'ai cru qu'elle \xE9tait forg\xE9 dans du Cateruim "
         - "mais j'ai \xE9t\xE9 d\xE9cu."
-      speakingSpeed: 0
+      speakingSpeed: 30
       sentencePartPauseTime: 0.4
       sentencePauseToNext: 1.5
-      isFinished: 0
+      isFinished: 1
     traitHintedWithInfo: 010000000b00000010000000
     value: 23
   - ownedObject: {fileID: 11400000, guid: 495334a907439f54082ed28169e4f956, type: 2}
@@ -117,14 +118,14 @@ MonoBehaviour:
       - sentencePart:
         - "mais je commence me dire que j'aurais du le laisser et prendre la potion
           d'aveuglement \xE0 la place."
-      speakingSpeed: 0
+      speakingSpeed: 30
       sentencePartPauseTime: 0.4
       sentencePauseToNext: 1.5
       isFinished: 1
     traitHintedWithInfo: 05000000070000000c000000
     value: 12
   defaultSpeachWhenWrongArgument:
-    speechRawText: 
+    speechRawText: De quoi vous me parler la ??
     sentences: []
     speakingSpeed: 0
     sentencePartPauseTime: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
   m_Name: ArgumentPanelAnim
   m_EditorClassIdentifier: 
-  animationTime: 0.2
+  animationTime: 0.18
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -115,9 +115,9 @@ MonoBehaviour:
   customRotCurve: 0
   customScaleCurve: 0
   animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: 0, y: -10}
+  animationEndPos: {x: 0, y: 0}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1, y: 1, z: 1}
+  animationEndScale: {x: 0.5, y: 0.5, z: 0.5}
   animationStartRot: 0
   animationEndRot: 0
   movementRelativeToOriginalPos: 1
@@ -141,7 +141,7 @@ MonoBehaviour:
     ctime7: 0
     atime0: 0
     atime1: 65535
-    atime2: 0
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0

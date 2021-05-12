@@ -10,29 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed2f2ecbafe45f47988832ee5865aa2, type: 3}
-  m_Name: SoySpeakBoxAnim
+  m_Name: SuccessExchangeWindowAnim
   m_EditorClassIdentifier: 
-  animationTime: 0.3
+  animationTime: 1.5
   animationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 6.1077967
+      outSlope: 6.1077967
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.20273659
+    - serializedVersion: 3
+      time: 0.34074238
+      value: 0.95730305
+      inSlope: 0.11554443
+      outSlope: 0.11554443
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.63279384
+      outWeight: 0.4214549
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.044519767
+      outSlope: 0.044519767
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.37083334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -43,20 +52,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 6.1077967
+      outSlope: 6.1077967
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.20273659
+    - serializedVersion: 3
+      time: 0.34074238
+      value: 0.95730305
+      inSlope: 0.11554443
+      outSlope: 0.11554443
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.63279384
+      outWeight: 0.4214549
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.044519767
+      outSlope: 0.044519767
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.37083334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -67,20 +85,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 6.1077967
+      outSlope: 6.1077967
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.20273659
+    - serializedVersion: 3
+      time: 0.34074238
+      value: 0.95730305
+      inSlope: 0.11554443
+      outSlope: 0.11554443
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.63279384
+      outWeight: 0.4214549
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.044519767
+      outSlope: 0.044519767
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.37083334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -88,41 +115,41 @@ MonoBehaviour:
   customRotCurve: 0
   customScaleCurve: 0
   animationStartPos: {x: 0, y: 0}
-  animationEndPos: {x: -100, y: -100}
+  animationEndPos: {x: 0, y: 0}
   animationStartScale: {x: 1, y: 1, z: 1}
-  animationEndScale: {x: 1, y: 1, z: 1}
+  animationEndScale: {x: 1.1, y: 1.1, z: 1.1}
   animationStartRot: 0
   animationEndRot: 0
   movementRelativeToOriginalPos: 1
   colorAnimation:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 0}
-    key2: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.1254902, g: 0.09803922, b: 0.18039216, a: 0.65882355}
+    key1: {r: 0.46518427, g: 0.8490566, b: 0.1481844, a: 0.8666667}
+    key2: {r: 0.4666667, g: 0.85098046, b: 0.14901961, a: 1}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
+    ctime1: 5783
+    ctime2: 65535
     ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
-    atime2: 0
+    atime1: 5783
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  useColorChange: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
+  useColorChange: 1
   disableRaycastIfTransparent: 1
   colorImage: {fileID: 0}

@@ -7,6 +7,7 @@ public class ArgumentRadialMenu : UIInteractable
 {
     public List<FeatureRadialOption> categoryRadialOptions;
     public List<FeatureRadialOption> featureRadialOptions;
+    public RadialOption removeObjectFromTradeOption;
     public Image objectIllustration;
     public Text objectNameText;
     public Text argumentDescriptionText;
@@ -17,6 +18,8 @@ public class ArgumentRadialMenu : UIInteractable
     private StallObject currentStallObject;
     private CharacterHandler.PotentialObject currentPotentialObject;
     private CharacterHandler characterTargeted;
+    private ExchangeSpace currentExchangeSpace;
+    private bool atLeastOneOptionChosen;
     private void Start()
     {
         appearAnim.GetReferences();
@@ -28,6 +31,12 @@ public class ArgumentRadialMenu : UIInteractable
     {
         if(isOpened)
         {
+            rectTransform.position = currentExchangeSpace.rectTransform.position;
+            if (Input.GetMouseButtonUp(0))
+            {
+                atLeastOneOptionChosen = false;
+            }
+
             for (int i = 0; i < categoryRadialOptions.Count; i++)
             {
                 if(categoryRadialOptions[i].radialOption.gameObject.activeSelf)
@@ -42,11 +51,10 @@ public class ArgumentRadialMenu : UIInteractable
                     if (Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking && !characterTargeted.isSpeaking)
                     {
                         NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, categoryRadialOptions[i].feature);
+                        atLeastOneOptionChosen = true;
                         Close();
                     }
                 }
-
-
             }
 
             
@@ -64,22 +72,33 @@ public class ArgumentRadialMenu : UIInteractable
                     if(Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking && !characterTargeted.isSpeaking)
                     {
                         NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, featureRadialOptions[i].feature);
+                        atLeastOneOptionChosen = true;
                         Close();
                     }
                 }
             }
 
 
-
             if(Input.GetMouseButtonUp(0))
             {
-                Close();
+                if (removeObjectFromTradeOption.isHovered)
+                {
+                    characterTargeted.characterExchangeHandler.RemoveStallObjectFromTrade(currentExchangeSpace);
+                    atLeastOneOptionChosen = true;
+                    Close();
+                }
+
+                if (!atLeastOneOptionChosen)
+                {
+                    Close(); // delay maybe
+                }
             }
         }
     }
 
     public void OpenRadialMenu(StallObject stallObject, CharacterHandler characterHandler, ExchangeSpace exchangeSpace)
     {
+        currentExchangeSpace = exchangeSpace;
         rectTransform.position = exchangeSpace.rectTransform.position;
         appearAnim.GetReferences();
         StartCoroutine(appearAnim.anim.PlayBackward(appearAnim, true));
