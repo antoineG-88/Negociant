@@ -27,20 +27,20 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Armor'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 5
+    interestLevelIncrease: 15
     isCategoryFeature: 1
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
       icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 5
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 15
+      argumentRememberTime: 30
       argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
-    rememberTime: 15
+    rememberTime: 30
   - traits: 
     argumentTitle: 'default : Magic'
     argumentSpokenText: Un objet d'une puissance magique extraodinaire dont vous
@@ -48,20 +48,20 @@ MonoBehaviour:
     argumentSpeakTime: 2
     description: 'default : Magic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
       icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
       argumentTime: 2
-      argumentInterestLevelIncrease: 8
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 20
       argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
         ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-    rememberTime: 15
+    rememberTime: 20
   - traits: 0400000008000000
     argumentTitle: DuskMagic & StrenghGiving
     argumentSpokenText: C'est DuskMagic et StrenghGiving

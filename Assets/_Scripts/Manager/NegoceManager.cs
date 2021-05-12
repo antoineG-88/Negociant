@@ -282,6 +282,8 @@ public class NegoceManager : MonoBehaviour
         newCharacter.speechPauseTimeBetweenSentenceParts = 0.3f;
         newCharacter.speechPauseTimeBetweenSentences = 3f;
 
+        newCharacter.defaultSpeachWhenWrongArgument = new Speech("Peu importe");
+
         return newCharacter;
     }
 

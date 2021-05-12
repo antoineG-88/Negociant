@@ -27,14 +27,14 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 4
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
-      argumentInterestLevelIncrease: 4
+      argumentInterestLevelIncrease: 20
       argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
@@ -44,17 +44,17 @@ MonoBehaviour:
   - traits: 
     argumentTitle: 'default : Accessory'
     argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
-    argumentSpeakTime: 1
+    argumentSpeakTime: 1.5
     description: 'default : Accessory'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 10
+    interestLevelIncrease: 15
     isCategoryFeature: 1
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
       icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
-      argumentTime: 1
-      argumentInterestLevelIncrease: 10
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 15
       argumentRememberTime: 15
       argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
         style"
@@ -99,4 +99,23 @@ MonoBehaviour:
       argumentDescription: 
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
-    rememberTime: 13
+    rememberTime: 21
+  - traits: 10000000
+    argumentTitle: Heskmar
+    argumentSpokenText: C'est Heskmar
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Heskmar, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 29
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18

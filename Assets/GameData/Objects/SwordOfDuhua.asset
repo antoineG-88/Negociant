@@ -28,14 +28,14 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 4
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
-      argumentInterestLevelIncrease: 4
+      argumentInterestLevelIncrease: 20
       argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
@@ -61,3 +61,23 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 29
+  - traits: 0200000006000000
+    argumentTitle: Shiny & Sharp
+    argumentSpokenText: C'est Shiny et Sharp
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Shiny,
+      Sharp, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 18
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 20

@@ -27,14 +27,14 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 4
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
-      argumentInterestLevelIncrease: 4
+      argumentInterestLevelIncrease: 20
       argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
@@ -47,14 +47,14 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Relic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 10
     isCategoryFeature: 1
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
       icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 8
+      argumentInterestLevelIncrease: 10
       argumentRememberTime: 15
       argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
       argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle

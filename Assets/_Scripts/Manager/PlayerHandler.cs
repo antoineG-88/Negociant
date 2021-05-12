@@ -23,7 +23,6 @@ public class PlayerHandler : MonoBehaviour
     public float speechPauseTime;
     public float speechTimeBetweenSentences;
     [Header("Reference")]
-    //public ArgumentRadialMenu argumentRadialMenu;   
     [HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
     public Text objectInfoTitleText;
@@ -36,6 +35,11 @@ public class PlayerHandler : MonoBehaviour
     public Image objectInfoIllustration;
     public RectTransform featureContentRect;
     public RectTransform[] featuresInfo;
+    public Image objectInfoHeaderBack;
+    public Image objectInfoBodyBack;
+    public Image objectInfoFeatureBack;
+    public Color[] stallObjectWindowTheme;
+    public Color[] charaObjectWindowTheme;
     public StallObject stallObjectPrefab;
     [Space]
     public TweeningAnimator objectInfoPanel;
@@ -48,6 +52,8 @@ public class PlayerHandler : MonoBehaviour
     private bool atLeastOneClicked;
     private StallObject selectedStallObject;
     private StallObject previousSelectedObject;
+    private CharaObject selectedCharaObject;
+    private CharaObject previousSelectedCharaObject;
     private StallObject hoveredStallObject;
     private StallObject previousHoveredObject;
     [HideInInspector] public StallObject draggedStallObject;
@@ -304,29 +310,103 @@ public class PlayerHandler : MonoBehaviour
                         previousSelectedObject = selectedStallObject;
                     }
                     selectedStallObject = allStallObjects[i];
+
+                    if (previousSelectedObject != selectedStallObject || selectedCharaObject != null)
+                    {
+                        selectedCharaObject = null;
+                        previousSelectedCharaObject = null;
+                        objectInfoPanel.canvasGroup.interactable = true;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = true;
+                        StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
+                        UpdateObjectInfoWindow(selectedStallObject);
+                    }
+                    else
+                    {
+                        selectedStallObject = null;
+                        previousSelectedObject = null;
+                        objectInfoPanel.canvasGroup.interactable = false;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = false;
+                        StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
+                    }
                     atLeastOneClicked = true;
+                }
+            }
+
+            foreach(CharacterHandler presentCharacter in NegoceManager.I.allPresentCharacters)
+            {
+                for (int y = 0; y < presentCharacter.belongings.Count; y++)
+                {
+                    if (presentCharacter.belongings[y].isHovered)
+                    {
+                        if (selectedCharaObject != null)
+                        {
+                            previousSelectedCharaObject = selectedCharaObject;
+                        }
+                        selectedCharaObject = presentCharacter.belongings[y];
+
+                        if (previousSelectedCharaObject != selectedCharaObject || selectedStallObject != null)
+                        {
+                            selectedStallObject = null;
+                            previousSelectedObject = null;
+                            objectInfoPanel.canvasGroup.interactable = true;
+                            objectInfoPanel.canvasGroup.blocksRaycasts = true;
+                            StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
+                            UpdateObjectInfoWindow(selectedCharaObject);
+                        }
+                        else
+                        {
+                            selectedCharaObject = null;
+                            previousSelectedCharaObject = null;
+                            objectInfoPanel.canvasGroup.interactable = false;
+                            objectInfoPanel.canvasGroup.blocksRaycasts = false;
+                            StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
+                        }
+                    }
                 }
             }
 
             if (atLeastOneClicked)
             {
-                if(previousSelectedObject != selectedStallObject)
+                if(selectedStallObject != null)
                 {
-                    objectInfoPanel.canvasGroup.interactable = true;
-                    objectInfoPanel.canvasGroup.blocksRaycasts = true;
-                    StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
-                    UpdateObjectInfoWindow(selectedStallObject);
+                    if (previousSelectedObject != selectedStallObject || selectedCharaObject != null)
+                    {
+                        selectedCharaObject = null;
+                        previousSelectedCharaObject = null;
+                        objectInfoPanel.canvasGroup.interactable = true;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = true;
+                        StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
+                        UpdateObjectInfoWindow(selectedStallObject);
+                    }
+                    else
+                    {
+                        selectedStallObject = null;
+                        previousSelectedObject = null;
+                        objectInfoPanel.canvasGroup.interactable = false;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = false;
+                        StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
+                    }
                 }
-            }
-            else if(selectedStallObject != null)
-            {
-                /*
-                selectedStallObject = null;
-                previousSelectedObject = null;
-                objectInfoPanel.canvasGroup.interactable = false;
-                objectInfoPanel.canvasGroup.blocksRaycasts = false;
-                StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
-                */
+                else if(selectedCharaObject != null)
+                {
+                    if (previousSelectedCharaObject != selectedCharaObject || selectedStallObject != null)
+                    {
+                        selectedStallObject = null;
+                        previousSelectedObject = null;
+                        objectInfoPanel.canvasGroup.interactable = true;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = true;
+                        StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
+                        UpdateObjectInfoWindow(selectedCharaObject);
+                    }
+                    else
+                    {
+                        selectedCharaObject = null;
+                        previousSelectedCharaObject = null;
+                        objectInfoPanel.canvasGroup.interactable = false;
+                        objectInfoPanel.canvasGroup.blocksRaycasts = false;
+                        StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
+                    }
+                }
             }
         }
     }
@@ -439,6 +519,51 @@ public class PlayerHandler : MonoBehaviour
             }
         }
         featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - 2) * 130 + 10);
+        objectInfoHeaderBack.color = stallObjectWindowTheme[0];
+        objectInfoBodyBack.color = stallObjectWindowTheme[1];
+        objectInfoFeatureBack.color = stallObjectWindowTheme[2];
+    }
+
+    private void UpdateObjectInfoWindow(CharaObject shownObject)
+    {
+        objectInfoNameText.text = shownObject.linkedObject.objectName;
+        objectInfoTitleText.text = shownObject.linkedObject.title;
+        objectInfoCategory1Text.text = shownObject.linkedObject.categories[0].ToString();
+        objectInfoCategory1Icon.sprite = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).icon;
+        objectInfoCategory1Icon.color = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).color;
+
+        if (shownObject.linkedObject.categories.Count > 1)
+        {
+            objectInfoCategory2Icon.gameObject.SetActive(true);
+            objectInfoCategory2Text.text = shownObject.linkedObject.categories[1].ToString();
+            objectInfoCategory2Icon.sprite = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[1]).icon;
+            objectInfoCategory2Icon.color = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[1]).color;
+        }
+        else
+        {
+            objectInfoCategory2Icon.gameObject.SetActive(false);
+        }
+        objectInfoDescriptionText.text = shownObject.linkedObject.description;
+        objectInfoOriginText.text = shownObject.linkedObject.originDescription;
+        objectInfoIllustration.sprite = shownObject.linkedObject.illustration;
+
+        for (int i = 0; i < featuresInfo.Length; i++)
+        {
+            if (i + 2 < shownObject.linkedObject.features.Count && shownObject.isPersonnalValueKnown)
+            {
+                featuresInfo[i].gameObject.SetActive(true);
+                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].argumentTitle;
+                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].description;
+            }
+            else
+            {
+                featuresInfo[i].gameObject.SetActive(false);
+            }
+        }
+        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - 2) * 130 + 10);
+        objectInfoHeaderBack.color = charaObjectWindowTheme[0];
+        objectInfoBodyBack.color = charaObjectWindowTheme[1];
+        objectInfoFeatureBack.color = charaObjectWindowTheme[2];
     }
 
     private int halfObjectNumber;

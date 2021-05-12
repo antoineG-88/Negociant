@@ -28,14 +28,14 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Relic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 10
     isCategoryFeature: 1
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
       icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 8
+      argumentInterestLevelIncrease: 10
       argumentRememberTime: 15
       argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
       argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
@@ -49,21 +49,21 @@ MonoBehaviour:
     argumentSpeakTime: 2
     description: 'default : Knowledge'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 3
+    interestLevelIncrease: 25
     isCategoryFeature: 1
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
       icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
       argumentTime: 2
-      argumentInterestLevelIncrease: 3
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 25
+      argumentRememberTime: 8
       argumentDescription: Un ouvrage comportant des informations exclusive qui saura
         satisfaire votre soif de connaissance
       argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
-    rememberTime: 15
+    rememberTime: 8
   - traits: 0a00000008000000
     argumentTitle: Glorious & StrenghGiving
     argumentSpokenText: C'est Glorious et StrenghGiving

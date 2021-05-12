@@ -26,34 +26,34 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Armor'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 5
+    interestLevelIncrease: 15
     isCategoryFeature: 1
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
       icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 5
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 15
+      argumentRememberTime: 30
       argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
-    rememberTime: 15
+    rememberTime: 30
   - traits: 
     argumentTitle: 'default : Relic'
     argumentSpokenText: Une relique ancienne qui ne se fabrique de nos jours
     argumentSpeakTime: 1
     description: 'default : Relic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 10
     isCategoryFeature: 1
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
       icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 8
+      argumentInterestLevelIncrease: 10
       argumentRememberTime: 15
       argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
       argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
@@ -98,3 +98,23 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 39
+  - traits: 0600000008000000
+    argumentTitle: Sharp & StrenghGiving
+    argumentSpokenText: C'est Sharp et StrenghGiving
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Sharp,
+      StrenghGiving, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 19
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18

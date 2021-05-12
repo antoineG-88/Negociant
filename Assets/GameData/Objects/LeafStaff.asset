@@ -27,14 +27,14 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 4
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
-      argumentInterestLevelIncrease: 4
+      argumentInterestLevelIncrease: 20
       argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
@@ -48,20 +48,20 @@ MonoBehaviour:
     argumentSpeakTime: 2
     description: 'default : Magic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
       icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
       argumentTime: 2
-      argumentInterestLevelIncrease: 8
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 20
       argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
         ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-    rememberTime: 15
+    rememberTime: 20
   - traits: 06000000
     argumentTitle: Sharp
     argumentSpokenText: C'est Sharp
@@ -101,3 +101,23 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 26
+  - traits: 0900000005000000
+    argumentTitle: Lost & Noble
+    argumentSpokenText: C'est Lost et Noble
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Lost,
+      Noble, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 28
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 18

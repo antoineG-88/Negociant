@@ -29,21 +29,21 @@ MonoBehaviour:
     argumentSpeakTime: 2
     description: 'default : Knowledge'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 3
+    interestLevelIncrease: 25
     isCategoryFeature: 1
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
       icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
       argumentTime: 2
-      argumentInterestLevelIncrease: 3
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 25
+      argumentRememberTime: 8
       argumentDescription: Un ouvrage comportant des informations exclusive qui saura
         satisfaire votre soif de connaissance
       argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
-    rememberTime: 15
+    rememberTime: 8
   - traits: 00000000
     argumentTitle: SandWorm
     argumentSpokenText: C'est SandWorm
@@ -102,3 +102,23 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 26
+  - traits: 010000000c000000
+    argumentTitle: Corruption & Light
+    argumentSpokenText: C'est Corruption et Light
+    argumentSpeakTime: 3
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Corruption,
+      Light, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 10
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 39

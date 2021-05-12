@@ -28,14 +28,14 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Relic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 10
     isCategoryFeature: 1
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
       icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 8
+      argumentInterestLevelIncrease: 10
       argumentRememberTime: 15
       argumentDescription: Une relique ancienne qui ne se fabrique de nos jours
       argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
@@ -49,20 +49,20 @@ MonoBehaviour:
     argumentSpeakTime: 2
     description: 'default : Magic'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 8
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
       icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
       argumentTime: 2
-      argumentInterestLevelIncrease: 8
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 20
       argumentDescription: Un objet d'une puissance magique extraodinaire dont vous
         ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-    rememberTime: 15
+    rememberTime: 20
   - traits: 0700000004000000
     argumentTitle: Malaisant
     argumentSpokenText: "Tenez, si vous le toucher vous vous sentirez malais\xE9...
@@ -84,7 +84,7 @@ MonoBehaviour:
       argumentDescription: 
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
-    rememberTime: 5
+    rememberTime: 12
   - traits: 09000000
     argumentTitle: Lost
     argumentSpokenText: C'est Lost

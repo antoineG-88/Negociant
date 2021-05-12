@@ -26,17 +26,17 @@ MonoBehaviour:
   - traits: 
     argumentTitle: 'default : Accessory'
     argumentSpokenText: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre style"
-    argumentSpeakTime: 1
+    argumentSpeakTime: 1.5
     description: 'default : Accessory'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 10
+    interestLevelIncrease: 15
     isCategoryFeature: 1
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
       icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
-      argumentTime: 1
-      argumentInterestLevelIncrease: 10
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 15
       argumentRememberTime: 15
       argumentDescription: "Un accesoire de qualit\xE9 qui compl\xE9mentera votre
         style"
@@ -44,52 +44,13 @@ MonoBehaviour:
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
     rememberTime: 15
-  - traits: 
-    argumentTitle: 
-    argumentSpokenText: 'C''est '
-    argumentSpeakTime: 0
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les "
-    isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 0
-    isCategoryFeature: 0
-    categoryProperties:
-      category: 0
-      color: {r: 0, g: 0, b: 0, a: 0}
-      icon: {fileID: 0}
-      argumentTime: 0
-      argumentInterestLevelIncrease: 0
-      argumentRememberTime: 0
-      argumentDescription: 
-      argumentSpeechGoodReaction: 
-      argumentSpeechBadReaction: 
-    rememberTime: 0
-  - traits: 0700000003000000
-    argumentTitle: WeaknessGiving & AuroraMagic
-    argumentSpokenText: C'est WeaknessGiving et AuroraMagic
+  - traits: 09000000
+    argumentTitle: Lost
+    argumentSpokenText: C'est Lost
     argumentSpeakTime: 2
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les WeaknessGiving,
-      AuroraMagic, "
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Lost, "
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 20
-    isCategoryFeature: 0
-    categoryProperties:
-      category: 0
-      color: {r: 0, g: 0, b: 0, a: 0}
-      icon: {fileID: 0}
-      argumentTime: 0
-      argumentInterestLevelIncrease: 0
-      argumentRememberTime: 0
-      argumentDescription: 
-      argumentSpeechGoodReaction: 
-      argumentSpeechBadReaction: 
-    rememberTime: 11
-  - traits: 0a000000
-    argumentTitle: Glorious
-    argumentSpokenText: C'est Glorious
-    argumentSpeakTime: 3
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Glorious, "
-    isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 15
+    interestLevelIncrease: 21
     isCategoryFeature: 0
     categoryProperties:
       category: 0
@@ -102,3 +63,41 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 40
+  - traits: 10000000
+    argumentTitle: Heskmar
+    argumentSpokenText: C'est Heskmar
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Heskmar, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 21
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 23
+  - traits: 00000000
+    argumentTitle: SandWorm
+    argumentSpokenText: C'est SandWorm
+    argumentSpeakTime: 1
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les SandWorm, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 19
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 7

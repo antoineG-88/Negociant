@@ -26,20 +26,20 @@ MonoBehaviour:
     argumentSpeakTime: 1
     description: 'default : Armor'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 5
+    interestLevelIncrease: 15
     isCategoryFeature: 1
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
       icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
       argumentTime: 1
-      argumentInterestLevelIncrease: 5
-      argumentRememberTime: 15
+      argumentInterestLevelIncrease: 15
+      argumentRememberTime: 30
       argumentDescription: "Une pi\xE8ce d'armure solide qui vous tiendra en vie"
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
-    rememberTime: 15
+    rememberTime: 30
   - traits: 
     argumentTitle: 'default : Weapon'
     argumentSpokenText: "Une arme fiable qui ne vous decevra point lors de vos affrontements
@@ -47,14 +47,14 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: 'default : Weapon'
     isKnownWhenObjectAcquired: 1
-    interestLevelIncrease: 4
+    interestLevelIncrease: 20
     isCategoryFeature: 1
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
       icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
       argumentTime: 1.5
-      argumentInterestLevelIncrease: 4
+      argumentInterestLevelIncrease: 20
       argumentRememberTime: 15
       argumentDescription: "Une arme fiable qui ne vous decevra point lors de vos
         affrontements les plus f\xE9roces"
@@ -119,3 +119,23 @@ MonoBehaviour:
       argumentSpeechGoodReaction: 
       argumentSpeechBadReaction: 
     rememberTime: 39
+  - traits: 0f0000000d000000
+    argumentTitle: Hot & Heavy
+    argumentSpokenText: C'est Hot et Heavy
+    argumentSpeakTime: 2
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime les Hot,
+      Heavy, "
+    isKnownWhenObjectAcquired: 1
+    interestLevelIncrease: 18
+    isCategoryFeature: 0
+    categoryProperties:
+      category: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+      icon: {fileID: 0}
+      argumentTime: 0
+      argumentInterestLevelIncrease: 0
+      argumentRememberTime: 0
+      argumentDescription: 
+      argumentSpeechGoodReaction: 
+      argumentSpeechBadReaction: 
+    rememberTime: 33

@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21698111, g: 0.14098501, b: 0.105420075, a: 1}
+  m_Color: {r: 0.12890822, g: 0.11294054, b: 0.16981131, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1942402, g: 0.15686275, b: 0.25490198, a: 1}
+  m_Color: {r: 0.3301887, g: 0.1671223, b: 0.09189214, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6634,7 +6634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.46226418, g: 0.28639528, b: 0.21150768, a: 1}
+  m_Color: {r: 0.31734347, g: 0.28657886, b: 0.3773585, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8543,6 +8543,17 @@ MonoBehaviour:
   - {fileID: 558789411}
   - {fileID: 308685540}
   - {fileID: 1111989217}
+  objectInfoHeaderBack: {fileID: 281642389}
+  objectInfoBodyBack: {fileID: 85291363}
+  objectInfoFeatureBack: {fileID: 1088237797}
+  stallObjectWindowTheme:
+  - {r: 0.19607845, g: 0.15686275, b: 0.25490198, a: 1}
+  - {r: 0.21568629, g: 0.14117648, b: 0.10588236, a: 1}
+  - {r: 0.46274513, g: 0.28627452, b: 0.21176472, a: 1}
+  charaObjectWindowTheme:
+  - {r: 0.32941177, g: 0.16862746, b: 0.09019608, a: 1}
+  - {r: 0.12941177, g: 0.1137255, b: 0.16862746, a: 1}
+  - {r: 0.31764707, g: 0.28627452, b: 0.37647063, a: 1}
   stallObjectPrefab: {fileID: 3480710484698725818, guid: c82e2ef66921fa340a63f82d1b6ec294,
     type: 3}
   objectInfoPanel:
@@ -9056,7 +9067,7 @@ MonoBehaviour:
   _openMindedCharaPrefab: {fileID: 7490402062767212952, guid: 04334ea4d4ab5ab4f8945c9602579c48,
     type: 3}
   _minMaxArgumentTime: {x: 1, y: 3}
-  _minMaxRememberTime: {x: 6, y: 40}
+  _minMaxRememberTime: {x: 15, y: 60}
   _minMaxNumberOfTraits: {x: 1, y: 2}
   _minMaxInterestIncrease: {x: 10, y: 30}
 --- !u!4 &1481276638
