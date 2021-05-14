@@ -13,9 +13,9 @@ public class Character : ScriptableObject
     public List<Need> needs;
     public List<PersonnalObject> personnalObjects;
     public Speech defaultSpeachWhenWrongArgument;
-    public float speechBaseSpeed;
-    public float speechPauseTimeBetweenSentences;
-    public float speechPauseTimeBetweenSentenceParts;
+    public float speechBaseSpeed = 30;
+    public float speechPauseTimeBetweenSentences = 2;
+    public float speechPauseTimeBetweenSentenceParts = 0.3f;
     public bool randomlyGenerated;
 
     public PersonnalObject GetPersonnalObjectFromObject(Object searchedObject)
@@ -43,8 +43,8 @@ public class Character : ScriptableObject
             trait = needTrait;
             if(defaultResponse)
             {
-                defaultHintToTell = "hum ... j'aime le " + trait.ToString();
-                reactionSpokenWhenArgumented = new Speech("Parfait !_ J'aime le " + trait.ToString());
+                defaultHintToTell = "hum ... j'aime le <color=#E98634>" + trait.ToString() + "</color>";
+                reactionSpokenWhenArgumented = new Speech("Parfait !_ J'aime le <color=#E98634>" + trait.ToString() + "</color>");
             }
         }
     }

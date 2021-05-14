@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: AnneauSaparkus
+  m_EditorClassIdentifier: 
+  objectName: Anneau Saparkus
+  title: du sanctuaire du serpent
+  illustration: {fileID: 21300000, guid: b82fc0f960a034646a21d2309da7c576, type: 3}
+  description: "Un anneau fabriqu\xE9 \xE0 partir d'un m\xE9tal rare avec 6 dents
+    repartis sur ses contours. Il \xE9mane une aura agr\xE9able lorsqu'il est port\xE9.
+    L'accessoire est ab\xEEm\xE9 et doit avoir travers\xE9s plusieurs d\xE9c\xE9nnies."
+  originDescription: 
+  origin: 0
+  categories: 0200000003000000
+  features:
+  - argumentTitle: 'default : Accessoire'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: "C'est un accesoire de qualit\xE9 qui compl\xE9mentera votre
+      style"
+    argumentSpeakTime: 1.5
+    description: 'default : Accessoire'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 2
+      color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+      icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est un accesoire de qualit\xE9 qui compl\xE9mentera
+        votre style"
+      argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
+        mon style"
+      argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+  - argumentTitle: 'default : Relique'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: C'est une relique ancienne qui ne se fabrique de nos jours
+    argumentSpeakTime: 1.5
+    description: 'default : Relique'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: "M\xE9tal rare"
+    traits: 0a000000
+    interestLevelIncrease: 25
+    rememberTime: 45
+    argumentSpokenText: "Il est fabriqu\xE9 \xE0 partir d'un m\xE9tal rare\r"
+    argumentSpeakTime: 1.5
+    description: "Cet anneau a \xE9t\xE9 forg\xE9 dans du Caterium, un m\xE9tal tr\xE8s
+      rare\r."
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: Confiance en soi
+    traits: 08000000
+    interestLevelIncrease: 20
+    rememberTime: 22
+    argumentSpokenText: "Il conf\xE8re un effet de confiance en soi\r"
+    argumentSpeakTime: 1.5
+    description: "Lorsque cette anneau est port\xE9 il conf\xE8re un am\xE9lioration
+      de la confiance en soi\r"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: Ancien temps
+    traits: 07000000
+    interestLevelIncrease: 15
+    rememberTime: 15
+    argumentSpokenText: "C'est un anneau qui a \xE9t\xE9 forg\xE9 il y a plus de
+      200 ans"
+    argumentSpeakTime: 1.5
+    description: "C'est un tr\xE8s vieile anneau qui a \xE9t\xE9 forg\xE9 il y a
+      plus de 200 ans\r"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: "Enchant\xE9 au cr\xE9puscule"
+    traits: 02000000
+    interestLevelIncrease: 30
+    rememberTime: 15
+    argumentSpokenText: "Il est enchant\xE9 avec de la magie cr\xE9pusculaire\r"
+    argumentSpeakTime: 1.5
+    description: "Son effet viens d'un enchantement qu'il a re\xE7cu avec de la magie
+      cr\xE9pusculaire.\r"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...

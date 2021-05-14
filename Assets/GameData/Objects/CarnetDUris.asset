@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: CarnetDUris
+  m_EditorClassIdentifier: 
+  objectName: Carnet d'Uris
+  title: de l'illustre marchand
+  illustration: {fileID: 21300000, guid: af39d3e97aa22904eb9623b51ef6ce38, type: 3}
+  description: 
+  originDescription: 
+  origin: 0
+  categories: 04000000
+  features:
+  - argumentTitle: 'default : Savoir'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: C'est un objet de savoir comportant des informations exclusive
+      qui saura satisfaire votre soif de connaissance
+    argumentSpeakTime: 1.5
+    description: 'default : Savoir'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 4
+      color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+      icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet de savoir comportant des informations exclusive
+        qui saura satisfaire votre soif de connaissance
+      argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+      argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
+        pour l'instant
+  - argumentTitle: Hekmar
+    traits: 03000000
+    interestLevelIncrease: 26
+    rememberTime: 19
+    argumentSpokenText: C'est Hekmar
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Hekmar"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 4
+      color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+      icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet de savoir comportant des informations exclusive
+        qui saura satisfaire votre soif de connaissance
+      argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+      argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
+        pour l'instant
+  - argumentTitle: PythonDesSables
+    traits: 00000000
+    interestLevelIncrease: 29
+    rememberTime: 26
+    argumentSpokenText: C'est PythonDesSables
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 4
+      color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+      icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet de savoir comportant des informations exclusive
+        qui saura satisfaire votre soif de connaissance
+      argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+      argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
+        pour l'instant
+  - argumentTitle: Affaiblissant
+    traits: 09000000
+    interestLevelIncrease: 16
+    rememberTime: 15
+    argumentSpokenText: C'est Affaiblissant
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Affaiblissant"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 4
+      color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+      icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet de savoir comportant des informations exclusive
+        qui saura satisfaire votre soif de connaissance
+      argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+      argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
+        pour l'instant

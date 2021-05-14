@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public abstract class CharacterHandler : UIInteractable
 {
     [Header("References")]
@@ -30,7 +30,7 @@ public abstract class CharacterHandler : UIInteractable
     [Header("Speak&Think Options")]
     public TweeningAnimator speakingBoxAnim;
     public RectTransform speakingBox;
-    public Text speakingText;
+    public TMP_Text speakingText;
     public TweeningAnimator thinkingBoxAnim;
     public RectTransform thinkingBox;
     public Image thinkingObjectImage;
@@ -68,7 +68,6 @@ public abstract class CharacterHandler : UIInteractable
     [HideInInspector] public Color identificationColor;
     [HideInInspector] public bool isLeaving;
     [HideInInspector] public bool isListening;
-    //[HideInInspector] public float exchangeTreshold;
 
     [HideInInspector] public List<PotentialObject> potentialObjects;
     [HideInInspector] public PotentialObject lookedObject;
@@ -92,6 +91,8 @@ public abstract class CharacterHandler : UIInteractable
     private Object.Feature argumentedFeatureToThink;
     private CharaObject draggedCharaObject;
     private Speech currentSpeech;
+    [HideInInspector] public string playerNotes;
+    [HideInInspector] public int playerCategoryNote;
 
     public virtual void Init()
     {
@@ -151,6 +152,7 @@ public abstract class CharacterHandler : UIInteractable
             UpdatePlayerActionAsTarget();
 
         }
+
     }
 
     private void UpdatePlayerActionAsTarget()
@@ -399,6 +401,16 @@ public abstract class CharacterHandler : UIInteractable
         StartCoroutine(speakingBoxAnim.anim.PlayBackward(speakingBoxAnim, true));
     }
 
+    public void Interrupt()
+    {
+        if(isSpeaking)
+        {
+            StartCoroutine(speakingBoxAnim.anim.Play(speakingBoxAnim));
+            isSpeaking = false;
+        }
+        currentSpeech = null;
+    }
+
     public void Leave()
     {
         NegoceManager.I.MakeCharacterLeave(this);
@@ -443,7 +455,7 @@ public abstract class CharacterHandler : UIInteractable
                 }
 
                 Vector3 objectPosToFollow = Input.mousePosition;
-                if(isHoveredWithCharaObject && !isThinking && !isSpeaking && !isListening)
+                if(isHoveredWithCharaObject && !isThinking && !isListening)
                 {
                     if (!NegoceManager.I.playerHandler.IsPlayerTalking())
                     {

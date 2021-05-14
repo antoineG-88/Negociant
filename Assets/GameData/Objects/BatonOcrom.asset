@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: BatonOcrom
+  m_EditorClassIdentifier: 
+  objectName: "B\xE2ton Ocrom"
+  title: des mages d'Auriah
+  illustration: {fileID: 21300000, guid: e5c93fb0e76693149a72455af07b98b3, type: 3}
+  description: 
+  originDescription: 
+  origin: 0
+  categories: 0100000005000000
+  features:
+  - argumentTitle: 'default : Arme'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: "C'est une arme fiable qui ne vous decevra point lors de
+      vos affrontements les plus f\xE9roces"
+    argumentSpeakTime: 1.5
+    description: 'default : Arme'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 1
+      color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
+      icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est une arme fiable qui ne vous decevra point lors
+        de vos affrontements les plus f\xE9roces"
+      argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
+      argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
+  - argumentTitle: 'default : Magie'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: C'est un objet d'une puissance magique extraodinaire dont
+      vous ne pourrez plus vous passer
+    argumentSpeakTime: 1.5
+    description: 'default : Magie'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: MagieCrepusculaire
+    traits: 02000000
+    interestLevelIncrease: 27
+    rememberTime: 15
+    argumentSpokenText: C'est MagieCrepusculaire
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieCrepusculaire"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: Hekmar
+    traits: 03000000
+    interestLevelIncrease: 24
+    rememberTime: 35
+    argumentSpokenText: C'est Hekmar
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Hekmar"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: Ancien
+    traits: 07000000
+    interestLevelIncrease: 10
+    rememberTime: 13
+    argumentSpokenText: C'est Ancien
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin

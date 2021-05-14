@@ -27,6 +27,15 @@ public class NegoceManager : MonoBehaviour
     public int additionnalSpaceTakenBySelectedCharacter;
     public int additionnalSpaceTakenBySelectedCharacterWhileTrading;
     public float selectedCharacterPositionRatioOffsetWhileTrading;
+    public TweeningAnimator notesWindowAnim;
+    public InputField notesField;
+    public Dropdown categoryDropdown;
+    public Text notesWindowCharacterText;
+    public Image notesWindowCharacterFace;
+    [Header("Market Day Options")]
+    public float marketDayTime;
+    public RectTransform sundialArrow;
+    public Vector2 minMaxSundialArrowAngle;
     [Header("RandomCharacterOptions")]
     public int minChInitialInterest;
     public int maxChInitialInterest;
@@ -73,18 +82,23 @@ public class NegoceManager : MonoBehaviour
         {
             playerHandler.allStallObjects[i].interestLevelToShow = -1;
         }
+        notesWindowAnim.GetReferences();
+        notesWindowAnim.anim.SetAtEndState(notesWindowAnim);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
+        if(negoceTimeSpend < marketDayTime)
         {
-            debugInfo = !debugInfo;
+            if(unfoldTime)
+            {
+                negoceTimeSpend += Time.deltaTime;
+                sundialArrow.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(minMaxSundialArrowAngle.x, minMaxSundialArrowAngle.y, negoceTimeSpend / marketDayTime));
+            }
         }
-
-        if(unfoldTime)
+        else
         {
-            negoceTimeSpend += Time.deltaTime;
+
         }
 
         UpdateCharacterApparition();
@@ -153,7 +167,18 @@ public class NegoceManager : MonoBehaviour
 
                 standObject.interestLevel.gameObject.SetActive(debugInfo);
             }
+            notesWindowCharacterFace.sprite = selectedCharacter.character.faceSprite;
+            notesWindowCharacterText.text = selectedCharacter.character.characterName;
+            notesField.text = selectedCharacter.playerNotes;
+            categoryDropdown.value = selectedCharacter.playerCategoryNote;
+            StartCoroutine(notesWindowAnim.anim.PlayBackward(notesWindowAnim, true));
         }
+        else if(selectedCharacter == null && previousSelectedCharacter != null)
+        {
+            previousSelectedCharacter = null;
+            StartCoroutine(notesWindowAnim.anim.Play(notesWindowAnim));
+        }
+
         if(selectedCharacter == null)
         {
             charaInfoPanel.SetActive(false);
@@ -164,6 +189,21 @@ public class NegoceManager : MonoBehaviour
         foreach (CharacterHandler characterPresent in allPresentCharacters)
         {
             characterPresent.rectTransform.anchoredPosition = Vector2.Lerp(characterPresent.rectTransform.anchoredPosition, characterPresent.targetPositionAtTheStall, characterMoveLerpRatio * Time.deltaTime);
+        }
+    }
+
+    public void ChangeSelectedCharacterNotes(string playerNotes)
+    {
+        if(selectedCharacter != null)
+        {
+            selectedCharacter.playerNotes = playerNotes;
+        }
+    }
+    public void ChangeSelectedCharacterCategoryNote(int playerNotes)
+    {
+        if (selectedCharacter != null)
+        {
+            selectedCharacter.playerCategoryNote = playerNotes;
         }
     }
 

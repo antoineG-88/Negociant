@@ -87,6 +87,30 @@ public class Object : ScriptableObject
 
         features.Add(newFeature);
     }
+    public void RandomizeLastFeatureValues()
+    {
+        Feature changingFeature = features[features.Count - 1];
+        changingFeature.argumentSpeakTime = 1.5f;
+
+        changingFeature.argumentSpokenText = "C'est ";
+        changingFeature.description = "Cet objet est convoités par les aventuriers qui aime : ";
+        changingFeature.argumentTitle = "";
+        for (int i = 0; i < changingFeature.traits.Count; i++)
+        {
+            if (i != 0)
+            {
+                changingFeature.argumentTitle = changingFeature.argumentTitle + " & ";
+                changingFeature.argumentSpokenText = changingFeature.argumentSpokenText + " et ";
+                changingFeature.description = changingFeature.description + ", ";
+            }
+            changingFeature.argumentTitle = changingFeature.argumentTitle + changingFeature.traits[i].ToString();
+            changingFeature.argumentSpokenText = changingFeature.argumentSpokenText + changingFeature.traits[i].ToString();
+            changingFeature.description = changingFeature.description + changingFeature.traits[i].ToString();
+        }
+        changingFeature.isKnownWhenObjectAcquired = true;
+        changingFeature.interestLevelIncrease = UnityEngine.Random.Range(GameData.minMaxInterestIncrease.x, GameData.minMaxInterestIncrease.y + 1);
+        changingFeature.rememberTime = UnityEngine.Random.Range(GameData.minMaxRememberTime.x, GameData.minMaxRememberTime.y + 1);
+    }
     public Object()
     {
     }
@@ -94,16 +118,16 @@ public class Object : ScriptableObject
     [System.Serializable]
     public class Feature
     {
-        public List<Trait> traits;
         public string argumentTitle;
-        [TextArea] public string argumentSpokenText;
-        public float argumentSpeakTime;
-        [TextArea] public string description;
-        public bool isKnownWhenObjectAcquired;
+        public List<Trait> traits;
         public float interestLevelIncrease;
+        public float rememberTime;
+        [TextArea] public string argumentSpokenText;
+        public float argumentSpeakTime = 1;
+        [TextArea] public string description;
+        public bool isKnownWhenObjectAcquired = true;
         public bool isCategoryFeature;
         public GameData.CategoryProperties categoryProperties;
-        public float rememberTime;
 
         public Feature()
         {
@@ -112,7 +136,7 @@ public class Object : ScriptableObject
 }
 
 
-public enum Trait { SandWorm, Corruption, Shiny, AuroraMagic, DuskMagic, Noble, Sharp, WeaknessGiving, StrenghGiving, Lost, Glorious, RareMaterial, Light, Heavy, Cold, Hot, Heskmar};
-public enum Category { Armor, Weapon, Accessory, Relic, Knowledge, Magic};
+public enum Trait { PythonDesSables, MagieDAurore, MagieCrepusculaire, Hekmar, Léger, Lourd, Noblesse, Ancien, Force, Affaiblissant, MateriauxRare};
+public enum Category { Armure, Arme, Accessoire, Relique, Savoir, Magie};
 public enum Origin { Unknown, DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, FrozenRuinedTower};
 

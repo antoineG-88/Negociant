@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: "TurbanEnchant\xE9"
+  m_EditorClassIdentifier: 
+  objectName: "Turban enchant\xE9"
+  title: des nomades de Duhua
+  illustration: {fileID: 21300000, guid: 6b5d0deaef7da734dbd45cc577f47252, type: 3}
+  description: 
+  originDescription: 
+  origin: 0
+  categories: 0000000005000000
+  features:
+  - argumentTitle: 'default : Armure'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: "C'est une pi\xE8ce d'armure solide qui vous tiendra en vie"
+    argumentSpeakTime: 1.5
+    description: 'default : Armure'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est une pi\xE8ce d'armure solide qui vous tiendra en
+        vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"
+  - argumentTitle: 'default : Magie'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: C'est un objet d'une puissance magique extraodinaire dont
+      vous ne pourrez plus vous passer
+    argumentSpeakTime: 1.5
+    description: 'default : Magie'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: Force
+    traits: 08000000
+    interestLevelIncrease: 10
+    rememberTime: 10
+    argumentSpokenText: C'est Force
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Force"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: "L\xE9ger"
+    traits: 04000000
+    interestLevelIncrease: 19
+    rememberTime: 30
+    argumentSpokenText: "C'est L\xE9ger"
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : L\xE9ger"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  - argumentTitle: MagieDAurore
+    traits: 01000000
+    interestLevelIncrease: 10
+    rememberTime: 25
+    argumentSpokenText: C'est MagieDAurore
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieDAurore"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 5
+      color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+      icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+        vous ne pourrez plus vous passer
+      argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+      argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin

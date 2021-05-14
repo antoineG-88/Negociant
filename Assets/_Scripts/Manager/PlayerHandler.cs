@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class PlayerHandler : MonoBehaviour
 {
     [Header("Temporary")]
@@ -16,7 +16,7 @@ public class PlayerHandler : MonoBehaviour
     [Header("Actions")]
     public string presentSpokenText;
     public float presentTime;
-    public Text currentSpokenText;
+    public TMP_Text currentSpokenText;
     public TweeningAnimator speakBoxAnim;
     public string askSpokenText;
     public float askTime;
@@ -144,6 +144,7 @@ public class PlayerHandler : MonoBehaviour
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isListening = true;
         presentedStallObject = stallObjectToPresent;
+        currentCharacterTalkingTo.Interrupt();
         Speak(presentSpokenText + stallObjectToPresent.linkedObject.objectName + ", " + targetCharacter.character.characterName + " ?", presentTime);
     }
 
@@ -153,6 +154,7 @@ public class PlayerHandler : MonoBehaviour
         currentCharacterTalkingTo.isListening = true;
         argumentedStallObject = stallObjectArgumented;
         featureArgumented = argumentedFeature;
+        currentCharacterTalkingTo.Interrupt();
         Speak(argumentedFeature.argumentSpokenText, argumentedFeature.argumentSpeakTime);
     }
     public void AskAbout(CharaObject charaObjectAsked, CharacterHandler targetCharacter)
@@ -160,6 +162,7 @@ public class PlayerHandler : MonoBehaviour
         currentCharacterTalkingTo = targetCharacter;
         currentCharacterTalkingTo.isListening = true;
         askedCharaObject = charaObjectAsked;
+        currentCharacterTalkingTo.Interrupt();
         Speak(askSpokenText, askTime);
     }
 
@@ -209,7 +212,7 @@ public class PlayerHandler : MonoBehaviour
 
             Vector3 objectPosToFollow = Input.mousePosition;
 
-            if (charaHovered != null && !charaHovered.isListening && !charaHovered.isThinking && !charaHovered.isSpeaking)
+            if (charaHovered != null && !charaHovered.isListening && !charaHovered.isThinking)
             {
                 characterInteractionPanel.position = charaHovered.rectTransform.position;
 

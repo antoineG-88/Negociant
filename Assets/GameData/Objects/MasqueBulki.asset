@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: MasqueBulki
+  m_EditorClassIdentifier: 
+  objectName: Masque Bulki
+  title: "du peuple oubli\xE9"
+  illustration: {fileID: 21300000, guid: e068d4e42de5b5147bf38af391baaa56, type: 3}
+  description: 
+  originDescription: 
+  origin: 0
+  categories: 03000000
+  features:
+  - argumentTitle: 'default : Relique'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: C'est une relique ancienne qui ne se fabrique de nos jours
+    argumentSpeakTime: 1.5
+    description: 'default : Relique'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: PythonDesSables
+    traits: 00000000
+    interestLevelIncrease: 19
+    rememberTime: 20
+    argumentSpokenText: C'est PythonDesSables
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - argumentTitle: Ancien
+    traits: 07000000
+    interestLevelIncrease: 16
+    rememberTime: 20
+    argumentSpokenText: C'est Ancien
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 3
+      color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+      icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+      argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+        relique"
+      argumentSpeechBadReaction: A quoi pourrais me servir une relique ...

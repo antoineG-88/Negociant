@@ -173,9 +173,21 @@ public class Speech
                     {
                         while (charProgression >= 1 && currentCharacterIndex < sentences[currentSentenceIndex].sentencePart[i].Length)
                         {
-                            savedSentencePart += sentences[currentSentenceIndex].sentencePart[i][currentCharacterIndex];
-                            currentCharacterIndex++;
-                            charProgression--;
+                            if(sentences[currentSentenceIndex].sentencePart[i][currentCharacterIndex] == '<')
+                            {
+                                do
+                                {
+                                    savedSentencePart += sentences[currentSentenceIndex].sentencePart[i][currentCharacterIndex];
+                                    currentCharacterIndex++;
+                                }
+                                while (sentences[currentSentenceIndex].sentencePart[i][currentCharacterIndex - 1] != '>');
+                            }
+                            if(currentCharacterIndex < sentences[currentSentenceIndex].sentencePart[i].Length)
+                            {
+                                savedSentencePart += sentences[currentSentenceIndex].sentencePart[i][currentCharacterIndex];
+                                currentCharacterIndex++;
+                                charProgression--;
+                            }
                         }
 
                         if (currentCharacterIndex >= sentences[currentSentenceIndex].sentencePart[i].Length)

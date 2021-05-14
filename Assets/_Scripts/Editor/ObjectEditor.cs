@@ -24,5 +24,10 @@ public class ObjectEditor : Editor
             objectToEdit.CreateOneRandomFeature();
             EditorUtility.SetDirty(objectToEdit);
         }
+        if (GUILayout.Button("Randomize last feature values"))
+        {
+            objectToEdit.RandomizeLastFeatureValues();
+            EditorUtility.SetDirty(objectToEdit);
+        }
     }
 }

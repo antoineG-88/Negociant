@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
+  m_Name: PlastronDAcier
+  m_EditorClassIdentifier: 
+  objectName: Plastron d'acier
+  title: de la garde d'Auriah
+  illustration: {fileID: 21300000, guid: 4d1af067361daf643853e2fbd28b8d2e, type: 3}
+  description: 
+  originDescription: 
+  origin: 0
+  categories: 00000000
+  features:
+  - argumentTitle: 'default : Armure'
+    traits: 
+    interestLevelIncrease: 20
+    rememberTime: 30
+    argumentSpokenText: "C'est une pi\xE8ce d'armure solide qui vous tiendra en vie"
+    argumentSpeakTime: 1.5
+    description: 'default : Armure'
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est une pi\xE8ce d'armure solide qui vous tiendra en
+        vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"
+  - argumentTitle: Lourd
+    traits: 05000000
+    interestLevelIncrease: 13
+    rememberTime: 11
+    argumentSpokenText: C'est Lourd
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est une pi\xE8ce d'armure solide qui vous tiendra en
+        vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"
+  - argumentTitle: PythonDesSables
+    traits: 00000000
+    interestLevelIncrease: 21
+    rememberTime: 19
+    argumentSpokenText: C'est PythonDesSables
+    argumentSpeakTime: 1.5
+    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
+    isKnownWhenObjectAcquired: 1
+    isCategoryFeature: 1
+    categoryProperties:
+      category: 0
+      color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+      icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+      argumentTime: 1.5
+      argumentInterestLevelIncrease: 20
+      argumentRememberTime: 30
+      argumentDescription: "C'est une pi\xE8ce d'armure solide qui vous tiendra en
+        vie"
+      argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+      argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+        le peux d\xE9ja"

@@ -48,7 +48,7 @@ public class ArgumentRadialMenu : UIInteractable
                 {
                     argumentDescriptionText.text = categoryRadialOptions[i].feature.categoryProperties.argumentDescription;
 
-                    if (Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking && !characterTargeted.isSpeaking)
+                    if (Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking)
                     {
                         NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, categoryRadialOptions[i].feature);
                         atLeastOneOptionChosen = true;
@@ -69,7 +69,7 @@ public class ArgumentRadialMenu : UIInteractable
                 {
                     argumentDescriptionText.text = featureRadialOptions[i].feature.description;
 
-                    if(Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking && !characterTargeted.isSpeaking)
+                    if(Input.GetMouseButtonUp(0) && !NegoceManager.I.playerHandler.IsPlayerTalking() && !characterTargeted.isThinking)
                     {
                         NegoceManager.I.playerHandler.ArgumentFeature(currentStallObject, characterTargeted, featureRadialOptions[i].feature);
                         atLeastOneOptionChosen = true;
