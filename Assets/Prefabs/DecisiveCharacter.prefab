@@ -2764,6 +2764,11 @@ MonoBehaviour:
     rectTransform: {fileID: 6150439527280269211}
     canvasGroup: {fileID: 0}
     originalPos: {x: 0, y: 0}
+  leavingAnim:
+    anim: {fileID: 11400000, guid: d1d7a8e3f4ce4c748ad197304dd963c6, type: 2}
+    rectTransform: {fileID: 6150439527280269211}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
   enthousiasmGauge: {fileID: 1053211536}
   gazeLerpRatio: 8
   identificationCircle: {fileID: 2078761732196462719}

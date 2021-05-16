@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
+  m_Name: Theodius
+  m_EditorClassIdentifier: 
+  characterName: Theodius
+  illustration: {fileID: -1538954623769790263, guid: fbb7889ddf9abb843a0c1e0df9a6d557,
+    type: 3}
+  faceSprite: {fileID: -4699079585706668072, guid: fbb7889ddf9abb843a0c1e0df9a6d557,
+    type: 3}
+  temper: 0
+  dayRangeComing: {x: 0, y: 0.5}
+  initialInterests: 01000000
+  needs:
+  - trait: 0
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Oh oui !_ De quoi me venger de ces pythons
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Je peux tuer des <color=#E98634>pythons des sables</color> avec
+        ca ?_ Non ?_ je m'en doutais
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 5
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: C'est parfait
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "Il me faut de l'\xE9quipement <color=#E98634>lourd</color>"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 8
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: C'est ce qu'il me faut !
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Si ca ne me donne pas de <color=#E98634>force</color>_, je m'en
+        passe
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: c9e35e9dc157fd34c91986862a39ec07, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Ce masque est inutile_, je te l'\xE9change sans probl\xE8me.&Si
+        tu as quoi que ce soit qui donne de la <color=#E98634>force</color>_, ca
+        me va !"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 08000000
+    value: 15
+  - ownedObject: {fileID: 11400000, guid: e565ff5c83771f345ba1aefc368caf71, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Il parait qu'elle permet de regagner sa vigueur..._, mais j'en
+        d\xE9j\xE0 bien assez comme ca !&Il me faut surtout une arme qui pourrais
+        m'aider \xE0 me d\xE9fendre contres les <color=#E98634>pythons des sables</color>&..
+        quelquechose de <color=#E98634>lourd</color>."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 0000000005000000
+    value: 40
+  defaultSpeachWhenWrongArgument:
+    speechRawText: "Ca m'est \xE9gal ..."
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 2
+  speechPauseTimeBetweenSentenceParts: 0.3
+  randomlyGenerated: 0

@@ -9,6 +9,7 @@ public class Character : ScriptableObject
     public Sprite illustration;
     public Sprite faceSprite;
     public Temper temper;
+    public Vector2 dayRangeComing;
     public List<Category> initialInterests;
     public List<Need> needs;
     public List<PersonnalObject> personnalObjects;
@@ -37,6 +38,7 @@ public class Character : ScriptableObject
         public Trait trait;
         [HideInInspector] public string defaultHintToTell;
         public Speech reactionSpokenWhenArgumented;
+        public Speech hintSpokenWhenAsked;
 
         public Need(Trait needTrait, bool defaultResponse)
         {

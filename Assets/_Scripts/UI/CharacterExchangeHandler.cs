@@ -183,8 +183,9 @@ public class CharacterExchangeHandler : MonoBehaviour
             totalPersonnalValueFiller.fillAmount = Mathf.Lerp(totalPersonnalValueFiller.fillAmount, knownTotalPersonnalValue / characterHandler.maxPersonnalValue, Time.deltaTime * 5);
             totalInterestFiller.fillAmount =  Mathf.Lerp(totalInterestFiller.fillAmount, totalInterest / characterHandler.maxPersonnalValue, Time.deltaTime * 5);
 
-            if (exchangeButton.canBeUsed && exchangeButton.isClicked)
+            if (exchangeButton.canBeUsed && exchangeButton.isClicked && !characterHandler.isThinking && !characterHandler.isListening)
             {
+                characterHandler.Interrupt();
                 ProposeExchange();
             }
         }
@@ -273,7 +274,7 @@ public class CharacterExchangeHandler : MonoBehaviour
         if (charaSpace.charaObjectHeld != null)
         {
             charaObjectsSelected.Remove(charaSpace.charaObjectHeld);
-            charaSpace.stallObjectHeld = null;
+            charaSpace.charaObjectHeld = null;
             charaSpace.objectImage.color = Color.clear;
 
             if (charaObjectsSelected.Count == 1 && charaSpace == characterSpaces[0])
@@ -397,9 +398,25 @@ public class CharacterExchangeHandler : MonoBehaviour
             NegoceManager.I.selectedCharacter.RefreshCharacterDisplay();
         }
 
+        foreach(ExchangeSpace charSpace in characterSpaces)
+        {
+            RemoveCharaObjectFromTrade(charSpace);
+        }
+
         foreach (StallObject stallObject in stallObjectsSelected)
         {
             NegoceManager.I.playerHandler.RemoveStallObject(stallObject);
+        }
+
+
+        foreach (ExchangeSpace playerSpace in playerSpaces)
+        {
+            RemoveStallObjectFromTrade(playerSpace);
+        }
+
+        if(characterHandler.belongings.Count == 0)
+        {
+            StartCoroutine(characterHandler.Leave());
         }
     }
 }

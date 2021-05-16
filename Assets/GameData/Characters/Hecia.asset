@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
+  m_Name: Hecia
+  m_EditorClassIdentifier: 
+  characterName: Hecia
+  illustration: {fileID: 3067962901903917793, guid: 2ec6b97270573f7469cd29b7365471ef,
+    type: 3}
+  faceSprite: {fileID: -8636346921316109455, guid: 2ec6b97270573f7469cd29b7365471ef,
+    type: 3}
+  temper: 0
+  dayRangeComing: {x: 0.4, y: 0.8}
+  initialInterests: 00000000
+  needs:
+  - trait: 3
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Je me retrouve souvent face \xE0 des Hekmars_, ca me sera utile
+        !"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "J'aimerais ne pas \xE0 avoir \xE0 les \xE9liminer, mais ces
+        <color=#E98634>Hekmars</color> s'installent partout"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 6
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Tu exploite mon point faible !_._._._ ca fonctionne
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "Je ne devrais pas le dire mais... &... si tu as un objet d'origine
+        <color=#E98634>noble</color> ca m'int\xE9resse"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 4
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Si c'est l\xE9ger_ c'est toujours mieux"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "Je ne n'\xE9change pas si c'est trop <color=#E98634>lourd</color>"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: c3e4d2053a3495d488fb5b28b3547793, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Tu veux parler de ce carnet ?&Il ne me sert plus \xE0 grand
+        chose_, j'ai appris tout ce que je voulais sur les <color=#E98634>Hekmar</color>."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 03000000
+    value: 25
+  - ownedObject: {fileID: 11400000, guid: 7261a1bbd20148648bddd0200afb6ffb, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Ce b\xE2ton est <color=#E98634>trop lourd</color>_, et en plus
+        il me donne mal \xE0 la t\xEAte. &C'est parce qu'il utilise de la magie cr\xE9pusculaire...&Je
+        voulais le donner \xE0 l'empereur pour obtenir la faveur des <color=#E98634>nobles</color>...
+        &mais tu peux l'avoir si tu as un bon article."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 0400000006000000
+    value: 38
+  defaultSpeachWhenWrongArgument:
+    speechRawText: "Oui ..._ peut \xEAtre"
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 2
+  speechPauseTimeBetweenSentenceParts: 0.3
+  randomlyGenerated: 0

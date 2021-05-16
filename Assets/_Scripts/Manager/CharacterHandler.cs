@@ -19,6 +19,7 @@ public abstract class CharacterHandler : UIInteractable
     public GameObject annoyedFxPrefab;
     public GameObject happyFxPrefab;
     public TweeningAnimator backWardApparitionAnim;
+    public TweeningAnimator leavingAnim;
     public GameObject enthousiasmGauge;
     public float gazeLerpRatio;
     public Image identificationCircle;
@@ -289,15 +290,22 @@ public abstract class CharacterHandler : UIInteractable
 
     public void AskAbout(CharaObject askedObject)
     {
-        askedObject.isPersonnalValueKnown = true;
         if(character.randomlyGenerated)
         {
             Speak(character.needs[Random.Range(0, character.needs.Count)].defaultHintToTell, 3);
         }
         else
         {
-            Speak(character.GetPersonnalObjectFromObject(askedObject.linkedObject).infoGivenWhenAsked);
+            if(!askedObject.isPersonnalValueKnown)
+            {
+                Speak(character.GetPersonnalObjectFromObject(askedObject.linkedObject).infoGivenWhenAsked);
+            }
+            else
+            {
+                Speak(character.needs[Random.Range(0, character.needs.Count)].hintSpokenWhenAsked);
+            }
         }
+        askedObject.isPersonnalValueKnown = true;
     }
 
     public void ReactToArgumentFeature(Object.Feature featureArgumented, StallObject argumentedObject)
@@ -411,10 +419,34 @@ public abstract class CharacterHandler : UIInteractable
         currentSpeech = null;
     }
 
-    public void Leave()
+    public IEnumerator Appear()
     {
-        NegoceManager.I.MakeCharacterLeave(this);
+        isAppearing = true;
+        backWardApparitionAnim.anim = Instantiate(backWardApparitionAnim.anim);
+        backWardApparitionAnim.GetReferences();
+        identificationCircle.gameObject.SetActive(false);
+        enthousiasmGauge.SetActive(false);
+        UnSelect(true);
+        StartCoroutine(backWardApparitionAnim.anim.PlayBackward(backWardApparitionAnim, true));
+        yield return new WaitForSeconds(backWardApparitionAnim.anim.animationTime);
+        identificationCircle.gameObject.SetActive(true);
+        enthousiasmGauge.SetActive(true);
+        isAppearing = false;
+    }
+
+    public IEnumerator Leave()
+    {
+        Speak("Je m'en vais_, je reviendrai demain", 4);
         isLeaving = true;
+        leavingAnim.anim = Instantiate(leavingAnim.anim);
+        leavingAnim.anim.animationTime = 5;
+        leavingAnim.GetReferences();
+        UnSelect(false);
+        identificationCircle.gameObject.SetActive(false);
+        enthousiasmGauge.SetActive(false);
+        StartCoroutine(leavingAnim.anim.Play(leavingAnim));
+        yield return new WaitForSeconds(leavingAnim.anim.animationTime);
+        NegoceManager.I.LeaveCharacterPresent(this);
     }
 
     public void LookObject(PotentialObject objectToLook, float timeToLook)
@@ -617,21 +649,6 @@ public abstract class CharacterHandler : UIInteractable
         return potentialCharaObject;
     }
 
-    public IEnumerator Appear()
-    {
-        isAppearing = true;
-        backWardApparitionAnim.anim = Instantiate(backWardApparitionAnim.anim);
-        backWardApparitionAnim.GetReferences();
-        identificationCircle.gameObject.SetActive(false);
-        enthousiasmGauge.SetActive(false);
-        UnSelect(true);
-        StartCoroutine(backWardApparitionAnim.anim.PlayBackward(backWardApparitionAnim, true));
-        yield return new WaitForSeconds(backWardApparitionAnim.anim.animationTime);
-        identificationCircle.gameObject.SetActive(true);
-        enthousiasmGauge.SetActive(true);
-        isAppearing = false;
-    }
-
     public void Select()
     {
         if (!isSelected)
@@ -691,23 +708,6 @@ public abstract class CharacterHandler : UIInteractable
 
     private void UpdateCharacterInfoDisplay()
     {
-        /*if (isSelected)
-        {
-            if (!selectedFlag)
-            {
-                selectedFlag = true;
-            }
-            nameText.gameObject.SetActive(true);
-        }
-        else
-        {
-            if (selectedFlag)
-            {
-                selectedFlag = false;
-            }
-            nameText.gameObject.SetActive(false);
-        }*/
-
         enthousiasmFiller.fillAmount =  Mathf.Lerp(enthousiasmFiller.fillAmount, currentEnthousiasm / 1, Time.deltaTime * enthousiasmLerpRatio);
     }
 

@@ -53,6 +53,7 @@ public class NegoceManager : MonoBehaviour
     private float timeSpendSinceLastCharacterApparition;
     private float nextCharacterApparitionTime;
     private CharacterHandler previousSelectedCharacter;
+    private List<Character> characterAlreadyCame;
 
     public static NegoceManager I;
     private void Awake()
@@ -62,6 +63,7 @@ public class NegoceManager : MonoBehaviour
 
     void Start()
     {
+        characterAlreadyCame = new List<Character>();
         unfoldTime = true;
         negoceTimeSpend = 0;
         allPresentCharacters = new List<CharacterHandler>();
@@ -173,7 +175,7 @@ public class NegoceManager : MonoBehaviour
             categoryDropdown.value = selectedCharacter.playerCategoryNote;
             StartCoroutine(notesWindowAnim.anim.PlayBackward(notesWindowAnim, true));
         }
-        else if(selectedCharacter == null && previousSelectedCharacter != null)
+        else if(selectedCharacter == null && previousSelectedCharacter != selectedCharacter)
         {
             previousSelectedCharacter = null;
             StartCoroutine(notesWindowAnim.anim.Play(notesWindowAnim));
@@ -217,6 +219,17 @@ public class NegoceManager : MonoBehaviour
         {
             allAbsentCharacter.Remove(allPresentCharacters[i].character);
         }
+        for (int i = (allAbsentCharacter.Count - 1); i >= 0; i--)
+        {
+            if(characterAlreadyCame.Contains(allAbsentCharacter[i]))
+            {
+                allAbsentCharacter.RemoveAt(i);
+            }
+            else if(!(allAbsentCharacter[i].dayRangeComing.x < negoceTimeSpend / marketDayTime && allAbsentCharacter[i].dayRangeComing.y > negoceTimeSpend / marketDayTime))
+            {
+                allAbsentCharacter.RemoveAt(i);
+            }
+        }
 
         if (allAbsentCharacter.Count > 0)
         {
@@ -255,6 +268,7 @@ public class NegoceManager : MonoBehaviour
         }
 
         RefreshCharactersDisplay();
+        characterAlreadyCame.Add(theCharacter);
         StartCoroutine(newCharacterHandler.Appear());
     }
 
@@ -280,6 +294,7 @@ public class NegoceManager : MonoBehaviour
                 }
                 allPresentCharacters[i].identificationColor = identificationColors[i];
                 allPresentCharacters[i].RefreshCharacterDisplay();
+                
             }
         }
     }
@@ -327,9 +342,8 @@ public class NegoceManager : MonoBehaviour
         return newCharacter;
     }
 
-    public void MakeCharacterLeave(CharacterHandler leavingCharacter)
+    public void LeaveCharacterPresent(CharacterHandler leavingCharacter)
     {
-        leavingCharacter.isLeaving = true;
         allPresentCharacters.Remove(leavingCharacter);
         Destroy(leavingCharacter.gazeDisplay.gameObject);
         Destroy(leavingCharacter.gameObject);

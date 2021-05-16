@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
   m_Name: LiqueurEternel
   m_EditorClassIdentifier: 
-  objectName: "Liqueur \xC9ternel"
+  objectName: "Liqueur \xC9ternelle"
   title: des coursiers d'Helghen
   illustration: {fileID: 21300000, guid: bdf3fce5626e8d64daedcaa7da986185, type: 3}
   description: 

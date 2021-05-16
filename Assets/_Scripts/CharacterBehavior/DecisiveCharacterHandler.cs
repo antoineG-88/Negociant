@@ -87,9 +87,9 @@ public class DecisiveCharacterHandler : CharacterHandler
 
         if (currentEnthousiasm <= 0)
         {
-            if (!isListening)
+            if (!isListening && !isLeaving)
             {
-                Leave();
+                StartCoroutine(Leave());
             }
         }
     }

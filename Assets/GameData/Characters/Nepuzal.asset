@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
+  m_Name: Nepuzal
+  m_EditorClassIdentifier: 
+  characterName: Nepuzal
+  illustration: {fileID: 2081441012283257675, guid: f603c6a5eb46370428cadf28ad917aaf,
+    type: 3}
+  faceSprite: {fileID: 7132382260777973126, guid: f603c6a5eb46370428cadf28ad917aaf,
+    type: 3}
+  temper: 0
+  dayRangeComing: {x: 0, y: 0.5}
+  initialInterests: 04000000
+  needs:
+  - trait: 1
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Cette magie m'intrigue toujours
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: La <color=#E98634>magie d'aurore</color> me surprend tous les
+        jours
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 7
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Les vieux objets sont souvent les plus int\xE9ressant"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Vous n'auriez pas un <color=#E98634>vieux</color> livre qui
+        traine dans vos affaires ?
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 6
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Je dois avouer que j'ai un faible pour le luxe
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "Je cotoie r\xE9guli\xE8rement les <color=#E98634>nobles</color>
+        d'Auriah_, ils adorent mes histoires !"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: 71f920a5da76d9646869ee3e193ef4f4, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Un erudit me l'a donn\xE9 lorsque j'ai quitt\xE9 Hagdon_, je
+        m'en suis servi pour faire progresser mes recherches sur la <color=#E98634>magie
+        d'aurore</color>"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 01000000
+    value: 34
+  defaultSpeachWhenWrongArgument:
+    speechRawText: "Ca ne m'int\xE9resse pas."
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 2
+  speechPauseTimeBetweenSentenceParts: 0.3
+  randomlyGenerated: 0

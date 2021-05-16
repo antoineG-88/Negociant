@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
+  m_Name: Kilptyc
+  m_EditorClassIdentifier: 
+  characterName: Kilptyc
+  illustration: {fileID: 3133950656342894596, guid: 6d7259d61e179b140864125bed65e594,
+    type: 3}
+  faceSprite: {fileID: -6609803509490941377, guid: 6d7259d61e179b140864125bed65e594,
+    type: 3}
+  temper: 1
+  dayRangeComing: {x: 0.4, y: 0.8}
+  initialInterests: 05000000
+  needs:
+  - trait: 9
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: 'Eheh ..._ oui ... '
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Vous n'auriez pas un <color=#E98634>poison</color> ?_ Ou un
+        elexir de <color=#E98634>fatigue</color> ?
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 1
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: "Je pr\xE9f\xE8re la magie d'aurore"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: "Les <color=#E98634>enchantement d'aurore</color> m'int\xE9ressent"
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 10
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: C'est rare ! Je prend
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Si vous trouvez un <color=#E98634>crystal rare</color>, faites
+        le moi savoir
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: 03d06fbcc82877446a49a844382a89f3, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Ah, ces gants..._  je les aies \xE9chang\xE9s \xE0 des moines
+        dans les montagnes.&Ils m'ont jur\xE9 qu'ils pouvais <color=#E98634>affaiblir</color>
+        mes ennemis juste au touch\xE9 !&J'imagine que j'aurais du apprendre leur
+        art martial..."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 09000000
+    value: 32
+  - ownedObject: {fileID: 11400000, guid: be697a14626d07247a27c102006b5923, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Oh, je vois que cette pierre vous int\xE9resse.& Elle est impr\xE9gn\xE9
+        de magie cr\xE9pusculaire_, j'aurais pr\xE9f\xE9r\xE9 que ce soit de la <color=#E98634>magie
+        d'aurore</color> ...&Cette obsidienne est un <color=#E98634>mat\xE9riaux
+        tr\xE8s rare</color>_, je ne m'en s\xE9parerai pas facilement."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 010000000a000000
+    value: 53
+  defaultSpeachWhenWrongArgument:
+    speechRawText: "(parle de votre t\xEAte : tu crois que c'est ca qui va me donner
+      envie de te l'\xE9changer)"
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 2
+  speechPauseTimeBetweenSentenceParts: 0.3
+  randomlyGenerated: 0

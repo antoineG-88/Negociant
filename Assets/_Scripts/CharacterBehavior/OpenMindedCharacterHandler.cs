@@ -63,9 +63,9 @@ public class OpenMindedCharacterHandler : CharacterHandler
             }
             else
             {
-                if (!isListening)
+                if (!isListening && !isLeaving)
                 {
-                    Leave();
+                    StartCoroutine(Leave());
                 }
                 currentEnthousiasm = 0;
             }

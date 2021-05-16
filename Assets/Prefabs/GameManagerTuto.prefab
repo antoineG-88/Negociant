@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6285004685861017135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6285004685861017133}
+  - component: {fileID: 6285004685861017134}
+  - component: {fileID: 6285004685861017132}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6285004685861017133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285004685861017135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6285004685861017134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285004685861017135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00e317b6267f1048b721c543bfb28ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allObjects: []
+  _categoriesProperties:
+  - category: 0
+    color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
+    icon: {fileID: 21300000, guid: 94f8cb56e9513414a969ef5778af5373, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: "C'est une pi\xE8ce d'armure solide qui vous tiendra en
+      vie"
+    argumentSpeechGoodReaction: J'ai justement besoin d'une armure
+    argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
+      le peux d\xE9ja"
+  - category: 1
+    color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
+    icon: {fileID: 21300000, guid: ef29924a212ab7040a3af78c9adf3d17, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: "C'est une arme fiable qui ne vous decevra point lors de
+      vos affrontements les plus f\xE9roces"
+    argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
+    argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
+  - category: 2
+    color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
+    icon: {fileID: 21300000, guid: 31fed24d5e2362b4ca7c1982dc60bf02, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: "C'est un accesoire de qualit\xE9 qui compl\xE9mentera votre
+      style"
+    argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9 mon
+      style"
+    argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
+  - category: 3
+    color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
+    icon: {fileID: 21300000, guid: 3ed560b86b38b6a478cc747ec2426c55, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: C'est une relique ancienne qui ne se fabrique de nos jours
+    argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
+      relique"
+    argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
+  - category: 4
+    color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
+    icon: {fileID: 21300000, guid: 311e41a307c1ee24db61c52ef1968e70, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: C'est un objet de savoir comportant des informations exclusive
+      qui saura satisfaire votre soif de connaissance
+    argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
+    argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose pour
+      l'instant
+  - category: 5
+    color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
+    icon: {fileID: 21300000, guid: c3dacb76eee53b84fba86f8e21c050e3, type: 3}
+    argumentTime: 1.5
+    argumentInterestLevelIncrease: 20
+    argumentRememberTime: 30
+    argumentDescription: C'est un objet d'une puissance magique extraodinaire dont
+      vous ne pourrez plus vous passer
+    argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
+    argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
+  _decisiveCharaPrefab: {fileID: 9165996161038736757, guid: 2b6b508496f34b745b71e825e382b5dc,
+    type: 3}
+  _openMindedCharaPrefab: {fileID: 7490402062767212952, guid: 04334ea4d4ab5ab4f8945c9602579c48,
+    type: 3}
+  _minMaxArgumentTime: {x: 1, y: 3}
+  _minMaxRememberTime: {x: 8, y: 40}
+  _minMaxNumberOfTraits: {x: 1, y: 2}
+  _minMaxInterestIncrease: {x: 10, y: 30}
+--- !u!114 &6285004685861017132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285004685861017135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991e7fc672e00764098b139f47fb9b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPossibleCharacters:
+  - {fileID: 11400000, guid: fa593ddd165048148acdf636ac63b572, type: 2}
+  - {fileID: 11400000, guid: 9dfe1dfb5bf07034190924b344ff1f49, type: 2}
+  playerHandler: {fileID: 0}
+  argumentRadialMenu: {fileID: 0}
+  charactersDisplay: {fileID: 0}
+  minCharacterPos: {x: -500, y: 0}
+  maxCharacterPos: {x: 900, y: 0}
+  maxCharacterPresent: 3
+  debugInfo: 0
+  charaInfoPanel: {fileID: 0}
+  charaInitialInterestsText: {fileID: 0}
+  charaNameText: {fileID: 0}
+  gazePrefab: {fileID: 6299357215637901463, guid: c63154aa956242144ac2af295f966e56,
+    type: 3}
+  gazePanel: {fileID: 0}
+  identificationColors:
+  - {r: 0.8679245, g: 0.5258065, b: 0.33980063, a: 1}
+  - {r: 0.63210046, g: 0.735849, b: 0.2742079, a: 1}
+  - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
+  - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
+  - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
+  timeRangeBetweenCharacterApparition: {x: 10, y: 30}
+  characterMoveLerpRatio: 10
+  additionnalSpaceTakenBySelectedCharacter: 5
+  additionnalSpaceTakenBySelectedCharacterWhileTrading: 12
+  selectedCharacterPositionRatioOffsetWhileTrading: 0.65
+  notesWindowAnim:
+    anim: {fileID: 11400000, guid: fdf202d016ff86345821c7f886a787fd, type: 2}
+    rectTransform: {fileID: 0}
+    canvasGroup: {fileID: 0}
+    originalPos: {x: 0, y: 0}
+  notesField: {fileID: 0}
+  categoryDropdown: {fileID: 0}
+  notesWindowCharacterText: {fileID: 0}
+  notesWindowCharacterFace: {fileID: 0}
+  marketDayTime: 120
+  sundialArrow: {fileID: 0}
+  minMaxSundialArrowAngle: {x: 90, y: -90}
+  minChInitialInterest: 1
+  maxChInitialInterest: 1
+  minChNeeds: 4
+  maxChNeeds: 7
+  allCharacterIllustrations:
+  - {fileID: -1413388721454057509, guid: b498245ae8971b74c91915d3dba56280, type: 3}
+  - {fileID: 8965860129341218014, guid: 56077c04119ec8d4b8231f4acd8e5813, type: 3}
+  - {fileID: 2081441012283257675, guid: f603c6a5eb46370428cadf28ad917aaf, type: 3}
+  - {fileID: 4498544600597911442, guid: ac5f81ca8c450ba4e8130ac21a22a24e, type: 3}
+  - {fileID: 438157911853704422, guid: b35c6e61ebe0bf4438e95bd56cf5e215, type: 3}
+  - {fileID: -8760860750590724520, guid: c1792b917450df34ca5cf95b859b71bb, type: 3}
+  - {fileID: -1536020125514087618, guid: b03b7df85f3306d4da2cf7fe1e95bbbb, type: 3}
+  - {fileID: 3067962901903917793, guid: 2ec6b97270573f7469cd29b7365471ef, type: 3}
+  - {fileID: -2164466282066322600, guid: 701ab6ee052087046999feb560ba5d1d, type: 3}
+  - {fileID: -6962342548317364080, guid: c630deaf8032f0c49a39218c4065aabc, type: 3}
+  - {fileID: -4406546410419622498, guid: 48ada3e54ba39d641a22fa7e5de4c109, type: 3}
+  - {fileID: 3133950656342894596, guid: 6d7259d61e179b140864125bed65e594, type: 3}
+  - {fileID: -1538954623769790263, guid: fbb7889ddf9abb843a0c1e0df9a6d557, type: 3}
+  - {fileID: -2033267079696759696, guid: 2aaa57dae1012d3468e27315a1873d7c, type: 3}
+  - {fileID: -8758374864151249627, guid: 05a8a9cb9fd71c049ab5f8e4b81b473a, type: 3}
+  - {fileID: 1805088148058408668, guid: 868c1a85b9d874c42a093f01f443168d, type: 3}
+  - {fileID: -9166689707693640997, guid: c50697e4fd83bc84997cd63f85e69d15, type: 3}
+  - {fileID: -2739807658926110822, guid: cf17e22b43bd6a942b391d2a6348b650, type: 3}
+  - {fileID: -8489279680045243894, guid: 46a2636f046ac1a46b0ae2a2c149c912, type: 3}
+  - {fileID: -4215602638976889590, guid: 68e2a5a6a85bdd4468b6ab30cacadffc, type: 3}
+  - {fileID: 5951965144175918990, guid: f0f0d37f12fd46e49b9c4ca4e849db39, type: 3}
+  allCharacterFaces:
+  - {fileID: 1437476644234695805, guid: b498245ae8971b74c91915d3dba56280, type: 3}
+  - {fileID: -6299242990183492890, guid: 56077c04119ec8d4b8231f4acd8e5813, type: 3}
+  - {fileID: 7132382260777973126, guid: f603c6a5eb46370428cadf28ad917aaf, type: 3}
+  - {fileID: -7706798523822224507, guid: ac5f81ca8c450ba4e8130ac21a22a24e, type: 3}
+  - {fileID: -735501874343175187, guid: b35c6e61ebe0bf4438e95bd56cf5e215, type: 3}
+  - {fileID: 6895806468020777741, guid: c1792b917450df34ca5cf95b859b71bb, type: 3}
+  - {fileID: -2686590059311066220, guid: b03b7df85f3306d4da2cf7fe1e95bbbb, type: 3}
+  - {fileID: -8636346921316109455, guid: 2ec6b97270573f7469cd29b7365471ef, type: 3}
+  - {fileID: -27853127596480695, guid: 701ab6ee052087046999feb560ba5d1d, type: 3}
+  - {fileID: -417424495441574947, guid: c630deaf8032f0c49a39218c4065aabc, type: 3}
+  - {fileID: 7915640968242148779, guid: 48ada3e54ba39d641a22fa7e5de4c109, type: 3}
+  - {fileID: -6609803509490941377, guid: 6d7259d61e179b140864125bed65e594, type: 3}
+  - {fileID: -4699079585706668072, guid: fbb7889ddf9abb843a0c1e0df9a6d557, type: 3}
+  - {fileID: 2236566244977645274, guid: 2aaa57dae1012d3468e27315a1873d7c, type: 3}
+  - {fileID: -9215628799201902632, guid: 05a8a9cb9fd71c049ab5f8e4b81b473a, type: 3}
+  - {fileID: 2185620427363274992, guid: 868c1a85b9d874c42a093f01f443168d, type: 3}
+  - {fileID: 4667139692136922147, guid: c50697e4fd83bc84997cd63f85e69d15, type: 3}
+  - {fileID: -8375587311600527847, guid: cf17e22b43bd6a942b391d2a6348b650, type: 3}
+  - {fileID: 4800353797765959337, guid: 46a2636f046ac1a46b0ae2a2c149c912, type: 3}
+  - {fileID: 5250556089858733034, guid: 68e2a5a6a85bdd4468b6ab30cacadffc, type: 3}
+  - {fileID: -405942562607742374, guid: f0f0d37f12fd46e49b9c4ca4e849db39, type: 3}
+  randomCharacterGenerated: 0
+  allPresentCharacters: []
+  unfoldTime: 0
+  negoceTimeSpend: 0
+  selectedCharacter: {fileID: 0}
+  draggedCharaObject: {fileID: 0}

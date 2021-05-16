@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
-  m_Name: Bumi
+  m_Name: BumiTuto
   m_EditorClassIdentifier: 
   characterName: Bumi
   illustration: {fileID: -8760860750590724520, guid: c1792b917450df34ca5cf95b859b71bb,
@@ -79,11 +79,11 @@ MonoBehaviour:
       sentencePauseToNext: 2
       isFinished: 0
   personnalObjects:
-  - ownedObject: {fileID: 11400000, guid: 49f9a2fbd01368c4fbc4155623128037, type: 2}
+  - ownedObject: {fileID: 11400000, guid: 48eef72160271da4db7f173c04cbd085, type: 2}
     infoGivenWhenAsked:
-      speechRawText: "Oh ! Cette lance, je l'utilis\xE9 quand je travers\xE9 le d\xE9sert_
-        mais je n'y retourne plus depuis longtemps.&Je n'ai plus la <color=#E98634>force</force>
-        de la manier"
+      speechRawText: "J'ai trouv\xE9 cette vielle boule dans les Marais Imos&Je ne
+        sais pas quoi en faire ..._,je vous l'\xE9change volontier contre une petite
+        contrepartie"
       sentences:
       - sentencePart:
         - "J'ai trouv\xE9 cette vielle boule dans les Marais Imos"
@@ -95,7 +95,7 @@ MonoBehaviour:
       sentencePauseToNext: 2
       isFinished: 0
     traitHintedWithInfo: 08000000
-    value: 30
+    value: 10
   defaultSpeachWhenWrongArgument:
     speechRawText: Ca ne m'importe peu ...
     sentences:

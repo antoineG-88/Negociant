@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec732c5287ddce4c89ccd487d71319a, type: 3}
+  m_Name: Aldowin
+  m_EditorClassIdentifier: 
+  characterName: Aldowin
+  illustration: {fileID: 1805088148058408668, guid: 868c1a85b9d874c42a093f01f443168d,
+    type: 3}
+  faceSprite: {fileID: 2185620427363274992, guid: 868c1a85b9d874c42a093f01f443168d,
+    type: 3}
+  temper: 0
+  dayRangeComing: {x: 0.6, y: 0.9}
+  initialInterests: 01000000
+  needs:
+  - trait: 1
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Je ne peux pas me passer d'un tel enchantement
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: La <color=#E98634>magie d'aurore</color> m'a toujours aider
+        quand j'en avais besoin
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 5
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: C'est lourd en plus !
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: J'ai toujours l'impression que les artefacts <color=#E98634>lourds</color>
+        ont plus de valeurs
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  - trait: 7
+    defaultHintToTell: 
+    reactionSpokenWhenArgumented:
+      speechRawText: Un vieil objet !_ ca me plais
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    hintSpokenWhenAsked:
+      speechRawText: Un <color=#E98634>ancien</color> artefact ! _ ah non j'ai cru
+        ...
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+  personnalObjects:
+  - ownedObject: {fileID: 11400000, guid: fccabe9988aa355479aad643ed8789fd, type: 2}
+    infoGivenWhenAsked:
+      speechRawText: "Cette bague est un cadeau.&Un homme me l'as offert car je l'avais
+        soign\xE9 gr\xE2ce \xE0 un enchantement de <color=#E98634>magie d'aurore</color>.&M\xEAme
+        si j'aime les objets <color=#E98634>anciens</color>_, je n'y suis pas particuli\xE8rement
+        attach\xE9."
+      sentences: []
+      speakingSpeed: 0
+      sentencePartPauseTime: 0
+      sentencePauseToNext: 0
+      isFinished: 0
+    traitHintedWithInfo: 0100000007000000
+    value: 37
+  defaultSpeachWhenWrongArgument:
+    speechRawText: "D\xE9sol\xE9_, ce n'est pas dans mon int\xE9r\xEAt"
+    sentences: []
+    speakingSpeed: 0
+    sentencePartPauseTime: 0
+    sentencePauseToNext: 0
+    isFinished: 0
+  speechBaseSpeed: 30
+  speechPauseTimeBetweenSentences: 2
+  speechPauseTimeBetweenSentenceParts: 0.3
+  randomlyGenerated: 0
