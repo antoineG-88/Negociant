@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 03000000
   features:
   - argumentTitle: 'default : Relique'
@@ -40,7 +41,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: "Je passais justement pour trouv\xE9 une nouvelle
         relique"
       argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
-  - argumentTitle: PythonDesSables
+  - argumentTitle: Python des sables
     traits: 00000000
     interestLevelIncrease: 19
     rememberTime: 20
@@ -48,7 +49,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
@@ -62,13 +63,13 @@ MonoBehaviour:
       argumentSpeechBadReaction: A quoi pourrais me servir une relique ...
   - argumentTitle: Ancien
     traits: 07000000
-    interestLevelIncrease: 16
-    rememberTime: 20
+    interestLevelIncrease: 24
+    rememberTime: 5
     argumentSpokenText: C'est Ancien
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}

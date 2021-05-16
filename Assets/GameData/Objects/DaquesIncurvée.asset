@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mes '
   categories: 0100000002000000
   features:
   - argumentTitle: 'default : Arme'
@@ -65,8 +66,8 @@ MonoBehaviour:
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
   - argumentTitle: Anti-Python
     traits: 00000000
-    interestLevelIncrease: 30
-    rememberTime: 15
+    interestLevelIncrease: 25
+    rememberTime: 8
     argumentSpokenText: Elles sont super efficaces sur les pythons des sables
     argumentSpeakTime: 1
     description: "Les lames de ces dagues ont \xE9t\xE9 incurv\xE9es permettre de
@@ -86,7 +87,7 @@ MonoBehaviour:
   - argumentTitle: "L\xE9g\xE8re"
     traits: 04000000
     interestLevelIncrease: 20
-    rememberTime: 32
+    rememberTime: 16
     argumentSpokenText: "Tenez-les, vous pouvez voir qu'elles sont l\xE9g\xE8res"
     argumentSpeakTime: 1
     description: "Ces dagues sont particuli\xE8rement l\xE9g\xE8res"

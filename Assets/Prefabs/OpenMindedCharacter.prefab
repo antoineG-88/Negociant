@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5090f1ddc467a44beb861a81965325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterHandler: {fileID: 9165996161038736757}
+  characterHandler: {fileID: 8994204549509413557}
   exchangeButton: {fileID: 6716988677840114909}
   characterSpaces:
   - {fileID: 8471697585599886730}
@@ -1539,7 +1539,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -69.3, y: 75.3}
-  m_SizeDelta: {x: -295.0072, y: -111.96344}
+  m_SizeDelta: {x: -213.5653, y: -111.96344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8496036996226645254
 CanvasRenderer:
@@ -2682,7 +2682,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2919613208417944377}
-  - component: {fileID: 9165996161038736757}
   - component: {fileID: 7756144542866971032}
   - component: {fileID: 7964137432250745116}
   - component: {fileID: 8994204549509413557}
@@ -2719,159 +2718,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 466.9917, y: 975.6085}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9165996161038736757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3879967711343790202}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f035a5defe46077409f282ac999fc13c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHovered: 0
-  isPressed: 0
-  isClicked: 0
-  clickedDown: 0
-  clickedUp: 0
-  isDragged: 0
-  isDropped: 0
-  character: {fileID: 0}
-  illustrationImage: {fileID: 6244530951691481489}
-  permanentDisplaySelectionAnim:
-    anim: {fileID: 11400000, guid: f7615f0be8a749949ae43f2866783ae2, type: 2}
-    rectTransform: {fileID: 3514979257410810097}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  illuSelectionAnim:
-    anim: {fileID: 11400000, guid: 3eff085e5affa314d914600672fa380c, type: 2}
-    rectTransform: {fileID: 6150439527280269211}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  rectTransform: {fileID: 2919613208417944377}
-  gazeHeadOffset: 150
-  nameText: {fileID: 6636841298738713827}
-  enthousiasmFiller: {fileID: 167399558}
-  enthousiasmLerpRatio: 15
-  characterCanvasRectTransform: {fileID: 0}
-  annoyedFxPrefab: {fileID: 5232284876384432290, guid: 6425c34d35ea1744b9a1075c4ec9ca43,
-    type: 3}
-  happyFxPrefab: {fileID: 4786305868150849728, guid: f0da53d191a01014f839723b09729709,
-    type: 3}
-  backWardApparitionAnim:
-    anim: {fileID: 11400000, guid: d1d7a8e3f4ce4c748ad197304dd963c6, type: 2}
-    rectTransform: {fileID: 6150439527280269211}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  leavingAnim:
-    anim: {fileID: 11400000, guid: d1d7a8e3f4ce4c748ad197304dd963c6, type: 2}
-    rectTransform: {fileID: 6150439527280269211}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  enthousiasmGauge: {fileID: 1053211536}
-  gazeLerpRatio: 8
-  identificationCircle: {fileID: 2078761732196462719}
-  belongingsSpaces:
-  - {fileID: 1213305831}
-  - {fileID: 4303452645287978474}
-  - {fileID: 7677456779505536652}
-  belongingsAnim:
-    anim: {fileID: 11400000, guid: b4462b12bbdef3447a0d9a9db09fb415, type: 2}
-    rectTransform: {fileID: 1562319768254030510}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  hoveredWithStallObjectAnim:
-    anim: {fileID: 11400000, guid: 1df9c76473c72cd42be143fbd42c2ebb, type: 2}
-    rectTransform: {fileID: 1479823198151711238}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  selectionDisplayAppearAnim:
-    anim: {fileID: 11400000, guid: 0c01665bafc658d4f93d34ebfffcd001, type: 2}
-    rectTransform: {fileID: 6883494605348995870}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  characterExchangeHandler: {fileID: 5755769870175739469}
-  speakingBoxAnim:
-    anim: {fileID: 11400000, guid: 2377429b756d9964298fec1f43a8c10b, type: 2}
-    rectTransform: {fileID: 6312772907449437340}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  speakingBox: {fileID: 6312772907449437340}
-  speakingText: {fileID: 5804143784505693239}
-  thinkingBoxAnim:
-    anim: {fileID: 11400000, guid: 2377429b756d9964298fec1f43a8c10b, type: 2}
-    rectTransform: {fileID: 5028719612341286684}
-    canvasGroup: {fileID: 0}
-    originalPos: {x: 0, y: 0}
-  thinkingBox: {fileID: 5028719612341286684}
-  thinkingObjectImage: {fileID: 4425443791337910146}
-  speakBoxName: {fileID: 4872966092128605985}
-  thinkBoxDeco: {fileID: 2601204722136901721}
-  allObjectsForCharacter:
-  - {fileID: 11400000, guid: 1627c4f84fa55ee4ea80101c32bb20dd, type: 2}
-  - {fileID: 11400000, guid: 71f920a5da76d9646869ee3e193ef4f4, type: 2}
-  - {fileID: 11400000, guid: 49f9a2fbd01368c4fbc4155623128037, type: 2}
-  - {fileID: 11400000, guid: e565ff5c83771f345ba1aefc368caf71, type: 2}
-  - {fileID: 11400000, guid: c9e35e9dc157fd34c91986862a39ec07, type: 2}
-  - {fileID: 11400000, guid: be697a14626d07247a27c102006b5923, type: 2}
-  - {fileID: 11400000, guid: 48eef72160271da4db7f173c04cbd085, type: 2}
-  - {fileID: 11400000, guid: 482a4a764a46ab04e82b20a33a37a856, type: 2}
-  - {fileID: 11400000, guid: ff7fa9a75675eb0478e7ab10e7c41a08, type: 2}
-  - {fileID: 11400000, guid: bc5ae7b6684fd904c9d5f6af8c70dbe8, type: 2}
-  - {fileID: 11400000, guid: 8c819ab9c50657d46963e502fa9a5a0a, type: 2}
-  - {fileID: 11400000, guid: 694220d1e3e68904096935832c60d1a2, type: 2}
-  - {fileID: 11400000, guid: 03d06fbcc82877446a49a844382a89f3, type: 2}
-  - {fileID: 11400000, guid: de28e2480a1c2ec49b2ba8dc09b90c46, type: 2}
-  - {fileID: 11400000, guid: 1a5f261a6540efd47a24698a752ff55e, type: 2}
-  - {fileID: 11400000, guid: c48d7e4be1e2cf84d82e71860aa9c15b, type: 2}
-  minMaxObjectPerChara: {x: 2, y: 3}
-  charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
-    type: 3}
-  minMaxObjectPersonnalValue: {x: 30, y: 70}
-  maxPersonnalValue: 70
-  baseLookingTime: 1.8
-  reflexionTime: 4
-  curiosityIncreaseSpeed: 1
-  minMaxRandomCuriosity: {x: 5, y: 10}
-  enthousiasmIncreaseWithCorrectPresent: 0.2
-  enthousiasmDecreaseWithIncorrectPresent: 0.1
-  interestLevelMultiplierWithCorrectCategoryArgument: 1
-  interestLevelMultiplierWithCorrectFeatureArgument: 1
-  enthousiasmDecreaseWithIncorrectArgument: 0.3
-  initialEntousiasm: 0.7
-  timeBeforeEnthousiasmDecrease: 30
-  enthousiasmDecreaseRate: 0.02
-  reactTimePresent: 3
-  askOption: {fileID: 6102746438244712882}
-  exchangeOption: {fileID: 8217399070790018735}
-  dropOptionCanvasGroup: {fileID: 6302768126947571058}
-  reactTimeArgument: 4
-  belongings: []
-  isSelected: 0
-  gazeDisplay: {fileID: 0}
-  identificationColor: {r: 0, g: 0, b: 0, a: 0}
-  isLeaving: 0
-  isListening: 0
-  potentialObjects: []
-  lookedObject:
-    stallObject: {fileID: 0}
-    interestLevel: 0
-    curiosityLevel: 0
-  gazeTimeRmn: 0
-  nonGazingTimeRMN: 0
-  maxCuriosityLevel: 0
-  timeSpendRefreshEnthousiasm: 0
-  currentEnthousiasm: 0
-  isAppearing: 0
-  isHoveredWithStallObject: 0
-  isHoveredWithCharaObject: 0
-  targetPositionAtTheStall: {x: 0, y: 0}
-  isSpeaking: 0
-  isThinking: 0
-  playerNotes: 
-  playerCategoryNote: 0
 --- !u!222 &7756144542866971032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3001,7 +2847,8 @@ MonoBehaviour:
   thinkBoxDeco: {fileID: 2601204722136901721}
   allObjectsForCharacter: []
   minMaxObjectPerChara: {x: 0, y: 0}
-  charaObjectPrefab: {fileID: 0}
+  charaObjectPrefab: {fileID: 4476535179830518203, guid: e696d9d83483ecd4a93b480da3f6fb9e,
+    type: 3}
   minMaxObjectPersonnalValue: {x: 0, y: 0}
   maxPersonnalValue: 70
   baseLookingTime: 1.8

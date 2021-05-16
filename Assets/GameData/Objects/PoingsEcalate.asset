@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mes '
   categories: 0000000001000000
   features:
   - argumentTitle: 'default : Armure'
@@ -64,13 +65,13 @@ MonoBehaviour:
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
   - argumentTitle: Hekmar
     traits: 03000000
-    interestLevelIncrease: 30
+    interestLevelIncrease: 22
     rememberTime: 31
     argumentSpokenText: C'est Hekmar
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Hekmar"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
@@ -84,13 +85,13 @@ MonoBehaviour:
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
   - argumentTitle: Lourd
     traits: 05000000
-    interestLevelIncrease: 14
+    interestLevelIncrease: 16
     rememberTime: 12
     argumentSpokenText: C'est Lourd
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}

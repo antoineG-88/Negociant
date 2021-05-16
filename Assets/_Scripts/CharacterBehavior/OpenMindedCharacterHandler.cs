@@ -10,6 +10,10 @@ public class OpenMindedCharacterHandler : CharacterHandler
     public int[] gazedObjectPerGazeTimePerInterestingObjectOnVitrine;
     [HideInInspector] public int gazedObjectThisGazeTime;
 
+    public override void Init()
+    {
+        base.Init();
+    }
     public override void UpdateBehavior()
     {
         if (!isListening)
@@ -26,7 +30,7 @@ public class OpenMindedCharacterHandler : CharacterHandler
 
             if (nonGazingTimeRMN <= 0 && gazeTimeRmn <= 0)
             {
-                if (gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)] - gazedObjectThisGazeTime > 0)
+                if (gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInitialCategoryObjectOnVitrine(), 0, gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)] - gazedObjectThisGazeTime > 0)
                 {
                     gazedObjectThisGazeTime++;
                     LookObject(GetMaxCuriosityObjectOnVitrine(potentialObjects), Mathf.Max(minLookingTime, baseLookingTime / gazedObjectPerGazeTimePerInterestingObjectOnVitrine[Mathf.Clamp(GetNumberOfInterestingObjectOnVitrine(), 0, gazedObjectPerGazeTimePerInterestingObjectOnVitrine.Length - 1)]));
@@ -44,12 +48,12 @@ public class OpenMindedCharacterHandler : CharacterHandler
         }
 
 
-        foreach (CharacterHandler.PotentialObject potentialObject in potentialObjects)
+        foreach (PotentialObject potentialObject in potentialObjects)
         {
             if (potentialObject != lookedObject && potentialObject.stallObject.stallSpace.isVitrine)
             {
                 potentialObject.curiosityLevel += Time.deltaTime * curiosityIncreaseSpeed
-                    * (DoesObjectHaveHigherInterestLevel(potentialObject) ? highLevelInterestCuriosityBoost : 1);
+                    * (DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests) ? highLevelInterestCuriosityBoost : 1);
             }
         }
 
@@ -70,5 +74,19 @@ public class OpenMindedCharacterHandler : CharacterHandler
                 currentEnthousiasm = 0;
             }
         }
+    }
+
+    public int GetNumberOfInitialCategoryObjectOnVitrine()
+    {
+        int numberOnVitrine = 0;
+
+        foreach (PotentialObject potentialObject in potentialObjects)
+        {
+            if (potentialObject.stallObject.stallSpace.isVitrine && DoesObjectHasCommonCategory(potentialObject.stallObject.linkedObject, character.initialInterests))
+            {
+                numberOnVitrine++;
+            }
+        }
+        return numberOnVitrine;
     }
 }

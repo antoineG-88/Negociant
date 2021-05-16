@@ -128,7 +128,7 @@ public abstract class CharacterHandler : UIInteractable
 
     public void Update()
     {
-        if(!isAppearing)
+        if(!isAppearing && NegoceManager.I.unfoldTime)
         {
             if (clickedDown)
             {
@@ -138,8 +138,6 @@ public abstract class CharacterHandler : UIInteractable
             if (potentialObjects != null)
             {
                 UpdateBehavior();
-
-                UpdateSpeakingAndThinking();
 
                 DragAndDropCharaObjectUpdate();
 
@@ -154,11 +152,15 @@ public abstract class CharacterHandler : UIInteractable
 
         }
 
+        if (potentialObjects != null)
+        {
+            UpdateSpeakingAndThinking();
+        }
     }
 
     private void UpdatePlayerActionAsTarget()
     {
-        if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered )
+        if(NegoceManager.I.playerHandler.draggedStallObject != null && isHovered)
         {
             isHoveredWithStallObject = true;
             NegoceManager.I.SelectCharacter(this);
@@ -220,32 +222,35 @@ public abstract class CharacterHandler : UIInteractable
 
     public void UpdateSpeakingAndThinking()
     {
-        if (currentThinkTimeRmn > 0)
+        if(!isLeaving)
         {
-            currentThinkTimeRmn -= Time.deltaTime;
-        }
-        else
-        {
-            isThinking = false;
-        }
-
-        if (presentedObjectToThink != null)
-        {
-            if(currentThinkTimeRmn <= 0)
+            if (currentThinkTimeRmn > 0)
             {
-                ReactToPresent(presentedObjectToThink);
-                presentedObjectToThink = null;
-                StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+                currentThinkTimeRmn -= Time.deltaTime;
             }
-        }
-
-        if (argumentedObjectToThink != null)
-        {
-            if (currentThinkTimeRmn <= 0)
+            else
             {
-                ReactToArgumentFeature(argumentedFeatureToThink, argumentedObjectToThink.stallObject);
-                argumentedObjectToThink = null;
-                StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+                isThinking = false;
+            }
+
+            if (presentedObjectToThink != null)
+            {
+                if (currentThinkTimeRmn <= 0)
+                {
+                    ReactToPresent(presentedObjectToThink);
+                    presentedObjectToThink = null;
+                    StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+                }
+            }
+
+            if (argumentedObjectToThink != null)
+            {
+                if (currentThinkTimeRmn <= 0)
+                {
+                    ReactToArgumentFeature(argumentedFeatureToThink, argumentedObjectToThink.stallObject);
+                    argumentedObjectToThink = null;
+                    StartCoroutine(thinkingBoxAnim.anim.Play(thinkingBoxAnim));
+                }
             }
         }
 
@@ -306,6 +311,10 @@ public abstract class CharacterHandler : UIInteractable
             }
         }
         askedObject.isPersonnalValueKnown = true;
+        if(NegoceManager.I.playerHandler.selectedCharaObject == askedObject)
+        {
+            NegoceManager.I.playerHandler.UpdateObjectInfoWindow(askedObject);
+        }
     }
 
     public void ReactToArgumentFeature(Object.Feature featureArgumented, StallObject argumentedObject)
@@ -436,8 +445,11 @@ public abstract class CharacterHandler : UIInteractable
 
     public IEnumerator Leave()
     {
-        Speak("Je m'en vais_, je reviendrai demain", 4);
+        SaveLoader.I.SaveCharacter(this);
+        characterExchangeHandler.Close();
         isLeaving = true;
+        yield return new WaitForSeconds(1);
+        Speak("Je m'en vais_, je reviendrai demain", 4);
         leavingAnim.anim = Instantiate(leavingAnim.anim);
         leavingAnim.anim.animationTime = 5;
         leavingAnim.GetReferences();
@@ -822,34 +834,58 @@ public abstract class CharacterHandler : UIInteractable
             newCharaObject.RefreshDisplay();
             belongings.Add(newCharaObject);
         }
-
-        /*exchangeTreshold = 0;
-        for (int i = 0; i < belongings.Count; i++)
-        {
-            exchangeTreshold += belongings[i].personnalValue;
-        }
-        exchangeTreshold /= belongings.Count;*/
     }
 
     public void GetBelongingsFromCharacter()
     {
         CharaObject newCharaObject = null;
-        for (int i = 0; i < character.personnalObjects.Count; i++)
+        PlayerSave.CharacterInfo characterInfo = SaveLoader.I.GetCharacterInfoFromCharacter(character);
+        if (characterInfo != null)
         {
-            newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
-            newCharaObject.linkedObject = character.personnalObjects[i].ownedObject;
-            newCharaObject.personnalValue = character.personnalObjects[i].value;
-            newCharaObject.personnalValueMaxRatio = maxPersonnalValue;
-            newCharaObject.RefreshDisplay();
-            belongings.Add(newCharaObject);
-        }
+            for (int i = 0; i < character.personnalObjects.Count; i++)
+            {
+                bool stillPossess = false; ;
+                for (int y = 0; y < characterInfo.ownedObjects.Count; y++)
+                {
+                    if(characterInfo.ownedObjects[y] == character.personnalObjects[i].ownedObject.objectName)
+                    {
+                        stillPossess = true;
+                    }
+                }
 
-        /*exchangeTreshold = 0;
-        for (int i = 0; i < belongings.Count; i++)
-        {
-            exchangeTreshold += belongings[i].personnalValue;
+                if(stillPossess)
+                {
+                    newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
+                    newCharaObject.linkedObject = character.personnalObjects[i].ownedObject;
+                    newCharaObject.personnalValue = character.personnalObjects[i].value;
+                    newCharaObject.personnalValueMaxRatio = maxPersonnalValue;
+                    newCharaObject.RefreshDisplay();
+                    belongings.Add(newCharaObject);
+                }
+            }
         }
-        exchangeTreshold /= belongings.Count;*/
+        else
+        {
+            for (int i = 0; i < character.personnalObjects.Count; i++)
+            {
+                newCharaObject = Instantiate(charaObjectPrefab, belongingsAnim.rectTransform);
+                newCharaObject.linkedObject = character.personnalObjects[i].ownedObject;
+                newCharaObject.personnalValue = character.personnalObjects[i].value;
+                newCharaObject.personnalValueMaxRatio = maxPersonnalValue;
+                newCharaObject.RefreshDisplay();
+                belongings.Add(newCharaObject);
+            }
+        }
+    }
+
+    public void GetSavedNotes()
+    {
+        PlayerSave.CharacterInfo characterInfo = SaveLoader.I.GetCharacterInfoFromCharacter(character);
+        if(characterInfo != null)
+        {
+            playerNotes = characterInfo.playerNotes;
+            playerCategoryNote = characterInfo.playerCategoryNote;
+        }
     }
 
     public override void OnHoverIn()

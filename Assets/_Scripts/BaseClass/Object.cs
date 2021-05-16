@@ -13,6 +13,7 @@ public class Object : ScriptableObject
     [TextArea] public string description;
     [TextArea] public string originDescription;
     public Origin origin;
+    public string possessivePronom;
     public List<Category> categories;
     public List<Feature> features;
 
@@ -136,7 +137,7 @@ public class Object : ScriptableObject
 }
 
 
-public enum Trait { PythonDesSables, MagieDAurore, MagieCrepusculaire, Hekmar, Léger, Lourd, Noblesse, Ancien, Force, Affaiblissant, MateriauxRare};
+public enum Trait { Python_des_sables, Magie_d_aurore, Magie_crepusculaire, Hekmar, Léger, Lourd, Noblesse, Ancien, Force, Affaiblissant, Materiaux_rare};
 public enum Category { Armure, Arme, Accessoire, Relique, Savoir, Magie};
 public enum Origin { Unknown, DuhuaDesert, SandCanyon, Hagdon, TioroCliffs, EnchantedWood, FrozenRuinedTower};
 

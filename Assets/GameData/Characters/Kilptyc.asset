@@ -18,17 +18,20 @@ MonoBehaviour:
   faceSprite: {fileID: -6609803509490941377, guid: 6d7259d61e179b140864125bed65e594,
     type: 3}
   temper: 1
-  dayRangeComing: {x: 0.4, y: 0.8}
+  dayRangeComing: {x: 0.3, y: 0.7}
   initialInterests: 05000000
   needs:
   - trait: 9
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: 'Eheh ..._ oui ... '
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - Eheh ...
+        - ' oui ... '
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: Vous n'auriez pas un <color=#E98634>poison</color> ?_ Ou un
@@ -42,10 +45,12 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: "Je pr\xE9f\xE8re la magie d'aurore"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - "Je pr\xE9f\xE8re la magie d'aurore"
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: "Les <color=#E98634>enchantement d'aurore</color> m'int\xE9ressent"
@@ -78,10 +83,18 @@ MonoBehaviour:
         dans les montagnes.&Ils m'ont jur\xE9 qu'ils pouvais <color=#E98634>affaiblir</color>
         mes ennemis juste au touch\xE9 !&J'imagine que j'aurais du apprendre leur
         art martial..."
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - Ah, ces gants...
+        - "  je les aies \xE9chang\xE9s \xE0 des moines dans les montagnes."
+      - sentencePart:
+        - "Ils m'ont jur\xE9 qu'ils pouvais <color=#E98634>affaiblir</color> mes
+          ennemis juste au touch\xE9 !"
+      - sentencePart:
+        - J'imagine que j'aurais du apprendre leur art martial...
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     traitHintedWithInfo: 09000000
     value: 32
@@ -91,11 +104,20 @@ MonoBehaviour:
         de magie cr\xE9pusculaire_, j'aurais pr\xE9f\xE9r\xE9 que ce soit de la <color=#E98634>magie
         d'aurore</color> ...&Cette obsidienne est un <color=#E98634>mat\xE9riaux
         tr\xE8s rare</color>_, je ne m'en s\xE9parerai pas facilement."
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Oh, je vois que cette pierre vous int\xE9resse."
+      - sentencePart:
+        - " Elle est impr\xE9gn\xE9 de magie cr\xE9pusculaire"
+        - ", j'aurais pr\xE9f\xE9r\xE9 que ce soit de la <color=#E98634>magie d'aurore</color>
+          ..."
+      - sentencePart:
+        - "Cette obsidienne est un <color=#E98634>mat\xE9riaux tr\xE8s rare</color>"
+        - ", je ne m'en s\xE9parerai pas facilement."
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 010000000a000000
     value: 53
   defaultSpeachWhenWrongArgument:

@@ -20,6 +20,7 @@ MonoBehaviour:
     L'accessoire est ab\xEEm\xE9 et doit avoir travers\xE9s plusieurs d\xE9c\xE9nnies."
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 0200000003000000
   features:
   - argumentTitle: 'default : Accessoire'
@@ -73,7 +74,7 @@ MonoBehaviour:
     description: "Cet anneau a \xE9t\xE9 forg\xE9 dans du Caterium, un m\xE9tal tr\xE8s
       rare\r."
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
@@ -94,7 +95,7 @@ MonoBehaviour:
     description: "Lorsque cette anneau est port\xE9 il conf\xE8re un am\xE9lioration
       de la confiance en soi\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
@@ -116,7 +117,7 @@ MonoBehaviour:
     description: "C'est un tr\xE8s vieile anneau qui a \xE9t\xE9 forg\xE9 il y a
       plus de 200 ans\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}
@@ -137,7 +138,7 @@ MonoBehaviour:
     description: "Son effet viens d'un enchantement qu'il a re\xE7cu avec de la magie
       cr\xE9pusculaire.\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 3
       color: {r: 0.22352943, g: 0.6431373, b: 0.48627454, a: 1}

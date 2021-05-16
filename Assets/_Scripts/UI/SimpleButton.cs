@@ -23,6 +23,7 @@ public class SimpleButton : UIInteractable
         }
 
         rectTransform = hoverAnim.rectTransform;
+        SetEnable(true);
     }
 
     public void SetEnable(bool enabled)

@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'ma '
   categories: 01000000
   features:
   - argumentTitle: 'default : Arme'
@@ -43,13 +44,13 @@ MonoBehaviour:
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
   - argumentTitle: "L\xE9ger"
     traits: 04000000
-    interestLevelIncrease: 12
-    rememberTime: 21
+    interestLevelIncrease: 16
+    rememberTime: 7
     argumentSpokenText: "C'est L\xE9ger"
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : L\xE9ger"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
@@ -61,15 +62,15 @@ MonoBehaviour:
         de vos affrontements les plus f\xE9roces"
       argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
-  - argumentTitle: PythonDesSables
+  - argumentTitle: Python des sables
     traits: 00000000
     interestLevelIncrease: 22
-    rememberTime: 14
+    rememberTime: 21
     argumentSpokenText: C'est PythonDesSables
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}

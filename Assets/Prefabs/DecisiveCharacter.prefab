@@ -1539,7 +1539,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -69.3, y: 75.3}
-  m_SizeDelta: {x: -295.0072, y: -111.96344}
+  m_SizeDelta: {x: -217.5144, y: -111.96344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8496036996226645254
 CanvasRenderer:
@@ -2842,11 +2842,11 @@ MonoBehaviour:
   initialEntousiasm: 0.7
   timeBeforeEnthousiasmDecrease: 30
   enthousiasmDecreaseRate: 0.02
-  reactTimePresent: 3
+  reactTimePresent: 5
   askOption: {fileID: 6102746438244712882}
   exchangeOption: {fileID: 8217399070790018735}
   dropOptionCanvasGroup: {fileID: 6302768126947571058}
-  reactTimeArgument: 4
+  reactTimeArgument: 7
   belongings: []
   isSelected: 0
   gazeDisplay: {fileID: 0}

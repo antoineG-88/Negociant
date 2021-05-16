@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 0100000005000000
   features:
   - argumentTitle: 'default : Arme'
@@ -62,15 +63,15 @@ MonoBehaviour:
         vous ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-  - argumentTitle: MagieCrepusculaire
+  - argumentTitle: Magie crepusculaire
     traits: 02000000
     interestLevelIncrease: 27
-    rememberTime: 15
+    rememberTime: 6
     argumentSpokenText: C'est MagieCrepusculaire
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieCrepusculaire"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
@@ -85,12 +86,12 @@ MonoBehaviour:
   - argumentTitle: Hekmar
     traits: 03000000
     interestLevelIncrease: 24
-    rememberTime: 35
+    rememberTime: 41
     argumentSpokenText: C'est Hekmar
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Hekmar"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
@@ -105,12 +106,12 @@ MonoBehaviour:
   - argumentTitle: Ancien
     traits: 07000000
     interestLevelIncrease: 10
-    rememberTime: 13
+    rememberTime: 21
     argumentSpokenText: C'est Ancien
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}

@@ -18,7 +18,7 @@ MonoBehaviour:
   faceSprite: {fileID: -8375587311600527847, guid: cf17e22b43bd6a942b391d2a6348b650,
     type: 3}
   temper: 0
-  dayRangeComing: {x: 0.6, y: 0.9}
+  dayRangeComing: {x: 0, y: 0.5}
   initialInterests: 03000000
   needs:
   - trait: 3
@@ -26,10 +26,12 @@ MonoBehaviour:
     reactionSpokenWhenArgumented:
       speechRawText: "J'aurais pu mieux me d\xE9fendre contre ces Hekmars si j'avais
         eu ca"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - "J'aurais pu mieux me d\xE9fendre contre ces Hekmars si j'avais eu ca"
+      speakingSpeed: 35
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: "Je ne sais pas si tu as d\xE9j\xE0 vu des <color=#E98634>Hekmars</color>_,
@@ -43,10 +45,13 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: Un objet de l'ancien temps..._ j'aime beaucoup
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - Un objet de l'ancien temps...
+        - ' j''aime beaucoup'
+      speakingSpeed: 35
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: L'<color=#E98634>histoire</color> des monts Satornes est passionante
@@ -80,11 +85,23 @@ MonoBehaviour:
         Satornes. &J'ai bien faillit me faire tuer par des  <color=#E98634>Hekmar</color>
         qui y rodaient. &Les <color=#E98634>anciennes</color> ruines qui se trouve
         la haut sont magnifiques."
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Oh tu l'as remarqu\xE9 !?"
+        - " Je tiens beaucoup \xE0 cet anneau."
+      - sentencePart:
+        - " Je l'ai retrouv\xE9 en traversant le sanctuaire du faucon au sommet des
+          monts Satornes. "
+      - sentencePart:
+        - 'J''ai bien faillit me faire tuer par des  <color=#E98634>Hekmar</color>
+          qui y rodaient. '
+      - sentencePart:
+        - Les <color=#E98634>anciennes</color> ruines qui se trouve la haut sont
+          magnifiques.
+      speakingSpeed: 35
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 0300000007000000
     value: 53
   - ownedObject: {fileID: 11400000, guid: 1627c4f84fa55ee4ea80101c32bb20dd, type: 2}
@@ -92,11 +109,16 @@ MonoBehaviour:
       speechRawText: "Cette \xE9p\xE9e n'a rien de sp\xE9cial_, mais elle a c\xF4t\xE9
         <color=#E98634>noble</color> qui me plait. &Tu me propose quoi en \xE9change
         ?"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Cette \xE9p\xE9e n'a rien de sp\xE9cial"
+        - ", mais elle a c\xF4t\xE9 <color=#E98634>noble</color> qui me plait. "
+      - sentencePart:
+        - "Tu me propose quoi en \xE9change ?"
+      speakingSpeed: 35
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 06000000
     value: 20
   defaultSpeachWhenWrongArgument:

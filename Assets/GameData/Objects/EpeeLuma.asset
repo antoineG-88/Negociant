@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 01000000
   features:
   - argumentTitle: 'default : Arme'
@@ -44,12 +45,12 @@ MonoBehaviour:
   - argumentTitle: Lourd
     traits: 05000000
     interestLevelIncrease: 20
-    rememberTime: 23
+    rememberTime: 11
     argumentSpokenText: C'est Lourd
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}
@@ -61,15 +62,15 @@ MonoBehaviour:
         de vos affrontements les plus f\xE9roces"
       argumentSpeechGoodReaction: Oui parfait, une nouvelle arme
       argumentSpeechBadReaction: "J'ai d\xE9ja l'arme qu'il me faut"
-  - argumentTitle: MateriauxRare
+  - argumentTitle: Materiaux rare
     traits: 0a000000
     interestLevelIncrease: 21
-    rememberTime: 30
+    rememberTime: 34
     argumentSpokenText: C'est MateriauxRare
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MateriauxRare"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 1
       color: {r: 0.7294118, g: 0.227451, b: 0.13725491, a: 1}

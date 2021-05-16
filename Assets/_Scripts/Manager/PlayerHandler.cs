@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class PlayerHandler : MonoBehaviour
 {
-    [Header("Temporary")]
-    public List<Object> initialPlayerBelongings;
+    //public List<Object> initialPlayerBelongings;
     [Header("Stall")]
     public RectTransform stallRectTransform; 
     public float distanceBetweenStandObject;
@@ -18,12 +17,13 @@ public class PlayerHandler : MonoBehaviour
     public float presentTime;
     public TMP_Text currentSpokenText;
     public TweeningAnimator speakBoxAnim;
-    public string askSpokenText;
+    public string[] askSpokenTexts;
     public float askTime;
     public float speechPauseTime;
     public float speechTimeBetweenSentences;
+    public string welcomeSpeech;
     [Header("Reference")]
-    [HideInInspector] public PlayerInventory playerInventory;
+    //[HideInInspector] public PlayerInventory playerInventory;
     public Text objectInfoNameText;
     public Text objectInfoTitleText;
     public Text objectInfoCategory1Text;
@@ -50,9 +50,9 @@ public class PlayerHandler : MonoBehaviour
     [HideInInspector] public List<StallObject> allStallObjects;
     private bool atleastOneHovered;
     private bool atLeastOneClicked;
-    private StallObject selectedStallObject;
+    [HideInInspector] public StallObject selectedStallObject;
     private StallObject previousSelectedObject;
-    private CharaObject selectedCharaObject;
+    [HideInInspector] public CharaObject selectedCharaObject;
     private CharaObject previousSelectedCharaObject;
     private StallObject hoveredStallObject;
     private StallObject previousHoveredObject;
@@ -65,6 +65,7 @@ public class PlayerHandler : MonoBehaviour
     private CharacterHandler currentCharacterTalkingTo;
     private Object.Feature featureArgumented;
     private Speech currentSpeech;
+    private bool isWaitingForResponse;
     private bool isTalking;
 
     private void Start()
@@ -87,7 +88,7 @@ public class PlayerHandler : MonoBehaviour
                 vitrineSpaceNumber++;
             }
         }
-        InitPlayerInfo();
+        //InitPlayerInfo();
         InitStallLayout();
     }
 
@@ -101,7 +102,10 @@ public class PlayerHandler : MonoBehaviour
     {
         if (isTalking)
         {
-            currentCharacterTalkingTo.RefreshEnthousiasm();
+            if( isWaitingForResponse)
+            {
+                currentCharacterTalkingTo.RefreshEnthousiasm();
+            }
 
             currentSpokenText.text = currentSpeech.GetCurrentSpeechProgression(Time.deltaTime);
 
@@ -109,26 +113,29 @@ public class PlayerHandler : MonoBehaviour
             {
                 isTalking = false;
                 StartCoroutine(speakBoxAnim.anim.Play(speakBoxAnim));
-
-                if (presentedStallObject != null)
+                if (isWaitingForResponse)
                 {
-                    currentCharacterTalkingTo.PresentObject(presentedStallObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    presentedStallObject = null;
-                }
-                else if (argumentedStallObject != null)
-                {
-                    currentCharacterTalkingTo.ArgumentFeature(featureArgumented, argumentedStallObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    currentCharacterTalkingTo = null;
-                    argumentedStallObject = null;
-                    featureArgumented = null;
-                }
-                else if (askedCharaObject != null)
-                {
-                    currentCharacterTalkingTo.AskAbout(askedCharaObject);
-                    currentCharacterTalkingTo.isListening = false;
-                    askedCharaObject = null;
+                    isWaitingForResponse = false;
+                    if (presentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.PresentObject(presentedStallObject);
+                        currentCharacterTalkingTo.isListening = false;
+                        presentedStallObject = null;
+                    }
+                    else if (argumentedStallObject != null)
+                    {
+                        currentCharacterTalkingTo.ArgumentFeature(featureArgumented, argumentedStallObject);
+                        currentCharacterTalkingTo.isListening = false;
+                        currentCharacterTalkingTo = null;
+                        argumentedStallObject = null;
+                        featureArgumented = null;
+                    }
+                    else if (askedCharaObject != null)
+                    {
+                        currentCharacterTalkingTo.AskAbout(askedCharaObject);
+                        currentCharacterTalkingTo.isListening = false;
+                        askedCharaObject = null;
+                    }
                 }
             }
         }
@@ -136,7 +143,7 @@ public class PlayerHandler : MonoBehaviour
 
     public bool IsPlayerTalking()
     {
-        return isTalking;
+        return isWaitingForResponse;
     }
 
     public void PresentObject(StallObject stallObjectToPresent, CharacterHandler targetCharacter)
@@ -145,7 +152,8 @@ public class PlayerHandler : MonoBehaviour
         currentCharacterTalkingTo.isListening = true;
         presentedStallObject = stallObjectToPresent;
         currentCharacterTalkingTo.Interrupt();
-        Speak(presentSpokenText + stallObjectToPresent.linkedObject.objectName + ", " + targetCharacter.character.characterName + " ?", presentTime);
+        isWaitingForResponse = true;
+        Speak(presentSpokenText + stallObjectToPresent.linkedObject.possessivePronom + stallObjectToPresent.linkedObject.objectName + ", " + targetCharacter.character.characterName + " ?", presentTime);
     }
 
     public void ArgumentFeature(StallObject stallObjectArgumented, CharacterHandler targetCharacter, Object.Feature argumentedFeature)
@@ -155,6 +163,7 @@ public class PlayerHandler : MonoBehaviour
         argumentedStallObject = stallObjectArgumented;
         featureArgumented = argumentedFeature;
         currentCharacterTalkingTo.Interrupt();
+        isWaitingForResponse = true;
         Speak(argumentedFeature.argumentSpokenText, argumentedFeature.argumentSpeakTime);
     }
     public void AskAbout(CharaObject charaObjectAsked, CharacterHandler targetCharacter)
@@ -163,10 +172,11 @@ public class PlayerHandler : MonoBehaviour
         currentCharacterTalkingTo.isListening = true;
         askedCharaObject = charaObjectAsked;
         currentCharacterTalkingTo.Interrupt();
-        Speak(askSpokenText, askTime);
+        isWaitingForResponse = true;
+        Speak(askSpokenTexts[Random.Range(0, askSpokenTexts.Length)], askTime);
     }
 
-    private void Speak(string speechToSpeak, float speechTime)
+    public void Speak(string speechToSpeak, float speechTime)
     {
         isTalking = true;
         currentSpeech =  new Speech(speechToSpeak);
@@ -216,7 +226,7 @@ public class PlayerHandler : MonoBehaviour
             {
                 characterInteractionPanel.position = charaHovered.rectTransform.position;
 
-                if (!isTalking)
+                if (!isWaitingForResponse)
                 {
                     presentOption.Enable(presentTime.ToString() + " s.");
                     exchangeOption.Enable("");
@@ -367,50 +377,6 @@ public class PlayerHandler : MonoBehaviour
                     }
                 }
             }
-
-            if (atLeastOneClicked)
-            {
-                if(selectedStallObject != null)
-                {
-                    if (previousSelectedObject != selectedStallObject || selectedCharaObject != null)
-                    {
-                        selectedCharaObject = null;
-                        previousSelectedCharaObject = null;
-                        objectInfoPanel.canvasGroup.interactable = true;
-                        objectInfoPanel.canvasGroup.blocksRaycasts = true;
-                        StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
-                        UpdateObjectInfoWindow(selectedStallObject);
-                    }
-                    else
-                    {
-                        selectedStallObject = null;
-                        previousSelectedObject = null;
-                        objectInfoPanel.canvasGroup.interactable = false;
-                        objectInfoPanel.canvasGroup.blocksRaycasts = false;
-                        StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
-                    }
-                }
-                else if(selectedCharaObject != null)
-                {
-                    if (previousSelectedCharaObject != selectedCharaObject || selectedStallObject != null)
-                    {
-                        selectedStallObject = null;
-                        previousSelectedObject = null;
-                        objectInfoPanel.canvasGroup.interactable = true;
-                        objectInfoPanel.canvasGroup.blocksRaycasts = true;
-                        StartCoroutine(objectInfoPanel.anim.PlayBackward(objectInfoPanel, true));
-                        UpdateObjectInfoWindow(selectedCharaObject);
-                    }
-                    else
-                    {
-                        selectedCharaObject = null;
-                        previousSelectedCharaObject = null;
-                        objectInfoPanel.canvasGroup.interactable = false;
-                        objectInfoPanel.canvasGroup.blocksRaycasts = false;
-                        StartCoroutine(objectInfoPanel.anim.Play(objectInfoPanel));
-                    }
-                }
-            }
         }
     }
 
@@ -465,27 +431,14 @@ public class PlayerHandler : MonoBehaviour
         stallObjectToRemove.stallSpace.stallObject = null;
         allStallObjects.Remove(stallObjectToRemove);
         Destroy(stallObjectToRemove.gameObject);
-
         foreach (CharacterHandler characterHandler in NegoceManager.I.allPresentCharacters)
         {
             characterHandler.RefreshPotentialObjects();
         }
+        SaveLoader.I.SavePlayerObjects();
     }
 
-    private void InitPlayerInfo()
-    {
-        playerInventory.belongings = new List<PlayerInventory.Belonging>();
-        for (int i = 0; i < initialPlayerBelongings.Count; i++)
-        {
-            playerInventory.belongings.Add(new PlayerInventory.Belonging(initialPlayerBelongings[i]));
-            for (int y = 0; y < playerInventory.belongings[playerInventory.belongings.Count - 1].featureKnowledge.Length; y++)
-            {
-                playerInventory.belongings[playerInventory.belongings.Count - 1].featureKnowledge[y] = true;
-            }
-        }
-    }
-
-    private void UpdateObjectInfoWindow(StallObject shownObject)
+    public void UpdateObjectInfoWindow(StallObject shownObject)
     {
         objectInfoNameText.text = shownObject.linkedObject.objectName;
         objectInfoTitleText.text = shownObject.linkedObject.title;
@@ -510,27 +463,27 @@ public class PlayerHandler : MonoBehaviour
 
         for (int i = 0; i < featuresInfo.Length; i++)
         {
-            if(i + 2 < shownObject.linkedObject.features.Count)
+            if(i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1) < shownObject.linkedObject.features.Count)
             {
                 featuresInfo[i].gameObject.SetActive(true);
-                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].argumentTitle;
-                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].description;
+                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)].argumentTitle;
+                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)].description;
             }
             else
             {
                 featuresInfo[i].gameObject.SetActive(false);
             }
         }
-        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - 2) * 130 + 10);
+        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)) * 130 + 10);
         objectInfoHeaderBack.color = stallObjectWindowTheme[0];
         objectInfoBodyBack.color = stallObjectWindowTheme[1];
         objectInfoFeatureBack.color = stallObjectWindowTheme[2];
     }
 
-    private void UpdateObjectInfoWindow(CharaObject shownObject)
+    public void UpdateObjectInfoWindow(CharaObject shownObject)
     {
-        objectInfoNameText.text = shownObject.linkedObject.objectName;
-        objectInfoTitleText.text = shownObject.linkedObject.title;
+        objectInfoIllustration.sprite = shownObject.linkedObject.illustration;
+
         objectInfoCategory1Text.text = shownObject.linkedObject.categories[0].ToString();
         objectInfoCategory1Icon.sprite = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).icon;
         objectInfoCategory1Icon.color = GameData.GetCategoryPropertiesFromCategory(shownObject.linkedObject.categories[0]).color;
@@ -546,24 +499,38 @@ public class PlayerHandler : MonoBehaviour
         {
             objectInfoCategory2Icon.gameObject.SetActive(false);
         }
-        objectInfoDescriptionText.text = shownObject.linkedObject.description;
-        objectInfoOriginText.text = shownObject.linkedObject.originDescription;
-        objectInfoIllustration.sprite = shownObject.linkedObject.illustration;
+
+        if(shownObject.isPersonnalValueKnown)
+        {
+            objectInfoNameText.text = shownObject.linkedObject.objectName;
+            objectInfoTitleText.text = shownObject.linkedObject.title;
+            objectInfoDescriptionText.text = shownObject.linkedObject.description;
+            objectInfoOriginText.text = shownObject.linkedObject.originDescription;
+        }
+        else
+        {
+            objectInfoNameText.text = "???";
+            objectInfoTitleText.text = "";
+            objectInfoDescriptionText.text = "";
+            objectInfoOriginText.text = "";
+        }
+
 
         for (int i = 0; i < featuresInfo.Length; i++)
         {
-            if (i + 2 < shownObject.linkedObject.features.Count && shownObject.isPersonnalValueKnown)
+            if (i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1) < shownObject.linkedObject.features.Count && shownObject.isPersonnalValueKnown)
             {
                 featuresInfo[i].gameObject.SetActive(true);
-                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].argumentTitle;
-                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + 2].description;
+                featuresInfo[i].GetChild(0).GetChild(0).GetComponent<Text>().text = shownObject.linkedObject.features[i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)].argumentTitle;
+                featuresInfo[i].GetChild(1).GetComponent<Text>().text = shownObject.linkedObject.features[i + (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)].description;
             }
             else
             {
                 featuresInfo[i].gameObject.SetActive(false);
             }
         }
-        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - 2) * 130 + 10);
+        featureContentRect.sizeDelta = new Vector2(0, (shownObject.linkedObject.features.Count - (shownObject.linkedObject.categories.Count > 1 ? 2 : 1)) * 130 + 10);
+
         objectInfoHeaderBack.color = charaObjectWindowTheme[0];
         objectInfoBodyBack.color = charaObjectWindowTheme[1];
         objectInfoFeatureBack.color = charaObjectWindowTheme[2];
@@ -574,12 +541,12 @@ public class PlayerHandler : MonoBehaviour
     {
         allStallObjects = new List<StallObject>();
         StallObject newStallObject;
-        halfObjectNumber = playerInventory.belongings.Count / 2;
+        halfObjectNumber = SaveLoader.I.playerSave.playerOwnedObjects.Count / 2;
         foreach(StallSpace stallSpace in allStallSpaces)
         {
             stallSpace.Init();
         }
-        for (int o = 0; o < playerInventory.belongings.Count; o++)
+        for (int o = 0; o < SaveLoader.I.playerSave.playerOwnedObjects.Count; o++)
         {
             newStallObject = Instantiate(stallObjectPrefab, stallRectTransform);
 
@@ -596,7 +563,7 @@ public class PlayerHandler : MonoBehaviour
                 newStallObject.stallSpace = allStallSpaces[realo];
                 newStallObject.stallSpace.stallObject = newStallObject;
             }
-            newStallObject.linkedObject = playerInventory.belongings[o].ownedObject;
+            newStallObject.linkedObject = SaveLoader.I.GetObjectFromName(SaveLoader.I.playerSave.playerOwnedObjects[o]);
             newStallObject.rectTransform = newStallObject.GetComponent<RectTransform>();
             newStallObject.name = newStallObject.linkedObject.objectName;
             newStallObject.RefreshDisplay();
@@ -611,5 +578,34 @@ public class PlayerHandler : MonoBehaviour
                 allStallSpaces[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    public void AddStallObject(Object newObject)
+    {
+        StallSpace stallSpace = null;
+        foreach(StallSpace stallSpace1 in allStallSpaces)
+        {
+            if(stallSpace1.stallObject == null && stallSpace1.gameObject.activeSelf)
+            {
+                stallSpace = stallSpace1;
+            }
+        }
+        StallObject newStallObject;
+        newStallObject = Instantiate(stallObjectPrefab, stallRectTransform);
+        newStallObject.rectTransform = newStallObject.GetComponent<RectTransform>();
+        newStallObject.stallSpace = stallSpace;
+        newStallObject.stallSpace.stallObject = newStallObject;
+        newStallObject.rectTransform.position = stallSpace.rectTransform.position;
+        newStallObject.linkedObject = newObject;
+        newStallObject.name = newStallObject.linkedObject.objectName;
+        newStallObject.RefreshDisplay();
+        allStallObjects.Add(newStallObject);
+
+        foreach (CharacterHandler characterHandler in NegoceManager.I.allPresentCharacters)
+        {
+            characterHandler.RefreshPotentialObjects();
+        }
+
+        SaveLoader.I.SavePlayerObjects();
     }
 }

@@ -18,44 +18,59 @@ MonoBehaviour:
   faceSprite: {fileID: -7706798523822224507, guid: ac5f81ca8c450ba4e8130ac21a22a24e,
     type: 3}
   temper: 1
-  dayRangeComing: {x: 0.6, y: 0.9}
+  dayRangeComing: {x: 0.3, y: 0.7}
   initialInterests: 05000000
   needs:
   - trait: 2
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: "Tiens tiens ..._de la magie cr\xE9pusculaire_ca m'int\xE9resse"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - Tiens tiens ...
+        - "de la magie cr\xE9pusculaire"
+        - "ca m'int\xE9resse"
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: "Hum _._._. je suppose que je ne trouverais pas de magie cr\xE9pusculaire
         ici"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - 'Hum '
+        - .
+        - .
+        - ". je suppose que je ne trouverais pas de magie cr\xE9pusculaire ici"
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
   - trait: 9
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: "Tr\xE8s bien, je n'ai jamais assez de moyen d'affaiblir mes
         ennemis"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Tr\xE8s bien, je n'ai jamais assez de moyen d'affaiblir mes ennemis"
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: Il me faudrais un sort de <color=#E98634>fatigue</color>_, ou
         de <color=#E98634>maladie</color>_, un objet de la sorte
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Il me faudrais un sort de <color=#E98634>fatigue</color>
+        - ', ou de <color=#E98634>maladie</color>'
+        - ', un objet de la sorte'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
   personnalObjects:
   - ownedObject: {fileID: 11400000, guid: 8c819ab9c50657d46963e502fa9a5a0a, type: 2}
     infoGivenWhenAsked:
@@ -66,11 +81,29 @@ MonoBehaviour:
         toutes les sentinelles qui ont tent\xE9 de l'arr\xEAter.&Hum _._._._ Si tu
         veux ce poignard_, il va falloir que tu me propose une objet digne de ce
         nom..."
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Tu as l'oeil on dirais
+        - ', ce poignard n''est pas n''importe lequel'
+      - sentencePart:
+        - "Il a servi \xE0 assassiner un des empereurs d'Hagdon."
+      - sentencePart:
+        - "L'assassin s'est enfui gr\xE2ce \xE0 un sort de <color=#E98634>magie cr\xE9pusculaire</color>
+          puissant qui me plairais de conna\xEEtre."
+      - sentencePart:
+        - "Ce sort lui aurais permis d'<color=#E98634>\xE9tourdir</color> toutes
+          les sentinelles qui ont tent\xE9 de l'arr\xEAter."
+      - sentencePart:
+        - 'Hum '
+        - .
+        - .
+        - .
+        - ' Si tu veux ce poignard'
+        - ', il va falloir que tu me propose une objet digne de ce nom...'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 
     value: 67
   defaultSpeachWhenWrongArgument:

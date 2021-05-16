@@ -25,11 +25,13 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: Un peu plus de vigueur me ferais du bien
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Un peu plus de vigueur me ferais du bien
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: J'aimerais retrouver ma <color=#E98634>force</color> d'antan
       sentences:
@@ -62,10 +64,12 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: "C'est l\xE9ger, je prend ! "
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - "C'est l\xE9ger, je prend ! "
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: "Tout mon \xE9quipement deviens <color=#E98634>trop lourd</color>
@@ -82,18 +86,18 @@ MonoBehaviour:
   - ownedObject: {fileID: 11400000, guid: 49f9a2fbd01368c4fbc4155623128037, type: 2}
     infoGivenWhenAsked:
       speechRawText: "Oh ! Cette lance, je l'utilis\xE9 quand je travers\xE9 le d\xE9sert_
-        mais je n'y retourne plus depuis longtemps.&Je n'ai plus la <color=#E98634>force</force>
+        mais je n'y retourne plus depuis longtemps.&Je n'ai plus la <color=#E98634>force</color>
         de la manier"
       sentences:
       - sentencePart:
-        - "J'ai trouv\xE9 cette vielle boule dans les Marais Imos"
+        - "Oh ! Cette lance, je l'utilis\xE9 quand je travers\xE9 le d\xE9sert"
+        - ' mais je n''y retourne plus depuis longtemps.'
       - sentencePart:
-        - Je ne sais pas quoi en faire ...
-        - ",je vous l'\xE9change volontier contre une petite contrepartie"
+        - Je n'ai plus la <color=#E98634>force</color> de la manier
       speakingSpeed: 30
       sentencePartPauseTime: 0.3
       sentencePauseToNext: 2
-      isFinished: 0
+      isFinished: 1
     traitHintedWithInfo: 08000000
     value: 30
   defaultSpeachWhenWrongArgument:

@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 0400000005000000
   features:
   - argumentTitle: 'default : Savoir'
@@ -71,7 +72,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Il recelle de nombreuses mal\xE9dictions oubli\xE9s\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
@@ -83,7 +84,7 @@ MonoBehaviour:
         vous ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-  - argumentTitle: MagieDAurore
+  - argumentTitle: Magie d'Aurore
     traits: 01000000
     interestLevelIncrease: 27
     rememberTime: 8
@@ -92,7 +93,7 @@ MonoBehaviour:
     description: "Il est enchant\xE9 avec de la magie d'aurore pour pouvoir cach\xE9
       son contenu \xE0 quiconque voudrais le copier"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}

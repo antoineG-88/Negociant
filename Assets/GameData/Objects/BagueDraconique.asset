@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'ma '
   categories: 02000000
   features:
   - argumentTitle: 'default : Accessoire'
@@ -50,7 +51,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Noblesse"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
@@ -63,7 +64,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
-  - argumentTitle: MateriauxRare
+  - argumentTitle: Materiaux rare
     traits: 0a000000
     interestLevelIncrease: 22
     rememberTime: 12
@@ -71,7 +72,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MateriauxRare"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
@@ -87,12 +88,12 @@ MonoBehaviour:
   - argumentTitle: Ancien
     traits: 07000000
     interestLevelIncrease: 24
-    rememberTime: 34
+    rememberTime: 45
     argumentSpokenText: C'est Ancien
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}

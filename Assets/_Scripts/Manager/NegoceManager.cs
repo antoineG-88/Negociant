@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NegoceManager : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class NegoceManager : MonoBehaviour
     public Vector2 minCharacterPos;
     public Vector2 maxCharacterPos;
     public int maxCharacterPresent;
+    public TweeningAnimator stallOpeningAnim;
+    public SimpleButton openStallButton;
+    public SimpleButton nextDayButton;
+    public TweeningAnimator blackScreenAnim;
+    public bool isTuto;
+    public GameObject anneauVictoryText;
+    public GameObject dagueVictoryText;
+    public GameObject defeatText;
     [Header("CharacterInfoRef")]
     public bool debugInfo;
     public GameObject charaInfoPanel;
@@ -32,6 +41,7 @@ public class NegoceManager : MonoBehaviour
     public Dropdown categoryDropdown;
     public Text notesWindowCharacterText;
     public Image notesWindowCharacterFace;
+    public SimpleButton askToLeaveButton;
     [Header("Market Day Options")]
     public float marketDayTime;
     public RectTransform sundialArrow;
@@ -54,6 +64,7 @@ public class NegoceManager : MonoBehaviour
     private float nextCharacterApparitionTime;
     private CharacterHandler previousSelectedCharacter;
     private List<Character> characterAlreadyCame;
+    private bool charaInfoWindowFlag;
 
     public static NegoceManager I;
     private void Awake()
@@ -63,8 +74,11 @@ public class NegoceManager : MonoBehaviour
 
     void Start()
     {
+        blackScreenAnim.GetReferences();
+        StartCoroutine(blackScreenAnim.anim.PlayBackward(blackScreenAnim, true));
+
         characterAlreadyCame = new List<Character>();
-        unfoldTime = true;
+        unfoldTime = false;
         negoceTimeSpend = 0;
         allPresentCharacters = new List<CharacterHandler>();
         if(randomCharacterGenerated > 0)
@@ -79,13 +93,18 @@ public class NegoceManager : MonoBehaviour
 
         }
 
-        nextCharacterApparitionTime = UnityEngine.Random.Range(1, 2);
+        nextCharacterApparitionTime = UnityEngine.Random.Range(5, 8);
         for (int i = 0; i < playerHandler.allStallObjects.Count; i++)
         {
             playerHandler.allStallObjects[i].interestLevelToShow = -1;
         }
         notesWindowAnim.GetReferences();
         notesWindowAnim.anim.SetAtEndState(notesWindowAnim);
+        askToLeaveButton.SetEnable(true);
+        stallOpeningAnim.GetReferences();
+        stallOpeningAnim.anim.SetAtStartState(stallOpeningAnim);
+        nextDayButton.SetEnable(false);
+        nextDayButton.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     void Update()
@@ -98,9 +117,16 @@ public class NegoceManager : MonoBehaviour
                 sundialArrow.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(minMaxSundialArrowAngle.x, minMaxSundialArrowAngle.y, negoceTimeSpend / marketDayTime));
             }
         }
-        else
+        else if(unfoldTime)
         {
-
+            unfoldTime = false;
+            Invoke("CloseShop", 5);
+            foreach (CharacterHandler characterPresent in allPresentCharacters)
+            {
+                characterPresent.Interrupt();
+                characterPresent.isThinking = false;
+                StartCoroutine(characterPresent.Leave());
+            }
         }
 
         UpdateCharacterApparition();
@@ -111,11 +137,29 @@ public class NegoceManager : MonoBehaviour
         {
             draggedCharaObject = null;
         }
+
+        if(openStallButton.isClicked & openStallButton.canBeUsed)
+        {
+            OpenShop();
+        }
+
+        if (nextDayButton.isClicked & nextDayButton.canBeUsed)
+        {
+            nextDayButton.SetEnable(false);
+            if(isTuto || SaveLoader.I.playerSave.passedDays >= 2)
+            {
+                GoToMainMenu();
+            }
+            else
+            {
+                StartCoroutine(LoadSceneWithTransition(SceneManager.GetActiveScene().buildIndex));
+            }
+        }
     }
 
     private void UpdateCharacterApparition()
     {
-        if(allPresentCharacters.Count < maxCharacterPresent)
+        if(allPresentCharacters.Count < maxCharacterPresent && unfoldTime)
         {
             if(timeSpendSinceLastCharacterApparition < nextCharacterApparitionTime)
             {
@@ -148,7 +192,7 @@ public class NegoceManager : MonoBehaviour
         {
             charaInfoPanel.SetActive(false);
         }
-        if (selectedCharacter != null && previousSelectedCharacter != selectedCharacter)
+        if (selectedCharacter != null && previousSelectedCharacter != selectedCharacter && !selectedCharacter.isLeaving)
         {
             previousSelectedCharacter = selectedCharacter;
 
@@ -169,15 +213,17 @@ public class NegoceManager : MonoBehaviour
 
                 standObject.interestLevel.gameObject.SetActive(debugInfo);
             }
+
+            charaInfoWindowFlag = true;
             notesWindowCharacterFace.sprite = selectedCharacter.character.faceSprite;
             notesWindowCharacterText.text = selectedCharacter.character.characterName;
             notesField.text = selectedCharacter.playerNotes;
             categoryDropdown.value = selectedCharacter.playerCategoryNote;
             StartCoroutine(notesWindowAnim.anim.PlayBackward(notesWindowAnim, true));
         }
-        else if(selectedCharacter == null && previousSelectedCharacter != selectedCharacter)
+        if ((selectedCharacter == null || selectedCharacter.isLeaving) && charaInfoWindowFlag)
         {
-            previousSelectedCharacter = null;
+            charaInfoWindowFlag = false;
             StartCoroutine(notesWindowAnim.anim.Play(notesWindowAnim));
         }
 
@@ -191,6 +237,13 @@ public class NegoceManager : MonoBehaviour
         foreach (CharacterHandler characterPresent in allPresentCharacters)
         {
             characterPresent.rectTransform.anchoredPosition = Vector2.Lerp(characterPresent.rectTransform.anchoredPosition, characterPresent.targetPositionAtTheStall, characterMoveLerpRatio * Time.deltaTime);
+        }
+
+        if (askToLeaveButton.isClicked && !selectedCharacter.isListening && !selectedCharacter.isThinking && !playerHandler.IsPlayerTalking())
+        {
+            selectedCharacter.Interrupt();
+            playerHandler.Speak("Reviens un autre jour !", 1.5f);
+            StartCoroutine(selectedCharacter.Leave());
         }
     }
 
@@ -209,6 +262,44 @@ public class NegoceManager : MonoBehaviour
         }
     }
 
+    public void CloseShop()
+    {
+        StartCoroutine(stallOpeningAnim.anim.PlayBackward(stallOpeningAnim, true));
+        unfoldTime = false;
+        nextDayButton.SetEnable(true);
+        nextDayButton.GetComponent<CanvasGroup>().alpha = 1;
+
+        SaveLoader.I.playerSave.passedDays++;
+
+        if (SaveLoader.I.playerSave.passedDays == 2 && !isTuto)
+        {
+            if (SaveLoader.I.playerSave.playerOwnedObjects.Contains("Anneau Saparkus"))
+            {
+                anneauVictoryText.SetActive(true);
+            }
+
+            if (SaveLoader.I.playerSave.playerOwnedObjects.Contains("Poignard d'Emerith"))
+            {
+                dagueVictoryText.SetActive(true);
+            }
+
+            if (!SaveLoader.I.playerSave.playerOwnedObjects.Contains("Anneau Saparkus") && !SaveLoader.I.playerSave.playerOwnedObjects.Contains("Poignard d'Emerith"))
+            {
+                defeatText.SetActive(true);
+            }
+        }
+    }
+
+    public void OpenShop()
+    {
+        StartCoroutine(stallOpeningAnim.anim.Play(stallOpeningAnim));
+        playerHandler.Speak(playerHandler.welcomeSpeech, 5);
+        unfoldTime = true;
+        openStallButton.SetEnable(false);
+        openStallButton.GetComponent<CanvasGroup>().alpha = 0;
+    }
+
+
     private Character GetRandomAbsentCharacter()
     {
         Character chosenChara = null;
@@ -226,6 +317,10 @@ public class NegoceManager : MonoBehaviour
                 allAbsentCharacter.RemoveAt(i);
             }
             else if(!(allAbsentCharacter[i].dayRangeComing.x < negoceTimeSpend / marketDayTime && allAbsentCharacter[i].dayRangeComing.y > negoceTimeSpend / marketDayTime))
+            {
+                allAbsentCharacter.RemoveAt(i);
+            }
+            else if(SaveLoader.I.GetCharacterInfoFromCharacter(allAbsentCharacter[i]) != null && SaveLoader.I.GetCharacterInfoFromCharacter(allAbsentCharacter[i]).ownedObjects.Count == 0)
             {
                 allAbsentCharacter.RemoveAt(i);
             }
@@ -265,6 +360,7 @@ public class NegoceManager : MonoBehaviour
         else
         {
             newCharacterHandler.GetBelongingsFromCharacter();
+            newCharacterHandler.GetSavedNotes();
         }
 
         RefreshCharactersDisplay();
@@ -361,6 +457,18 @@ public class NegoceManager : MonoBehaviour
                 character.UnSelect(false);
             }
         }
+    }
+
+    public IEnumerator LoadSceneWithTransition(int index)
+    {
+        StartCoroutine(blackScreenAnim.anim.Play(blackScreenAnim));
+        yield return new WaitForSeconds(blackScreenAnim.anim.animationTime);
+        SceneManager.LoadScene(index);
+    }
+
+    public void GoToMainMenu()
+    {
+        StartCoroutine(LoadSceneWithTransition(0));
     }
 
     public static Vector2 GetDirectionFromAngle(float angle)

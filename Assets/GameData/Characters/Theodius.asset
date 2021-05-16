@@ -18,18 +18,21 @@ MonoBehaviour:
   faceSprite: {fileID: -4699079585706668072, guid: fbb7889ddf9abb843a0c1e0df9a6d557,
     type: 3}
   temper: 0
-  dayRangeComing: {x: 0, y: 0.5}
+  dayRangeComing: {x: 0.5, y: 0.9}
   initialInterests: 01000000
   needs:
   - trait: 0
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: Oh oui !_ De quoi me venger de ces pythons
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Oh oui !
+        - ' De quoi me venger de ces pythons'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: Je peux tuer des <color=#E98634>pythons des sables</color> avec
         ca ?_ Non ?_ je m'en doutais
@@ -58,10 +61,12 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: C'est ce qu'il me faut !
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - C'est ce qu'il me faut !
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     hintSpokenWhenAsked:
       speechRawText: Si ca ne me donne pas de <color=#E98634>force</color>_, je m'en
@@ -77,11 +82,17 @@ MonoBehaviour:
       speechRawText: "Ce masque est inutile_, je te l'\xE9change sans probl\xE8me.&Si
         tu as quoi que ce soit qui donne de la <color=#E98634>force</color>_, ca
         me va !"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Ce masque est inutile
+        - ", je te l'\xE9change sans probl\xE8me."
+      - sentencePart:
+        - Si tu as quoi que ce soit qui donne de la <color=#E98634>force</color>
+        - ', ca me va !'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 08000000
     value: 15
   - ownedObject: {fileID: 11400000, guid: e565ff5c83771f345ba1aefc368caf71, type: 2}
@@ -90,10 +101,18 @@ MonoBehaviour:
         d\xE9j\xE0 bien assez comme ca !&Il me faut surtout une arme qui pourrais
         m'aider \xE0 me d\xE9fendre contres les <color=#E98634>pythons des sables</color>&..
         quelquechose de <color=#E98634>lourd</color>."
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - Il parait qu'elle permet de regagner sa vigueur...
+        - ", mais j'en d\xE9j\xE0 bien assez comme ca !"
+      - sentencePart:
+        - "Il me faut surtout une arme qui pourrais m'aider \xE0 me d\xE9fendre contres
+          les <color=#E98634>pythons des sables</color>"
+      - sentencePart:
+        - .. quelquechose de <color=#E98634>lourd</color>.
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
     traitHintedWithInfo: 0000000005000000
     value: 40

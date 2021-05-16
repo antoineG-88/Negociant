@@ -318,21 +318,12 @@ public class CharacterExchangeHandler : MonoBehaviour
     {
         if(isOpened)
         {
-            ExchangeSpace playerSpaceDropOn = null;
             for (int i = 0; i < playerSpaces.Count; i++)
             {
                 if (playerSpaces[i].isHovered)
                 {
-                    playerSpaceDropOn = playerSpaces[i];
+                    AddObjectToTrade(stallObjectDropped, null);
                 }
-            }
-
-            if (playerSpaceDropOn != null && !stallObjectsSelected.Contains(stallObjectDropped))
-            {
-                stallObjectsSelected.Add(stallObjectDropped);
-                playerSpaceDropOn.stallObjectHeld = stallObjectDropped;
-                playerSpaceDropOn.objectImage.color = Color.white;
-                playerSpaceDropOn.objectImage.sprite = stallObjectDropped.linkedObject.illustration;
             }
         }
     }
@@ -341,21 +332,12 @@ public class CharacterExchangeHandler : MonoBehaviour
     {
         if (isOpened)
         {
-            ExchangeSpace charaSpaceDropOn = null;
             for (int i = 0; i < characterSpaces.Count; i++)
             {
                 if (characterSpaces[i].isHovered)
                 {
-                    charaSpaceDropOn = characterSpaces[i];
+                    AddObjectToTrade(null, charaObjectDropped);
                 }
-            }
-
-            if (charaSpaceDropOn != null && !charaObjectsSelected.Contains(charaObjectDropped))
-            {
-                charaObjectsSelected.Add(charaObjectDropped);
-                charaSpaceDropOn.charaObjectHeld = charaObjectDropped;
-                charaSpaceDropOn.objectImage.color = Color.white;
-                charaSpaceDropOn.objectImage.sprite = charaObjectDropped.linkedObject.illustration;
             }
         }
     }
@@ -393,14 +375,10 @@ public class CharacterExchangeHandler : MonoBehaviour
     {
         foreach (CharaObject charaObject in charaObjectsSelected)
         {
-            NegoceManager.I.selectedCharacter.belongings.Remove(charaObject);
+            characterHandler.belongings.Remove(charaObject);
             Destroy(charaObject.gameObject);
             NegoceManager.I.selectedCharacter.RefreshCharacterDisplay();
-        }
-
-        foreach(ExchangeSpace charSpace in characterSpaces)
-        {
-            RemoveCharaObjectFromTrade(charSpace);
+            NegoceManager.I.playerHandler.AddStallObject(charaObject.linkedObject);
         }
 
         foreach (StallObject stallObject in stallObjectsSelected)
@@ -408,7 +386,15 @@ public class CharacterExchangeHandler : MonoBehaviour
             NegoceManager.I.playerHandler.RemoveStallObject(stallObject);
         }
 
+        foreach(CharacterHandler characterHandler in NegoceManager.I.allPresentCharacters)
+        {
+            characterHandler.RefreshPotentialObjects();
+        }
 
+        foreach (ExchangeSpace charSpace in characterSpaces)
+        {
+            RemoveCharaObjectFromTrade(charSpace);
+        }
         foreach (ExchangeSpace playerSpace in playerSpaces)
         {
             RemoveStallObjectFromTrade(playerSpace);

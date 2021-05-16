@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dec0739becd3a42a5a000c543ea083, type: 3}
   m_Name: ObsidienneCrepus
   m_EditorClassIdentifier: 
-  objectName: ObsidienneCrepus
+  objectName: Obsidienne Crepus
   title: du volcan Satornum
   illustration: {fileID: 21300000, guid: 25ffe0bfaea59ed4a9c8bca5438d959f, type: 3}
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 0500000004000000
   features:
   - argumentTitle: 'default : Magie'
@@ -63,15 +64,15 @@ MonoBehaviour:
       argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
-  - argumentTitle: MagieCrepusculaire
+  - argumentTitle: Magie crepusculaire
     traits: 02000000
     interestLevelIncrease: 27
-    rememberTime: 23
-    argumentSpokenText: C'est MagieCrepusculaire
+    rememberTime: 20
+    argumentSpokenText: "Elle est imbib\xE9 de magie cr\xE9pusculaire"
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieCrepusculaire"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -87,12 +88,12 @@ MonoBehaviour:
   - argumentTitle: Affaiblissant
     traits: 09000000
     interestLevelIncrease: 17
-    rememberTime: 22
-    argumentSpokenText: C'est Affaiblissant
+    rememberTime: 8
+    argumentSpokenText: Attention, elle est dangereuse
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Affaiblissant"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -107,13 +108,13 @@ MonoBehaviour:
         pour l'instant
   - argumentTitle: Lourd
     traits: 05000000
-    interestLevelIncrease: 28
-    rememberTime: 27
+    interestLevelIncrease: 16
+    rememberTime: 40
     argumentSpokenText: C'est Lourd
     argumentSpeakTime: 1.5
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
+    description: "Cette pierre est particuli\xE8rement lourde"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -129,12 +130,12 @@ MonoBehaviour:
   - argumentTitle: Ancien
     traits: 07000000
     interestLevelIncrease: 24
-    rememberTime: 39
-    argumentSpokenText: C'est Ancien
+    rememberTime: 30
+    argumentSpokenText: Elle proviens d'un vieux volcan
     argumentSpeakTime: 1.5
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Ancien"
+    description: Elle proviens d'un vieux volcan
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}

@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'ma '
   categories: 0200000005000000
   features:
   - argumentTitle: 'default : Accessoire'
@@ -65,13 +66,13 @@ MonoBehaviour:
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
   - argumentTitle: Force
     traits: 08000000
-    interestLevelIncrease: 13
-    rememberTime: 19
-    argumentSpokenText: C'est Force
+    interestLevelIncrease: 23
+    rememberTime: 8
+    argumentSpokenText: Cette liqueur vous rend votre vigueur
     argumentSpeakTime: 1.5
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Force"
+    description: Il parait qu'elle rend la vigueur de celui qui la bois
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
@@ -83,15 +84,15 @@ MonoBehaviour:
         vous ne pourrez plus vous passer
       argumentSpeechGoodReaction: Un objet magique, j'en cherche en ce moment
       argumentSpeechBadReaction: La magie_ ce n'est pas ce que j'ai besoin
-  - argumentTitle: MagieDAurore
+  - argumentTitle: Magie d'Aurore
     traits: 01000000
     interestLevelIncrease: 20
     rememberTime: 23
-    argumentSpokenText: C'est MagieDAurore
+    argumentSpokenText: Elle ne se vide jamais !
     argumentSpeakTime: 1.5
-    description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieDAurore"
+    description: "Son contenu se remplis par magie la rendant \xE9ternelle"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}
@@ -111,7 +112,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : L\xE9ger"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 5
       color: {r: 0.7169812, g: 0.1724813, b: 0.44173685, a: 1}

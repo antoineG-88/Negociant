@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'ma '
   categories: 0200000004000000
   features:
   - argumentTitle: 'default : Accessoire'
@@ -66,13 +67,13 @@ MonoBehaviour:
         pour l'instant
   - argumentTitle: Noblesse
     traits: 06000000
-    interestLevelIncrease: 20
+    interestLevelIncrease: 26
     rememberTime: 39
     argumentSpokenText: C'est Noblesse
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Noblesse"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -85,7 +86,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: "De quoi apprendre de nouvelle chose, je suis int\xE9ress\xE9"
       argumentSpeechBadReaction: Je n'ai pas besoin d'apprendre de nouvelle chose
         pour l'instant
-  - argumentTitle: MateriauxRare
+  - argumentTitle: Materiaux rare
     traits: 0a000000
     interestLevelIncrease: 13
     rememberTime: 23
@@ -93,7 +94,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MateriauxRare"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -108,13 +109,13 @@ MonoBehaviour:
         pour l'instant
   - argumentTitle: "L\xE9ger"
     traits: 04000000
-    interestLevelIncrease: 14
-    rememberTime: 17
+    interestLevelIncrease: 19
+    rememberTime: 6
     argumentSpokenText: "C'est L\xE9ger"
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : L\xE9ger"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}

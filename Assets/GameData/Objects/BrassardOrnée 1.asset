@@ -21,6 +21,7 @@ MonoBehaviour:
     le canyon, le vent ayant balayer les sables, le brassard a \xE9t\xE9 r\xE9v\xE9l\xE9
     alors qu'il \xE9t\xE9 enfoui depuis bien longtemps"
   origin: 2
+  possessivePronom: 'mon '
   categories: 0000000002000000
   features:
   - argumentTitle: 'default : Armure'
@@ -74,7 +75,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: Ce brassard n'est pas lourd du tout
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}
@@ -87,7 +88,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: "Il me manquais quelquechose pour accompagn\xE9
         mon style"
       argumentSpeechBadReaction: Je ne pense pas avoir besoin d'un nouvel accessoire
-  - argumentTitle: "R\xE9chauffant"
+  - argumentTitle: Force
     traits: 08000000
     interestLevelIncrease: 25
     rememberTime: 45
@@ -96,7 +97,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: Ce brassard chauffe le corps de son porteur.
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 2
       color: {r: 0.76470596, g: 0.6431373, b: 0.18039216, a: 1}

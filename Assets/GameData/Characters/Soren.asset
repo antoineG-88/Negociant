@@ -18,7 +18,7 @@ MonoBehaviour:
   faceSprite: {fileID: 1437476644234695805, guid: b498245ae8971b74c91915d3dba56280,
     type: 3}
   temper: 0
-  dayRangeComing: {x: 0.4, y: 0.8}
+  dayRangeComing: {x: 0.3, y: 0.7}
   initialInterests: 02000000
   needs:
   - trait: 0
@@ -80,24 +80,6 @@ MonoBehaviour:
       sentencePauseToNext: 0
       isFinished: 0
   personnalObjects:
-  - ownedObject: {fileID: 11400000, guid: ff7fa9a75675eb0478e7ab10e7c41a08, type: 2}
-    infoGivenWhenAsked:
-      speechRawText: "J'ai retrouv\xE9 ce parchemin sur le cadavre d'un voyageur
-        dans le d\xE9sert Duhua.&Il a du se faire avoir par des <color=#E98634>pyhtons
-        des sables</color>_, ces monstres me terrifient.."
-      sentences:
-      - sentencePart:
-        - "J'ai retrouv\xE9 ce parchemin sur le cadavre d'un voyageur dans le d\xE9sert
-          Duhua."
-      - sentencePart:
-        - Il a du se faire avoir par des <color=#E98634>pyhtons des sables</color>
-        - ', ces monstres me terrifient..'
-      speakingSpeed: 30
-      sentencePartPauseTime: 0.3
-      sentencePauseToNext: 2
-      isFinished: 1
-    traitHintedWithInfo: 00000000
-    value: 38
   - ownedObject: {fileID: 11400000, guid: 0dd35e1e00b517e4c91994887685e019, type: 2}
     infoGivenWhenAsked:
       speechRawText: "Tu m'avais \xE9chang\xE9 ces dagues mais au final je ne m'en

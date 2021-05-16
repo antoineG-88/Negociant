@@ -18,7 +18,7 @@ MonoBehaviour:
   faceSprite: {fileID: -27853127596480695, guid: 701ab6ee052087046999feb560ba5d1d,
     type: 3}
   temper: 0
-  dayRangeComing: {x: 0.6, y: 0.9}
+  dayRangeComing: {x: 0.5, y: 0.9}
   initialInterests: 02000000
   needs:
   - trait: 0

@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mes '
   categories: 0100000000000000
   features:
   - argumentTitle: 'default : Arme'
@@ -62,7 +63,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
-  - argumentTitle: MagieDAurore
+  - argumentTitle: Magie d'Aurore
     traits: 01000000
     interestLevelIncrease: 26
     rememberTime: 11
@@ -70,7 +71,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : MagieDAurore"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
@@ -85,13 +86,13 @@ MonoBehaviour:
         le peux d\xE9ja"
   - argumentTitle: Lourd
     traits: 05000000
-    interestLevelIncrease: 29
-    rememberTime: 15
+    interestLevelIncrease: 15
+    rememberTime: 21
     argumentSpokenText: C'est Lourd
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
@@ -106,13 +107,13 @@ MonoBehaviour:
         le peux d\xE9ja"
   - argumentTitle: Force
     traits: 08000000
-    interestLevelIncrease: 27
+    interestLevelIncrease: 23
     rememberTime: 38
     argumentSpokenText: C'est Force
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Force"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}

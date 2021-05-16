@@ -18,6 +18,7 @@ MonoBehaviour:
   description: 
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 00000000
   features:
   - argumentTitle: 'default : Armure'
@@ -43,13 +44,13 @@ MonoBehaviour:
         le peux d\xE9ja"
   - argumentTitle: Lourd
     traits: 05000000
-    interestLevelIncrease: 13
+    interestLevelIncrease: 17
     rememberTime: 11
     argumentSpokenText: C'est Lourd
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : Lourd"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}
@@ -62,7 +63,7 @@ MonoBehaviour:
       argumentSpeechGoodReaction: J'ai justement besoin d'une armure
       argumentSpeechBadReaction: "Je n'ai pas besoin de me prot\xE9ger plus que je
         le peux d\xE9ja"
-  - argumentTitle: PythonDesSables
+  - argumentTitle: Python des sables
     traits: 00000000
     interestLevelIncrease: 21
     rememberTime: 19
@@ -70,7 +71,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Cet objet est convoit\xE9s par les aventuriers qui aime : PythonDesSables"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 0
       color: {r: 0.23529413, g: 0.36862746, b: 0.6313726, a: 1}

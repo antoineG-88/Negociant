@@ -19,4 +19,17 @@ public class PlayerInventory
             ownedObject = newObject;
         }
     }
+
+    public Belonging GetBelongingFromObject(Object searchedObject)
+    {
+        Belonging potentialBelonging = null;
+        for (int i = 0; i < belongings.Count; i++)
+        {
+            if(belongings[i].ownedObject == searchedObject)
+            {
+                potentialBelonging =  belongings[i];
+            }
+        }
+        return potentialBelonging;
+    }
 }

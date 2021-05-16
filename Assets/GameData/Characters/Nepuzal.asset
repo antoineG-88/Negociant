@@ -25,18 +25,22 @@ MonoBehaviour:
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: Cette magie m'intrigue toujours
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Cette magie m'intrigue toujours
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: La <color=#E98634>magie d'aurore</color> me surprend tous les
         jours
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
+      sentences:
+      - sentencePart:
+        - La <color=#E98634>magie d'aurore</color> me surprend tous les jours
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
       isFinished: 0
   - trait: 7
     defaultHintToTell: 
@@ -50,48 +54,62 @@ MonoBehaviour:
     hintSpokenWhenAsked:
       speechRawText: Vous n'auriez pas un <color=#E98634>vieux</color> livre qui
         traine dans vos affaires ?
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Vous n'auriez pas un <color=#E98634>vieux</color> livre qui traine dans
+          vos affaires ?
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
   - trait: 6
     defaultHintToTell: 
     reactionSpokenWhenArgumented:
       speechRawText: Je dois avouer que j'ai un faible pour le luxe
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - Je dois avouer que j'ai un faible pour le luxe
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: "Je cotoie r\xE9guli\xE8rement les <color=#E98634>nobles</color>
         d'Auriah_, ils adorent mes histoires !"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Je cotoie r\xE9guli\xE8rement les <color=#E98634>nobles</color> d'Auriah"
+        - ', ils adorent mes histoires !'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
   personnalObjects:
   - ownedObject: {fileID: 11400000, guid: 71f920a5da76d9646869ee3e193ef4f4, type: 2}
     infoGivenWhenAsked:
       speechRawText: "Un erudit me l'a donn\xE9 lorsque j'ai quitt\xE9 Hagdon_, je
         m'en suis servi pour faire progresser mes recherches sur la <color=#E98634>magie
         d'aurore</color>"
-      sentences: []
-      speakingSpeed: 0
-      sentencePartPauseTime: 0
-      sentencePauseToNext: 0
-      isFinished: 0
+      sentences:
+      - sentencePart:
+        - "Un erudit me l'a donn\xE9 lorsque j'ai quitt\xE9 Hagdon"
+        - ', je m''en suis servi pour faire progresser mes recherches sur la <color=#E98634>magie
+          d''aurore</color>'
+      speakingSpeed: 30
+      sentencePartPauseTime: 0.3
+      sentencePauseToNext: 2
+      isFinished: 1
     traitHintedWithInfo: 01000000
     value: 34
   defaultSpeachWhenWrongArgument:
     speechRawText: "Ca ne m'int\xE9resse pas."
-    sentences: []
-    speakingSpeed: 0
-    sentencePartPauseTime: 0
-    sentencePauseToNext: 0
-    isFinished: 0
+    sentences:
+    - sentencePart:
+      - "Ca ne m'int\xE9resse pas."
+    speakingSpeed: 30
+    sentencePartPauseTime: 0.3
+    sentencePauseToNext: 2
+    isFinished: 1
   speechBaseSpeed: 30
   speechPauseTimeBetweenSentences: 2
   speechPauseTimeBetweenSentenceParts: 0.3

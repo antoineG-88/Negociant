@@ -20,6 +20,7 @@ MonoBehaviour:
     enfoui apr\xE8s avoir laisser le poignard dans le corps de sa victime"
   originDescription: 
   origin: 0
+  possessivePronom: 'mon '
   categories: 0100000004000000
   features:
   - argumentTitle: 'default : Arme'
@@ -73,7 +74,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Ce poignard est donn\xE9 aux sentinelles d'Hagdon\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
@@ -94,7 +95,7 @@ MonoBehaviour:
     argumentSpeakTime: 1.5
     description: "Une couche d'\xE9meraude bris\xE9e recouvre la manche du poignard\r"
     isKnownWhenObjectAcquired: 1
-    isCategoryFeature: 1
+    isCategoryFeature: 0
     categoryProperties:
       category: 4
       color: {r: 0.45916417, g: 0.3615611, b: 0.6132076, a: 1}
