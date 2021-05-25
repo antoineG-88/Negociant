@@ -67,13 +67,22 @@ public class OpenMindedCharacterHandler : CharacterHandler
             }
             else
             {
-                if (!isListening && !isLeaving)
-                {
-                    StartCoroutine(Leave());
-                }
                 currentEnthousiasm = 0;
             }
         }
+
+        if(currentEnthousiasm <= 0)
+        {
+            if (!isListening && !isLeaving)
+            {
+                StartCoroutine(Leave());
+            }
+        }
+    }
+
+    public override void PresentSetup()
+    {
+
     }
 
     public int GetNumberOfInitialCategoryObjectOnVitrine()

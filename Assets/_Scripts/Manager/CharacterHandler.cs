@@ -59,6 +59,7 @@ public abstract class CharacterHandler : UIInteractable
     [Space]
     public float reactTimePresent;
     public DropOption askOption;
+    public Text askOptionText;
     public DropOption exchangeOption;
     public CanvasGroup dropOptionCanvasGroup;
     public float reactTimeArgument;
@@ -125,6 +126,8 @@ public abstract class CharacterHandler : UIInteractable
     }
 
     public abstract void UpdateBehavior();
+
+    public abstract void PresentSetup();
 
     public void Update()
     {
@@ -197,7 +200,7 @@ public abstract class CharacterHandler : UIInteractable
     {
         foreach(PotentialObject potentialObject in potentialObjects)
         {
-            foreach (PotentialObject.KnownFeature knownFeature in potentialObject.knownFeatures)
+            /*foreach (PotentialObject.KnownFeature knownFeature in potentialObject.knownFeatures)
             {
                 if(knownFeature.isKnown)
                 {
@@ -210,12 +213,23 @@ public abstract class CharacterHandler : UIInteractable
                         knownFeature.ForgetFeature();
                     }
                 }
-            }
+            }*/
 
             potentialObject.RefreshInterestLevel();
             if (NegoceManager.I.selectedCharacter == this)
             {
                 potentialObject.stallObject.SetInterestLevelDisplay(potentialObject.interestLevel / maxPersonnalValue, identificationColor, false);
+            }
+        }
+    }
+
+    private void ForgetAllKnownFeatures()
+    {
+        foreach (PotentialObject potentialObject in potentialObjects)
+        {
+            foreach (PotentialObject.KnownFeature knownFeature in potentialObject.knownFeatures)
+            {
+                knownFeature.ForgetFeature();
             }
         }
     }
@@ -344,6 +358,7 @@ public abstract class CharacterHandler : UIInteractable
                 currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
                 Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), annoyedFxPrefab.transform.rotation, characterCanvasRectTransform);
                 Speak(featureArgumented.categoryProperties.argumentSpeechBadReaction, 5);
+                ForgetAllKnownFeatures();
             }
         }
         else
@@ -371,6 +386,7 @@ public abstract class CharacterHandler : UIInteractable
                 Instantiate(annoyedFxPrefab, rectTransform.position + new Vector3(0, gazeHeadOffset, 0), happyFxPrefab.transform.rotation, characterCanvasRectTransform);
                 currentEnthousiasm -= enthousiasmDecreaseWithIncorrectArgument;
                 Speak(character.defaultSpeachWhenWrongArgument);
+                ForgetAllKnownFeatures();
             }
         }
 
@@ -504,6 +520,14 @@ public abstract class CharacterHandler : UIInteractable
                     if (!NegoceManager.I.playerHandler.IsPlayerTalking())
                     {
                         askOption.Enable("");
+                        if(draggedCharaObject.isPersonnalValueKnown)
+                        {
+                            askOptionText.text = "Discuter";
+                        }
+                        else
+                        {
+                            askOptionText.text = "Questionner";
+                        }
                         exchangeOption.Enable("");
                         dropOptionCanvasGroup.blocksRaycasts = true;
                     }

@@ -2855,16 +2855,17 @@ MonoBehaviour:
   reflexionTime: 4
   curiosityIncreaseSpeed: 1
   minMaxRandomCuriosity: {x: 5, y: 10}
-  enthousiasmIncreaseWithCorrectPresent: 0.2
+  enthousiasmIncreaseWithCorrectPresent: 0.1
   enthousiasmDecreaseWithIncorrectPresent: 0.1
   interestLevelMultiplierWithCorrectCategoryArgument: 1
   interestLevelMultiplierWithCorrectFeatureArgument: 1
-  enthousiasmDecreaseWithIncorrectArgument: 0.3
+  enthousiasmDecreaseWithIncorrectArgument: 0.5
   initialEntousiasm: 0.7
   timeBeforeEnthousiasmDecrease: 30
-  enthousiasmDecreaseRate: 0.02
+  enthousiasmDecreaseRate: 0.01
   reactTimePresent: 3
   askOption: {fileID: 6102746438244712882}
+  askOptionText: {fileID: 6305203672611639108}
   exchangeOption: {fileID: 8217399070790018735}
   dropOptionCanvasGroup: {fileID: 6302768126947571058}
   reactTimeArgument: 4

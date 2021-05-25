@@ -9624,6 +9624,9 @@ MonoBehaviour:
   - Je peux te demander ce que c'est ?
   - "Cet objet m'int\xE9resse, tu peux m'en dire plus ?"
   - Quel est cet objet ?
+  chatSpokenTexts:
+  - Qu'est ce qui te plairais ?
+  - De quoi as tu besoin ?
   askTime: 2.5
   speechPauseTime: 0.1
   speechTimeBetweenSentences: 1
@@ -10279,7 +10282,7 @@ MonoBehaviour:
   notesWindowCharacterText: {fileID: 984224591}
   notesWindowCharacterFace: {fileID: 726401043}
   askToLeaveButton: {fileID: 28727055}
-  marketDayTime: 180
+  marketDayTime: 240
   sundialArrow: {fileID: 1803050660}
   minMaxSundialArrowAngle: {x: 90, y: -90}
   minChInitialInterest: 1

@@ -94,6 +94,11 @@ public class DecisiveCharacterHandler : CharacterHandler
         }
     }
 
+    public override void PresentSetup()
+    {
+        reflexionFlag = true;
+    }
+
     private List<PotentialObject> GetAllInterestingObjectsOnVitrine()
     {
         List<PotentialObject> interestingPotentialObjects = new List<PotentialObject>();

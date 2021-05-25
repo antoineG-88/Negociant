@@ -9992,7 +9992,11 @@ MonoBehaviour:
   - Je peux te demander ce que c'est ?
   - "Cet objet m'int\xE9resse, tu peux m'en dire plus ?"
   - Quel est cet objet ?
-  askTime: 2.5
+  chatSpokenTexts:
+  - Qu'est ce qui te plairais ?
+  - De quoi as tu besoin ?
+  - "Y a t'il quelquechose qui t'int\xE9resse ?"
+  askTime: 2
   speechPauseTime: 0.1
   speechTimeBetweenSentences: 1
   welcomeSpeech: "Mon stand est ouvert Aventuriers !&Venez y jet\xE9 un oeil !__
@@ -10641,7 +10645,7 @@ MonoBehaviour:
   - {r: 0.5557251, g: 0.35510856, b: 0.7924528, a: 1}
   - {r: 0.745283, g: 0.26067993, b: 0.20038268, a: 1}
   - {r: 0.3469651, g: 0.6509434, b: 0.5546122, a: 1}
-  timeRangeBetweenCharacterApparition: {x: 5, y: 20}
+  timeRangeBetweenCharacterApparition: {x: 30, y: 60}
   characterMoveLerpRatio: 10
   additionnalSpaceTakenBySelectedCharacter: 5
   additionnalSpaceTakenBySelectedCharacterWhileTrading: 12
@@ -10656,7 +10660,7 @@ MonoBehaviour:
   notesWindowCharacterText: {fileID: 984224591}
   notesWindowCharacterFace: {fileID: 726401043}
   askToLeaveButton: {fileID: 28727055}
-  marketDayTime: 600
+  marketDayTime: 780
   sundialArrow: {fileID: 1803050660}
   minMaxSundialArrowAngle: {x: 90, y: -90}
   minChInitialInterest: 1

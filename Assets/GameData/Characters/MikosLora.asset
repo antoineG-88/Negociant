@@ -52,7 +52,7 @@ MonoBehaviour:
       speakingSpeed: 35
       sentencePartPauseTime: 0.3
       sentencePauseToNext: 2
-      isFinished: 0
+      isFinished: 1
     hintSpokenWhenAsked:
       speechRawText: L'<color=#E98634>histoire</color> des monts Satornes est passionante
       sentences: []
@@ -122,11 +122,13 @@ MonoBehaviour:
     traitHintedWithInfo: 06000000
     value: 20
   defaultSpeachWhenWrongArgument:
-    speechRawText: 
-    sentences: []
-    speakingSpeed: 0
-    sentencePartPauseTime: 0
-    sentencePauseToNext: 0
+    speechRawText: Pourquoi tu me dit ca ?
+    sentences:
+    - sentencePart:
+      - Pourquoi tu me dit ca ?
+    speakingSpeed: 35
+    sentencePartPauseTime: 0.3
+    sentencePauseToNext: 2
     isFinished: 0
   speechBaseSpeed: 35
   speechPauseTimeBetweenSentences: 2

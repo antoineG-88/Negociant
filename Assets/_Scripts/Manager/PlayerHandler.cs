@@ -18,6 +18,7 @@ public class PlayerHandler : MonoBehaviour
     public TMP_Text currentSpokenText;
     public TweeningAnimator speakBoxAnim;
     public string[] askSpokenTexts;
+    public string[] chatSpokenTexts;
     public float askTime;
     public float speechPauseTime;
     public float speechTimeBetweenSentences;
@@ -173,7 +174,14 @@ public class PlayerHandler : MonoBehaviour
         askedCharaObject = charaObjectAsked;
         currentCharacterTalkingTo.Interrupt();
         isWaitingForResponse = true;
-        Speak(askSpokenTexts[Random.Range(0, askSpokenTexts.Length)], askTime);
+        if(charaObjectAsked.isPersonnalValueKnown)
+        {
+            Speak(chatSpokenTexts[Random.Range(0, chatSpokenTexts.Length)], askTime);
+        }
+        else
+        {
+            Speak(askSpokenTexts[Random.Range(0, askSpokenTexts.Length)], askTime);
+        }
     }
 
     public void Speak(string speechToSpeak, float speechTime)
